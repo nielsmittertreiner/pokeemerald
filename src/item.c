@@ -1045,7 +1045,7 @@ void DrawHeaderBox(void)
     FillWindowPixelBuffer(sHeaderBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sHeaderBoxWindowId);
     CopyWindowToVram(sHeaderBoxWindowId, 3);
-    SetStandardWindowBorderStyle(sHeaderBoxWindowId, FALSE);
+    DrawStdFrameWithCustomTileAndPalette(sHeaderBoxWindowId, FALSE, 0x214, 14);
     
     if (ReformatItemDescription(item, gStringVar1) == 1)
         textY = 4;
@@ -1066,7 +1066,7 @@ void HideHeaderBox(void)
     RemoveWindow(sHeaderBoxWindowId);
 }
 
-#define ITEM_TAG 0xFDF3
+#define ITEM_TAG 0x2722 //same as money label
 void ShowItemIconSprite(u16 item)
 {
 	s16 x, y;
