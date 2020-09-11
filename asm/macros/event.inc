@@ -1632,12 +1632,12 @@
     .endm
     
     .macro showitemdesc
-    setvar VAR_0x8007, 0
+    setvar VAR_0x8009, 0
     showdescription
     .endm
     
     .macro showberrydesc
-    setvar VAR_0x8007, 1
+    setvar VAR_0x8009, 1
     showdescription
     .endm
     
