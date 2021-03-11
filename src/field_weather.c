@@ -251,6 +251,7 @@ static void None_Init(void)
 {
     gWeatherPtr->gammaTargetIndex = 0;
     gWeatherPtr->gammaStepDelay = 0;
+    Weather_SetBlendCoeffs(8, 10);
 }
 
 static void None_Main(void)
