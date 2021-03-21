@@ -27,6 +27,7 @@
 #include "save.h"
 #include "scanline_effect.h"
 #include "sound.h"
+#include "speech_bubble.h"
 #include "sprite.h"
 #include "strings.h"
 #include "string_util.h"
@@ -232,6 +233,7 @@ static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8);
 void CreateYesNoMenuParameterized(u8, u8, u16, u16, u8, u8);
 static void Task_NewGameBirchSpeech_SlidePlatformAway2(u8);
 static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8);
+static void Task_NewGameBirchSpeech_LoadTailAfterGenderAndName(u8);
 static void Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter(u8);
 static void Task_NewGameBirchSpeech_AreYouReady(u8);
 static void Task_NewGameBirchSpeech_ShrinkPlayer(u8);
@@ -1328,6 +1330,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
         }
         else
         {
+            LoadTail(140, 50);
             InitWindows(gNewGameBirchSpeechTextWindows);
             LoadMainMenuWindowFrameTiles(0, 0xF3);
             LoadMessageBoxGfx(0, 0xFC, 0xF0);
@@ -1419,6 +1422,7 @@ static void Task_NewGameBirchSpeech_AndYouAre(u8 taskId)
         gUnknown_02022D04 = 0;
         StringExpandPlaceholders(gStringVar4, gText_Birch_AndYouAre);
         AddTextPrinterForMessage(1);
+        DestroyTail();
         gTasks[taskId].func = Task_NewGameBirchSpeech_StartBirchLotadPlatformFade;
     }
 }
@@ -1682,6 +1686,16 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
         NewGameBirchSpeech_ClearWindow(0);
         StringExpandPlaceholders(gStringVar4, gText_Birch_YourePlayer);
         AddTextPrinterForMessage(1);
+        //LoadTail(140, 50);
+        gTasks[taskId].func = Task_NewGameBirchSpeech_LoadTailAfterGenderAndName;
+    }
+}
+
+static void Task_NewGameBirchSpeech_LoadTailAfterGenderAndName(u8 taskId)
+{
+    if (gTasks[taskId].tIsDoneFadingSprites)
+    {
+        LoadTail(140, 50);
         gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter;
     }
 }
@@ -1694,6 +1708,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter(u8 taskId)
         gSprites[gTasks[taskId].tLotadSpriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
         if (!RunTextPrintersAndIsPrinter0Active())
         {
+            DestroyTail();
             gSprites[gTasks[taskId].tBirchSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
             gSprites[gTasks[taskId].tLotadSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
             NewGameBirchSpeech_StartFadeOutTarget1InTarget2(taskId, 2);
