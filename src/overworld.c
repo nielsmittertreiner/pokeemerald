@@ -1098,6 +1098,11 @@ u16 GetCurrLocationDefaultMusic(void)
      && GetSav1Weather() == WEATHER_SANDSTORM)
         return MUS_ROUTE111;
 
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ACREN_FOREST)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ACREN_FOREST)
+     && GetSav1Weather() == WEATHER_SUNNY)
+        return MUS_CELEBI;
+
     music = GetLocationMusic(&gSaveBlock1Ptr->location);
     if (music != MUS_ROUTE118)
     {
