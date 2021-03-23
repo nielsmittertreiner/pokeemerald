@@ -131,8 +131,71 @@ LitorTown_EventScript_SailToMurena_5:
 
 
 LitorTown_EventScript_SailToNavire::
+	call FishermanFerry_EventScript_BackupFerryLocation
+	hideobjectat 1, MAP_NAVIRE_TOWN
+	setobjectpriority 2, MAP_LITOR_TOWN, 0
+	setobjectpriority OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN, 0
+	applymovement 2, Common_Movement_WalkRight
+	waitmovement 0
+	removeobject 2
+	switch VAR_FACING
+	case DIR_NORTH, LitorTown_EventScript_SailToNavire_3
+	case DIR_EAST, LitorTown_EventScript_SailToNavire_4
+	case DIR_SOUTH, LitorTown_EventScript_SailToNavire_5
+LitorTown_EventScript_SailToNavire_1:
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN
+	delay 30
+	setflag FLAG_DONT_TRANSITION_MUSIC
+	playbgm MUS_SAILING, 0
+	applymovement OBJ_EVENT_ID_PLAYER, LitorTown_Movement_SailToNavire
+	applymovement 1, LitorTown_Movement_SailToNavire
+	waitmovement 0
+	clearflag FLAG_DONT_TRANSITION_MUSIC
+	fadedefaultbgm
+	showobjectat OBJ_EVENT_ID_PLAYER, MAP_NAVIRE_TOWN
+	applymovement OBJ_EVENT_ID_PLAYER, LitorTown_Movement_PlayerExitBoat
+	waitmovement 0
+	clearflag FLAG_HIDE_NAVIRE_TOWN_FISHERMAN
+	setobjectxyperm 2, 8, 9
+	addobject 2
+	setobjectpriority 2, MAP_NAVIRE_TOWN, 0
+	applymovement 2, LitorTown_Movement_FishermanExitBoat
+	waitmovement 0
+	clearflag FLAG_HIDE_NAVIRE_TOWN_FISHERMAN
+	addobject 1
+	setobjectpriority 1, MAP_NAVIRE_TOWN, 1
+	clearflag FLAG_HIDE_NAVIRE_TOWN_BOAT
+	setflag FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT
+	setflag FLAG_HIDE_MURENA_CITY_BOAT
+	setflag FLAG_HIDE_LITOR_TOWN_BOAT
+	hideobjectat 10, MAP_MURENA_CITY
+	hideobjectat 1, MAP_MURENA_CITY_SHIPYARD
+	hideobjectat 1, MAP_LITOR_TOWN
+	load_speech_bubble 2
+	msgbox LitorTown_EventScript_SailToNavire_Text_0
+	destroy_speech_bubble
+	closemessage
+	resetobjectpriority OBJ_EVENT_ID_PLAYER, MAP_NAVIRE_TOWN
+	resetobjectpriority 2, MAP_NAVIRE_TOWN
+	copyobjectxytoperm 2
+	call FishermanFerry_EventScript_RestoreFerryLocation
 	release
 	end
+
+LitorTown_EventScript_SailToNavire_3:
+	applymovement OBJ_EVENT_ID_PLAYER, LitorTown_Movement_PlayerBoardBoatNorth
+	waitmovement 0
+	goto LitorTown_EventScript_SailToNavire_1
+
+LitorTown_EventScript_SailToNavire_4:
+	applymovement OBJ_EVENT_ID_PLAYER, LitorTown_Movement_PlayerBoardBoatEast
+	waitmovement 0
+	goto LitorTown_EventScript_SailToNavire_1
+
+LitorTown_EventScript_SailToNavire_5:
+	applymovement OBJ_EVENT_ID_PLAYER, LitorTown_Movement_PlayerBoardBoatSouth
+	waitmovement 0
+	goto LitorTown_EventScript_SailToNavire_1
 
 
 LitorTown_EventScript_Scott::
@@ -460,6 +523,101 @@ LitorTown_Movement_SailToMurena:
 	walk_right
 	step_end
 
+LitorTown_Movement_SailToNavire:
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fast_down
+	walk_fast_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fastest_down
+	walk_fast_down
+	walk_fast_down
+	walk_down
+	walk_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_right
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fast_down
+	walk_fast_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fast_down
+	walk_fast_down
+	walk_down
+	walk_right
+	walk_fast_right
+	walk_fast_right
+	walk_fastest_right
+	walk_fast_right
+	walk_fast_right
+	walk_right
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fastest_down
+	walk_fast_down
+	walk_fast_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+LitorTown_Movement_PlayerExitBoat:
+	walk_right
+	walk_right
+	face_left
+	step_end
+
+LitorTown_Movement_FishermanExitBoat:
+	walk_right
+	face_right
+	step_end
+
 LitorTown_Movement_PlayerWalkDown:
 	lock_facing_direction
 	walk_down
@@ -490,12 +648,16 @@ LitorTown_EventScript_ChooseMurena_Text_0:
 	.string "Let's set sail!$"
 
 LitorTown_EventScript_ChooseNavire_Text_0:
-	.string "We're headed to NAVIRE CITY!\n"
+	.string "We're headed to NAVIRE TOWN!\n"
 	.string "Let's set sail!$"
 
 LitorTown_EventScript_CancelFerrySelect_Text_0:
 	.string "Tell me whenever you need me\n"
 	.string "and my trusty boat.$"
+
+LitorTown_EventScript_SailToNavire_Text_0:
+	.string "These are the sands of NAVIRE!\n"
+	.string "We've hit the mainland again!$"
 
 LitorTown_EventScript_Scott_Text_0:
 	.string "Boot up that new POKéNAV of yours now!\p"

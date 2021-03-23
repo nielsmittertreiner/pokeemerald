@@ -4805,7 +4805,7 @@
       "id": "LAYOUT_LITOR_TOWN",
       "name": "LitorTown_Layout",
       "width": 64,
-      "height": 40,
+      "height": 37,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Slateport",
       "border_filepath": "data/layouts/LitorTown/border.bin",
@@ -4880,6 +4880,26 @@
       "secondary_tileset": "gTileset_PokemonCenter",
       "border_filepath": "data/layouts/LitorTown_PokemonCenter_2F/border.bin",
       "blockdata_filepath": "data/layouts/LitorTown_PokemonCenter_2F/map.bin"
+    },
+    {
+      "id": "LAYOUT_NAVIRE_TOWN",
+      "name": "NavireTown_Layout",
+      "width": 40,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Dewford",
+      "border_filepath": "data/layouts/NavireTown/border.bin",
+      "blockdata_filepath": "data/layouts/NavireTown/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE405",
+      "name": "Route405_Layout",
+      "width": 40,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Slateport",
+      "border_filepath": "data/layouts/Route405/border.bin",
+      "blockdata_filepath": "data/layouts/Route405/map.bin"
     }
   ]
 }

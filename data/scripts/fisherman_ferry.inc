@@ -4,6 +4,12 @@ FishermanFerry_EventScript_BackupFerryLocation::
 	return
 
 
+FishermanFerry_EventScript_RestoreFerryLocation::
+	copyvar VAR_FISHERMAN_FERRY_LOCATION, VAR_0x8008
+	setvar VAR_0x8008, 0
+	return
+
+
 FishermanFerry_EventScript_ResetFerryLocation::
 	compare VAR_FISHERMAN_FERRY_LOCATION, 1
 	goto_if_eq FishermanFerry_EventScript_ResetFerryLocation_2
@@ -11,6 +17,9 @@ FishermanFerry_EventScript_ResetFerryLocation_1:
 	compare VAR_FISHERMAN_FERRY_LOCATION, 2
 	goto_if_eq FishermanFerry_EventScript_ResetFerryLocation_5
 FishermanFerry_EventScript_ResetFerryLocation_4:
+	compare VAR_FISHERMAN_FERRY_LOCATION, 3
+	goto_if_eq FishermanFerry_EventScript_ResetFerryLocation_8
+FishermanFerry_EventScript_ResetFerryLocation_7:
 	return
 
 FishermanFerry_EventScript_ResetFerryLocation_2:
@@ -19,6 +28,8 @@ FishermanFerry_EventScript_ResetFerryLocation_2:
 	clearflag FLAG_HIDE_MURENA_CITY_SHIPYARD_FISHERMAN
 	clearflag FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT
 	clearflag FLAG_HIDE_MURENA_CITY_BOAT
+	setflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
+	setflag FLAG_HIDE_LITOR_TOWN_BOAT
 	goto FishermanFerry_EventScript_ResetFerryLocation_1
 
 FishermanFerry_EventScript_ResetFerryLocation_5:
@@ -27,7 +38,19 @@ FishermanFerry_EventScript_ResetFerryLocation_5:
 	setflag FLAG_HIDE_MURENA_CITY_BOAT
 	clearflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
 	clearflag FLAG_HIDE_LITOR_TOWN_BOAT
+	setflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
+	setflag FLAG_HIDE_LITOR_TOWN_BOAT
 	goto FishermanFerry_EventScript_ResetFerryLocation_4
+
+FishermanFerry_EventScript_ResetFerryLocation_8:
+	setflag FLAG_HIDE_NAVIRE_TOWN_FISHERMAN
+	setflag FLAG_HIDE_NAVIRE_TOWN_BOAT
+	setflag FLAG_HIDE_MURENA_CITY_SHIPYARD_FISHERMAN
+	setflag FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT
+	setflag FLAG_HIDE_MURENA_CITY_BOAT
+	clearflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
+	clearflag FLAG_HIDE_LITOR_TOWN_BOAT
+	goto FishermanFerry_EventScript_ResetFerryLocation_7
 
 
 FishermanFerry_EventScript_UpdateFerryLocation::
@@ -35,6 +58,8 @@ FishermanFerry_EventScript_UpdateFerryLocation::
 FishermanFerry_EventScript_UpdateFerryLocation_1:
 	goto_if_unset FLAG_HIDE_LITOR_TOWN_FISHERMAN, FishermanFerry_EventScript_UpdateFerryLocation_5
 FishermanFerry_EventScript_UpdateFerryLocation_4:
+	goto_if_unset FLAG_HIDE_NAVIRE_TOWN_FISHERMAN, FishermanFerry_EventScript_UpdateFerryLocation_8
+FishermanFerry_EventScript_UpdateFerryLocation_7:
 	return
 
 FishermanFerry_EventScript_UpdateFerryLocation_2:
@@ -44,4 +69,8 @@ FishermanFerry_EventScript_UpdateFerryLocation_2:
 FishermanFerry_EventScript_UpdateFerryLocation_5:
 	setvar VAR_FISHERMAN_FERRY_LOCATION, 2
 	goto FishermanFerry_EventScript_UpdateFerryLocation_4
+
+FishermanFerry_EventScript_UpdateFerryLocation_8:
+	setvar VAR_FISHERMAN_FERRY_LOCATION, 3
+	goto FishermanFerry_EventScript_UpdateFerryLocation_7
 

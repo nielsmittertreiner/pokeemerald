@@ -22,5 +22,7 @@ EventScript_ResetAllMapFlags:: @ 82715DE
 	setflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
 	setflag FLAG_HIDE_LITOR_TOWN_BOAT
 	setflag FLAG_HIDE_LITOR_TOWN_JULIA
+	setflag FLAG_HIDE_NAVIRE_TOWN_FISHERMAN
+	setflag FLAG_HIDE_NAVIRE_TOWN_BOAT
 	call EventScript_ResetAllBerries
 	end

@@ -31,7 +31,7 @@ static const struct CityMapEntry sPokenavCityMaps[NUM_CITY_MAPS] =
         .tilemap = gPokenavCityMap_Litor_0,
     },
     {
-        .mapSecId = MAPSEC_VERDANTURF_TOWN,
+        .mapSecId = MAPSEC_NAVIRE_TOWN,
         .index = 0,
         .tilemap = gPokenavCityMap_Verdanturf_0,
     },

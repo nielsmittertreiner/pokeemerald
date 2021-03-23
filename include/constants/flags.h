@@ -522,7 +522,7 @@
 #define FLAG_HIDDEN_ITEM_ACREN_FOREST_POTION                 (FLAG_HIDDEN_ITEMS_START + 0x01)
 #define FLAG_HIDDEN_ITEM_ROUTE_403_SUPER_POTION              (FLAG_HIDDEN_ITEMS_START + 0x08)
 #define FLAG_HIDDEN_ITEM_ROUTE_403_GREAT_BALL                (FLAG_HIDDEN_ITEMS_START + 0x09)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL                (FLAG_HIDDEN_ITEMS_START + 0x0A)
+#define FLAG_HIDDEN_ITEM_ROUTE_405_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x0A)
 #define FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL            (FLAG_HIDDEN_ITEMS_START + 0x0B)
 #define FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_1        (FLAG_HIDDEN_ITEMS_START + 0x0D)
 #define FLAG_HIDDEN_ITEM_UNDERWATER_124_CALCIUM              (FLAG_HIDDEN_ITEMS_START + 0x24)
@@ -667,8 +667,8 @@
 #define FLAG_HIDE_MURENA_CITY_BOAT                                  0x283
 #define FLAG_HIDE_LITOR_TOWN_JULIA                                  0x284
 #define FLAG_HIDE_LITOR_TOWN_SCOTT                                  0x285
-#define FLAG_UNUSED_0x286                                           0x286
-#define FLAG_UNUSED_0x287                                           0x287
+#define FLAG_HIDE_NAVIRE_TOWN_FISHERMAN                             0x286
+#define FLAG_HIDE_NAVIRE_TOWN_BOAT                                  0x287
 #define FLAG_UNUSED_0x288                                           0x288
 #define FLAG_UNUSED_0x289                                           0x289
 #define FLAG_UNUSED_0x28A                                           0x28A
@@ -1340,7 +1340,7 @@
 #define FLAG_VISITED_FIRWEALD_CITY                  (SYSTEM_FLAGS + 0x11)
 #define FLAG_VISITED_MURENA_CITY                    (SYSTEM_FLAGS + 0x12)
 #define FLAG_VISITED_LITOR_TOWN                     (SYSTEM_FLAGS + 0x13)
-#define FLAG_VISITED_VERDANTURF_TOWN                (SYSTEM_FLAGS + 0x14)
+#define FLAG_VISITED_NAVIRE_TOWN                    (SYSTEM_FLAGS + 0x14)
 #define FLAG_VISITED_PACIFIDLOG_TOWN                (SYSTEM_FLAGS + 0x15)
 #define FLAG_VISITED_PETALBURG_CITY                 (SYSTEM_FLAGS + 0x16)
 #define FLAG_VISITED_SLATEPORT_CITY                 (SYSTEM_FLAGS + 0x17)

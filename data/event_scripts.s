@@ -1112,3 +1112,5 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/maps/LitorTown_Mart/scripts.inc"
 	.include "data/maps/LitorTown_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/LitorTown_PokemonCenter_2F/scripts.inc"
+	.include "data/maps/NavireTown/scripts.inc"
+	.include "data/maps/Route405/scripts.inc"

@@ -53,26 +53,28 @@ MurenaCity_EventScript_SailToLitor::
 	waitmovement 0
 	clearflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
 	addobject 1
-	setobjectpriority 1, MAP_LITOR_TOWN, 4
+	setobjectpriority 1, MAP_LITOR_TOWN, 1
 	clearflag FLAG_HIDE_LITOR_TOWN_BOAT
 	setflag FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT
 	setflag FLAG_HIDE_MURENA_CITY_BOAT
+	setflag FLAG_HIDE_NAVIRE_TOWN_BOAT
 	hideobjectat 10, MAP_MURENA_CITY
 	hideobjectat 1, MAP_MURENA_CITY_SHIPYARD
+	hideobjectat 1, MAP_NAVIRE_TOWN
 	load_speech_bubble 2
 	msgbox MurenaCity_EventScript_SailToLitor_Text_0
 	destroy_speech_bubble
 	closemessage
-	copyvar VAR_FISHERMAN_FERRY_LOCATION, VAR_0x8008
 	resetobjectpriority OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN
 	resetobjectpriority 2, MAP_LITOR_TOWN
 	copyobjectxytoperm 2
+	call FishermanFerry_EventScript_RestoreFerryLocation
 	release
 	end
 
 
 MurenaCity_EventScript_TeamAirlockEncounter::
-	playbgm MUS_ENCOUNTER_AQUA, 0x00
+	playbgm MUS_ENCOUNTER_AQUA, 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 	waitmovement 0
 	load_speech_bubble 20

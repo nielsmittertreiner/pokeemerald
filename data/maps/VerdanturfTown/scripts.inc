@@ -5,7 +5,7 @@ VerdanturfTown_MapScripts:: @ 81EB566
 	.byte 0
 
 VerdanturfTown_OnTransition: @ 81EB56C
-	setflag FLAG_VISITED_VERDANTURF_TOWN
+	setflag FLAG_VISITED_NAVIRE_TOWN
 	setvar VAR_ROUTE402_STATE, 0
 	end
 

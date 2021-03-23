@@ -1,0 +1,166 @@
+const LOCALID_BOAT_MURENA = 10
+
+const LOCALID_BOAT_MURENA_SHIPYARD = 1
+const LOCALID_FISHERMAN_MURENA_SHIPYARD = 2
+
+const LOCALID_BOAT_LITOR = 1
+const LOCALID_FISHERMAN_LITOR = 2
+
+const LOCALID_BOAT_NAVIRE = 1
+const LOCALID_FISHERMAN_NAVIRE = 2
+
+mapscripts NavireTown_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(FishermanFerry_EventScript_UpdateFerryLocation)
+        setrespawn(HEAL_LOCATION_NAVIRE_TOWN)
+        setflag(FLAG_VISITED_NAVIRE_TOWN)
+    }
+}
+
+script NavireTown_EventScript_Fisherman {
+    lock
+    faceplayer
+    load_speech_bubble(LOCALID_FISHERMAN_NAVIRE)
+    msgbox("You need a trip to LITOR?\n"
+           "I'm always here.", MSGBOX_YESNO)
+    switch (var(VAR_RESULT)) {
+        case YES:
+            goto(NavireTown_EventScript_ChooseLitor)
+        case NO:
+            goto(NavireTown_EventScript_CancelFerrySelect)
+        case MULTI_B_PRESSED:
+            goto(NavireTown_EventScript_CancelFerrySelect)
+    }
+}
+
+script NavireTown_EventScript_ChooseLitor {
+    msgbox("We're headed to LITOR TOWN!\n"
+           "Let's set sail!")
+    destroy_speech_bubble
+    closemessage
+    goto(NavireTown_EventScript_SailToLitor)
+}
+
+script NavireTown_EventScript_CancelFerrySelect {
+    msgbox("Tell me whenever you need me\n"
+           "and my trusty boat.")
+    destroy_speech_bubble
+    closemessage
+    release
+    end
+}
+
+script NavireTown_EventScript_SailToLitor {
+    call(FishermanFerry_EventScript_BackupFerryLocation)
+    hideobjectat(LOCALID_BOAT_LITOR, MAP_LITOR_TOWN)
+    setobjectpriority(LOCALID_FISHERMAN_NAVIRE, MAP_NAVIRE_TOWN, 0)
+    setobjectpriority(OBJ_EVENT_ID_PLAYER, MAP_NAVIRE_TOWN, 0)
+    applymovement(LOCALID_FISHERMAN_NAVIRE, Common_Movement_WalkLeft)
+    waitmovement(0)
+    removeobject(LOCALID_FISHERMAN_LITOR)
+    applymovement(OBJ_EVENT_ID_PLAYER, NavireTown_Movement_PlayerBoardBoat)
+    waitmovement(0)
+    hideobjectat(OBJ_EVENT_ID_PLAYER, MAP_NAVIRE_TOWN)
+    applymovement(LOCALID_BOAT_NAVIRE, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(30)
+    setflag(FLAG_DONT_TRANSITION_MUSIC)
+    playbgm(MUS_SAILING, 0)
+    applymovement(OBJ_EVENT_ID_PLAYER, NavireTown_Movement_SailToLitor)
+    applymovement(LOCALID_BOAT_LITOR, NavireTown_Movement_SailToLitor)
+    waitmovement(0)
+    clearflag(FLAG_DONT_TRANSITION_MUSIC)
+    fadedefaultbgm
+    showobjectat(OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN)
+    applymovement(OBJ_EVENT_ID_PLAYER, NavireTown_Movement_PlayerExitBoat)
+    waitmovement(0)
+    clearflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
+    setobjectxyperm(LOCALID_FISHERMAN_LITOR, 34, 22)
+    addobject(LOCALID_FISHERMAN_LITOR)
+    setobjectpriority(LOCALID_FISHERMAN_LITOR, MAP_LITOR_TOWN, 0)
+    applymovement(LOCALID_FISHERMAN_LITOR, Common_Movement_WalkLeft)
+    waitmovement(0)
+    clearflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
+    addobject(LOCALID_BOAT_LITOR)
+    setobjectpriority(LOCALID_BOAT_LITOR, MAP_LITOR_TOWN, 1)
+    clearflag(FLAG_HIDE_LITOR_TOWN_BOAT)
+    setflag(FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT)
+    setflag(FLAG_HIDE_MURENA_CITY_BOAT)
+    setflag(FLAG_HIDE_NAVIRE_TOWN_BOAT)
+    hideobjectat(LOCALID_BOAT_MURENA, MAP_MURENA_CITY)
+    hideobjectat(LOCALID_BOAT_MURENA_SHIPYARD, MAP_MURENA_CITY_SHIPYARD)
+    hideobjectat(LOCALID_BOAT_NAVIRE, MAP_NAVIRE_TOWN)
+    load_speech_bubble(LOCALID_FISHERMAN_LITOR)
+    msgbox("Ahoy! We've arrived at LITOR TOWN!\n"
+           "Don't get sunburnt alright.")
+    destroy_speech_bubble
+    closemessage
+    resetobjectpriority(OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN)
+    resetobjectpriority(LOCALID_FISHERMAN_LITOR, MAP_LITOR_TOWN)
+    copyobjectxytoperm(LOCALID_FISHERMAN_LITOR)
+    call(FishermanFerry_EventScript_RestoreFerryLocation)
+    release
+    end
+}
+
+script NavireTown_EventScript_Fisherman2 {
+    msgbox("Any luck with fishing?\p"
+           "You gotta be patient, or they won't\n"
+           "bite…", MSGBOX_NPC)
+    end
+}
+
+script NavireTown_EventScript_TownSign {
+    msgbox("NAVIRE TOWN\n"
+           "“Sea crashing back on the mainland.”", MSGBOX_SIGN)
+    end
+}
+
+movement NavireTown_Movement_PlayerBoardBoat {
+    walk_left * 2
+}
+
+movement NavireTown_Movement_SailToLitor {
+    walk_up * 6
+    walk_right
+    walk_up
+    walk_fast_up * 2
+    walk_fastest_up * 6
+    walk_fast_up * 2
+    walk_up
+    walk_left
+    walk_fast_left * 2
+    walk_fastest_left * 1
+    walk_fast_left * 2
+    walk_left
+    walk_up
+    walk_fast_up * 2
+    walk_fastest_up * 4
+    walk_fast_up * 2
+    walk_up
+    walk_right * 2
+    walk_up
+    walk_fast_up * 2
+    walk_fastest_up * 9
+    walk_fast_up * 2
+    walk_up
+    walk_left
+    walk_fast_left * 3
+    walk_left
+    walk_up
+    walk_fast_up * 2
+    walk_fastest_up * 6
+    walk_fast_up * 2
+    walk_up
+    walk_right * 2
+    walk_up
+    walk_fast_up * 2
+    walk_fastest_up * 3
+    walk_fast_up * 2
+    walk_up
+}
+
+movement NavireTown_Movement_PlayerExitBoat {
+    walk_left * 2
+    face_right
+}

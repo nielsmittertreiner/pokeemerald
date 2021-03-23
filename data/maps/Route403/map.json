@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE403",
   "name": "Route403",
   "layout": "LAYOUT_ROUTE403",
-  "music": "MUS_ROUTE104",
+  "music": "MUS_ROUTE403",
   "region_map_section": "MAPSEC_ROUTE_403",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

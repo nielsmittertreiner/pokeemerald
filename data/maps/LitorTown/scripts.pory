@@ -6,6 +6,9 @@ const LOCALID_FISHERMAN_MURENA_SHIPYARD = 2
 const LOCALID_BOAT_LITOR = 1
 const LOCALID_FISHERMAN_LITOR = 2
 
+const LOCALID_BOAT_NAVIRE = 1
+const LOCALID_FISHERMAN_NAVIRE = 2
+
 const LOCALID_SCOTT = 7
 const LOCALID_JULIA = 13
 
@@ -59,7 +62,7 @@ script LitorTown_EventScript_ChooseMurena {
 }
 
 script LitorTown_EventScript_ChooseNavire {
-    msgbox("We're headed to NAVIRE CITY!\n"
+    msgbox("We're headed to NAVIRE TOWN!\n"
            "Let's set sail!")
     destroy_speech_bubble
     closemessage
@@ -112,6 +115,64 @@ script LitorTown_EventScript_SailToMurena {
 }
 
 script LitorTown_EventScript_SailToNavire {
+    call(FishermanFerry_EventScript_BackupFerryLocation)
+    hideobjectat(LOCALID_BOAT_NAVIRE, MAP_NAVIRE_TOWN)
+    setobjectpriority(LOCALID_FISHERMAN_LITOR, MAP_LITOR_TOWN, 0)
+    setobjectpriority(OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN, 0)
+    applymovement(LOCALID_FISHERMAN_LITOR, Common_Movement_WalkRight)
+    waitmovement(0)
+    removeobject(LOCALID_FISHERMAN_LITOR)
+    switch (var(VAR_FACING)) {
+        case DIR_NORTH:
+            applymovement(OBJ_EVENT_ID_PLAYER, LitorTown_Movement_PlayerBoardBoatNorth)
+            waitmovement(0)
+            break
+        case DIR_EAST:
+            applymovement(OBJ_EVENT_ID_PLAYER, LitorTown_Movement_PlayerBoardBoatEast)
+            waitmovement(0)
+            break
+        case DIR_SOUTH:
+            applymovement(OBJ_EVENT_ID_PLAYER, LitorTown_Movement_PlayerBoardBoatSouth)
+            waitmovement(0)
+            break
+    }
+    hideobjectat(OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN)
+    delay(30)
+    setflag(FLAG_DONT_TRANSITION_MUSIC)
+    playbgm(MUS_SAILING, 0)
+    applymovement(OBJ_EVENT_ID_PLAYER, LitorTown_Movement_SailToNavire)
+    applymovement(LOCALID_BOAT_LITOR, LitorTown_Movement_SailToNavire)
+    waitmovement(0)
+    clearflag(FLAG_DONT_TRANSITION_MUSIC)
+    fadedefaultbgm
+    showobjectat(OBJ_EVENT_ID_PLAYER, MAP_NAVIRE_TOWN)
+    applymovement(OBJ_EVENT_ID_PLAYER, LitorTown_Movement_PlayerExitBoat)
+    waitmovement(0)
+    clearflag(FLAG_HIDE_NAVIRE_TOWN_FISHERMAN)
+    setobjectxyperm(LOCALID_FISHERMAN_NAVIRE, 8, 9)
+    addobject(LOCALID_FISHERMAN_NAVIRE)
+    setobjectpriority(LOCALID_FISHERMAN_NAVIRE, MAP_NAVIRE_TOWN, 0)
+    applymovement(LOCALID_FISHERMAN_NAVIRE, LitorTown_Movement_FishermanExitBoat)
+    waitmovement(0)
+    clearflag(FLAG_HIDE_NAVIRE_TOWN_FISHERMAN)
+    addobject(LOCALID_BOAT_NAVIRE)
+    setobjectpriority(LOCALID_BOAT_NAVIRE, MAP_NAVIRE_TOWN, 1)
+    clearflag(FLAG_HIDE_NAVIRE_TOWN_BOAT)
+    setflag(FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT)
+    setflag(FLAG_HIDE_MURENA_CITY_BOAT)
+    setflag(FLAG_HIDE_LITOR_TOWN_BOAT)
+    hideobjectat(LOCALID_BOAT_MURENA, MAP_MURENA_CITY)
+    hideobjectat(LOCALID_BOAT_MURENA_SHIPYARD, MAP_MURENA_CITY_SHIPYARD)
+    hideobjectat(LOCALID_BOAT_LITOR, MAP_LITOR_TOWN)
+    load_speech_bubble(LOCALID_FISHERMAN_NAVIRE)
+    msgbox("These are the sands of NAVIRE!\n"
+           "We've hit the mainland again!")
+    destroy_speech_bubble
+    closemessage
+    resetobjectpriority(OBJ_EVENT_ID_PLAYER, MAP_NAVIRE_TOWN)
+    resetobjectpriority(LOCALID_FISHERMAN_NAVIRE, MAP_NAVIRE_TOWN)
+    copyobjectxytoperm(LOCALID_FISHERMAN_NAVIRE)
+    call(FishermanFerry_EventScript_RestoreFerryLocation)
     release
     end
 }
@@ -359,6 +420,56 @@ movement LitorTown_Movement_SailToMurena {
     walk_right
     walk_fast_right * 3
     walk_right
+}
+
+movement LitorTown_Movement_SailToNavire {
+    walk_down
+    walk_fast_down * 2
+    walk_fastest_down * 8
+    walk_fast_down * 2
+    walk_down
+    walk_left * 2
+    walk_down
+    walk_fast_down * 2
+    walk_fastest_down * 1
+    walk_fast_down * 2
+    walk_down
+    walk_right
+    walk_fast_right * 3
+    walk_right
+    walk_down
+    walk_fast_down * 2
+    walk_fastest_down * 9
+    walk_fast_down * 2
+    walk_down
+    walk_left * 2
+    walk_down
+    walk_fast_down * 2
+    walk_fastest_down * 4
+    walk_fast_down * 2
+    walk_down
+    walk_right
+    walk_fast_right * 2
+    walk_fastest_right * 1
+    walk_fast_right * 2
+    walk_right
+    walk_down
+    walk_fast_down * 2
+    walk_fastest_down * 6
+    walk_fast_down * 2
+    walk_down
+    walk_left
+    walk_down * 6
+}
+
+movement LitorTown_Movement_PlayerExitBoat {
+    walk_right * 2
+    face_left
+}
+
+movement LitorTown_Movement_FishermanExitBoat {
+    walk_right
+    face_right
 }
 
 movement LitorTown_Movement_PlayerWalkDown {
