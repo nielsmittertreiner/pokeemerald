@@ -1,7 +1,7 @@
 gText_Birch_Welcome:: @ 82C897B
 	.string "Hi! Sorry to keep you waiting!\p"
 	.string "Welcome to the world of POKéMON!\p"
-	.string "My name is BIRCH.\p"
+	.string "My name is CONIFER.\p"
 	.string "But everyone calls me the POKéMON\n"
 	.string "PROFESSOR.\p"
 	.string "$"
@@ -42,11 +42,20 @@ gText_Birch_WhatsYourName:: @ 82C8BFF
 gText_Birch_SoItsPlayer:: @ 82C8C1C
 	.string "So it's {PLAYER}{KUN}?$"
 
-gText_Birch_YourePlayer:: @ 82C8C2A
-	.string "Ah, okay!\p"
-	.string "You're {PLAYER}{KUN} who's moving to my\n"
-	.string "hometown of LITTLEROOT.\l"
-	.string "I get it now!\p"
+gText_Birch_YourePlayerMale:: @ 82C8C2A
+	.string "Hold on!\n"
+	.string "You're {PLAYER}{KUN}, my son!\p"
+	.string "We live in SUNSET TOWN now,\n"
+	.string "remember?\p"
+	.string "It's a place in the EURUS REGION.\p"
+	.string "$"
+
+gText_Birch_YourePlayerFemale::
+	.string "Hold on!\n"
+	.string "You're {PLAYER}{KUN}, my daughter!\p"
+	.string "We live in SUNSET TOWN now,\n"
+	.string "remember?\p"
+	.string "It's a place in the EURUS REGION.\p"
 	.string "$"
 
 gText_Birch_AreYouReady:: @ 82C8C7A
