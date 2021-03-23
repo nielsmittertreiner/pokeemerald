@@ -2,7 +2,7 @@
   "id": "MAP_SUNSET_TOWN_PLAYER_HOUSE_2F",
   "name": "SunsetTown_PlayerHouse_2F",
   "layout": "LAYOUT_SUNSET_TOWN_PLAYER_HOUSE_2F",
-  "music": "MUS_LITTLEROOT",
+  "music": "MUS_SUNSET",
   "region_map_section": "MAPSEC_SUNSET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

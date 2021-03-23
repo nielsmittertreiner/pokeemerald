@@ -505,7 +505,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_5",
       "var_value": "0",
-      "script": "AcrenForest_EventScript_SetShrineWeather"
+      "script": "AcrenForest_EventScript_SetShrineWeatherAndSong"
     },
     {
       "type": "trigger",
@@ -514,7 +514,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_5",
       "var_value": "0",
-      "script": "AcrenForest_EventScript_SetShrineWeather"
+      "script": "AcrenForest_EventScript_SetShrineWeatherAndSong"
     },
     {
       "type": "trigger",
@@ -523,7 +523,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_5",
       "var_value": "0",
-      "script": "AcrenForest_EventScript_SetDefaultWeather"
+      "script": "AcrenForest_EventScript_SetDefaultWeatherAndSong"
     },
     {
       "type": "trigger",
@@ -532,7 +532,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_5",
       "var_value": "0",
-      "script": "AcrenForest_EventScript_SetDefaultWeather"
+      "script": "AcrenForest_EventScript_SetDefaultWeatherAndSong"
     },
     {
       "type": "trigger",

@@ -2,7 +2,7 @@
   "id": "MAP_SUNSET_TOWN_ALEXS_HOUSE_2F",
   "name": "SunsetTown_AlexsHouse_2F",
   "layout": "LAYOUT_SUNSET_TOWN_ALEXS_HOUSE_2F",
-  "music": "MUS_LITTLEROOT",
+  "music": "MUS_SUNSET",
   "region_map_section": "MAPSEC_SUNSET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

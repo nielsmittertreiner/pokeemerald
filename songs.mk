@@ -1265,3 +1265,12 @@ $(MID_SUBDIR)/se_dex_search.s: %.s: %.mid
 
 $(MID_SUBDIR)/mus_acren_forest.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G191 -v100
+
+$(MID_SUBDIR)/mus_route403.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G192 -v100
+
+$(MID_SUBDIR)/mus_sunset.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -v127
+
+$(MID_SUBDIR)/mus_celebi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G195 -v100

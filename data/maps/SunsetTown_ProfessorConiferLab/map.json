@@ -2,7 +2,7 @@
   "id": "MAP_SUNSET_TOWN_PROFESSOR_CONIFER_LAB",
   "name": "SunsetTown_ProfessorConiferLab",
   "layout": "LAYOUT_SUNSET_TOWN_PROFESSOR_CONIFER_LAB",
-  "music": "MUS_BIRCH_LAB",
+  "music": "MUS_SUNSET",
   "region_map_section": "MAPSEC_SUNSET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

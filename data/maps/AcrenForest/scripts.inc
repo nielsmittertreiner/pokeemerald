@@ -114,6 +114,7 @@ AcrenForest_EventScript_PhyllosShrineCutscene::
 	destroy_speech_bubble
 	closemessage
 	delay 10
+	fadenewbgm MUS_CELEBI
 	setweather WEATHER_SUNNY
 	doweather
 	applymovement 31, Common_Movement_FaceUp
@@ -123,8 +124,6 @@ AcrenForest_EventScript_PhyllosShrineCutscene::
 	msgbox AcrenForest_EventScript_PhyllosShrineCutscene_Text_2
 	destroy_speech_bubble
 	closemessage
-	resetweather
-	doweather
 	delay 10
 	applymovement 31, Common_Movement_FaceLeft
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
@@ -133,6 +132,10 @@ AcrenForest_EventScript_PhyllosShrineCutscene::
 	msgbox AcrenForest_EventScript_PhyllosShrineCutscene_Text_3
 	destroy_speech_bubble
 	closemessage
+	delay 10
+	fadedefaultbgm
+	resetweather
+	doweather
 	applymovement 31, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	load_speech_bubble 31
@@ -461,14 +464,16 @@ AcrenForest_EventScript_Grunt::
 	end
 
 
-AcrenForest_EventScript_SetShrineWeather::
+AcrenForest_EventScript_SetShrineWeatherAndSong::
+	fadenewbgm MUS_CELEBI
 	setweather WEATHER_SUNNY
 	doweather
 	release
 	end
 
 
-AcrenForest_EventScript_SetDefaultWeather::
+AcrenForest_EventScript_SetDefaultWeatherAndSong::
+	fadenewbgm MUS_ACREN_FOREST
 	resetweather
 	doweather
 	release

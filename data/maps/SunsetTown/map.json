@@ -2,7 +2,7 @@
   "id": "MAP_SUNSET_TOWN",
   "name": "SunsetTown",
   "layout": "LAYOUT_SUNSET_TOWN",
-  "music": "MUS_LITTLEROOT",
+  "music": "MUS_SUNSET",
   "region_map_section": "MAPSEC_SUNSET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
