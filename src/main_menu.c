@@ -256,10 +256,12 @@ static const u16 sBirchSpeechBgPals[][16] = {
     INCBIN_U16("graphics/birch_speech/bg1.gbapal")
 };
 
+#define BG_COLOR RGB(31, 31, 26)
+
 static const u32 sBirchSpeechShadowGfx[] = INCBIN_U32("graphics/birch_speech/shadow.4bpp.lz");
 static const u32 sBirchSpeechBgMap[] = INCBIN_U32("graphics/birch_speech/map.bin.lz");
 static const u16 sBirchSpeechBgGradientPal[] = INCBIN_U16("graphics/birch_speech/bg2.gbapal");
-static const u16 sBirchSpeechPlatformBlackPal[] = {RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK};
+static const u16 sBirchSpeechPlatformBlackPal[] = {BG_COLOR, BG_COLOR, BG_COLOR, BG_COLOR, BG_COLOR, BG_COLOR, BG_COLOR, BG_COLOR};
 
 #define MENU_LEFT 2
 #define MENU_TOP_WIN0 1
@@ -1684,9 +1686,16 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
         NewGameBirchSpeech_ClearWindow(0);
-        StringExpandPlaceholders(gStringVar4, gText_Birch_YourePlayer);
-        AddTextPrinterForMessage(1);
-        //LoadTail(140, 50);
+        if (gSaveBlock2Ptr->playerGender == MALE)
+        {
+            StringExpandPlaceholders(gStringVar4, gText_Birch_YourePlayerMale);
+            AddTextPrinterForMessage(1);
+        }
+        else
+        {
+            StringExpandPlaceholders(gStringVar4, gText_Birch_YourePlayerFemale);
+            AddTextPrinterForMessage(1);
+        }
         gTasks[taskId].func = Task_NewGameBirchSpeech_LoadTailAfterGenderAndName;
     }
 }
