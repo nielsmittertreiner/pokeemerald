@@ -231,7 +231,7 @@ struct PokemonStorageSystemData
     struct Sprite *field_D94;
     struct Sprite *field_D98[2];
     u16 *field_DA0;
-    struct PokemonMarkMenu markMenu;
+    struct MonMarkingsMenu markMenu;
     struct UnkPSSStruct_2002370 field_1E5C;
     struct Pokemon movingMon;
     struct Pokemon field_2108;
@@ -2323,8 +2323,8 @@ static void Cb_InitPSS(u8 taskId)
         {
             sPSSData->markMenu.baseTileTag = TAG_TILE_D;
             sPSSData->markMenu.basePaletteTag = TAG_PAL_DACE;
-            sub_811F90C(&sPSSData->markMenu);
-            sub_811FA90();
+            InitMonMarkingsMenu(&sPSSData->markMenu);
+            BufferMonMarkingsMenuTiles();
         }
         else
         {
@@ -2336,12 +2336,12 @@ static void Cb_InitPSS(u8 taskId)
         SetMonIconTransparency();
         if (!sPSSData->isReshowingPSS)
         {
-            BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
             SetPSSCallback(Cb_ShowPSS);
         }
         else
         {
-            BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
             SetPSSCallback(Cb_ReshowPSS);
         }
         SetVBlankCallback(VblankCb_PSS);
@@ -2374,7 +2374,7 @@ static void Cb_ReshowPSS(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0x10, 0, RGB_BLACK);
         sPSSData->state++;
         break;
     case 1:
@@ -3179,13 +3179,13 @@ static void Cb_ShowMarkMenu(u8 taskId)
     case 0:
         PrintStorageActionText(PC_TEXT_MARK_POKE);
         sPSSData->markMenu.markings = sPSSData->cursorMonMarkings;
-        sub_811FAA4(sPSSData->cursorMonMarkings, 0xb0, 0x10);
+        OpenMonMarkingsMenu(sPSSData->cursorMonMarkings, 0xb0, 0x10);
         sPSSData->state++;
         break;
     case 1:
-        if (!MonMarkingsMenuHandleInput())
+        if (!HandleMonMarkingsMenuInput())
         {
-            sub_811FAF8();
+            FreeMonMarkingsMenu();
             ClearBottomWindow();
             SetMonMarkings(sPSSData->markMenu.markings);
             RefreshCursorMonData();
@@ -3681,7 +3681,7 @@ static void Cb_NameBox(u8 taskId)
     {
     case 0:
         sub_80CE760();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sPSSData->state++;
         break;
     case 1:
@@ -3701,7 +3701,7 @@ static void Cb_ShowMonSummary(u8 taskId)
     {
     case 0:
         sub_80CE7E8();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sPSSData->state++;
         break;
     case 1:
@@ -3720,7 +3720,7 @@ static void Cb_GiveItemFromBag(u8 taskId)
     switch (sPSSData->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sPSSData->state++;
         break;
     case 1:
@@ -3983,7 +3983,7 @@ static void sub_80CA0D8(void)
 
 static void sub_80CA154(void)
 {
-    sPSSData->field_D94 = sub_811FFB4(TAG_TILE_10, TAG_PAL_DAC8, NULL);
+    sPSSData->field_D94 = CreateMonMarkingComboSprite(TAG_TILE_10, TAG_PAL_DAC8, NULL);
     sPSSData->field_D94->oam.priority = 1;
     sPSSData->field_D94->subpriority = 1;
     sPSSData->field_D94->pos1.x = 40;
@@ -4126,7 +4126,7 @@ static void PrintCursorMonInfo(void)
     CopyWindowToVram(0, 2);
     if (sPSSData->cursorMonSpecies != SPECIES_NONE)
     {
-        sub_8120084(sPSSData->cursorMonMarkings, sPSSData->field_DA0);
+        UpdateMonMarkingTiles(sPSSData->cursorMonMarkings, sPSSData->field_DA0);
         sPSSData->field_D94->invisible = FALSE;
     }
     else

@@ -490,7 +490,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
 	def_special SetDeoxysRockPalette
-	def_special CreateObedientEnemyMon
+	def_special CreateEventLegalEnemyMon
 	def_special StartMirageTowerDisintegration
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink
@@ -514,7 +514,7 @@ gSpecials:: @ 81DBA64
 	def_special SetMewAboveGrass
 	def_special ShouldDistributeEonTicket
 	def_special LinkRetireStatusWithBattleTowerPartner
-	def_special sub_813B534
+	def_special BattleTowerReconnectLink
 	def_special CallTrainerHillFunction
 	def_special Script_DoRayquazaScene @ Listed twice
 	def_special LoopWingFlapSE
