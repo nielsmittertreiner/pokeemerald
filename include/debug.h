@@ -12,13 +12,13 @@ void Debug_OpenDebugMenu(void);
 
 #define DEBUG_NUMBER_DIGITS_FLAGS 4
 
-// Main menu
+// Main Menu
 enum {
     DEBUG_MENU_ITEM_UTILITY,
     DEBUG_MENU_ITEM_CANCEL,
 };
 
-// Utility menu
+// Utility Menu
 enum {
     DEBUG_MENU_ITEM_SET_FLAG,
     DEBUG_MENU_ITEM_HEAL_PARTY,
@@ -27,7 +27,7 @@ enum {
     DEBUG_MENU_ITEM_PREPARE_TRADES,
 };
 
-// Toggles menu
+// Toggles Menu
 enum {
     DEBUG_MENU_ITEM_TOGGLE_TRAINERS,
     DEBUG_MENU_ITEM_TOGGLE_ENCOUNTER,

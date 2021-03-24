@@ -25,6 +25,8 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 
+// Functions
+// Window Functions
 void Debug_OpenDebugMenu(void);
 static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_ShowTogglesSubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
@@ -49,23 +51,24 @@ static void DebugAction_PrepareTrades(u8);
 
 static void DebugAction_Cancel(u8);
 
-// Main menu
+// Main Menu Strings
 static const u8 gDebugText_Utility[] = _("UTILITY");
 static const u8 gDebugText_Cancel[] = _("CANCEL");
 
-// Utility menu
+// Utility Menu Strings
 static const u8 gDebugText_Utility_SetFlag[] = _("SET FLAG");
 static const u8 gDebugText_Utility_HealParty[] = _("HEAL PARTY");
 static const u8 gDebugText_Utility_GiveRareCandy[] = _("GIVE RARE CANDY");
 static const u8 gDebugText_Utility_ResetAllMapFlags[] = _("RESET MAP FLAGS");
 static const u8 gDebugText_Utility_PrepareTrades[] = _("PREPARE TRADES");
 
-// Flags menu
+// Flags Menu Strings
 static const u8 gDebugText_Flag_FlagDef[] =_("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
 static const u8 gDebugText_Flag_FlagHex[] = _("{STR_VAR_1}\n0x{STR_VAR_2}");
 static const u8 gDebugText_Flag_FlagSet[] = _("{COLOR}{06}TRUE{COLOR}{02}");
 static const u8 gDebugText_Flag_FlagUnset[] = _("{COLOR}{04}FALSE{COLOR}{02}");
 
+// Digit Indicator Strings
 static const u8 digitInidicator_1[] =_("{LEFT_ARROW}+1{RIGHT_ARROW}");
 static const u8 digitInidicator_10[] = _("{LEFT_ARROW}+10{RIGHT_ARROW}");
 static const u8 digitInidicator_100[] = _("{LEFT_ARROW}+100{RIGHT_ARROW}");
@@ -104,6 +107,7 @@ static const s32 sPowersOfTen[] =
 extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 Debug_EventScript_PrepareTrades[];
 
+// List Menu Items
 static const struct ListMenuItem sDebugMenuItems_Main[] =
 {
     [DEBUG_MENU_ITEM_UTILITY] = {gDebugText_Utility, DEBUG_MENU_ITEM_UTILITY},
@@ -119,6 +123,7 @@ static const struct ListMenuItem sDebugMenuItems_Utility[] =
     [DEBUG_MENU_ITEM_PREPARE_TRADES] = {gDebugText_Utility_PrepareTrades, DEBUG_MENU_ITEM_PREPARE_TRADES},
 };
 
+// Menu Actions
 static void (*const sDebugMenuActions_Main[])(u8) =
 {
     [DEBUG_MENU_ITEM_UTILITY] = DebugAction_OpenMenu_Utility,
@@ -134,6 +139,7 @@ static void (*const sDebugMenuActions_Utility[])(u8) =
     [DEBUG_MENU_ITEM_PREPARE_TRADES] = DebugAction_PrepareTrades,
 };
 
+// Window Templates
 static const struct WindowTemplate sDebugMainMenuWindowTemplate =
 {
     .bg = 0,
@@ -167,6 +173,7 @@ static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
     .baseBlock = 128,
 };
 
+// List Menu Templates
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Main =
 {
     .items = sDebugMenuItems_Main,
@@ -182,6 +189,7 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utility =
     .totalItems = ARRAY_COUNT(sDebugMenuItems_Utility),
 };
 
+// Window Functions
 void Debug_OpenDebugMenu(void)
 {
     Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
