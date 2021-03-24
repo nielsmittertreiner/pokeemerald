@@ -4,6 +4,12 @@ FishermanFerry_EventScript_BackupFerryLocation::
 	return
 
 
+FishermanFerry_EventScript_RestoreFerryLocation::
+	copyvar VAR_FISHERMAN_FERRY_LOCATION, VAR_0x8008
+	setvar VAR_0x8008, 0
+	return
+
+
 FishermanFerry_EventScript_ResetFerryLocation::
 	compare VAR_FISHERMAN_FERRY_LOCATION, 1
 	goto_if_eq FishermanFerry_EventScript_ResetFerryLocation_2
