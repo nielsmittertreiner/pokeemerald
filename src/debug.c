@@ -41,7 +41,7 @@ static void DebugTask_HandleMenuInput_Flags(u8);
 
 // Open Menus
 static void DebugAction_OpenMenu_Utility(u8);
-static void DebugAction_OpenMenu_Flags(u8);
+static void DebugAction_ManageFlags(u8);
 
 // Utility Functions
 static void DebugAction_HealParty(u8);
@@ -56,7 +56,7 @@ static const u8 gDebugText_Utility[] = _("UTILITY");
 static const u8 gDebugText_Cancel[] = _("CANCEL");
 
 // Utility Menu Strings
-static const u8 gDebugText_Utility_SetFlag[] = _("SET FLAG");
+static const u8 gDebugText_Utility_ManageFlag[] = _("MANAGE FLAGS");
 static const u8 gDebugText_Utility_HealParty[] = _("HEAL PARTY");
 static const u8 gDebugText_Utility_GiveRareCandy[] = _("GIVE RARE CANDY");
 static const u8 gDebugText_Utility_ResetAllMapFlags[] = _("RESET MAP FLAGS");
@@ -116,7 +116,7 @@ static const struct ListMenuItem sDebugMenuItems_Main[] =
 
 static const struct ListMenuItem sDebugMenuItems_Utility[] =
 {
-    [DEBUG_MENU_ITEM_SET_FLAG] = {gDebugText_Utility_SetFlag, DEBUG_MENU_ITEM_SET_FLAG},
+    [DEBUG_MENU_ITEM_MANAGE_FLAGS] = {gDebugText_Utility_ManageFlag, DEBUG_MENU_ITEM_MANAGE_FLAGS},
     [DEBUG_MENU_ITEM_HEAL_PARTY] = {gDebugText_Utility_HealParty, DEBUG_MENU_ITEM_HEAL_PARTY},
     [DEBUG_MENU_ITEM_GIVE_RARE_CANDY] = {gDebugText_Utility_GiveRareCandy, DEBUG_MENU_ITEM_GIVE_RARE_CANDY},
     [DEBUG_MENU_ITEM_RESET_MAP_FLAGS] = {gDebugText_Utility_ResetAllMapFlags, DEBUG_MENU_ITEM_RESET_MAP_FLAGS},
@@ -132,7 +132,7 @@ static void (*const sDebugMenuActions_Main[])(u8) =
 
 static void (*const sDebugMenuActions_Utility[])(u8) =
 {
-    [DEBUG_MENU_ITEM_SET_FLAG] = DebugAction_OpenMenu_Flags,
+    [DEBUG_MENU_ITEM_MANAGE_FLAGS] = DebugAction_ManageFlags,
     [DEBUG_MENU_ITEM_HEAL_PARTY] = DebugAction_HealParty,
     [DEBUG_MENU_ITEM_GIVE_RARE_CANDY] = DebugAction_GiveRareCandy,
     [DEBUG_MENU_ITEM_RESET_MAP_FLAGS] = DebugAction_ResetMapFlags,
@@ -399,7 +399,8 @@ static void DebugAction_OpenMenu_Utility(u8 taskId)
     Debug_ShowUtilitySubMenu(DebugTask_HandleMenuInput_Utility, sDebugMenu_ListTemplate_Utility);
 }
 
-static void DebugAction_OpenMenu_Flags(u8 taskId)
+// Utility Functions
+static void DebugAction_ManageFlags(u8 taskId)
 {
     u8 windowId;
 
@@ -428,13 +429,6 @@ static void DebugAction_OpenMenu_Flags(u8 taskId)
     gTasks[taskId].data[4] = 0;            //Digit Selected
 }
 
-static void DebugAction_Cancel(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    EnableBothScriptContexts();
-}
-
-// Utility Functions
 static void DebugAction_HealParty(u8 taskId)
 {
     HealPlayerParty();
@@ -458,6 +452,12 @@ static void DebugAction_PrepareTrades(u8 taskId)
     Debug_DestroyMenu(taskId);
     ScriptContext1_SetupScript(Debug_EventScript_PrepareTrades);
     ScriptGiveMon(SPECIES_KECLEON, 20, ITEM_NONE, 0, 0, 0);
+}
+
+static void DebugAction_Cancel(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    EnableBothScriptContexts();
 }
 
 #endif
