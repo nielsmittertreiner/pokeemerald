@@ -179,7 +179,7 @@ LitorTown_EventScript_SailToNavire_1:
 	resetobjectpriority OBJ_EVENT_ID_PLAYER, MAP_NAVIRE_TOWN
 	resetobjectpriority 2, MAP_NAVIRE_TOWN
 	copyobjectxytoperm 2
-	copyvar VAR_FISHERMAN_FERRY_LOCATION, VAR_0x8008
+	call FishermanFerry_EventScript_RestoreFerryLocation
 	release
 	end
 
