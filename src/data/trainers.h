@@ -303,36 +303,36 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_GruntMuseum2),
-        .party = {.NoItemDefaultMoves = sParty_GruntMuseum2},
+        .partySize = ARRAY_COUNT(sParty_MurenaCity_Grunt),
+        .party = {.NoItemDefaultMoves = sParty_MurenaCity_Grunt},
     },
 
-    [TRAINER_GRUNT_SPACE_CENTER_1] =
+    [TRAINER_ROUTE404_WILLIAM] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
-        .trainerPic = TRAINER_PIC_MAGMA_GRUNT_M,
-        .trainerName = _("GRUNT"),
+        .trainerClass = TRAINER_CLASS_SWIMMER_M,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SWIMMER,
+        .trainerPic = TRAINER_PIC_SWIMMER_M,
+        .trainerName = _("WILLIAM"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_GruntSpaceCenter1),
-        .party = {.NoItemDefaultMoves = sParty_GruntSpaceCenter1},
+        .partySize = ARRAY_COUNT(sParty_Route404_William),
+        .party = {.NoItemDefaultMoves = sParty_Route404_William},
     },
 
-    [TRAINER_GRUNT_MT_PYRE_1] =
+    [TRAINER_ROUTE404_SARAH] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_TEAM_AQUA,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
-        .trainerPic = TRAINER_PIC_AQUA_GRUNT_M,
-        .trainerName = _("GRUNT"),
+        .trainerClass = TRAINER_CLASS_SWIMMER_F,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SWIMMER,
+        .trainerPic = TRAINER_PIC_SWIMMER_F,
+        .trainerName = _("SARAH"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_GruntMtPyre1),
-        .party = {.NoItemDefaultMoves = sParty_GruntMtPyre1},
+        .partySize = ARRAY_COUNT(sParty_Route404_Sarah),
+        .party = {.NoItemDefaultMoves = sParty_Route404_Sarah},
     },
 
     [TRAINER_GRUNT_MT_PYRE_2] =

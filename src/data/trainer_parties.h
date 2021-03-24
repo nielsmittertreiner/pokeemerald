@@ -269,7 +269,7 @@ static const struct TrainerMonItemCustomMoves sParty_Route403_Warren[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMuseum2[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_MurenaCity_Grunt[] = {
     {
     .iv = 100,
     .lvl = 17,
@@ -282,19 +282,24 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMuseum2[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntSpaceCenter1[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_Route404_William[] = {
     {
     .iv = 0,
-    .lvl = 32,
-    .species = SPECIES_NUMEL,
+    .lvl = 33,
+    .species = SPECIES_TENTACOOL,
+    },
+    {
+    .iv = 0,
+    .lvl = 34,
+    .species = SPECIES_WAILMER,
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMtPyre1[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_Route404_Sarah[] = {
     {
     .iv = 0,
-    .lvl = 32,
-    .species = SPECIES_ZUBAT,
+    .lvl = 36,
+    .species = SPECIES_SEAKING,
     }
 };
 

@@ -23,8 +23,8 @@
 #define TRAINER_ROUTE403_ANNA                19
 #define TRAINER_ROUTE403_WARREN              20
 #define TRAINER_MURENA_CITY_GRUNT            21
-#define TRAINER_GRUNT_SPACE_CENTER_1         22
-#define TRAINER_GRUNT_MT_PYRE_1              23
+#define TRAINER_ROUTE404_WILLIAM             22
+#define TRAINER_ROUTE404_SARAH               23
 #define TRAINER_GRUNT_MT_PYRE_2              24
 #define TRAINER_GRUNT_MT_PYRE_3              25
 #define TRAINER_GRUNT_WEATHER_INST_4         26

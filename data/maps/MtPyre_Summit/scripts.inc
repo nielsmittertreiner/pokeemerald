@@ -431,7 +431,7 @@ MtPyre_Summit_Movement_MaxieApproachArchie2: @ 82323F8
 	step_end
 
 MtPyre_Summit_EventScript_Grunt1:: @ 82323FD
-	trainerbattle_single TRAINER_GRUNT_MT_PYRE_1, MtPyre_Summit_Text_Grunt1Intro, MtPyre_Summit_Text_Grunt1Defeat
+	trainerbattle_single TRAINER_ROUTE404_SARAH, MtPyre_Summit_Text_Grunt1Intro, MtPyre_Summit_Text_Grunt1Defeat
 	msgbox MtPyre_Summit_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 

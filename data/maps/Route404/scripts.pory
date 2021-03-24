@@ -1,1 +1,48 @@
 mapscripts Route404_MapScripts {}
+
+script Route404_EventScript_SwimmerM {
+    trainerbattle_single(TRAINER_ROUTE404_WILLIAM, Route404_Text_WilliamIntro, Route404_Text_WilliamDefeat)
+    msgbox(Route404_Text_WilliamPostBattle, MSGBOX_NPC)
+    end
+}
+
+script Route404_EventScript_SwimmerF {
+    trainerbattle_single(TRAINER_ROUTE404_SARAH, Route404_Text_SarahIntro, Route404_Text_SarahDefeat)
+    msgbox(Route404_Text_SarahPostBattle, MSGBOX_NPC)
+    end
+}
+
+script Route404_EventScript_TuberMSwimming {
+    msgbox("Look how far I've drifted off of\n"
+           "the beach!\p"
+           "I might even end up in MURENA CITY.", MSGBOX_NPC)
+    end
+}
+
+text Route404_Text_WilliamIntro {
+    "Try beating me in the water!"
+}
+
+text Route404_Text_WilliamDefeat {
+    "Huff puff puff…\n"
+    "Swimming is tiring…"
+}
+
+text Route404_Text_WilliamPostBattle {
+    "Swimming really gets you ripped\n"
+    "you know!"
+}
+
+text Route404_Text_SarahIntro {
+    "My GOLDEEN evolved a while back!\n"
+    "I'll try its new power on you!"
+}
+
+text Route404_Text_SarahDefeat {
+    "SEAKING held on for longer than\n"
+    "GOLDEEN ever did."
+}
+
+text Route404_Text_SarahPostBattle {
+    "Is a female SEAKING called a SEAQUEEN?"
+}
