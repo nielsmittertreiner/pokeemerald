@@ -13,33 +13,33 @@ script FishermanFerry_EventScript_RestoreFerryLocation {
 script FishermanFerry_EventScript_ResetFerryLocation {
     if (var(VAR_FISHERMAN_FERRY_LOCATION) == 1) {
         // hide all ferry npcs except murena city
-        setflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
-        setflag(FLAG_HIDE_LITOR_TOWN_BOAT)
         clearflag(FLAG_HIDE_MURENA_CITY_SHIPYARD_FISHERMAN)
         clearflag(FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT)
         clearflag(FLAG_HIDE_MURENA_CITY_BOAT)
         setflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
         setflag(FLAG_HIDE_LITOR_TOWN_BOAT)
+        setflag(FLAG_HIDE_NAVIRE_TOWN_FISHERMAN)
+        setflag(FLAG_HIDE_NAVIRE_TOWN_BOAT)
     }
     if (var(VAR_FISHERMAN_FERRY_LOCATION) == 2) {
         // hide all ferry npcs except litor town
+        clearflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
+        clearflag(FLAG_HIDE_LITOR_TOWN_BOAT)
         setflag(FLAG_HIDE_MURENA_CITY_SHIPYARD_FISHERMAN)
         setflag(FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT)
         setflag(FLAG_HIDE_MURENA_CITY_BOAT)
-        clearflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
-        clearflag(FLAG_HIDE_LITOR_TOWN_BOAT)
-        setflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
-        setflag(FLAG_HIDE_LITOR_TOWN_BOAT)
+        setflag(FLAG_HIDE_NAVIRE_TOWN_FISHERMAN)
+        setflag(FLAG_HIDE_NAVIRE_TOWN_BOAT)
     }
     if (var(VAR_FISHERMAN_FERRY_LOCATION) == 3) {
         // hide all ferry npcs except navire town
-        setflag(FLAG_HIDE_NAVIRE_TOWN_FISHERMAN)
-        setflag(FLAG_HIDE_NAVIRE_TOWN_BOAT)
+        clearflag(FLAG_HIDE_NAVIRE_TOWN_FISHERMAN)
+        clearflag(FLAG_HIDE_NAVIRE_TOWN_BOAT)
+        setflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
+        setflag(FLAG_HIDE_LITOR_TOWN_BOAT)
         setflag(FLAG_HIDE_MURENA_CITY_SHIPYARD_FISHERMAN)
         setflag(FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT)
         setflag(FLAG_HIDE_MURENA_CITY_BOAT)
-        clearflag(FLAG_HIDE_LITOR_TOWN_FISHERMAN)
-        clearflag(FLAG_HIDE_LITOR_TOWN_BOAT)
     }
     return
 }

@@ -4,12 +4,6 @@ FishermanFerry_EventScript_BackupFerryLocation::
 	return
 
 
-FishermanFerry_EventScript_RestoreFerryLocation::
-	copyvar VAR_FISHERMAN_FERRY_LOCATION, VAR_0x8008
-	setvar VAR_0x8008, 0
-	return
-
-
 FishermanFerry_EventScript_ResetFerryLocation::
 	compare VAR_FISHERMAN_FERRY_LOCATION, 1
 	goto_if_eq FishermanFerry_EventScript_ResetFerryLocation_2
@@ -23,33 +17,33 @@ FishermanFerry_EventScript_ResetFerryLocation_7:
 	return
 
 FishermanFerry_EventScript_ResetFerryLocation_2:
-	setflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
-	setflag FLAG_HIDE_LITOR_TOWN_BOAT
 	clearflag FLAG_HIDE_MURENA_CITY_SHIPYARD_FISHERMAN
 	clearflag FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT
 	clearflag FLAG_HIDE_MURENA_CITY_BOAT
 	setflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
 	setflag FLAG_HIDE_LITOR_TOWN_BOAT
+	setflag FLAG_HIDE_NAVIRE_TOWN_FISHERMAN
+	setflag FLAG_HIDE_NAVIRE_TOWN_BOAT
 	goto FishermanFerry_EventScript_ResetFerryLocation_1
 
 FishermanFerry_EventScript_ResetFerryLocation_5:
+	clearflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
+	clearflag FLAG_HIDE_LITOR_TOWN_BOAT
 	setflag FLAG_HIDE_MURENA_CITY_SHIPYARD_FISHERMAN
 	setflag FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT
 	setflag FLAG_HIDE_MURENA_CITY_BOAT
-	clearflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
-	clearflag FLAG_HIDE_LITOR_TOWN_BOAT
-	setflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
-	setflag FLAG_HIDE_LITOR_TOWN_BOAT
+	setflag FLAG_HIDE_NAVIRE_TOWN_FISHERMAN
+	setflag FLAG_HIDE_NAVIRE_TOWN_BOAT
 	goto FishermanFerry_EventScript_ResetFerryLocation_4
 
 FishermanFerry_EventScript_ResetFerryLocation_8:
-	setflag FLAG_HIDE_NAVIRE_TOWN_FISHERMAN
-	setflag FLAG_HIDE_NAVIRE_TOWN_BOAT
+	clearflag FLAG_HIDE_NAVIRE_TOWN_FISHERMAN
+	clearflag FLAG_HIDE_NAVIRE_TOWN_BOAT
+	setflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
+	setflag FLAG_HIDE_LITOR_TOWN_BOAT
 	setflag FLAG_HIDE_MURENA_CITY_SHIPYARD_FISHERMAN
 	setflag FLAG_HIDE_MURENA_CITY_SHIPYARD_BOAT
 	setflag FLAG_HIDE_MURENA_CITY_BOAT
-	clearflag FLAG_HIDE_LITOR_TOWN_FISHERMAN
-	clearflag FLAG_HIDE_LITOR_TOWN_BOAT
 	goto FishermanFerry_EventScript_ResetFerryLocation_7
 
 
