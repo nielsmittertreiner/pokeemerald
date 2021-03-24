@@ -38,12 +38,15 @@ static void DebugAction_DestroyExtraWindow(u8);
 static void DebugTask_HandleMenuInput_Main(u8);
 static void DebugTask_HandleMenuInput_Utility(u8);
 static void DebugTask_HandleMenuInput_Flags(u8);
+static void DebugTask_HandleMenuInput_Vars(u8);
 
 // Open Menus
 static void DebugAction_OpenMenu_Utility(u8);
-static void DebugAction_ManageFlags(u8);
 
 // Utility Functions
+static void DebugAction_ManageFlags(u8);
+static void DebugAction_ManageVars(u8);
+static void DebugAction_SetVarValue(u8);
 static void DebugAction_HealParty(u8);
 static void DebugAction_GiveRareCandy(u8);
 static void DebugAction_ResetMapFlags(u8);
@@ -57,6 +60,7 @@ static const u8 gDebugText_Cancel[] = _("CANCEL");
 
 // Utility Menu Strings
 static const u8 gDebugText_Utility_ManageFlag[] = _("MANAGE FLAGS");
+static const u8 gDebugText_Utility_ManageVars[] = _("MANAGE VARS");
 static const u8 gDebugText_Utility_HealParty[] = _("HEAL PARTY");
 static const u8 gDebugText_Utility_GiveRareCandy[] = _("GIVE RARE CANDY");
 static const u8 gDebugText_Utility_ResetAllMapFlags[] = _("RESET MAP FLAGS");
@@ -64,9 +68,14 @@ static const u8 gDebugText_Utility_PrepareTrades[] = _("PREPARE TRADES");
 
 // Flags Menu Strings
 static const u8 gDebugText_Flag_FlagDef[] =_("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
-static const u8 gDebugText_Flag_FlagHex[] = _("{STR_VAR_1}\n0x{STR_VAR_2}");
+static const u8 gDebugText_Flag_FlagHex[] = _("{STR_VAR_1}         0x{STR_VAR_2}");
 static const u8 gDebugText_Flag_FlagSet[] = _("{COLOR}{06}TRUE{COLOR}{02}");
 static const u8 gDebugText_Flag_FlagUnset[] = _("{COLOR}{04}FALSE{COLOR}{02}");
+
+// Var Menu Strings
+static const u8 gDebugText_Var_VariableDef[] = _("VAR: {COLOR}{06}{STR_VAR_1}\n{COLOR}{02}VAL: {STR_VAR_3}\n{STR_VAR_2}");
+static const u8 gDebugText_Var_VariableHex[] = _("{STR_VAR_1}       0x{STR_VAR_2}");
+static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{06}{STR_VAR_3}{COLOR}{02}\n{STR_VAR_2}");
 
 // Digit Indicator Strings
 static const u8 digitInidicator_1[] =_("{LEFT_ARROW}+1{RIGHT_ARROW}");
@@ -117,6 +126,7 @@ static const struct ListMenuItem sDebugMenuItems_Main[] =
 static const struct ListMenuItem sDebugMenuItems_Utility[] =
 {
     [DEBUG_MENU_ITEM_MANAGE_FLAGS] = {gDebugText_Utility_ManageFlag, DEBUG_MENU_ITEM_MANAGE_FLAGS},
+    [DEBUG_MENU_ITEM_MANAGE_VARS] = {gDebugText_Utility_ManageVars, DEBUG_MENU_ITEM_MANAGE_VARS},
     [DEBUG_MENU_ITEM_HEAL_PARTY] = {gDebugText_Utility_HealParty, DEBUG_MENU_ITEM_HEAL_PARTY},
     [DEBUG_MENU_ITEM_GIVE_RARE_CANDY] = {gDebugText_Utility_GiveRareCandy, DEBUG_MENU_ITEM_GIVE_RARE_CANDY},
     [DEBUG_MENU_ITEM_RESET_MAP_FLAGS] = {gDebugText_Utility_ResetAllMapFlags, DEBUG_MENU_ITEM_RESET_MAP_FLAGS},
@@ -133,6 +143,7 @@ static void (*const sDebugMenuActions_Main[])(u8) =
 static void (*const sDebugMenuActions_Utility[])(u8) =
 {
     [DEBUG_MENU_ITEM_MANAGE_FLAGS] = DebugAction_ManageFlags,
+    [DEBUG_MENU_ITEM_MANAGE_VARS] = DebugAction_ManageVars,
     [DEBUG_MENU_ITEM_HEAL_PARTY] = DebugAction_HealParty,
     [DEBUG_MENU_ITEM_GIVE_RARE_CANDY] = DebugAction_GiveRareCandy,
     [DEBUG_MENU_ITEM_RESET_MAP_FLAGS] = DebugAction_ResetMapFlags,
@@ -170,7 +181,7 @@ static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
     .width = DEBUG_NUMBER_DISPLAY_WIDTH,
     .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
     .paletteNum = 15,
-    .baseBlock = 128,
+    .baseBlock = 256,
 };
 
 // List Menu Templates
@@ -392,6 +403,89 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
     }
 }
 
+static void DebugTask_HandleMenuInput_Vars(u8 taskId)
+{
+    if(gMain.newKeys & DPAD_UP)
+    {
+        gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
+        if(gTasks[taskId].data[3] > VARS_END){
+            gTasks[taskId].data[3] = VARS_END;
+        }
+    }
+    if(gMain.newKeys & DPAD_DOWN)
+    {
+        gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
+        if(gTasks[taskId].data[3] < VARS_START){
+            gTasks[taskId].data[3] = VARS_START;
+        }
+    }
+    if(gMain.newKeys & DPAD_LEFT)
+    {
+        gTasks[taskId].data[4] -= 1;
+        if(gTasks[taskId].data[4] < 0)
+        {
+            gTasks[taskId].data[4] = 0;
+        }
+    }
+    if(gMain.newKeys & DPAD_RIGHT)
+    {
+        gTasks[taskId].data[4] += 1;
+        if(gTasks[taskId].data[4] > DEBUG_NUMBER_DIGITS_VARIABLES-1)
+        {
+            gTasks[taskId].data[4] = DEBUG_NUMBER_DIGITS_VARIABLES-1;
+        }
+    }
+
+    if (gMain.newKeys & DPAD_ANY)
+    {
+        PlaySE(SE_SELECT);
+
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
+        ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
+        StringExpandPlaceholders(gStringVar1, gDebugText_Var_VariableHex);
+        if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) //Current value, if 65535 the value hasnt been set
+            gTasks[taskId].data[5] = 0;
+        else
+            gTasks[taskId].data[5] = VarGet(gTasks[taskId].data[3]);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[5], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
+
+        //Combine str's to full window string
+        StringExpandPlaceholders(gStringVar4, gDebugText_Var_VariableDef);
+        AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gTasks[taskId].data[4] = 0;
+
+        PlaySE(SE_SELECT);
+
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
+        ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
+        StringExpandPlaceholders(gStringVar1, gDebugText_Var_VariableHex);
+        if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) //Current value if 65535 the value hasnt been set
+            gTasks[taskId].data[5] = 0;
+        else
+            gTasks[taskId].data[5] = VarGet(gTasks[taskId].data[3]);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[5], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
+        StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
+        StringExpandPlaceholders(gStringVar4, gDebugText_Var_VariableVal);
+        AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+
+        gTasks[taskId].data[6] = gTasks[taskId].data[5]; //New value selector
+        gTasks[taskId].func = DebugAction_SetVarValue;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
+        DebugAction_OpenMenu_Utility(taskId);
+        return;
+    }
+}
+
 // Open Menus
 static void DebugAction_OpenMenu_Utility(u8 taskId)
 {
@@ -427,6 +521,99 @@ static void DebugAction_ManageFlags(u8 taskId)
     gTasks[taskId].data[2] = windowId;
     gTasks[taskId].data[3] = 0;            //Current Flag
     gTasks[taskId].data[4] = 0;            //Digit Selected
+}
+
+static void DebugAction_ManageVars(u8 taskId)
+{
+    u8 windowId;
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, 3);
+
+    //Display initial Variable
+    ConvertIntToDecimalStringN(gStringVar1, VARS_START, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
+    ConvertIntToHexStringN(gStringVar2, VARS_START, STR_CONV_MODE_LEFT_ALIGN, 4);
+    StringExpandPlaceholders(gStringVar1, gDebugText_Var_VariableHex);
+    ConvertIntToDecimalStringN(gStringVar3, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
+    StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    StringExpandPlaceholders(gStringVar4, gDebugText_Var_VariableDef);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
+
+    gTasks[taskId].func = DebugTask_HandleMenuInput_Vars;
+    gTasks[taskId].data[2] = windowId;
+    gTasks[taskId].data[3] = VARS_START;   //Current Variable
+    gTasks[taskId].data[4] = 0;            //Digit Selected
+    gTasks[taskId].data[5] = 0;            //Current Variable VALUE
+}
+
+static void DebugAction_SetVarValue(u8 taskId)
+{
+    if(gMain.newKeys & DPAD_UP)
+    {
+        gTasks[taskId].data[6] += sPowersOfTen[gTasks[taskId].data[4]];
+        if(gTasks[taskId].data[6] >= 100){
+            gTasks[taskId].data[6] = 99;
+        }
+    }
+
+    if(gMain.newKeys & DPAD_DOWN)
+    {
+        gTasks[taskId].data[6] -= sPowersOfTen[gTasks[taskId].data[4]];
+        if(gTasks[taskId].data[6] < 0){
+            gTasks[taskId].data[6] = 0;
+        }
+    }
+
+    if(gMain.newKeys & DPAD_LEFT)
+    {
+        gTasks[taskId].data[4] -= 1;
+        if(gTasks[taskId].data[4] < 0)
+        {
+            gTasks[taskId].data[4] = 0;
+        }
+    }
+
+    if(gMain.newKeys & DPAD_RIGHT)
+    {
+        gTasks[taskId].data[4] += 1;
+        if(gTasks[taskId].data[4] > 2)
+        {
+            gTasks[taskId].data[4] = 2;
+        }
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        VarSet(gTasks[taskId].data[3], gTasks[taskId].data[5]);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        DebugTask_HandleMenuInput_Vars(taskId);
+        DebugAction_ManageVars(taskId);
+        return;
+    }
+
+    if (gMain.newKeys & DPAD_ANY || gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
+        ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
+        StringExpandPlaceholders(gStringVar1, gDebugText_Var_VariableHex);
+        StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[6], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
+        StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
+        StringExpandPlaceholders(gStringVar4, gDebugText_Var_VariableVal);
+        AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+    }
 }
 
 static void DebugAction_HealParty(u8 taskId)
