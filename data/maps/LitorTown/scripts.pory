@@ -106,6 +106,7 @@ script LitorTown_EventScript_SailToMurena {
     applymovement(OBJ_EVENT_ID_PLAYER, LitorTown_Movement_SailToMurena)
     applymovement(LOCALID_BOAT_LITOR, LitorTown_Movement_SailToMurena)
     waitmovement(0)
+    setflag(FLAG_HIDE_LITOR_TOWN_BOAT)
     clearflag(FLAG_DONT_TRANSITION_MUSIC)
     fadedefaultbgm
     setvar(VAR_FISHERMAN_FERRY_STATE, 3)
