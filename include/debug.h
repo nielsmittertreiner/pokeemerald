@@ -6,7 +6,6 @@ void Debug_OpenDebugMenu(void);
 
 #define DEBUG_MAIN_MENU_WIDTH 7
 #define DEBUG_UTILITY_MENU_WIDTH 12
-#define DEBUG_TOGGLES_MENU_WIDTH 9
 
 #define DEBUG_NUMBER_DISPLAY_WIDTH 7
 #define DEBUG_NUMBER_DISPLAY_HEIGHT 4
@@ -16,7 +15,6 @@ void Debug_OpenDebugMenu(void);
 // Main menu
 enum {
     DEBUG_MENU_ITEM_UTILITY,
-    DEBUG_MENU_ITEM_TOGGLES,
     DEBUG_MENU_ITEM_CANCEL,
 };
 
