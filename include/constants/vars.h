@@ -136,7 +136,7 @@
 #define TOWN_CITY_STATE_VARS_END                         VAR_ROUTE116_STATE
 
 // Special Area and other State Variables
-#define SPECIAL_STATE_VARS_START                           0x4070
+#define SPECIAL_STATE_VARS_START                         0x4070
 #define VAR_ACREN_FOREST_STATE                           (SPECIAL_STATE_VARS_START + 0x0) // Acren Forest
 #define VAR_SUNSET_TOWN_FOLLOWER_STATE                   (SPECIAL_STATE_VARS_START + 0x1) // Conifer Follower
 #define VAR_JULIA_STATE                                  (SPECIAL_STATE_VARS_START + 0x2) // Julia Encounters
