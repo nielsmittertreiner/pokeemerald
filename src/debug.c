@@ -30,6 +30,7 @@ static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate 
 static void Debug_ShowTogglesSubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_DestroyMenu(u8);
+static void DebugAction_DestroyExtraWindow(u8);
 
 // Input Handlers
 static void DebugTask_HandleMenuInput_Main(u8);
@@ -266,6 +267,14 @@ static void Debug_DestroyMenu(u8 taskId)
     DestroyTask(taskId);
 }
 
+static void DebugAction_DestroyExtraWindow(u8 taskId)
+{
+    ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
+    RemoveWindow(gTasks[taskId].data[2]);
+
+    DestroyTask(taskId);
+}
+
 // Input Handlers
 static void DebugTask_HandleMenuInput_Main(u8 taskId)
 {
@@ -317,9 +326,8 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
-        Debug_ShowUtilitySubMenu(DebugTask_HandleMenuInput_Utility, sDebugMenu_ListTemplate_Utility);
+        DebugAction_DestroyExtraWindow(taskId);
+        DebugAction_OpenMenu_Utility(taskId);
         return;
     }
 
