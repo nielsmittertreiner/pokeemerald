@@ -405,21 +405,21 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
 
 static void DebugTask_HandleMenuInput_Vars(u8 taskId)
 {
-    if(gMain.newKeys & DPAD_UP)
+    if (gMain.newKeys & DPAD_UP)
     {
         gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
         if(gTasks[taskId].data[3] > VARS_END){
             gTasks[taskId].data[3] = VARS_END;
         }
     }
-    if(gMain.newKeys & DPAD_DOWN)
+    if (gMain.newKeys & DPAD_DOWN)
     {
         gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
         if(gTasks[taskId].data[3] < VARS_START){
             gTasks[taskId].data[3] = VARS_START;
         }
     }
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
         gTasks[taskId].data[4] -= 1;
         if(gTasks[taskId].data[4] < 0)
@@ -427,7 +427,7 @@ static void DebugTask_HandleMenuInput_Vars(u8 taskId)
             gTasks[taskId].data[4] = 0;
         }
     }
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
         gTasks[taskId].data[4] += 1;
         if(gTasks[taskId].data[4] > DEBUG_NUMBER_DIGITS_VARIABLES-1)
@@ -553,7 +553,7 @@ static void DebugAction_ManageVars(u8 taskId)
 
 static void DebugAction_SetVarValue(u8 taskId)
 {
-    if(gMain.newKeys & DPAD_UP)
+    if (gMain.newKeys & DPAD_UP)
     {
         gTasks[taskId].data[6] += sPowersOfTen[gTasks[taskId].data[4]];
         if(gTasks[taskId].data[6] >= 100){
@@ -561,7 +561,7 @@ static void DebugAction_SetVarValue(u8 taskId)
         }
     }
 
-    if(gMain.newKeys & DPAD_DOWN)
+    if (gMain.newKeys & DPAD_DOWN)
     {
         gTasks[taskId].data[6] -= sPowersOfTen[gTasks[taskId].data[4]];
         if(gTasks[taskId].data[6] < 0){
@@ -569,7 +569,7 @@ static void DebugAction_SetVarValue(u8 taskId)
         }
     }
 
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
         gTasks[taskId].data[4] -= 1;
         if(gTasks[taskId].data[4] < 0)
@@ -578,7 +578,7 @@ static void DebugAction_SetVarValue(u8 taskId)
         }
     }
 
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
         gTasks[taskId].data[4] += 1;
         if(gTasks[taskId].data[4] > 2)
@@ -591,6 +591,8 @@ static void DebugAction_SetVarValue(u8 taskId)
     {
         PlaySE(SE_SELECT);
         VarSet(gTasks[taskId].data[3], gTasks[taskId].data[5]);
+        DebugAction_DestroyExtraWindow(taskId);
+        DebugAction_Cancel(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
