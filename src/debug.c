@@ -30,23 +30,32 @@ static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate 
 static void Debug_ShowTogglesSubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_DestroyMenu(u8);
+
+// Input Handlers
 static void DebugTask_HandleMenuInput_Main(u8);
 static void DebugTask_HandleMenuInput_Utility(u8);
 static void DebugTask_HandleMenuInput_Toggles(u8);
 static void DebugTask_HandleMenuInput_Flags(u8);
+
+// Open Menus
 static void DebugAction_OpenMenu_Utility(u8);
 static void DebugAction_OpenMenu_Toggles(u8);
 static void DebugAction_OpenMenu_Flags(u8);
-static void DebugAction_Cancel(u8);
+
+// Utility Functions
 static void DebugAction_HealParty(u8);
 static void DebugAction_GiveRareCandy(u8);
 static void DebugAction_ResetMapFlags(u8);
 static void DebugAction_PrepareTrades(u8);
+
+// Toggle Functions
 static void DebugAction_ToggleTrainers(u8);
 static void DebugAction_ToggleEncounters(u8);
 static void DebugAction_TogglePokedex(u8);
 static void DebugAction_ToggleBadges(u8);
 static void DebugAction_ToggleCollision(u8);
+
+static void DebugAction_Cancel(u8);
 
 // Main menu
 static const u8 gDebugText_Utility[] = _("UTILITY");
@@ -348,6 +357,7 @@ static void Debug_DestroyMenu(u8 taskId)
     DestroyTask(taskId);
 }
 
+// Input Handlers
 static void DebugTask_HandleMenuInput_Main(u8 taskId)
 {
     void (*func)(u8);
@@ -476,6 +486,7 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
     }
 }
 
+// Open Menus
 static void DebugAction_OpenMenu_Utility(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
@@ -523,6 +534,7 @@ static void DebugAction_Cancel(u8 taskId)
     EnableBothScriptContexts();
 }
 
+// Utility Functions
 static void DebugAction_HealParty(u8 taskId)
 {
     HealPlayerParty();
@@ -548,6 +560,7 @@ static void DebugAction_PrepareTrades(u8 taskId)
     ScriptGiveMon(SPECIES_KECLEON, 20, ITEM_NONE, 0, 0, 0);
 }
 
+// Toggle Functions
 static void DebugAction_ToggleTrainers(u8 taskId)
 {
     if (FlagGet(FLAG_DISABLE_TRAINERS))
