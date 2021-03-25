@@ -44,7 +44,7 @@ static void DebugTask_HandleMenuInput_Flags(u8);
 static void DebugTask_HandleMenuInput_Vars(u8);
 
 // Open Menus
-static void DebugAction_OpenMenu_Utility(u8);
+static void DebugAction_OpenUtilityMenu(u8);
 
 // Utility Functions
 static void DebugAction_ManageFlags(u8);
@@ -63,28 +63,36 @@ static void DebugAction_Cancel(u8);
 #define DEBUG_NUMBER_DISPLAY_WIDTH 14
 #define DEBUG_NUMBER_DISPLAY_HEIGHT 3
 
+#define DEBUG_DUMMY_WINDOW_WIDTH 28
+#define DEBUG_DUMMY_WINDOW_HEIGHT 2
+
 #define DEBUG_NUMBER_DIGITS_FLAGS 4
 #define DEBUG_NUMBER_DIGITS_VARIABLES 5
 
 // Main Menu Strings
 static const u8 gDebugText_Utility[] = _("UTILITY");
-static const u8 gDebugText_Cancel[] = _("CANCEL");
+static const u8 gDebugText_Cancel[]  = _("CANCEL");
 
 // Utility Menu Strings
-static const u8 gDebugText_Utility_ManageFlag[] = _("MANAGE FLAGS");
-static const u8 gDebugText_Utility_ManageVars[] = _("MANAGE VARS");
-static const u8 gDebugText_Utility_HealParty[] = _("HEAL PARTY");
+static const u8 gDebugText_Utility_ManageFlag[] = _("{COLOR}{RED}MANAGE FLAGS");
+static const u8 gDebugText_Utility_ManageVars[] = _("{COLOR}{RED}MANAGE VARS");
+static const u8 gDebugText_Utility_HealParty[]  = _("HEAL PARTY");
 
 // Flags Menu Strings
-static const u8 gDebugText_Flag_FlagDef[] =_("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
-static const u8 gDebugText_Flag_FlagHex[] = _("{STR_VAR_1}         0x{STR_VAR_2}");
-static const u8 gDebugText_Flag_FlagSet[] = _("{COLOR}{06}TRUE{COLOR}{02}");
+static const u8 gDebugText_Flag_FlagDef[]   = _("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
+static const u8 gDebugText_Flag_FlagHex[]   = _("{STR_VAR_1}         0x{STR_VAR_2}");
+static const u8 gDebugText_Flag_FlagSet[]   = _("{COLOR}{06}TRUE{COLOR}{02}");
 static const u8 gDebugText_Flag_FlagUnset[] = _("{COLOR}{04}FALSE{COLOR}{02}");
 
 // Var Menu Strings
 static const u8 gDebugText_Var_VariableDef[] = _("VAR: {COLOR}{06}{STR_VAR_1}\n{COLOR}{02}VAL: {STR_VAR_3}\n{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableHex[] = _("{STR_VAR_1}       0x{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{06}{STR_VAR_3}{COLOR}{02}\n{STR_VAR_2}{A_BUTTON}");
+
+// Help Strings
+static const u8 gDebugText_Help_General[] = _("{DPAD_UPDOWN} SELECT   {A_BUTTON} CONFIRM   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_Flags[]   = _("{DPAD_UPDOWN} FLAG   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} TOGGLE   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_Vars[]   =  _("{DPAD_UPDOWN} VAR/VAL   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} SELECT   {B_BUTTON} CANCEL");
 
 // Digit Indicator Strings
 static const u8 digitInidicator_1[]        = _("{LEFT_ARROW}    +1                        {RIGHT_ARROW}");
@@ -152,7 +160,7 @@ static const struct ListMenuItem sDebugMenuItems_Utility[] =
 // Menu Actions
 static void (*const sDebugMenuActions_Main[])(u8) =
 {
-    [DEBUG_MENU_ITEM_UTILITY] = DebugAction_OpenMenu_Utility,
+    [DEBUG_MENU_ITEM_UTILITY] = DebugAction_OpenUtilityMenu,
     [DEBUG_MENU_ITEM_CANCEL] = DebugAction_Cancel,
 };
 
@@ -175,7 +183,7 @@ static const struct WindowTemplate sDebugMainMenuWindowTemplate =
     .baseBlock = 1,
 };
 
-static const struct WindowTemplate sDebugSubMenuUtilityWindowTemplate =
+static const struct WindowTemplate sDebugUtilityMenuWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 1,
@@ -189,10 +197,21 @@ static const struct WindowTemplate sDebugSubMenuUtilityWindowTemplate =
 static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
 {
     .bg = 0,
-    .tilemapLeft = 3 + DEBUG_UTILITY_MENU_WIDTH,
+    .tilemapLeft = 1,
     .tilemapTop = 1,
     .width = DEBUG_NUMBER_DISPLAY_WIDTH,
     .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
+    .paletteNum = 15,
+    .baseBlock = 128,
+};
+
+static const struct WindowTemplate sDebugHelpWindowTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 18,
+    .width = DEBUG_DUMMY_WINDOW_WIDTH,
+    .height = DEBUG_DUMMY_WINDOW_HEIGHT,
     .paletteNum = 15,
     .baseBlock = 256,
 };
@@ -222,18 +241,22 @@ void Debug_OpenDebugMenu(void)
 static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate)
 {
     struct ListMenuTemplate menuTemplate;
-    u8 windowId;
+    u8 windowId1;
+    u8 windowId2;
     u8 menuTaskId;
     u8 inputTaskId;
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugMainMenuWindowTemplate);
-    DrawStdWindowFrame(windowId, FALSE);
+
+    windowId1 = AddWindow(&sDebugMainMenuWindowTemplate);
+    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    DrawStdWindowFrame(windowId1, FALSE);
+    DrawStdWindowFrame(windowId2, FALSE);
 
     menuTemplate = ListMenuTemplate;
     menuTemplate.maxShowed = ARRAY_COUNT(sDebugMenuItems_Main);
-    menuTemplate.windowId = windowId;
+    menuTemplate.windowId = windowId1;
     menuTemplate.header_X = 0;
     menuTemplate.item_X = 8;
     menuTemplate.cursor_X = 0;
@@ -248,28 +271,38 @@ static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate 
     menuTemplate.cursorKind = 0;
     menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
+
+    //Display help
+    StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
+    AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     inputTaskId = CreateTask(HandleInput, 3);
     gTasks[inputTaskId].data[0] = menuTaskId;
-    gTasks[inputTaskId].data[1] = windowId;
+    gTasks[inputTaskId].data[1] = windowId1;
+    gTasks[inputTaskId].data[2] = windowId2;
 }
 
 static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate)
 {
     struct ListMenuTemplate menuTemplate;
-    u8 windowId;
+    u8 windowId1;
+    u8 windowId2;
     u8 menuTaskId;
     u8 inputTaskId;
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugSubMenuUtilityWindowTemplate);
-    DrawStdWindowFrame(windowId, FALSE);
+
+    windowId1 = AddWindow(&sDebugUtilityMenuWindowTemplate);
+    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    DrawStdWindowFrame(windowId1, FALSE);
+    DrawStdWindowFrame(windowId2, FALSE);
 
     menuTemplate = ListMenuTemplate;
     menuTemplate.maxShowed = ARRAY_COUNT(sDebugMenuItems_Utility);
-    menuTemplate.windowId = windowId;
+    menuTemplate.windowId = windowId1;
     menuTemplate.header_X = 0;
     menuTemplate.item_X = 8;
     menuTemplate.cursor_X = 0;
@@ -284,11 +317,17 @@ static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTem
     menuTemplate.cursorKind = 0;
     menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
+
+    //Display help
+    StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
+    AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     inputTaskId = CreateTask(HandleInput, 3);
     gTasks[inputTaskId].data[0] = menuTaskId;
-    gTasks[inputTaskId].data[1] = windowId;
+    gTasks[inputTaskId].data[1] = windowId1;
+    gTasks[inputTaskId].data[2] = windowId2;
 }
 
 static void Debug_DestroyMenu(u8 taskId)
@@ -303,6 +342,9 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
 {
     ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
     RemoveWindow(gTasks[taskId].data[2]);
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[8], TRUE);
+    RemoveWindow(gTasks[taskId].data[8]);
 
     DestroyTask(taskId);
 }
@@ -322,6 +364,7 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
         Debug_DestroyMenu(taskId);
         EnableBothScriptContexts();
     }
@@ -341,6 +384,7 @@ static void DebugTask_HandleMenuInput_Utility(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
+        DebugAction_DestroyExtraWindow(taskId);
         Debug_DestroyMenu(taskId);
         Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
     }
@@ -360,7 +404,7 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
     {
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
-        DebugAction_OpenMenu_Utility(taskId);
+        DebugAction_OpenUtilityMenu(taskId);
         return;
     }
 
@@ -495,14 +539,15 @@ static void DebugTask_HandleMenuInput_Vars(u8 taskId)
     {
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
-        DebugAction_OpenMenu_Utility(taskId);
+        DebugAction_OpenUtilityMenu(taskId);
         return;
     }
 }
 
 // Open Menus
-static void DebugAction_OpenMenu_Utility(u8 taskId)
+static void DebugAction_OpenUtilityMenu(u8 taskId)
 {
+    DebugAction_DestroyExtraWindow(taskId);
     Debug_DestroyMenu(taskId);
     Debug_ShowUtilitySubMenu(DebugTask_HandleMenuInput_Utility, sDebugMenu_ListTemplate_Utility);
 }
@@ -510,14 +555,23 @@ static void DebugAction_OpenMenu_Utility(u8 taskId)
 // Utility Functions
 static void DebugAction_ManageFlags(u8 taskId)
 {
-    u8 windowId;
+    u8 windowId1;
+    u8 windowId2;
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
-    DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, 3);
+    windowId1 = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+
+    DrawStdWindowFrame(windowId1, FALSE);
+    DrawStdWindowFrame(windowId2, FALSE);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     //Display initial Flag
     ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
@@ -529,24 +583,37 @@ static void DebugAction_ManageFlags(u8 taskId)
         StringCopyPadded(gStringVar2, gDebugText_Flag_FlagUnset, CHAR_SPACE, 15);
     StringCopy(gStringVar3, gText_DigitIndicator[0]);
     StringExpandPlaceholders(gStringVar4, gDebugText_Flag_FlagDef);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
+    AddTextPrinterParameterized(windowId1, 1, gStringVar4, 1, 1, 0, NULL);
+
+    //Display help
+    StringExpandPlaceholders(gStringVar4, gDebugText_Help_Flags);
+    AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_Flags;
-    gTasks[taskId].data[2] = windowId;
+    gTasks[taskId].data[2] = windowId1;
+    gTasks[taskId].data[8] = windowId2;
     gTasks[taskId].data[3] = 0;            //Current Flag
     gTasks[taskId].data[4] = 0;            //Digit Selected
 }
 
 static void DebugAction_ManageVars(u8 taskId)
 {
-    u8 windowId;
+    u8 windowId1;
+    u8 windowId2;
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
 
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
-    windowId = AddWindow(&sDebugNumberDisplayWindowTemplate);
-    DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, 3);
+    windowId1 = AddWindow(&sDebugNumberDisplayWindowTemplate);
+    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    DrawStdWindowFrame(windowId1, FALSE);
+    DrawStdWindowFrame(windowId2, FALSE);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     //Display initial Variable
     ConvertIntToDecimalStringN(gStringVar1, VARS_START, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
@@ -556,10 +623,15 @@ static void DebugAction_ManageVars(u8 taskId)
     StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
     StringExpandPlaceholders(gStringVar4, gDebugText_Var_VariableDef);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
+    AddTextPrinterParameterized(windowId1, 1, gStringVar4, 1, 1, 0, NULL);
+
+    //Display help
+    StringExpandPlaceholders(gStringVar4, gDebugText_Help_Vars);
+    AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_Vars;
-    gTasks[taskId].data[2] = windowId;
+    gTasks[taskId].data[2] = windowId1;
+    gTasks[taskId].data[8] = windowId2;
     gTasks[taskId].data[3] = VARS_START;   //Current Variable
     gTasks[taskId].data[4] = 0;            //Digit Selected
     gTasks[taskId].data[5] = 0;            //Current Variable VALUE
@@ -607,14 +679,11 @@ static void DebugAction_SetVarValue(u8 taskId)
     {
         PlaySE(SE_SELECT);
         VarSet(gTasks[taskId].data[3], gTasks[taskId].data[6]);
-        //DebugAction_ManageVars(taskId);
-        //DebugTask_HandleMenuInput_Vars(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
         DebugAction_ManageVars(taskId);
-        //DebugTask_HandleMenuInput_Vars(taskId);
         return;
     }
 
@@ -642,6 +711,7 @@ static void DebugAction_HealParty(u8 taskId)
 
 static void DebugAction_Cancel(u8 taskId)
 {
+    DebugAction_DestroyExtraWindow(taskId);
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
 }
