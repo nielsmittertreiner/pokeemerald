@@ -2,8 +2,10 @@
 
 #include "global.h"
 #include "debug.h"
+#include "data.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_player_avatar.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -20,10 +22,11 @@
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
-#include "constants/songs.h"
-#include "constants/items.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
+#include "constants/flags.h"
+#include "constants/items.h"
+#include "constants/songs.h"
 
 // Functions
 // Window Functions
@@ -54,6 +57,15 @@ static void DebugAction_PrepareTrades(u8);
 
 static void DebugAction_Cancel(u8);
 
+#define DEBUG_MAIN_MENU_WIDTH 7
+#define DEBUG_UTILITY_MENU_WIDTH 12
+
+#define DEBUG_NUMBER_DISPLAY_WIDTH 14
+#define DEBUG_NUMBER_DISPLAY_HEIGHT 3
+
+#define DEBUG_NUMBER_DIGITS_FLAGS 4
+#define DEBUG_NUMBER_DIGITS_VARIABLES 5
+
 // Main Menu Strings
 static const u8 gDebugText_Utility[] = _("UTILITY");
 static const u8 gDebugText_Cancel[] = _("CANCEL");
@@ -75,17 +87,17 @@ static const u8 gDebugText_Flag_FlagUnset[] = _("{COLOR}{04}FALSE{COLOR}{02}");
 // Var Menu Strings
 static const u8 gDebugText_Var_VariableDef[] = _("VAR: {COLOR}{06}{STR_VAR_1}\n{COLOR}{02}VAL: {STR_VAR_3}\n{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableHex[] = _("{STR_VAR_1}       0x{STR_VAR_2}");
-static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{06}{STR_VAR_3}{COLOR}{02}\n{STR_VAR_2}");
+static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{06}{STR_VAR_3}{COLOR}{02}\n{STR_VAR_2}{A_BUTTON}");
 
 // Digit Indicator Strings
-static const u8 digitInidicator_1[] =_("{LEFT_ARROW}+1{RIGHT_ARROW}");
-static const u8 digitInidicator_10[] = _("{LEFT_ARROW}+10{RIGHT_ARROW}");
-static const u8 digitInidicator_100[] = _("{LEFT_ARROW}+100{RIGHT_ARROW}");
-static const u8 digitInidicator_1000[] = _("{LEFT_ARROW}+1000{RIGHT_ARROW}");
-static const u8 digitInidicator_10000[] = _("{LEFT_ARROW}+10000{RIGHT_ARROW}");
-static const u8 digitInidicator_100000[] = _("{LEFT_ARROW}+100000{RIGHT_ARROW}");
-static const u8 digitInidicator_1000000[] = _("{LEFT_ARROW}+1000000{RIGHT_ARROW}");
-static const u8 digitInidicator_10000000[] = _("{LEFT_ARROW}+10000000{RIGHT_ARROW}");
+static const u8 digitInidicator_1[]        = _("{LEFT_ARROW}    +1                        {RIGHT_ARROW}");
+static const u8 digitInidicator_10[]       = _("{LEFT_ARROW}    +10                      {RIGHT_ARROW}");
+static const u8 digitInidicator_100[]      = _("{LEFT_ARROW}    +100                    {RIGHT_ARROW}");
+static const u8 digitInidicator_1000[]     = _("{LEFT_ARROW}    +1000                  {RIGHT_ARROW}");
+static const u8 digitInidicator_10000[]    = _("{LEFT_ARROW}    +10000                {RIGHT_ARROW}");
+static const u8 digitInidicator_100000[]   = _("{LEFT_ARROW}    +100000              {RIGHT_ARROW}");
+static const u8 digitInidicator_1000000[]  = _("{LEFT_ARROW}    +1000000            {RIGHT_ARROW}");
+static const u8 digitInidicator_10000000[] = _("{LEFT_ARROW}    +10000000          {RIGHT_ARROW}");
 
 const u8 * const gText_DigitIndicator[] =
 {
@@ -113,8 +125,21 @@ static const s32 sPowersOfTen[] =
     1000000000,
 };
 
-extern const u8 EventScript_ResetAllMapFlags[];
-extern const u8 Debug_EventScript_PrepareTrades[];
+// Main Menu
+enum {
+    DEBUG_MENU_ITEM_UTILITY,
+    DEBUG_MENU_ITEM_CANCEL,
+};
+
+// Utility Menu
+enum {
+    DEBUG_MENU_ITEM_MANAGE_FLAGS,
+    DEBUG_MENU_ITEM_MANAGE_VARS,
+    DEBUG_MENU_ITEM_HEAL_PARTY,
+    DEBUG_MENU_ITEM_GIVE_RARE_CANDY,
+    DEBUG_MENU_ITEM_RESET_MAP_FLAGS,
+    DEBUG_MENU_ITEM_PREPARE_TRADES,
+};
 
 // List Menu Items
 static const struct ListMenuItem sDebugMenuItems_Main[] =
@@ -128,9 +153,6 @@ static const struct ListMenuItem sDebugMenuItems_Utility[] =
     [DEBUG_MENU_ITEM_MANAGE_FLAGS] = {gDebugText_Utility_ManageFlag, DEBUG_MENU_ITEM_MANAGE_FLAGS},
     [DEBUG_MENU_ITEM_MANAGE_VARS] = {gDebugText_Utility_ManageVars, DEBUG_MENU_ITEM_MANAGE_VARS},
     [DEBUG_MENU_ITEM_HEAL_PARTY] = {gDebugText_Utility_HealParty, DEBUG_MENU_ITEM_HEAL_PARTY},
-    [DEBUG_MENU_ITEM_GIVE_RARE_CANDY] = {gDebugText_Utility_GiveRareCandy, DEBUG_MENU_ITEM_GIVE_RARE_CANDY},
-    [DEBUG_MENU_ITEM_RESET_MAP_FLAGS] = {gDebugText_Utility_ResetAllMapFlags, DEBUG_MENU_ITEM_RESET_MAP_FLAGS},
-    [DEBUG_MENU_ITEM_PREPARE_TRADES] = {gDebugText_Utility_PrepareTrades, DEBUG_MENU_ITEM_PREPARE_TRADES},
 };
 
 // Menu Actions
@@ -145,9 +167,6 @@ static void (*const sDebugMenuActions_Utility[])(u8) =
     [DEBUG_MENU_ITEM_MANAGE_FLAGS] = DebugAction_ManageFlags,
     [DEBUG_MENU_ITEM_MANAGE_VARS] = DebugAction_ManageVars,
     [DEBUG_MENU_ITEM_HEAL_PARTY] = DebugAction_HealParty,
-    [DEBUG_MENU_ITEM_GIVE_RARE_CANDY] = DebugAction_GiveRareCandy,
-    [DEBUG_MENU_ITEM_RESET_MAP_FLAGS] = DebugAction_ResetMapFlags,
-    [DEBUG_MENU_ITEM_PREPARE_TRADES] = DebugAction_PrepareTrades,
 };
 
 // Window Templates
@@ -345,6 +364,7 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
+        PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
         DebugAction_OpenMenu_Utility(taskId);
         return;
@@ -555,10 +575,12 @@ static void DebugAction_SetVarValue(u8 taskId)
 {
     if (gMain.newKeys & DPAD_UP)
     {
-        gTasks[taskId].data[6] += sPowersOfTen[gTasks[taskId].data[4]];
-        if(gTasks[taskId].data[6] >= 100){
-            gTasks[taskId].data[6] = 99;
-        }
+        if (gTasks[taskId].data[6] + sPowersOfTen[gTasks[taskId].data[4]] <= 32000)
+            gTasks[taskId].data[6] += sPowersOfTen[gTasks[taskId].data[4]];
+        else
+            gTasks[taskId].data[6] = 32000-1;
+        if (gTasks[taskId].data[6] >= 32000)
+            gTasks[taskId].data[6] = 32000-1;
     }
 
     if (gMain.newKeys & DPAD_DOWN)
@@ -581,24 +603,24 @@ static void DebugAction_SetVarValue(u8 taskId)
     if (gMain.newKeys & DPAD_RIGHT)
     {
         gTasks[taskId].data[4] += 1;
-        if(gTasks[taskId].data[4] > 2)
+        if(gTasks[taskId].data[4] > 4)
         {
-            gTasks[taskId].data[4] = 2;
+            gTasks[taskId].data[4] = 4;
         }
     }
 
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        VarSet(gTasks[taskId].data[3], gTasks[taskId].data[5]);
-        DebugAction_DestroyExtraWindow(taskId);
-        DebugAction_Cancel(taskId);
+        VarSet(gTasks[taskId].data[3], gTasks[taskId].data[6]);
+        //DebugAction_ManageVars(taskId);
+        //DebugTask_HandleMenuInput_Vars(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        DebugTask_HandleMenuInput_Vars(taskId);
         DebugAction_ManageVars(taskId);
+        //DebugTask_HandleMenuInput_Vars(taskId);
         return;
     }
 
@@ -622,25 +644,6 @@ static void DebugAction_HealParty(u8 taskId)
 {
     HealPlayerParty();
     PlaySE(SE_USE_ITEM);
-}
-
-static void DebugAction_GiveRareCandy(u8 taskId)
-{
-    AddBagItem(ITEM_RARE_CANDY, 10);
-    PlaySE(SE_USE_ITEM);
-}
-
-static void DebugAction_ResetMapFlags(u8 taskId)
-{
-    ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
-    PlaySE(SE_USE_ITEM);
-}
-
-static void DebugAction_PrepareTrades(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    ScriptContext1_SetupScript(Debug_EventScript_PrepareTrades);
-    ScriptGiveMon(SPECIES_KECLEON, 20, ITEM_NONE, 0, 0, 0);
 }
 
 static void DebugAction_Cancel(u8 taskId)
