@@ -74,9 +74,6 @@ static const u8 gDebugText_Cancel[] = _("CANCEL");
 static const u8 gDebugText_Utility_ManageFlag[] = _("MANAGE FLAGS");
 static const u8 gDebugText_Utility_ManageVars[] = _("MANAGE VARS");
 static const u8 gDebugText_Utility_HealParty[] = _("HEAL PARTY");
-static const u8 gDebugText_Utility_GiveRareCandy[] = _("GIVE RARE CANDY");
-static const u8 gDebugText_Utility_ResetAllMapFlags[] = _("RESET MAP FLAGS");
-static const u8 gDebugText_Utility_PrepareTrades[] = _("PREPARE TRADES");
 
 // Flags Menu Strings
 static const u8 gDebugText_Flag_FlagDef[] =_("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
