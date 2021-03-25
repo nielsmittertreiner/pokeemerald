@@ -342,10 +342,6 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
 {
     ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
     RemoveWindow(gTasks[taskId].data[2]);
-
-    ClearStdWindowAndFrame(gTasks[taskId].data[8], TRUE);
-    RemoveWindow(gTasks[taskId].data[8]);
-
     DestroyTask(taskId);
 }
 
