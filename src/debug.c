@@ -350,7 +350,7 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
         return;
     }
 
-    if(gMain.newKeys & DPAD_UP)
+    if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
@@ -359,7 +359,7 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
         }
     }
 
-    if(gMain.newKeys & DPAD_DOWN)
+    if (gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
@@ -368,7 +368,7 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
         }
     }
 
-    if(gMain.newKeys & DPAD_LEFT)
+    if (gMain.newKeys & DPAD_LEFT)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[4] -= 1;
@@ -378,7 +378,7 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
         }
     }
 
-    if(gMain.newKeys & DPAD_RIGHT)
+    if (gMain.newKeys & DPAD_RIGHT)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[4] += 1;
