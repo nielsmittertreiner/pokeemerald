@@ -73,6 +73,7 @@ EWRAM_DATA u8 sFindThatGamerWhichGame = SLOT_MACHINE;
 EWRAM_DATA ALIGNED(4) u8 sRecordMixingPartnersWithoutShowsToShare = 0;
 EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
 EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
+extern EWRAM_DATA struct ItemSlot gMartPurchaseHistory[3];
 
 // Static ROM declarations
 void ClearPokemonNews(void);
