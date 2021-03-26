@@ -1,7 +1,7 @@
 {
-  "id": "MAP_UNKNOWN_LINK_CONTEST_ROOM_25_34",
-  "name": "UnknownLinkContestRoom_25_34",
-  "layout": "LAYOUT_UNKNOWN_LINK_CONTEST_ROOM_25_34",
+  "id": "MAP_UNUSED_CONTEST_HALL2",
+  "name": "UnusedContestHall2",
+  "layout": "LAYOUT_UNUSED_CONTEST_HALL2",
   "music": "MUS_GSC_PEWTER",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
@@ -12,7 +12,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "shared_events_map": "ContestHall",
   "shared_scripts_map": "ContestHall"
 }

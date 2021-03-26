@@ -179,14 +179,9 @@ struct EventObject
     /*0x10*/ struct Coords16 currentCoords;
     /*0x14*/ struct Coords16 previousCoords;
     /*0x18*/ u8 facingDirection:4;
-    /*0x18*/ u8 movementDirection:4;
-    /*0x19*/ union __attribute__((packed)) {
-        u8 as_byte;
-        struct __attribute__((packed)) {
-            u16 x:4;
-            u16 y:4;
-        } as_nybbles;
-    }  range;
+             u16 movementDirection:4;
+             u16 rangeX:4;
+             u16 rangeY:4;
     /*0x1A*/ u8 fieldEffectSpriteId;
     /*0x1B*/ u8 warpArrowSpriteId;
     /*0x1C*/ u8 movementActionId;

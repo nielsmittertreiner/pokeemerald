@@ -9,6 +9,7 @@
 #include "constants/flags.h"
 #include "constants/vars.h"
 #include "constants/species.h"
+#include "constants/berry.h"
 
 // free saveblock 1 defines
 #define FREE_EXTRA_SEEN_FLAGS           //free up extra pokedex seen flags. Frees up 104 bytes
@@ -89,6 +90,14 @@
 
 #if MODERN
 #define abs(x) (((x) < 0) ? -(x) : (x))
+#endif
+
+// Used in cases where division by 0 can occur in the retail version.
+// Avoids invalid opcodes on some emulators, and the otherwise UB.
+#ifdef UBFIX
+#define SAFE_DIV(a, b) ((b) ? (a) / (b) : 0)
+#else
+#define SAFE_DIV(a, b) ((a) / (b))
 #endif
 
 // Extracts the upper 16 bits of a 32-bit number
@@ -192,13 +201,13 @@ struct Pokedex
     /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
-struct PokemonJumpResults
+struct PokemonJumpRecords
 {
     u16 jumpsInRow;
-    u16 field2;
+    u16 unused1; // Set to 0, never read
     u16 excellentsInRow;
-    u16 field6;
-    u32 field8;
+    u16 gamesWithMaxPlayers;
+    u32 unused2; // Set to 0, never read
     u32 bestJumpScore;
 };
 
@@ -353,9 +362,7 @@ struct BattleFrontier
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
     /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[BATTLE_TOWER_RECORD_COUNT]; // From record mixing.
     /*0xBEB*/ struct BattleTowerInterview towerInterview;
-    #ifndef FREE_BATTLE_TOWER_E_READER
     /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;  //188 bytes
-    #endif
     /*0xCA8*/ u8 challengeStatus;
     /*0xCA9*/ u8 lvlMode:2;
     /*0xCA9*/ u8 challengePaused:1;
@@ -528,14 +535,10 @@ struct SaveBlock2
     /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];   //272 bytes
     /*0x1EC*/ struct BerryCrush berryCrush;
-    #ifndef FREE_POKEMON_JUMP
-    /*0x1FC*/ struct PokemonJumpResults pokeJump;   //16 bytes
-    #endif
+    /*0x1FC*/ struct PokemonJumpRecords pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
-    #ifndef FREE_RECORD_MIXING_HALL_RECORDS
     /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][2][3]; // From record mixing.
     /*0x57C*/ struct RankingHall2P hallRecords2P[2][3]; // From record mixing.
-    #endif
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
     /*0xF2C*/ struct Follower follower;
@@ -558,7 +561,7 @@ struct SecretBaseParty
 struct SecretBase
 {
     /*0x1A9C*/ u8 secretBaseId;
-    /*0x1A9D*/ u8 sbr_field_1_0:4;
+    /*0x1A9D*/ bool8 toRegister:4;
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 battledOwnerToday:1;
     /*0x1A9D*/ u8 registryStatus:2;
@@ -567,7 +570,7 @@ struct SecretBase
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 numSecretBasesReceived;
     /*0x1AAC*/ u8 numTimesEntered;
-    /*0x1AAD*/ u8 sbr_field_11;
+    /*0x1AAD*/ u8 unused;
     /*0x1AAE*/ u8 decorations[DECOR_MAX_SECRET_BASE];
     /*0x1ABE*/ u8 decorationPositions[DECOR_MAX_SECRET_BASE];
     /*0x1AD0*/ struct SecretBaseParty party;
@@ -950,10 +953,56 @@ struct MysteryEventStruct
     /*0x000 0x322C*/ struct WonderNewsSaveStruct wonderNews;
     /*0x1c0 0x33EC*/ struct WonderCardSaveStruct wonderCard;
     /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
-    /*0x338 0x3564*/ u16 unk_338[4];
+    /*0x338 0x3564*/ u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
     /*0x340 0x356C*/ struct MysteryEventStruct unk_340;
     /*0x344 0x3570*/ u32 unk_344[2][5];
 }; // 0x36C 0x3598
+
+// For external event data storage. The majority of these may have never been used.
+// In Emerald, the only known used fields are the PokeCoupon and BoxRS ones, but hacking the distribution discs allows Emerald to receive events and set the others
+struct ExternalEventData
+{
+    u8 unknownExternalDataFields1[7]; // if actually used, may be broken up into different fields.
+    u32 unknownExternalDataFields2:8;
+    u32 currentPokeCoupons:24; // PokéCoupons stored by Pokémon Colosseum and XD from Mt. Battle runs. Earned PokéCoupons are also added to totalEarnedPokeCoupons. Colosseum/XD caps this at 9,999,999, but will read up to 16,777,215.
+    u32 gotGoldPokeCouponTitleReward:1; // Master Ball from JP Colosseum Bonus Disc; for reaching 30,000 totalEarnedPokeCoupons
+    u32 gotSilverPokeCouponTitleReward:1; // Light Ball Pikachu from JP Colosseum Bonus Disc; for reaching 5000 totalEarnedPokeCoupons
+    u32 gotBronzePokeCouponTitleReward:1; // PP Max from JP Colosseum Bonus Disc; for reaching 2500 totalEarnedPokeCoupons
+    u32 receivedAgetoCelebi:1; // from JP Colosseum Bonus Disc
+    u32 unknownExternalDataFields3:4;
+    u32 totalEarnedPokeCoupons:24; // Used by the JP Colosseum bonus disc. Determines PokéCoupon rank to distribute rewards. Unread in International games. Colosseum/XD caps this at 9,999,999.
+    u8 unknownExternalDataFields4[5]; // if actually used, may be broken up into different fields.
+} __attribute__((packed)); /*size = 0x14*/
+
+// For external event flags. The majority of these may have never been used.
+// In Emerald, Jirachi cannot normally be received, but hacking the distribution discs allows Emerald to receive Jirachi and set the flag
+struct ExternalEventFlags
+{
+    u8 usedBoxRS:1; // Set by Pokémon Box: Ruby & Sapphire; denotes whether this save has connected to it and triggered the free False Swipe Swablu Egg giveaway.
+    u8 boxRSEggsUnlocked:2; // Set by Pokémon Box: Ruby & Sapphire; denotes the number of Eggs unlocked from deposits; 1 for ExtremeSpeed Zigzagoon (at 100 deposited), 2 for Pay Day Skitty (at 500 deposited), 3 for Surf Pichu (at 1499 deposited)
+    u8 padding:5;
+    u8 unknownFlag1;
+    u8 receivedGCNJirachi; // Both the US Colosseum Bonus Disc and PAL/AUS Pokémon Channel use this field. One cannot receive a WISHMKR Jirachi and CHANNEL Jirachi with the same savefile.
+    u8 unknownFlag3;
+    u8 unknownFlag4;
+    u8 unknownFlag5;
+    u8 unknownFlag6;
+    u8 unknownFlag7;
+    u8 unknownFlag8;
+    u8 unknownFlag9;
+    u8 unknownFlag10;
+    u8 unknownFlag11;
+    u8 unknownFlag12;
+    u8 unknownFlag13;
+    u8 unknownFlag14;
+    u8 unknownFlag15;
+    u8 unknownFlag16;
+    u8 unknownFlag17;
+    u8 unknownFlag18;
+    u8 unknownFlag19;
+    u8 unknownFlag20;
+
+} __attribute__((packed));/*size = 0x15*/
 
 struct SaveBlock1
 {
@@ -984,15 +1033,11 @@ struct SaveBlock1
               struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
               struct ItemSlot bagPocket_PowerUp[BAG_POWERUP_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    #ifndef FREE_EXTRA_SEEN_FLAGS
     /*0x988*/ u8 seen1[DEX_FLAGS_NO];   //52 bytes
-    #endif
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 field_9C2[6];
-    #ifndef FREE_MATCH_CALL
     /*0x9C8*/ u16 trainerRematchStepCounter;    //104 bytes
     /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
-    #endif
     /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     /*0xC70*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
     /*0x1270*/ u8 flags[NUM_FLAG_BYTES];
@@ -1034,39 +1079,23 @@ struct SaveBlock1
     /*0x2e64*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2e90*/ struct ContestWinner contestWinners[NUM_CONTEST_WINNERS]; // see CONTEST_WINNER_*
     /*0x3030*/ struct DayCare daycare;
-    #ifndef FREE_LINK_BATTLE_RECORDS
-    /*0x3150*/ struct LinkBattleRecords linkBattleRecords;  //88 bytes
-    #endif
-    /*0x31A8*/ u8 giftRibbons[52];
+    /*0x3150*/ struct LinkBattleRecords linkBattleRecords;
+    /*0x31A8*/ u8 giftRibbons[GIFT_RIBBONS_COUNT];
+    /*0x31B3*/ struct ExternalEventData externalEventData;
+    /*0x31C7*/ struct ExternalEventFlags externalEventFlags;
     /*0x31DC*/ struct Roamer roamer;
-    #ifndef FREE_ENIGMA_BERRY
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;  //52 bytes
-    #endif
-    #ifndef FREE_MYSTERY_EVENT_BUFFERS
     /*0x322C*/ struct MEventBuffers unk_322C;   //876 bytes
-    #endif
-    #ifndef FREE_FIELD_3598
     /*0x3598*/ u8 field_3598[0x180];    //384 bytes
-    #endif
-    #ifndef FREE_TRAINER_HILL
     /*0x3718*/ u32 trainerHillTimes[4]; //16 bytes
-    #endif
-    #ifndef FREE_MYSTERY_EVENT_BUFFERS
     /*0x3728*/ struct RamScript ramScript;
-    #endif
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
-    #ifndef FREE_EXTRA_SEEN_FLAGS
     /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];  //52 bytes
-    #endif
     /*0x3B58*/ LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
-    #ifndef FREE_UNION_ROOM_CHAT
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];      //210 bytes
-    #endif
     /*0x3D5A*/ u8 filler3D5A[0xA];    //10 bytes
-    #ifndef FREE_TRAINER_HILL
     /*0x3D64*/ struct SaveTrainerHill trainerHill;  //12 bytes
-    #endif
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
 };

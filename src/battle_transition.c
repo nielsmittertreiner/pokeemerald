@@ -991,7 +991,7 @@ static bool8 Transition_Phase1(struct Task *task)
 
 static bool8 Transition_WaitForPhase1(struct Task *task)
 {
-    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == 0xFF)
+    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == TASK_NONE)
     {
         task->tState++;
         return TRUE;
@@ -1012,7 +1012,7 @@ static bool8 Transition_Phase2(struct Task *task)
 static bool8 Transition_WaitForPhase2(struct Task *task)
 {
     task->tTransitionDone = FALSE;
-    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == 0xFF)
+    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == TASK_NONE)
         task->tTransitionDone = TRUE;
     return FALSE;
 }
@@ -1071,7 +1071,7 @@ static bool8 Phase2_Blur_Func2(struct Task *task)
     {
         task->tData1 = 4;
         if (++task->tData2 == 10)
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 0x10, RGB_BLACK);
         SetGpuReg(REG_OFFSET_MOSAIC, (task->tData2 & 15) * 17);
         if (task->tData2 > 14)
             task->tState++;
@@ -1098,7 +1098,7 @@ static bool8 Phase2_Swirl_Func1(struct Task *task)
 {
     InitTransitionStructVars();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 0x10, RGB_BLACK);
     sub_8149F98(gScanlineEffectRegBuffers[1], sTransitionStructPtr->field_14, 0, 2, 0, 160);
 
     SetVBlankCallback(VBlankCB_Phase2_Swirl);
@@ -1153,7 +1153,7 @@ static bool8 Phase2_Shuffle_Func1(struct Task *task)
     InitTransitionStructVars();
     ScanlineEffect_Clear();
 
-    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 0x10, RGB_BLACK);
     memset(gScanlineEffectRegBuffers[1], sTransitionStructPtr->field_16, 0x140);
 
     SetVBlankCallback(VBlankCB_Phase2_Shuffle);
@@ -1456,7 +1456,7 @@ static bool8 Phase2_Kyogre_Func5(struct Task *task)
 
 static bool8 Phase2_WeatherDuo_Func6(struct Task *task)
 {
-    BeginNormalPaletteFade(0xFFFF8000, 1, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_OBJECTS | 0x8000, 1, 0, 0x10, RGB_BLACK);
     task->tState++;
     return FALSE;
 }
@@ -1541,7 +1541,7 @@ static bool8 Phase2_FramesCountdown(struct Task *task)
 
 static bool8 Phase2_WeatherTrio_Func1(struct Task *task)
 {
-    BeginNormalPaletteFade(0x0000FFFF, 1, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_BG, 1, 0, 0x10, RGB_BLACK);
     task->tState++;
     return FALSE;
 }
@@ -1965,7 +1965,7 @@ static bool8 Phase2_Ripple_Func2(struct Task *task)
     if (++task->tData3 == 81)
     {
         task->tData4++;
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 0x10, RGB_BLACK);
     }
 
     if (task->tData4 != 0 && !gPaletteFade.active)
@@ -2311,7 +2311,7 @@ static bool8 Phase2_Mugshot_Func7(struct Task *task)
 static bool8 Phase2_Mugshot_Func8(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+    BlendPalettes(PALETTES_ALL, 0x10, RGB_WHITE);
     sTransitionStructPtr->BLDCNT = 0xFF;
     task->tData3 = 0;
 
@@ -3171,7 +3171,7 @@ static bool8 Phase2_Rayquaza_Func6(struct Task *task)
     {
         task->tState++;
         task->tData1 = 0;
-        BeginNormalPaletteFade(0xFFFF8000, 2, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_OBJECTS | 0x8000, 2, 0, 0x10, RGB_BLACK);
     }
 
     return FALSE;
@@ -3190,8 +3190,8 @@ static bool8 Phase2_Rayquaza_Func7(struct Task *task)
 
 static bool8 Phase2_Rayquaza_Func8(struct Task *task)
 {
-    BlendPalettes(0x00007FFF, 8, 0);
-    BlendPalettes(0xFFFF8000, 0, 0);
+    BlendPalettes(PALETTES_BG & ~(0x8000), 8, 0);
+    BlendPalettes(PALETTES_OBJECTS | 0x8000, 0, 0);
 
     task->tState++;
     return FALSE;
@@ -3303,7 +3303,7 @@ static bool8 Phase2_WhiteFade_Func3(struct Task *task)
     sTransitionStructPtr->VBlank_DMA = 0;
     if (sTransitionStructPtr->field_20 > 7)
     {
-        BlendPalettes(-1, 0x10, 0x7FFF);
+        BlendPalettes(PALETTES_ALL, 0x10, 0x7FFF);
         task->tState++;
     }
     return FALSE;
@@ -3615,7 +3615,7 @@ static void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
 
 static bool8 IsPhase1Done(void)
 {
-    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == 0xFF)
+    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == TASK_NONE)
         return TRUE;
     else
         return FALSE;
@@ -3634,7 +3634,7 @@ static bool8 Phase1_TransitionAll_Func1(struct Task *task)
         task->tData7 += task->tData4;
         if (task->tData7 > 16)
             task->tData7 = 16;
-        BlendPalettes(-1, task->tData7, 0x2D6B);
+        BlendPalettes(PALETTES_ALL, task->tData7, 0x2D6B);
     }
     if (task->tData7 > 15)
     {
@@ -3652,7 +3652,7 @@ static bool8 Phase1_TransitionAll_Func2(struct Task *task)
         task->tData7 -= task->tData5;
         if (task->tData7 < 0)
             task->tData7 = 0;
-        BlendPalettes(-1, task->tData7, 0x2D6B);
+        BlendPalettes(PALETTES_ALL, task->tData7, 0x2D6B);
     }
     if (task->tData7 == 0)
     {
@@ -3709,7 +3709,7 @@ void GetBg0TilesDst(u16 **tilemap, u16 **tileset)
 
 static void FadeScreenBlack(void)
 {
-    BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
 }
 
 static void sub_8149F98(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize)
@@ -3980,7 +3980,7 @@ static bool8 Phase2_FrontierLogoWave_Func4(struct Task *task)
     if (++task->tData3 == 101)
     {
         task->tData4++;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     }
 
     if (task->tData4 != 0 && !gPaletteFade.active)
@@ -4080,7 +4080,7 @@ static bool8 Phase2_FrontierSquares_Func3(struct Task *task)
             }
             break;
         case 1:
-            BlendPalettes(0xFFFF7FFF, 0x10, 0);
+            BlendPalettes(PALETTES_ALL & ~(0x8000), 0x10, 0);
             LZ77UnCompVram(sFrontierSquares_EmptyBg_Tileset, tileset);
             break;
         case 2:
@@ -4141,7 +4141,7 @@ static bool8 Phase2_FrontierSquaresSpiral_Func2(struct Task *task)
 static bool8 Phase2_FrontierSquaresSpiral_Func3(struct Task *task)
 {
     BlendPalette(0xE0, 0x10, 3, 0);
-    BlendPalettes(0xFFFF3FFF, 0x10, 0);
+    BlendPalettes(PALETTES_ALL & ~(0x8000 | 0x4000), 0x10, 0);
 
     task->tData2 = 0;
     task->tData3 = 0;
@@ -4197,7 +4197,7 @@ static bool8 Phase2_FrontierSquares_End(struct Task *task)
 {
     FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 0x20, 0x20);
     CopyBgTilemapBufferToVram(0);
-    BlendPalettes(0xFFFFFFFF, 0x10, 0);
+    BlendPalettes(PALETTES_ALL, 0x10, 0);
     DestroyTask(FindTaskIdByFunc(task->func));
     return FALSE;
 }
@@ -4289,7 +4289,7 @@ static bool8 Phase2_FrontierSquaresScroll_Func2(struct Task *task)
 
 static bool8 Phase2_FrontierSquaresScroll_Func3(struct Task *task)
 {
-    BlendPalettes(0xFFFF7FFF, 0x10, 0);
+    BlendPalettes(PALETTES_ALL & ~(0x8000), 0x10, 0);
 
     task->tData2 = 0;
 
@@ -4328,7 +4328,7 @@ static bool8 Phase2_FrontierSquaresScroll_Func5(struct Task *task)
 
     FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 0x20, 0x20);
     CopyBgTilemapBufferToVram(0);
-    BlendPalettes(0xFFFFFFFF, 0x10, 0);
+    BlendPalettes(PALETTES_ALL, 0x10, 0);
 
     DestroyTask(FindTaskIdByFunc(task->func));
     task->tState++; // UB: changing value of a destroyed task
