@@ -42,6 +42,7 @@ static void DebugTask_HandleMenuInput_Main(u8);
 static void DebugTask_HandleMenuInput_Utility(u8);
 static void DebugTask_HandleMenuInput_Flags(u8);
 static void DebugTask_HandleMenuInput_Vars(u8);
+static void DebugTask_HandleMenuInput_CheckSaveBlockSize(u8);
 
 // Open Menus
 static void DebugAction_OpenUtilityMenu(u8);
@@ -50,10 +51,8 @@ static void DebugAction_OpenUtilityMenu(u8);
 static void DebugAction_ManageFlags(u8);
 static void DebugAction_ManageVars(u8);
 static void DebugAction_SetVarValue(u8);
+static void DebugAction_CheckSaveBlockSize(u8);
 static void DebugAction_HealParty(u8);
-static void DebugAction_GiveRareCandy(u8);
-static void DebugAction_ResetMapFlags(u8);
-static void DebugAction_PrepareTrades(u8);
 
 static void DebugAction_Cancel(u8);
 
@@ -62,6 +61,9 @@ static void DebugAction_Cancel(u8);
 
 #define DEBUG_NUMBER_DISPLAY_WIDTH 14
 #define DEBUG_NUMBER_DISPLAY_HEIGHT 3
+
+#define DEBUG_SAVEBLOCK_DISPLAY_WIDTH 10
+#define DEBUG_SAVEBLOCK_DISPLAY_HEIGHT 2
 
 #define DEBUG_DUMMY_WINDOW_WIDTH 28
 #define DEBUG_DUMMY_WINDOW_HEIGHT 2
@@ -76,6 +78,7 @@ static const u8 gDebugText_Cancel[]  = _("CANCEL");
 // Utility Menu Strings
 static const u8 gDebugText_Utility_ManageFlag[] = _("{COLOR}{RED}MANAGE FLAGS");
 static const u8 gDebugText_Utility_ManageVars[] = _("{COLOR}{RED}MANAGE VARS");
+static const u8 gDebugText_Utility_SaveBlocks[] = _("{COLOR}{GREEN}SAVEBLOCKS");
 static const u8 gDebugText_Utility_HealParty[]  = _("HEAL PARTY");
 
 // Flags Menu Strings
@@ -89,10 +92,16 @@ static const u8 gDebugText_Var_VariableDef[] = _("VAR: {COLOR}{06}{STR_VAR_1}\n{
 static const u8 gDebugText_Var_VariableHex[] = _("{STR_VAR_1}       0x{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{06}{STR_VAR_3}{COLOR}{02}\n{STR_VAR_2}{A_BUTTON}");
 
+// Check SaveBlock Strings
+static const u8 gDebugText_SaveBlocks_SaveBlockSize[] = _("{COLOR}{06}{STR_VAR_1}{COLOR}{02} IS\n{STR_VAR_2} BYTES");
+static const u8 gDebugText_SaveBlocks_SaveBlock1[] =    _("SAVEBLOCK1");
+static const u8 gDebugText_SaveBlocks_SaveBlock2[] =    _("SAVEBLOCK2");
+
 // Help Strings
-static const u8 gDebugText_Help_General[] = _("{DPAD_UPDOWN} SELECT   {A_BUTTON} CONFIRM   {B_BUTTON} CANCEL");
-static const u8 gDebugText_Help_Flags[]   = _("{DPAD_UPDOWN} FLAG   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} TOGGLE   {B_BUTTON} CANCEL");
-static const u8 gDebugText_Help_Vars[]   =  _("{DPAD_UPDOWN} VAR/VAL   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} SELECT   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_General[]      = _("{DPAD_UPDOWN} SELECT   {A_BUTTON} CONFIRM   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_Flags[]        = _("{DPAD_UPDOWN} FLAG   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} TOGGLE   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_Vars[]         = _("{DPAD_UPDOWN} VAR/VAL   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} SELECT   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_SaveBlocks[]   = _("{DPAD_UPDOWN} SEEK   {B_BUTTON} BACK");
 
 // Digit Indicator Strings
 static const u8 digitInidicator_1[]        = _("{LEFT_ARROW}    +1                        {RIGHT_ARROW}");
@@ -140,6 +149,7 @@ enum {
 enum {
     DEBUG_MENU_ITEM_MANAGE_FLAGS,
     DEBUG_MENU_ITEM_MANAGE_VARS,
+    DEBUG_MENU_ITEM_SAVEBLOCKS,
     DEBUG_MENU_ITEM_HEAL_PARTY,
 };
 
@@ -154,6 +164,7 @@ static const struct ListMenuItem sDebugMenuItems_Utility[] =
 {
     [DEBUG_MENU_ITEM_MANAGE_FLAGS] = {gDebugText_Utility_ManageFlag, DEBUG_MENU_ITEM_MANAGE_FLAGS},
     [DEBUG_MENU_ITEM_MANAGE_VARS] = {gDebugText_Utility_ManageVars, DEBUG_MENU_ITEM_MANAGE_VARS},
+    [DEBUG_MENU_ITEM_SAVEBLOCKS] = {gDebugText_Utility_SaveBlocks, DEBUG_MENU_ITEM_SAVEBLOCKS},
     [DEBUG_MENU_ITEM_HEAL_PARTY] = {gDebugText_Utility_HealParty, DEBUG_MENU_ITEM_HEAL_PARTY},
 };
 
@@ -168,6 +179,7 @@ static void (*const sDebugMenuActions_Utility[])(u8) =
 {
     [DEBUG_MENU_ITEM_MANAGE_FLAGS] = DebugAction_ManageFlags,
     [DEBUG_MENU_ITEM_MANAGE_VARS] = DebugAction_ManageVars,
+    [DEBUG_MENU_ITEM_SAVEBLOCKS] = DebugAction_CheckSaveBlockSize,
     [DEBUG_MENU_ITEM_HEAL_PARTY] = DebugAction_HealParty,
 };
 
@@ -201,6 +213,17 @@ static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
     .tilemapTop = 1,
     .width = DEBUG_NUMBER_DISPLAY_WIDTH,
     .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
+    .paletteNum = 15,
+    .baseBlock = 128,
+};
+
+static const struct WindowTemplate sDebugSaveBlockDisplayWindowTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = DEBUG_SAVEBLOCK_DISPLAY_WIDTH,
+    .height = 2 * DEBUG_SAVEBLOCK_DISPLAY_HEIGHT,
     .paletteNum = 15,
     .baseBlock = 128,
 };
@@ -274,7 +297,7 @@ static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate 
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
-    //Display help
+    // Display help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
@@ -320,7 +343,7 @@ static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTem
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
-    //Display help
+    // Display help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
@@ -444,6 +467,7 @@ static void DebugTask_HandleMenuInput_Flags(u8 taskId)
 
     if (gMain.newKeys & DPAD_ANY || gMain.newKeys & A_BUTTON)
     {
+        FillWindowPixelBuffer(gTasks[taskId].data[2], PIXEL_FILL(1));
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar1, gDebugText_Flag_FlagHex);
@@ -494,15 +518,16 @@ static void DebugTask_HandleMenuInput_Vars(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
+        FillWindowPixelBuffer(gTasks[taskId].data[2], PIXEL_FILL(1));
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
         StringExpandPlaceholders(gStringVar1, gDebugText_Var_VariableHex);
-        if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) //Current value, if 65535 the value hasnt been set
+        if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) // Current value, if 65535 the value hasnt been set
             gTasks[taskId].data[5] = 0;
         else
             gTasks[taskId].data[5] = VarGet(gTasks[taskId].data[3]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[5], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); // Current digit
 
         //Combine str's to full window string
         StringExpandPlaceholders(gStringVar4, gDebugText_Var_VariableDef);
@@ -518,18 +543,19 @@ static void DebugTask_HandleMenuInput_Vars(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
         StringExpandPlaceholders(gStringVar1, gDebugText_Var_VariableHex);
-        if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) //Current value if 65535 the value hasnt been set
+        if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) // Current value if 65535 the value hasnt been set
             gTasks[taskId].data[5] = 0;
         else
             gTasks[taskId].data[5] = VarGet(gTasks[taskId].data[3]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[5], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); // Current digit
         StringExpandPlaceholders(gStringVar4, gDebugText_Var_VariableVal);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
-        gTasks[taskId].data[6] = gTasks[taskId].data[5]; //New value selector
         gTasks[taskId].func = DebugAction_SetVarValue;
+        gTasks[taskId].data[2] = gTasks[taskId].data[2];
+        gTasks[taskId].data[6] = gTasks[taskId].data[5]; // New value selector
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -537,6 +563,36 @@ static void DebugTask_HandleMenuInput_Vars(u8 taskId)
         DebugAction_DestroyExtraWindow(taskId);
         DebugAction_OpenUtilityMenu(taskId);
         return;
+    }
+}
+
+static void DebugTask_HandleMenuInput_CheckSaveBlockSize(u8 taskId)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        StringCopy(gStringVar1, gDebugText_SaveBlocks_SaveBlock1);
+        ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock1), STR_CONV_MODE_LEFT_ALIGN, 6);
+    }
+    
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        StringCopy(gStringVar1, gDebugText_SaveBlocks_SaveBlock2);
+        ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock2), STR_CONV_MODE_LEFT_ALIGN, 6);
+    }
+    
+    if (gMain.newKeys & DPAD_ANY)
+    {
+        PlaySE(SE_SELECT);
+        FillWindowPixelBuffer(gTasks[taskId].data[1], PIXEL_FILL(1));
+        StringExpandPlaceholders(gStringVar3, gDebugText_SaveBlocks_SaveBlockSize);
+        AddTextPrinterParameterized(gTasks[taskId].data[1], 1, gStringVar3, 1, 1, 0, NULL);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        RemoveScrollIndicatorArrowPair(gTasks[taskId].data[3]);
+        DebugAction_DestroyExtraWindow(taskId);
+        DebugAction_OpenUtilityMenu(taskId);
     }
 }
 
@@ -569,7 +625,7 @@ static void DebugAction_ManageFlags(u8 taskId)
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
-    //Display initial Flag
+    // Display initial Flag
     ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
     ConvertIntToHexStringN(gStringVar2, 0, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar1, gDebugText_Flag_FlagHex);
@@ -581,15 +637,15 @@ static void DebugAction_ManageFlags(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gDebugText_Flag_FlagDef);
     AddTextPrinterParameterized(windowId1, 1, gStringVar4, 1, 1, 0, NULL);
 
-    //Display help
+    // Display help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_Flags);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_Flags;
     gTasks[taskId].data[2] = windowId1;
     gTasks[taskId].data[8] = windowId2;
-    gTasks[taskId].data[3] = 0;            //Current Flag
-    gTasks[taskId].data[4] = 0;            //Digit Selected
+    gTasks[taskId].data[3] = 0;            // Current Flag
+    gTasks[taskId].data[4] = 0;            // Digit Selected
 }
 
 static void DebugAction_ManageVars(u8 taskId)
@@ -628,9 +684,9 @@ static void DebugAction_ManageVars(u8 taskId)
     gTasks[taskId].func = DebugTask_HandleMenuInput_Vars;
     gTasks[taskId].data[2] = windowId1;
     gTasks[taskId].data[8] = windowId2;
-    gTasks[taskId].data[3] = VARS_START;   //Current Variable
-    gTasks[taskId].data[4] = 0;            //Digit Selected
-    gTasks[taskId].data[5] = 0;            //Current Variable VALUE
+    gTasks[taskId].data[3] = VARS_START;   // Current Variable
+    gTasks[taskId].data[4] = 0;            // Digit Selected
+    gTasks[taskId].data[5] = 0;            // Current Variable VALUE
 }
 
 static void DebugAction_SetVarValue(u8 taskId)
@@ -687,16 +743,56 @@ static void DebugAction_SetVarValue(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
+        FillWindowPixelBuffer(gTasks[taskId].data[2], PIXEL_FILL(1));
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
         StringExpandPlaceholders(gStringVar1, gDebugText_Var_VariableHex);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[6], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); // Current digit
         StringExpandPlaceholders(gStringVar4, gDebugText_Var_VariableVal);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
+}
+
+static void DebugAction_CheckSaveBlockSize(u8 taskId)
+{
+    u8 windowId1;
+    u8 windowId2;
+    u8 tArrowTaskId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+
+    windowId1 = AddWindow(&sDebugSaveBlockDisplayWindowTemplate);
+    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+
+    DrawStdWindowFrame(windowId1, FALSE);
+    DrawStdWindowFrame(windowId2, FALSE);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
+
+    // Display Scrolling Indicator
+    tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 93, 6, 42, 0, 110, 110, 0);
+
+    // Display SaveBlock1
+    StringCopy(gStringVar1, gDebugText_SaveBlocks_SaveBlock1);
+    ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock1), STR_CONV_MODE_LEFT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar3, gDebugText_SaveBlocks_SaveBlockSize);
+    AddTextPrinterParameterized(windowId1, 1, gStringVar3, 1, 1, 0, NULL);
+
+    // Display help
+    StringExpandPlaceholders(gStringVar4, gDebugText_Help_SaveBlocks);
+    AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    gTasks[taskId].func = DebugTask_HandleMenuInput_CheckSaveBlockSize;
+    gTasks[taskId].data[1] = windowId1;
+    gTasks[taskId].data[3] = tArrowTaskId;
 }
 
 static void DebugAction_HealParty(u8 taskId)
