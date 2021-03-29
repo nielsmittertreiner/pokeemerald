@@ -369,17 +369,17 @@ script CedarredTown_LoggersCabin_EventScript_LoggerQuestMaster {
 }
 
 script CedarredTown_LoggersCabin_EventScript_LoggerManOne {
-    msgbox("I hope you like the starters I\n"
-	       "got you…\p"
-	       "There were more POKéMON, but I thought\n"
-	       "these would fit you best.", MSGBOX_NPC)
+    msgbox("Every single one of us here works\n"
+	       "very hard to get the best quality\l"
+	       "lumber for all sorts of REGIONS!", MSGBOX_NPC)
     end
 }
 
 script CedarredTown_LoggersCabin_EventScript_LoggerManTwo {
-    msgbox("Every single one of us here works\n"
-	       "very hard to get the best quality\l"
-	       "lumber for all sorts of REGIONS!", MSGBOX_NPC)
+    msgbox("I hope you like the starters I\n"
+	       "got you…\p"
+	       "There were more POKéMON, but I thought\n"
+	       "these would fit you best.", MSGBOX_NPC)
     end
 }
 
