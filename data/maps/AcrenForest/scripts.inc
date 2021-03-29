@@ -423,6 +423,16 @@ AcrenForest_EventScript_BugCatcher::
 	end
 
 
+AcrenForest_EventScript_ItemGreatBall::
+	finditem ITEM_GREAT_BALL
+	end
+
+
+AcrenForest_EventScript_ItemPokeBall::
+	finditem ITEM_POKE_BALL
+	end
+
+
 AcrenForest_EventScript_FlowerShopSign::
 	msgbox AcrenForest_EventScript_FlowerShopSign_Text_0, MSGBOX_SIGN
 	end

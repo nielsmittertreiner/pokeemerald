@@ -51,6 +51,11 @@ FirwealdCity_EventScript_TournamentHallSign::
 	end
 
 
+FirwealdCity_EventScript_ItemHyperPotion::
+	finditem ITEM_HYPER_POTION
+	end
+
+
 FirwealdCity_EventScript_PhyllosEncounter::
 	lock
 	setmetatile 37, 16, METATILE_Petalburg_Door_BattleTent, 1

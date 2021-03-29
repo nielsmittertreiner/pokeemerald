@@ -461,6 +461,16 @@ script AcrenForest_EventScript_BugCatcher {
     end
 }
 
+script AcrenForest_EventScript_ItemGreatBall {
+    finditem(ITEM_GREAT_BALL)
+    end
+}
+
+script AcrenForest_EventScript_ItemPokeBall {
+    finditem(ITEM_POKE_BALL)
+    end
+}
+
 script AcrenForest_EventScript_FlowerShopSign {
     msgbox("ELDER BERRY's GREENERY SHOP", MSGBOX_SIGN)
     end

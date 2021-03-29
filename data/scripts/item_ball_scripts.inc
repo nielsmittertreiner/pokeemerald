@@ -657,15 +657,3 @@ MagmaHideout_4F_EventScript_MaxRevive:: @ 829151F
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope:: @ 829152C
 	finditem ITEM_ESCAPE_ROPE
 	end
-
-AcrenForest_EventScript_ItemGreatBall::
-	finditem ITEM_GREAT_BALL
-	end
-
-AcrenForest_EventScript_ItemPokeBall::
-	finditem ITEM_POKE_BALL
-	end
-
-FirwealdCity_EventScript_ItemHyperPotion::
-	finditem ITEM_HYPER_POTION
-	end
