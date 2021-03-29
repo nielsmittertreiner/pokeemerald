@@ -1100,16 +1100,16 @@ static void DebugTask_HandleMenuInput_GiveMon(u8 taskId)
         SetMonMoveSlot(&gPlayerParty[1], MOVE_PROTECT, 3);
 
         // Set Ninjask Move Data
-        SetMonMoveSlot(&gPlayerParty[3], MOVE_SUBSTITUTE, 0);
-        SetMonMoveSlot(&gPlayerParty[3], MOVE_SILVER_WIND, 1);
-        SetMonMoveSlot(&gPlayerParty[3], MOVE_SWORDS_DANCE, 2);
-        SetMonMoveSlot(&gPlayerParty[3], MOVE_SLASH, 3);
+        SetMonMoveSlot(&gPlayerParty[2], MOVE_SUBSTITUTE, 0);
+        SetMonMoveSlot(&gPlayerParty[2], MOVE_SILVER_WIND, 1);
+        SetMonMoveSlot(&gPlayerParty[2], MOVE_SWORDS_DANCE, 2);
+        SetMonMoveSlot(&gPlayerParty[2], MOVE_SLASH, 3);
 
         // Set Milotic Move Data
-        SetMonMoveSlot(&gPlayerParty[2], MOVE_ICE_BEAM, 0);
-        SetMonMoveSlot(&gPlayerParty[2], MOVE_SURF, 1);
-        SetMonMoveSlot(&gPlayerParty[2], MOVE_DIVE, 2);
-        SetMonMoveSlot(&gPlayerParty[2], MOVE_WATERFALL, 3);
+        SetMonMoveSlot(&gPlayerParty[3], MOVE_ICE_BEAM, 0);
+        SetMonMoveSlot(&gPlayerParty[3], MOVE_SURF, 1);
+        SetMonMoveSlot(&gPlayerParty[3], MOVE_DIVE, 2);
+        SetMonMoveSlot(&gPlayerParty[3], MOVE_WATERFALL, 3);
 
         // Set Aggron Move Data
         SetMonMoveSlot(&gPlayerParty[4], MOVE_EARTHQUAKE, 0);
