@@ -632,3 +632,87 @@ movement AcrenForest_Movement_PhyllosWalkFromShrine_3 {
     walk_right
     walk_up * 4
 }
+
+text AcrenForest_Text_FrederickIntro {
+    "My RATTATA and I will become champions\n"
+    "of the EURUS REGION!"
+}
+
+text AcrenForest_Text_FrederickDefeat {
+    "Why would you crush my\n"
+    "hopes and dreams?!"
+}
+
+text AcrenForest_Text_FrederickPostBattle {
+    "See you at the EURUS LEAGUE, loser!"
+}
+
+text AcrenForest_Text_RoddyIntro {
+    "I just pulled my worm out the box."
+}
+
+text AcrenForest_Text_RoddyDefeat {
+    "Eeee, eerrrr…"
+}
+
+text AcrenForest_Text_RoddyPostBattle {
+    "Wait until I drop my next album…"
+}
+
+text AcrenForest_Text_ArminIntro {
+    "I have a good friend called EREN.\n"
+    "He lives in FIRWEALD CITY."
+}
+
+text AcrenForest_Text_ArminDefeat {
+    "Wow!\p"
+    "You're a titan in battle!"
+}
+
+text AcrenForest_Text_ArminPostBattle {
+    "Go visit my friend in\n"
+    "FIRWEALD CITY once."
+}
+
+text AcrenForest_Text_MarishaIntro {
+    "My parents came here from a country\n"
+    "far, far away."
+}
+
+text AcrenForest_Text_MarishaDefeat {
+    "You won't beat my parents\n"
+    "in a battle!"
+}
+
+text AcrenForest_Text_MarishaPostBattle {
+    "The country my parents are from\n"
+    "is very dangerous and cold."
+}
+
+text AcrenForest_Text_LadaIntro {
+    "My parents named me after a car\n"
+    "'cause I'm a machine in battle!"
+}
+
+text AcrenForest_Text_LadaDefeat {
+    "Oh no!\n"
+    "I choked my engine!"
+}
+
+text AcrenForest_Text_LadaPostBattle {
+    "I guess I ran out of gas…"
+}
+
+text AcrenForest_Text_GruntIntro {
+    "How did you get here?"
+}
+
+text AcrenForest_Text_GruntDefeat {
+    "The others will take\n"
+    "care of you!"
+}
+
+text AcrenForest_Text_GruntPostBattle {
+    "The BOSS will get you kicked\n"
+    "out of here, no problem!"
+}

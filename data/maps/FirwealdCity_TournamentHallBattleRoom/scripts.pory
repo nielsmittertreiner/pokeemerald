@@ -465,3 +465,48 @@ movement FirwealdCity_TournamentHallBattleRoom_Movement_OpponentExitBattleRoom {
 movement FirwealdCity_TournamentHallBattleRoom_Movement_PhyllosWalkToPlayer {
     walk_left * 3
 }
+
+text FirwealdCity_TournamentHallBattleRoom_Text_Opponent1Defeat {
+    "You may have bested me, but\n"
+    "you'll never get past PHYLLOS!"
+}
+
+text FirwealdCity_TournamentHallBattleRoom_Text_Opponent2Defeat {
+    "No need to be so blue…\n"
+        "We will blossom again!"
+}
+
+text FirwealdCity_TournamentHallBattleRoom_Text_Opponent3Defeat {
+    "It seems the real\n"
+    "parasite is within…"
+}
+
+text FirwealdCity_TournamentHallBattleRoom_Text_Opponent4Defeat {
+    "Shame all around me, if I\n"
+    "could only avenge this defeat…"
+}
+
+text FirwealdCity_TournamentHallBattleRoom_Text_Opponent5Defeat {
+    "You need to train your POKéMON?\n"
+    "Not only catch a bunch?"
+}
+
+text FirwealdCity_TournamentHallBattleRoom_Text_Opponent6Defeat {
+    "Why did mom give\n"
+    "me a CHIKORITA…"
+}
+
+text FirwealdCity_TournamentHallBattleRoom_Text_Opponent7Defeat {
+    "Mother, why did you name\n"
+    "me after a vegetable…"
+}
+
+text FirwealdCity_TournamentHallBattleRoom_Text_Opponent8Defeat {
+    "Well that tasted\n"
+    "rather foul…"
+}
+
+text FirwealdCity_TournamentHallBattleRoom_Text_PhyllosDefeat {
+    "I can hear them chanting!\n"
+    "{PLAYER}! {PLAYER}! {PLAYER}!"
+}

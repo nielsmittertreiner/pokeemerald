@@ -881,3 +881,69 @@ AcrenForest_EventScript_FlowerShopSign_Text_0:
 AcrenForest_EventScript_CelebiShrine_Text_0:
 	.string "You feel a strange presence\n"
 	.string "around you…$"
+
+AcrenForest_Text_FrederickIntro::
+	.string "My RATTATA and I will become champions\n"
+	.string "of the EURUS REGION!$"
+
+AcrenForest_Text_FrederickDefeat::
+	.string "Why would you crush my\n"
+	.string "hopes and dreams?!$"
+
+AcrenForest_Text_FrederickPostBattle::
+	.string "See you at the EURUS LEAGUE, loser!$"
+
+AcrenForest_Text_RoddyIntro::
+	.string "I just pulled my worm out the box.$"
+
+AcrenForest_Text_RoddyDefeat::
+	.string "Eeee, eerrrr…$"
+
+AcrenForest_Text_RoddyPostBattle::
+	.string "Wait until I drop my next album…$"
+
+AcrenForest_Text_ArminIntro::
+	.string "I have a good friend called EREN.\n"
+	.string "He lives in FIRWEALD CITY.$"
+
+AcrenForest_Text_ArminDefeat::
+	.string "Wow!\p"
+	.string "You're a titan in battle!$"
+
+AcrenForest_Text_ArminPostBattle::
+	.string "Go visit my friend in\n"
+	.string "FIRWEALD CITY once.$"
+
+AcrenForest_Text_MarishaIntro::
+	.string "My parents came here from a country\n"
+	.string "far, far away.$"
+
+AcrenForest_Text_MarishaDefeat::
+	.string "You won't beat my parents\n"
+	.string "in a battle!$"
+
+AcrenForest_Text_MarishaPostBattle::
+	.string "The country my parents are from\n"
+	.string "is very dangerous and cold.$"
+
+AcrenForest_Text_LadaIntro::
+	.string "My parents named me after a car\n"
+	.string "'cause I'm a machine in battle!$"
+
+AcrenForest_Text_LadaDefeat::
+	.string "Oh no!\n"
+	.string "I choked my engine!$"
+
+AcrenForest_Text_LadaPostBattle::
+	.string "I guess I ran out of gas…$"
+
+AcrenForest_Text_GruntIntro::
+	.string "How did you get here?$"
+
+AcrenForest_Text_GruntDefeat::
+	.string "The others will take\n"
+	.string "care of you!$"
+
+AcrenForest_Text_GruntPostBattle::
+	.string "The BOSS will get you kicked\n"
+	.string "out of here, no problem!$"

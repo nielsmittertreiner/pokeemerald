@@ -58,3 +58,56 @@ script Route402_EventScript_Momo {
     msgbox(Route402_Text_MomoPostBattle, MSGBOX_NPC)
     end
 }
+
+text Route402_Text_MimiIntro {
+    "Double the POKéMON!\n"
+    "Double the fun!"
+}
+
+text Route402_Text_MimiDefeat {
+    "Even though we battled\n"
+    "together we lost…"
+}
+
+text Route402_Text_MimiNotEnoughMons {
+    "We're with too, you're with one…"
+}
+
+text Route402_Text_MimiPostBattle {
+    "You're a really strong trainer!"
+}
+
+text Route402_Text_MomoIntro {
+    "We're twins, so we battle\n"
+    "together."
+}
+
+text Route402_Text_MomoDefeat {
+    "Wow! You're so strong!"
+}
+
+text Route402_Text_MomoNotEnoughMons {
+    "Oh? Only one POKéMON?\n"
+    "Then, we don't battle with you.\p"
+    "If there's only one POKéMON, it will\n"
+    "be lonesome. That's not nice."
+}
+
+text Route402_Text_MomoPostBattle {
+    "Hopefully we'll become as strong\n"
+    "as you once."
+}
+
+text Route402_Text_TimmyIntro {
+    "I just caught a ZIGZAGOON!\p"
+    "Go ZIGZAGOON!"
+}
+
+text Route402_Text_TimmyDefeat {
+    "I guess I didn't train\n"
+    "my ZIGZAGOON enough yet…"
+}
+
+text Route402_Text_TimmyPostBattle {
+    "I'll train my ZIGZAGOON stronger!"
+}

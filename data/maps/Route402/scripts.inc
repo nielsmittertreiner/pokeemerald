@@ -77,3 +77,45 @@ Route402_EventScript_Fisherman2_Text_0:
 
 Route402_EventScript_Fisherman2_Text_1:
 	.string "Did you just see that too?!$"
+
+Route402_Text_MimiIntro::
+	.string "Double the POKéMON!\n"
+	.string "Double the fun!$"
+
+Route402_Text_MimiDefeat::
+	.string "Even though we battled\n"
+	.string "together we lost…$"
+
+Route402_Text_MimiNotEnoughMons::
+	.string "We're with too, you're with one…$"
+
+Route402_Text_MimiPostBattle::
+	.string "You're a really strong trainer!$"
+
+Route402_Text_MomoIntro::
+	.string "We're twins, so we battle\n"
+	.string "together.$"
+
+Route402_Text_MomoDefeat::
+	.string "Wow! You're so strong!$"
+
+Route402_Text_MomoNotEnoughMons::
+	.string "Oh? Only one POKéMON?\n"
+	.string "Then, we don't battle with you.\p"
+	.string "If there's only one POKéMON, it will\n"
+	.string "be lonesome. That's not nice.$"
+
+Route402_Text_MomoPostBattle::
+	.string "Hopefully we'll become as strong\n"
+	.string "as you once.$"
+
+Route402_Text_TimmyIntro::
+	.string "I just caught a ZIGZAGOON!\p"
+	.string "Go ZIGZAGOON!$"
+
+Route402_Text_TimmyDefeat::
+	.string "I guess I didn't train\n"
+	.string "my ZIGZAGOON enough yet…$"
+
+Route402_Text_TimmyPostBattle::
+	.string "I'll train my ZIGZAGOON stronger!$"

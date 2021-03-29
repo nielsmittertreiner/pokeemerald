@@ -661,3 +661,39 @@ FirwealdCity_TournamentHallBattleRoom_EventScripts_Finals_Text_6:
 	.string "Meet me at the cave north of town\n"
 	.string "and talk to the lady in front of\l"
 	.string "the entrance.$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_Opponent1Defeat::
+	.string "You may have bested me, but\n"
+	.string "you'll never get past PHYLLOS!$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_Opponent2Defeat::
+	.string "No need to be so blue…\n"
+	.string "We will blossom again!$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_Opponent3Defeat::
+	.string "It seems the real\n"
+	.string "parasite is within…$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_Opponent4Defeat::
+	.string "Shame all around me, if I\n"
+	.string "could only avenge this defeat…$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_Opponent5Defeat::
+	.string "You need to train your POKéMON?\n"
+	.string "Not only catch a bunch?$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_Opponent6Defeat::
+	.string "Why did mom give\n"
+	.string "me a CHIKORITA…$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_Opponent7Defeat::
+	.string "Mother, why did you name\n"
+	.string "me after a vegetable…$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_Opponent8Defeat::
+	.string "Well that tasted\n"
+	.string "rather foul…$"
+
+FirwealdCity_TournamentHallBattleRoom_Text_PhyllosDefeat::
+	.string "I can hear them chanting!\n"
+	.string "{PLAYER}! {PLAYER}! {PLAYER}!$"
