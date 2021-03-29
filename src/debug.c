@@ -120,8 +120,8 @@ extern const u8 Debug_EventScript_DoConfetti[];
 // Main Menu Strings
 static const u8 gDebugText_Credits[] = _("{COLOR}{GREEN}CREDITS");
 static const u8 gDebugText_GodMode[] = _("{COLOR}{RED}GODMODE");
-static const u8 gDebugText_Utility[] = _("UTILITY");
-static const u8 gDebugText_Party[]   = _("PARTY");
+static const u8 gDebugText_Utility[] = _("{COLOR}{BLUE}UTILITY");
+static const u8 gDebugText_Party[]   = _("{COLOR}{BLUE}PARTY");
 static const u8 gDebugText_Cancel[]  = _("CANCEL");
 
 // Credits Window Strings
@@ -141,12 +141,12 @@ static const u8 gDebugText_Party_RevievedBobParty[]      = _("{COLOR}{GREEN}RECE
 static const u8 gDebugText_Party_AlreadyHasBobParty[]    = _("{COLOR}{GREEN}YOU ALREADY HAVE BSBOB'S PARTY!   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
 
 // Utility Menu Strings
+static const u8 gDebugText_Utility_SaveBlocks[]   = _("{COLOR}{GREEN}SAVEBLOCKS");
 static const u8 gDebugText_Utility_ManageFlag[]   = _("{COLOR}{RED}MANAGE FLAGS");
 static const u8 gDebugText_Utility_ManageVars[]   = _("{COLOR}{RED}MANAGE VARS");
 static const u8 gDebugText_Utility_Warp[]         = _("{COLOR}{RED}WARP");
-static const u8 gDebugText_Utility_SaveBlocks[]   = _("{COLOR}{GREEN}SAVEBLOCKS");
-static const u8 gDebugText_Utility_ChangeName[]   = _("{COLOR}{DARK_GREY}CHANGE NAME");
-static const u8 gDebugText_Utility_ChangeGender[] = _("{COLOR}{DARK_GREY}CHANGE GENDER");
+static const u8 gDebugText_Utility_ChangeName[]   = _("{COLOR}{BLUE}CHANGE NAME");
+static const u8 gDebugText_Utility_ChangeGender[] = _("{COLOR}{BLUE}CHANGE GENDER");
 
 // Gender Change Window Strings
 static const u8 gDebugText_GenderChange_GenderChangeExplaination[] = _("{COLOR}{DARK_GREY}YOU ARE ABOUT TO CHANGE YOUR GENDER!\n{COLOR}{GREEN}WALK THROUGH A DOOR{COLOR}{DARK_GREY} TO UPDATE YOUR\nPLAYER SPRITE.");
@@ -239,10 +239,10 @@ enum {
 
 // Utility Menu
 enum {
+    DEBUG_MENU_ITEM_SAVEBLOCKS,
     DEBUG_MENU_ITEM_MANAGE_FLAGS,
     DEBUG_MENU_ITEM_MANAGE_VARS,
     DEBUG_MENU_ITEM_WARP,
-    DEBUG_MENU_ITEM_SAVEBLOCKS,
     DEBUG_MENU_ITEM_CHANGE_NAME,
     DEBUG_MENU_ITEM_CHANGE_GENDER,
 };
@@ -264,10 +264,10 @@ static const struct ListMenuItem sDebugMenuItems_Main[] =
 
 static const struct ListMenuItem sDebugMenuItems_Utility[] =
 {
+    [DEBUG_MENU_ITEM_SAVEBLOCKS] = {gDebugText_Utility_SaveBlocks, DEBUG_MENU_ITEM_SAVEBLOCKS},
     [DEBUG_MENU_ITEM_MANAGE_FLAGS] = {gDebugText_Utility_ManageFlag, DEBUG_MENU_ITEM_MANAGE_FLAGS},
     [DEBUG_MENU_ITEM_MANAGE_VARS] = {gDebugText_Utility_ManageVars, DEBUG_MENU_ITEM_MANAGE_VARS},
     [DEBUG_MENU_ITEM_WARP] = {gDebugText_Utility_Warp, DEBUG_MENU_ITEM_WARP},
-    [DEBUG_MENU_ITEM_SAVEBLOCKS] = {gDebugText_Utility_SaveBlocks, DEBUG_MENU_ITEM_SAVEBLOCKS},
     [DEBUG_MENU_ITEM_CHANGE_NAME] = {gDebugText_Utility_ChangeName, DEBUG_MENU_ITEM_CHANGE_NAME},
     [DEBUG_MENU_ITEM_CHANGE_GENDER] = {gDebugText_Utility_ChangeGender, DEBUG_MENU_ITEM_CHANGE_GENDER},
 };
@@ -290,10 +290,10 @@ static void (*const sDebugMenuActions_Main[])(u8) =
 
 static void (*const sDebugMenuActions_Utility[])(u8) =
 {
+    [DEBUG_MENU_ITEM_SAVEBLOCKS] = DebugAction_CheckSaveBlockSize,
     [DEBUG_MENU_ITEM_MANAGE_FLAGS] = DebugAction_ManageFlags,
     [DEBUG_MENU_ITEM_MANAGE_VARS] = DebugAction_ManageVars,
     [DEBUG_MENU_ITEM_WARP] = DebugAction_OpenWarpMenu,
-    [DEBUG_MENU_ITEM_SAVEBLOCKS] = DebugAction_CheckSaveBlockSize,
     [DEBUG_MENU_ITEM_CHANGE_NAME] = DebugAction_ChangePlayerName,
     [DEBUG_MENU_ITEM_CHANGE_GENDER] = DebugAction_OpenGenderChange,
 };
