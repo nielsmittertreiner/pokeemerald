@@ -3968,6 +3968,14 @@ static bool32 IsNotEventLegalMewOrDeoxys(u8 battlerId)
     return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_EVENT_LEGAL, NULL);
 }
 
+bool8 IsBobMon(void)
+{
+    if (gBattleMons[gBattlerAttacker].otId == 23501)
+        return TRUE;
+
+    return FALSE;
+}
+
 u8 IsMonDisobedient(void)
 {
     s32 rnd;
@@ -3988,6 +3996,8 @@ u8 IsMonDisobedient(void)
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             return 0;
         if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
+            return 0;
+        if (IsBobMon())
             return 0;
         if (FlagGet(FLAG_BADGE08_GET))
             return 0;
