@@ -228,6 +228,11 @@ static const s32 sPowersOfTen[] =
     1000000000,
 };
 
+static const u16 gBobMonHeldItems[] =
+{
+    ITEM_LEFTOVERS
+};
+
 // Main Menu
 enum {
     DEBUG_MENU_ITEM_CREDITS,
@@ -1080,12 +1085,20 @@ static void DebugTask_HandleMenuInput_GiveMon(u8 taskId)
         FlagSet(FLAG_HAS_BOB_PARTY);
 
         // Give Mons
-        CreateMon(&gPlayerParty[0], SPECIES_BLAZIKEN, 50, MAX_PER_STAT_IVS, 1, NATURE_BRAVE, OT_ID_PRESET, BOB_OTID);
-        CreateMon(&gPlayerParty[1], SPECIES_GARDEVOIR, 50, MAX_PER_STAT_IVS, 1, NATURE_TIMID, OT_ID_PRESET, BOB_OTID);
-        CreateMon(&gPlayerParty[2], SPECIES_NINJASK, 50, MAX_PER_STAT_IVS, 1, NATURE_JOLLY, OT_ID_PRESET, BOB_OTID);
-        CreateMon(&gPlayerParty[3], SPECIES_MILOTIC, 50, MAX_PER_STAT_IVS, 1, NATURE_MILD, OT_ID_PRESET, BOB_OTID);
-        CreateMon(&gPlayerParty[4], SPECIES_AGGRON, 50, MAX_PER_STAT_IVS, 1, NATURE_IMPISH, OT_ID_PRESET, BOB_OTID);
-        CreateMon(&gPlayerParty[5], SPECIES_FLYGON, 50, MAX_PER_STAT_IVS, 1, NATURE_BRAVE, OT_ID_PRESET, BOB_OTID);
+        CreateMon(&gPlayerParty[0], SPECIES_BLAZIKEN, 80, MAX_PER_STAT_IVS, 1, NATURE_BRAVE, OT_ID_PRESET, BOB_OTID);
+        CreateMon(&gPlayerParty[1], SPECIES_GARDEVOIR, 80, MAX_PER_STAT_IVS, 1, NATURE_TIMID, OT_ID_PRESET, BOB_OTID);
+        CreateMon(&gPlayerParty[2], SPECIES_NINJASK, 80, MAX_PER_STAT_IVS, 1, NATURE_ADAMANT, OT_ID_PRESET, BOB_OTID);
+        CreateMon(&gPlayerParty[3], SPECIES_MILOTIC, 80, MAX_PER_STAT_IVS, 1, NATURE_MILD, OT_ID_PRESET, BOB_OTID);
+        CreateMon(&gPlayerParty[4], SPECIES_AGGRON, 80, MAX_PER_STAT_IVS, 1, NATURE_IMPISH, OT_ID_PRESET, BOB_OTID);
+        CreateMon(&gPlayerParty[5], SPECIES_FLYGON, 80, MAX_PER_STAT_IVS, 1, NATURE_BRAVE, OT_ID_PRESET, BOB_OTID);
+
+        // Give Held Items
+        SetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM, &gBobMonHeldItems[0]);
+        SetMonData(&gPlayerParty[1], MON_DATA_HELD_ITEM, &gBobMonHeldItems[0]);
+        SetMonData(&gPlayerParty[2], MON_DATA_HELD_ITEM, &gBobMonHeldItems[0]);
+        SetMonData(&gPlayerParty[3], MON_DATA_HELD_ITEM, &gBobMonHeldItems[0]);
+        SetMonData(&gPlayerParty[4], MON_DATA_HELD_ITEM, &gBobMonHeldItems[0]);
+        SetMonData(&gPlayerParty[5], MON_DATA_HELD_ITEM, &gBobMonHeldItems[0]);
 
         // Set Blaziken Move Data
         SetMonMoveSlot(&gPlayerParty[0], MOVE_BLAZE_KICK, 0);
@@ -1100,10 +1113,10 @@ static void DebugTask_HandleMenuInput_GiveMon(u8 taskId)
         SetMonMoveSlot(&gPlayerParty[1], MOVE_PROTECT, 3);
 
         // Set Ninjask Move Data
-        SetMonMoveSlot(&gPlayerParty[2], MOVE_SUBSTITUTE, 0);
-        SetMonMoveSlot(&gPlayerParty[2], MOVE_SILVER_WIND, 1);
-        SetMonMoveSlot(&gPlayerParty[2], MOVE_SWORDS_DANCE, 2);
-        SetMonMoveSlot(&gPlayerParty[2], MOVE_SLASH, 3);
+        SetMonMoveSlot(&gPlayerParty[2], MOVE_SWORDS_DANCE, 0);
+        SetMonMoveSlot(&gPlayerParty[2], MOVE_AERIAL_ACE, 1);
+        SetMonMoveSlot(&gPlayerParty[2], MOVE_SLASH, 2);
+        SetMonMoveSlot(&gPlayerParty[2], MOVE_SUBSTITUTE, 3);
 
         // Set Milotic Move Data
         SetMonMoveSlot(&gPlayerParty[3], MOVE_ICE_BEAM, 0);
