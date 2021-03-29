@@ -145,7 +145,7 @@ CedarredTown_EventScript_EnterLoggersCabin_1:
 	closedoor 20, 18
 	waitdooranim
 	setvar VAR_CEDARRED_TOWN_STATE, 2
-	warp MAP_CEDARRED_TOWN_LOGGERS_CABIN, 1, 5, 8
+	warp MAP_CEDARRED_TOWN_LOGGERS_CABIN, 0, 6, 8
 	waitstate
 	end
 
