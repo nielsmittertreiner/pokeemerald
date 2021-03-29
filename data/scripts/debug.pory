@@ -1,0 +1,4 @@
+script Debug_EventScript_DoConfetti {
+    special(DoDomeConfetti)
+    waitstate
+}

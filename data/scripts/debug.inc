@@ -1,2 +1,5 @@
-Debug_EventScript_Nop::
-    end
+Debug_EventScript_DoConfetti::
+	special DoDomeConfetti
+	waitstate
+	return
+
