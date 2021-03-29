@@ -87,6 +87,7 @@ script CedarredTown_EventScript_ShowLoggersCabin {
 	       "The LOGGERS CABIN should be at the\n"
 	       "far EAST of town.")
     destroy_speech_bubble
+    closemessage
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
     special(SpawnCameraObject)
     switch (var(VAR_TEMP_1))
@@ -137,6 +138,7 @@ script CedarredTown_EventScript_EnterLoggersCabin {
 	       "the ACREN FOREST.\p"
 	       "Let's head in and see what happened.")
     destroy_speech_bubble
+    closemessage
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
     switch (var(VAR_TEMP_0))
     {

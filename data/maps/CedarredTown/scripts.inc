@@ -64,6 +64,7 @@ CedarredTown_EventScript_ShowLoggersCabin::
 	load_speech_bubble OBJ_EVENT_ID_FOLLOWER
 	msgbox CedarredTown_EventScript_ShowLoggersCabin_Text_0
 	destroy_speech_bubble
+	closemessage
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	special SpawnCameraObject
 	switch VAR_TEMP_1
@@ -126,6 +127,7 @@ CedarredTown_EventScript_EnterLoggersCabin::
 	load_speech_bubble OBJ_EVENT_ID_FOLLOWER
 	msgbox CedarredTown_EventScript_EnterLoggersCabin_Text_0
 	destroy_speech_bubble
+	closemessage
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	switch VAR_TEMP_0
 	case 14, CedarredTown_EventScript_EnterLoggersCabin_3

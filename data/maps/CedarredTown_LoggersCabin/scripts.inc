@@ -679,15 +679,15 @@ CedarredTown_LoggersCabin_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_23:
 	.string "Now off you go…$"
 
 CedarredTown_LoggersCabin_EventScript_LoggerManOne_Text_0:
+	.string "Every single one of us here works\n"
+	.string "very hard to get the best quality\l"
+	.string "lumber for all sorts of REGIONS!$"
+
+CedarredTown_LoggersCabin_EventScript_LoggerManTwo_Text_0:
 	.string "I hope you like the starters I\n"
 	.string "got you…\p"
 	.string "There were more POKéMON, but I thought\n"
 	.string "these would fit you best.$"
-
-CedarredTown_LoggersCabin_EventScript_LoggerManTwo_Text_0:
-	.string "Every single one of us here works\n"
-	.string "very hard to get the best quality\l"
-	.string "lumber for all sorts of REGIONS!$"
 
 CedarredTown_LoggersCabin_EventScript_LoggerManThree_Text_0:
 	.string "I think we're the best TRAINER GUILD!\p"
