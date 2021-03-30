@@ -1026,7 +1026,7 @@
 #define FLAG_ITEM_ACREN_FOREST_GREAT_BALL                           0x3E8
 #define FLAG_ITEM_ACREN_FOREST_POKE_BALL                            0x3E9
 #define FLAG_ITEM_FIRWEALD_CITY_HYPER_POTION                        0x3EA
-#define FLAG_ITEM_ROUTE_105_IRON                                    0x3EB
+#define FLAG_ITEM_NAVIRE_TOWN_NUGGET                                0x3EB
 #define FLAG_ITEM_ROUTE_106_PROTEIN                                 0x3EC
 #define FLAG_ITEM_ROUTE_109_PP_UP                                   0x3ED
 #define FLAG_ITEM_ROUTE_109_RARE_CANDY                              0x3EE
