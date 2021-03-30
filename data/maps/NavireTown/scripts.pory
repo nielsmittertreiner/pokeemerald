@@ -110,6 +110,29 @@ script NavireTown_EventScript_Fisherman2 {
     end
 }
 
+script NavireTown_EventScript_Fisherman3 {
+    msgbox("If you go left here you enter the\n"
+           "EURUS MOUNTAINS, namesake of the\l"
+           "EURUS REGION.\p"
+           "Personally I'm not a fan, I'm not\n"
+           "not big on cold!", MSGBOX_NPC)
+    end
+}
+
+script NavireTown_EventScript_Boy {
+    msgbox("My dad works in shipping!\p"
+           "All the raw materials from ACREN FOREST\n"
+           "are sent towards the mainland through\l"
+           "the port of MURENA CITY.\p"
+           "Boats are so cool!", MSGBOX_NPC)
+    end
+}
+
+script NavireTown_EventScript_ItemNugget {
+    finditem(ITEM_NUGGET)
+    end
+}
+
 script NavireTown_EventScript_TownSign {
     msgbox("NAVIRE TOWN\n"
            "“Sea crashing back on the mainland.”", MSGBOX_SIGN)

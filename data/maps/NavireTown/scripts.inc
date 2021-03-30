@@ -106,6 +106,21 @@ NavireTown_EventScript_Fisherman2::
 	end
 
 
+NavireTown_EventScript_Fisherman3::
+	msgbox NavireTown_EventScript_Fisherman3_Text_0, MSGBOX_NPC
+	end
+
+
+NavireTown_EventScript_Boy::
+	msgbox NavireTown_EventScript_Boy_Text_0, MSGBOX_NPC
+	end
+
+
+NavireTown_EventScript_ItemNugget::
+	finditem ITEM_NUGGET
+	end
+
+
 NavireTown_EventScript_TownSign::
 	msgbox NavireTown_EventScript_TownSign_Text_0, MSGBOX_SIGN
 	end
@@ -226,6 +241,20 @@ NavireTown_EventScript_Fisherman2_Text_0:
 	.string "Any luck with fishing?\p"
 	.string "You gotta be patient, or they won't\n"
 	.string "bite…$"
+
+NavireTown_EventScript_Fisherman3_Text_0:
+	.string "If you go left here you enter the\n"
+	.string "EURUS MOUNTAINS, namesake of the\l"
+	.string "EURUS REGION.\p"
+	.string "Personally I'm not a fan, I'm not\n"
+	.string "not big on cold!$"
+
+NavireTown_EventScript_Boy_Text_0:
+	.string "My dad works in shipping!\p"
+	.string "All the raw materials from ACREN FOREST\n"
+	.string "are sent towards the mainland through\l"
+	.string "the port of MURENA CITY.\p"
+	.string "Boats are so cool!$"
 
 NavireTown_EventScript_TownSign_Text_0:
 	.string "NAVIRE TOWN\n"
