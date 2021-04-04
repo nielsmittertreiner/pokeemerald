@@ -13,14 +13,8 @@ AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_4:
 	compare VAR_ACREN_FOREST_STATE, 4
 	goto_if_eq AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_8
 AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_7:
-	compare VAR_ACREN_FOREST_STATE, 4
-	goto_if_eq AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_11
-AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_10:
 	compare VAR_ACREN_FOREST_STATE, 5
-	goto_if_eq AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_14
-AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_13:
-	compare VAR_ACREN_FOREST_STATE, 5
-	goto_if_eq AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_16
+	goto_if_eq AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_10
 	return
 
 AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_2:
@@ -45,6 +39,8 @@ AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_5:
 	setobjectmovementtype 18, MOVEMENT_TYPE_RUN_IN_PLACE_LEFT
 	setobjectmovementtype 19, MOVEMENT_TYPE_FACE_DOWN
 	setobjectmovementtype 20, MOVEMENT_TYPE_FACE_DOWN
+	setobjectmovementtype 9, MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT
+	setobjectmovementtype 10, MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT
 	goto AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_4
 
 AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_8:
@@ -58,29 +54,7 @@ AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_8:
 	setobjectmovementtype 20, MOVEMENT_TYPE_FACE_DOWN
 	goto AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_7
 
-AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_11:
-	setobjectxyperm 17, 4, 6
-	setobjectxyperm 18, 4, 7
-	setobjectxyperm 19, 52, 6
-	setobjectxyperm 20, 55, 6
-	setobjectmovementtype 17, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectmovementtype 18, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectmovementtype 19, MOVEMENT_TYPE_FACE_DOWN
-	setobjectmovementtype 20, MOVEMENT_TYPE_FACE_DOWN
-	goto AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_10
-
-AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_14:
-	setobjectxyperm 17, 4, 6
-	setobjectxyperm 18, 4, 7
-	setobjectxyperm 19, 52, 6
-	setobjectxyperm 20, 55, 6
-	setobjectmovementtype 17, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectmovementtype 18, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectmovementtype 19, MOVEMENT_TYPE_FACE_DOWN
-	setobjectmovementtype 20, MOVEMENT_TYPE_FACE_DOWN
-	goto AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_13
-
-AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_16:
+AcrenForest_MapScripts_MAP_SCRIPT_ON_TRANSITION_10:
 	setobjectxyperm 17, 4, 6
 	setobjectxyperm 18, 4, 7
 	setobjectxyperm 19, 52, 6
@@ -266,6 +240,8 @@ AcrenForest_EventScript_Logger3And4_2:
 	applymovement 19, AcrenForest_Movement_Logger3WalkLeft
 	applymovement 20, AcrenForest_Movement_Logger4WalkRight
 	waitmovement 0
+	copyobjectxytoperm 19
+	copyobjectxytoperm 20
 	setvar VAR_ACREN_FOREST_STATE, 3
 	release
 	end

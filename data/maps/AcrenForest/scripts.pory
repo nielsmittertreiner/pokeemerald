@@ -34,28 +34,10 @@ mapscripts AcrenForest_MapScripts {
 	        setobjectmovementtype(LOCALID_LOGGER_2, MOVEMENT_TYPE_RUN_IN_PLACE_LEFT)
 	        setobjectmovementtype(LOCALID_LOGGER_3, MOVEMENT_TYPE_FACE_DOWN)
 	        setobjectmovementtype(LOCALID_LOGGER_4, MOVEMENT_TYPE_FACE_DOWN)
+            setobjectmovementtype(LOCALID_TEAMAIRLOCKGRUNT_1, MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT)
+            setobjectmovementtype(LOCALID_TEAMAIRLOCKGRUNT_2, MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT)
         }
         if (var(VAR_ACREN_FOREST_STATE) == 4) {
-            setobjectxyperm(LOCALID_LOGGER_1, 4, 6)
-	        setobjectxyperm(LOCALID_LOGGER_2, 4, 7)
-            setobjectxyperm(LOCALID_LOGGER_3, 52, 6)
-	        setobjectxyperm(LOCALID_LOGGER_4, 55, 6)
-            setobjectmovementtype(LOCALID_LOGGER_1, MOVEMENT_TYPE_FACE_RIGHT)
-	        setobjectmovementtype(LOCALID_LOGGER_2, MOVEMENT_TYPE_FACE_RIGHT)
-	        setobjectmovementtype(LOCALID_LOGGER_3, MOVEMENT_TYPE_FACE_DOWN)
-	        setobjectmovementtype(LOCALID_LOGGER_4, MOVEMENT_TYPE_FACE_DOWN)
-        }
-        if (var(VAR_ACREN_FOREST_STATE) == 4) {
-            setobjectxyperm(LOCALID_LOGGER_1, 4, 6)
-	        setobjectxyperm(LOCALID_LOGGER_2, 4, 7)
-            setobjectxyperm(LOCALID_LOGGER_3, 52, 6)
-	        setobjectxyperm(LOCALID_LOGGER_4, 55, 6)
-            setobjectmovementtype(LOCALID_LOGGER_1, MOVEMENT_TYPE_FACE_RIGHT)
-	        setobjectmovementtype(LOCALID_LOGGER_2, MOVEMENT_TYPE_FACE_RIGHT)
-	        setobjectmovementtype(LOCALID_LOGGER_3, MOVEMENT_TYPE_FACE_DOWN)
-	        setobjectmovementtype(LOCALID_LOGGER_4, MOVEMENT_TYPE_FACE_DOWN)
-        }
-        if (var(VAR_ACREN_FOREST_STATE) == 5) {
             setobjectxyperm(LOCALID_LOGGER_1, 4, 6)
 	        setobjectxyperm(LOCALID_LOGGER_2, 4, 7)
             setobjectxyperm(LOCALID_LOGGER_3, 52, 6)
@@ -290,6 +272,8 @@ script AcrenForest_EventScript_Logger3And4 {
         applymovement(LOCALID_LOGGER_3, AcrenForest_Movement_Logger3WalkLeft)
         applymovement(LOCALID_LOGGER_4, AcrenForest_Movement_Logger4WalkRight)
         waitmovement(0)
+        copyobjectxytoperm(LOCALID_LOGGER_3)
+        copyobjectxytoperm(LOCALID_LOGGER_4)
         setvar(VAR_ACREN_FOREST_STATE, 3)
         release
         end
