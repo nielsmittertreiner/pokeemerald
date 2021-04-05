@@ -53,11 +53,11 @@ static void DebugTask_HandleMenuInput_Vars(u8);
 static void DebugTask_HandleMenuInput_SelectMapGroup(u8);
 static void DebugTask_HandleMenuInput_SelectMapNumber(u8);
 static void DebugTask_HandleMenuInput_SelectWarpNumber(u8);
-static void DebugTask_HandleMenuInput_CheckSaveBlockSize(u8);
-static void DebugTask_HandleMenuInput_Credits(u8);
-static void DebugTask_HandleMenuInput_GodMode(u8);
-static void DebugTask_HandleMenuInput_GenderChange(u8);
-static void DebugTask_HandleMenuInput_GiveMon(u8);
+static void DebugTask_HandleInput_CheckSaveBlockSize(u8);
+static void DebugTask_HandleInput_Credits(u8);
+static void DebugTask_HandleInput_GodMode(u8);
+static void DebugTask_HandleInput_GenderChange(u8);
+static void DebugTask_HandleInput_GiveMon(u8);
 
 // Main Menu Functions
 static void DebugAction_OpenCredits(u8);
@@ -970,7 +970,7 @@ static void DebugTask_HandleMenuInput_SelectWarpNumber(u8 taskId)
     }
 }
 
-static void DebugTask_HandleMenuInput_CheckSaveBlockSize(u8 taskId)
+static void DebugTask_HandleInput_CheckSaveBlockSize(u8 taskId)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -1000,7 +1000,7 @@ static void DebugTask_HandleMenuInput_CheckSaveBlockSize(u8 taskId)
     }
 }
 
-static void DebugTask_HandleMenuInput_Credits(u8 taskId)
+static void DebugTask_HandleInput_Credits(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1018,7 +1018,7 @@ static void DebugTask_HandleMenuInput_Credits(u8 taskId)
     }
 }
 
-static void DebugTask_HandleMenuInput_GodMode(u8 taskId)
+static void DebugTask_HandleInput_GodMode(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1046,7 +1046,7 @@ static void DebugTask_HandleMenuInput_GodMode(u8 taskId)
     }
 }
 
-static void DebugTask_HandleMenuInput_GenderChange(u8 taskId)
+static void DebugTask_HandleInput_GenderChange(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1072,7 +1072,7 @@ static void DebugTask_HandleMenuInput_GenderChange(u8 taskId)
     }
 }
 
-static void DebugTask_HandleMenuInput_GiveMon(u8 taskId)
+static void DebugTask_HandleInput_GiveMon(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1159,10 +1159,8 @@ static void DebugAction_OpenCredits(u8 taskId)
 
     windowId1 = AddWindow(&sDebugCreditsWindowTemplate);
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
-
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
@@ -1177,7 +1175,7 @@ static void DebugAction_OpenCredits(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_Credits);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
-    gTasks[taskId].func = DebugTask_HandleMenuInput_Credits;
+    gTasks[taskId].func = DebugTask_HandleInput_Credits;
     gTasks[taskId].data[2] = windowId1;
     gTasks[taskId].data[3] = tConfettiTaskId;
     gTasks[taskId].data[8] = windowId2;
@@ -1197,10 +1195,8 @@ static void DebugAction_OpenGodMode(u8 taskId)
 
     windowId1 = AddWindow(&sDebugWarningWindowTemplate);
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
-
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
@@ -1220,7 +1216,7 @@ static void DebugAction_OpenGodMode(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gDebugText_GodMode_EnableGodMode);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
-    gTasks[taskId].func = DebugTask_HandleMenuInput_GodMode;
+    gTasks[taskId].func = DebugTask_HandleInput_GodMode;
     gTasks[taskId].data[2] = windowId1;
     gTasks[taskId].data[8] = windowId2;
 }
@@ -1253,10 +1249,8 @@ static void DebugAction_ManageFlags(u8 taskId)
 
     windowId1 = AddWindow(&sDebugNumberDisplayWindowTemplate);
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
-
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
@@ -1298,7 +1292,6 @@ static void DebugAction_ManageVars(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
@@ -1403,10 +1396,8 @@ static void DebugAction_OpenWarpMenu(u8 taskId)
 
     windowId1 = AddWindow(&sDebugWarpDisplayWindowTemplate);
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
-
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
@@ -1446,10 +1437,8 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
 
     windowId1 = AddWindow(&sDebugSaveBlockDisplayWindowTemplate);
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
-
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
@@ -1466,7 +1455,7 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_SaveBlocks);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
-    gTasks[taskId].func = DebugTask_HandleMenuInput_CheckSaveBlockSize;
+    gTasks[taskId].func = DebugTask_HandleInput_CheckSaveBlockSize;
     gTasks[taskId].data[1] = windowId1;
     gTasks[taskId].data[3] = tArrowTaskId;
 }
@@ -1490,10 +1479,8 @@ static void DebugAction_OpenGenderChange(u8 taskId)
 
     windowId1 = AddWindow(&sDebugWarningWindowTemplate);
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
-
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
@@ -1513,7 +1500,7 @@ static void DebugAction_OpenGenderChange(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gDebugText_GenderChange_ChangeToMale);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
-    gTasks[taskId].func = DebugTask_HandleMenuInput_GenderChange;
+    gTasks[taskId].func = DebugTask_HandleInput_GenderChange;
     gTasks[taskId].data[2] = windowId1;
     gTasks[taskId].data[8] = windowId2;
 }
@@ -1545,10 +1532,8 @@ static void DebugAction_GiveMons(u8 taskId)
 
     windowId1 = AddWindow(&sDebugWarningWindowTemplate);
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
-
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
@@ -1568,7 +1553,7 @@ static void DebugAction_GiveMons(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gDebugText_Help_GiveMon);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
-    gTasks[taskId].func = DebugTask_HandleMenuInput_GiveMon;
+    gTasks[taskId].func = DebugTask_HandleInput_GiveMon;
     gTasks[taskId].data[2] = windowId1;
     gTasks[taskId].data[8] = windowId2;
 }
