@@ -80,7 +80,6 @@ script SunsetTown_EventScript_Lass {
 
 script SunsetTown_EventScript_ProfessorConifer {
     lock
-    fadenewbgm(MUS_BIRCH_LAB)
     msgbox("Oh hey there {PLAYER}.\n"
 	       "You're finally here!\p"
 	       "Come in quickly, something\n"
@@ -117,7 +116,6 @@ script SunsetTown_EventScript_ProfessorConifer {
 script SunsetTown_EventScript_BlockPlayer {
     lock
     playse(SE_PIN)
-    fadenewbgm(MUS_BIRCH_LAB)
     applymovement(LOCALID_CONIFER, Common_Movement_FaceDown)
     applymovement(LOCALID_CONIFER, Common_Movement_ExclamationMark)
     load_speech_bubble(LOCALID_CONIFER)

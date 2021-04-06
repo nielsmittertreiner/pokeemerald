@@ -88,7 +88,6 @@ SunsetTown_EventScript_Lass::
 
 SunsetTown_EventScript_ProfessorConifer::
 	lock
-	fadenewbgm MUS_BIRCH_LAB
 	msgbox SunsetTown_EventScript_ProfessorConifer_Text_0, MSGBOX_NPC
 	opendoor 15, 6
 	applymovement 3, Common_Movement_FaceUp
@@ -126,7 +125,6 @@ SunsetTown_EventScript_ProfessorConifer_5:
 SunsetTown_EventScript_BlockPlayer::
 	lock
 	playse SE_PIN
-	fadenewbgm MUS_BIRCH_LAB
 	applymovement 3, Common_Movement_FaceDown
 	applymovement 3, Common_Movement_ExclamationMark
 	load_speech_bubble 3
