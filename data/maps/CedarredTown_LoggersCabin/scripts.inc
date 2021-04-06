@@ -575,7 +575,7 @@ CedarredTown_LoggersCabin_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0:
 	.string "We've been waiting for you.\p"
 	.string "Hmmm, who's that you brought with you?\p"
 	.string "Any extra help is always nice to have.\n"
-	.string "Defenitely with what we have going on\l"
+	.string "Definitely with what we have going on\l"
 	.string "in ACREN FOREST.$"
 
 CedarredTown_LoggersCabin_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_1:

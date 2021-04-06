@@ -234,7 +234,7 @@ script AcrenForest_EventScript_Logger1 {
         turnobject(LOCALID_LOGGER_2, DIR_WEST)
         end
     } elif (var(VAR_ACREN_FOREST_STATE) == 5) {
-        msgbox("You defenitely look like a strong\n"
+        msgbox("You definitely look like a strong\n"
                "TRAINER, kid.", MSGBOX_NPC)
         end
     }

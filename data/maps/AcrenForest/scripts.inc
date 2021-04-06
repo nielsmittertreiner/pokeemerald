@@ -745,7 +745,7 @@ AcrenForest_EventScript_Logger1_Text_0:
 	.string "the forest for help…$"
 
 AcrenForest_EventScript_Logger1_Text_1:
-	.string "You defenitely look like a strong\n"
+	.string "You definitely look like a strong\n"
 	.string "TRAINER, kid.$"
 
 AcrenForest_EventScript_Logger1_Text_2:

@@ -39,7 +39,7 @@ mapscripts CedarredTown_LoggersCabin_MapScripts {
 	               "We've been waiting for you.\p"
 	               "Hmmm, who's that you brought with you?\p"
 	               "Any extra help is always nice to have.\n"
-	               "Defenitely with what we have going on\l"
+	               "Definitely with what we have going on\l"
 	               "in ACREN FOREST.")
             destroy_speech_bubble
             closemessage
