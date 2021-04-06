@@ -471,12 +471,12 @@ static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate 
     menuTemplate.cursorKind = 0;
     menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
-
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     inputTaskId = CreateTask(HandleInput, 3);
     gTasks[inputTaskId].data[0] = menuTaskId;
@@ -517,12 +517,12 @@ static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTem
     menuTemplate.cursorKind = 0;
     menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
-
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     inputTaskId = CreateTask(HandleInput, 3);
     gTasks[inputTaskId].data[0] = menuTaskId;
@@ -563,12 +563,12 @@ static void Debug_ShowPartySubMenu(void (*HandleInput)(u8), struct ListMenuTempl
     menuTemplate.cursorKind = 0;
     menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
-
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     inputTaskId = CreateTask(HandleInput, 3);
     gTasks[inputTaskId].data[0] = menuTaskId;
@@ -1161,8 +1161,6 @@ static void DebugAction_OpenCredits(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
 
     // Display Credits
     StringCopy(gStringVar1, gDebugText_Credits_CreditsFriend);
@@ -1174,6 +1172,9 @@ static void DebugAction_OpenCredits(u8 taskId)
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_Credits);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleInput_Credits;
     gTasks[taskId].data[2] = windowId1;
@@ -1197,8 +1198,6 @@ static void DebugAction_OpenGodMode(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
 
     // Display GodMode Warning
     StringExpandPlaceholders(gStringVar1, gDebugText_Help_Warning);
@@ -1215,6 +1214,9 @@ static void DebugAction_OpenGodMode(u8 taskId)
     else
         StringExpandPlaceholders(gStringVar4, gDebugText_GodMode_EnableGodMode);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleInput_GodMode;
     gTasks[taskId].data[2] = windowId1;
@@ -1251,8 +1253,6 @@ static void DebugAction_ManageFlags(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
 
     // Display initial Flag
     ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
@@ -1269,6 +1269,9 @@ static void DebugAction_ManageFlags(u8 taskId)
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_Flags);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_Flags;
     gTasks[taskId].data[2] = windowId1;
@@ -1292,8 +1295,6 @@ static void DebugAction_ManageVars(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
 
     //Display initial Variable
     ConvertIntToDecimalStringN(gStringVar1, VARS_START, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
@@ -1308,6 +1309,9 @@ static void DebugAction_ManageVars(u8 taskId)
     //Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_Vars);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_Vars;
     gTasks[taskId].data[2] = windowId1;
@@ -1398,8 +1402,6 @@ static void DebugAction_OpenWarpMenu(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
 
     // Display Warp
     ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -1412,6 +1414,9 @@ static void DebugAction_OpenWarpMenu(u8 taskId)
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_Warp);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_SelectMapGroup;
     gTasks[taskId].data[2] = windowId1;
@@ -1439,8 +1444,6 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
 
     // Display Scrolling Indicator
     tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 93, 6, 42, 0, 110, 110, 0);
@@ -1454,6 +1457,9 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_SaveBlocks);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleInput_CheckSaveBlockSize;
     gTasks[taskId].data[1] = windowId1;
@@ -1481,8 +1487,6 @@ static void DebugAction_OpenGenderChange(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
 
     // Display GenderChange Warning
     StringExpandPlaceholders(gStringVar1, gDebugText_Help_Warning);
@@ -1499,6 +1503,9 @@ static void DebugAction_OpenGenderChange(u8 taskId)
     else
         StringExpandPlaceholders(gStringVar4, gDebugText_GenderChange_ChangeToMale);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleInput_GenderChange;
     gTasks[taskId].data[2] = windowId1;
@@ -1534,8 +1541,6 @@ static void DebugAction_GiveMons(u8 taskId)
     windowId2 = AddWindow(&sDebugHelpWindowTemplate);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
-    CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
 
     // Display GiveMon Warning
     StringExpandPlaceholders(gStringVar1, gDebugText_Help_Warning);
@@ -1552,6 +1557,9 @@ static void DebugAction_GiveMons(u8 taskId)
     else
         StringExpandPlaceholders(gStringVar4, gDebugText_Help_GiveMon);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+
+    CopyWindowToVram(windowId1, 3);
+    CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleInput_GiveMon;
     gTasks[taskId].data[2] = windowId1;
