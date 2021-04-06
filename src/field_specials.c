@@ -22,6 +22,7 @@
 #include "link.h"
 #include "list_menu.h"
 #include "main.h"
+#include "map_name_popup.h"
 #include "mevent.h"
 #include "match_call.h"
 #include "menu.h"
@@ -85,6 +86,7 @@ static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
+static EWRAM_DATA u8 sEndOfCurrentBetaScreenWindowId = 0;
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
 
@@ -134,6 +136,8 @@ bool8 IsPlayerInMurenaCity(void);
 void SpawnMurenaCityWingullObject(u8 taskId);
 bool8 CheckMurenaCityRelicanth(void);
 void CheckPokeCenterLocation(void);
+void ShowEndOfCurrentBetaScreen(void);
+void HideEndOfCurrentBetaScreen(void);
 #ifndef FREE_LINK_BATTLE_RECORDS
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
 #else
@@ -4529,3 +4533,49 @@ void CheckPokeCenterLocation(void)
 {
     GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
 }
+
+#if DEBUG
+
+static const u8 gText_EndOfCurrentBetaThankYou[]  = _("{COLOR}{GREEN}THANK YOU!");
+static const u8 gText_EndOfCurrentBetaMessage[]   = _("YOU'VE REACHED THE END OF THIS BETA RELEASE!\nTHANK YOU FOR PLAYING AND I HOPE\nYOU'LL STAY ON THIS JOURNEY WITH ME!");
+static const u8 gText_EndOfCurrentBetaGreetings[] = _("{COLOR}{BLUE}GREETINGS FROM BOB!");
+
+static const struct WindowTemplate sEndOfCurrentBetaWindowTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 2,
+    .tilemapTop = 4,
+    .width = 26,
+    .height = 12,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+
+void ShowEndOfCurrentBetaScreen(void)
+{
+    u8 x;
+    u8 nextLine = 16;
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+
+    sEndOfCurrentBetaScreenWindowId = AddWindow(&sEndOfCurrentBetaWindowTemplate);
+    DrawStdWindowFrame(sEndOfCurrentBetaScreenWindowId, FALSE);
+    FillWindowPixelBuffer(sEndOfCurrentBetaScreenWindowId, PIXEL_FILL(1));
+
+    x = GetStringCenterAlignXOffset(1, gText_EndOfCurrentBetaThankYou, 210);
+    AddTextPrinterParameterized(sEndOfCurrentBetaScreenWindowId, 1, gText_EndOfCurrentBetaThankYou, x, 1, 0, NULL);
+    AddTextPrinterParameterized(sEndOfCurrentBetaScreenWindowId, 0, gText_EndOfCurrentBetaMessage, 1, nextLine, 0, NULL);
+    AddTextPrinterParameterized(sEndOfCurrentBetaScreenWindowId, 0, gText_EndOfCurrentBetaGreetings, 1, nextLine * 5, 0, NULL);
+
+    CopyWindowToVram(sEndOfCurrentBetaScreenWindowId, 3);
+}
+
+void HideEndOfCurrentBetaScreen(void)
+{
+    ClearStdWindowAndFrame(sEndOfCurrentBetaScreenWindowId, FALSE);
+    RemoveWindow(sEndOfCurrentBetaScreenWindowId);
+    EnableBothScriptContexts();
+}
+
+#endif
