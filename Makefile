@@ -79,8 +79,6 @@ ifeq ($(DDEBUG),1)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
 ROM := pokevanadium_debug.gba
-OBJ_DIR := build/vanadium_debug
-LIBPATH := -L ../../tools/agbcc/lib
 endif
 
 CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN)
