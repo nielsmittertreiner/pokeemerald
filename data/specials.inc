@@ -540,6 +540,7 @@ gSpecials:: @ 81DBA64
 	def_special TentacoolSkewerIncreaseFriendship
 	def_special CheckMurenaCityRelicanth
 	def_special CheckPokeCenterLocation
+	def_special ShakeCameraSilent
 	.if DEBUG
 	def_special ShowEndOfCurrentBetaScreen
 	def_special HideEndOfCurrentBetaScreen
