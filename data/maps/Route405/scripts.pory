@@ -1,1 +1,14 @@
 mapscripts Route405_MapScripts {}
+
+script Route405_EventScript_RunningTriathleteF {
+    msgbox("How I got here?\p"
+           "Swimming of course, I can't fly…", MSGBOX_NPC)
+    end
+}
+
+script Route405_EventScript_SwimmerM {
+    msgbox("Woah woah!\p"
+           "Were you on that boat that\n"
+           "zoomed by just now?!", MSGBOX_NPC)
+    end
+}
