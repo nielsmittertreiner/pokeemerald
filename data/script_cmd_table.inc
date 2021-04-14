@@ -227,13 +227,14 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_warpsootopolislegend      @ 0xe0
 	.4byte ScrCmd_buffercontesttype         @ 0xe1
 	.4byte ScrCmd_bufferitemnameplural      @ 0xe2
-	.4byte ScrCmd_setfollower
-	.4byte ScrCmd_destroyfollower
-	.4byte ScrCmd_facefollower
-	.4byte ScrCmd_checkfollower
-	.4byte ScrCmd_showitemdesc
-	.4byte ScrCmd_hideitemdesc
-	.4byte ScrCmd_teleportcamera
+	.4byte ScrCmd_setfollower               @ 0xe3
+	.4byte ScrCmd_destroyfollower           @ 0xe4
+	.4byte ScrCmd_facefollower              @ 0xe5
+	.4byte ScrCmd_checkfollower             @ 0xe6
+	.4byte ScrCmd_showitemdesc              @ 0xe7
+	.4byte ScrCmd_hideitemdesc              @ 0xe8
+	.4byte ScrCmd_teleportcamera            @ 0xe9
+	.4byte ScrCmd_warpholecustom            @ 0xea
 
 gScriptCmdTableEnd:: @ 81DBA08
 	.4byte ScrCmd_nop

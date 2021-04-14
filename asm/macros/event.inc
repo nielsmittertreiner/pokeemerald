@@ -1863,3 +1863,11 @@
 	.macro resetcamera
 	callnative ResetCamera
 	.endm
+
+	@ Warps the player to another map with specified coordinates using a hole animation.
+	.macro warpholecustom map:req, x:req, y:req
+	.byte 0xea
+	map \map
+	.2byte \x
+	.2byte \y
+	.endm

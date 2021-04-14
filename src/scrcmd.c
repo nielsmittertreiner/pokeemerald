@@ -2363,3 +2363,16 @@ bool8 ScrCmd_teleportcamera(struct ScriptContext *ctx)
     TeleportCamera(x, y);
     return FALSE;
 }
+
+bool8 ScrCmd_warpholecustom(struct ScriptContext *ctx)
+{
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    s16 x = VarGet(ScriptReadHalfword(ctx));
+    s16 y = VarGet(ScriptReadHalfword(ctx));
+
+    SetWarpDestination(mapGroup, mapNum, -1, x, y);
+    DoFallWarp();
+    ResetInitialPlayerAvatarState();
+    return TRUE;
+}
