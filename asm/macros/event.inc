@@ -1854,12 +1854,14 @@
 	dofieldeffect FLDEFF_SPARKLE
 	.endm
 
+	@ Teleports the camera to specified coordinates.
 	.macro teleportcamera x:req, y:req
 	.byte 0xe9
 	.2byte \x
 	.2byte \y
 	.endm
 
+	@ Resets the camera position back to the player.
 	.macro resetcamera
 	callnative ResetCamera
 	.endm
