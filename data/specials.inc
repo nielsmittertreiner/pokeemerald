@@ -541,6 +541,7 @@ gSpecials:: @ 81DBA64
 	def_special CheckMurenaCityRelicanth
 	def_special CheckPokeCenterLocation
 	def_special ShakeCameraSilent
+	def_special IsPlayerInFlashCave
 	.if DEBUG
 	def_special ShowEndOfCurrentBetaScreen
 	def_special HideEndOfCurrentBetaScreen

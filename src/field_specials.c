@@ -138,6 +138,7 @@ bool8 CheckMurenaCityRelicanth(void);
 void CheckPokeCenterLocation(void);
 void ShowEndOfCurrentBetaScreen(void);
 void HideEndOfCurrentBetaScreen(void);
+bool8 IsPlayerInFlashCave(void);
 #ifndef FREE_LINK_BATTLE_RECORDS
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
 #else
@@ -4587,6 +4588,14 @@ void HideEndOfCurrentBetaScreen(void)
     ClearStdWindowAndFrame(sEndOfCurrentBetaScreenWindowId, FALSE);
     RemoveWindow(sEndOfCurrentBetaScreenWindowId);
     EnableBothScriptContexts();
+}
+
+bool8 IsPlayerInFlashCave(void)
+{
+    if (Overworld_GetFlashLevel() > 1)
+        return  TRUE;
+
+    return FALSE;
 }
 
 #endif
