@@ -23,7 +23,7 @@ mapscripts FirwealdCity_TournamentHallLobby_MapScripts {
                 load_speech_bubble(LOCALID_ATTENDANT)
                 msgbox("Across the EURUS REGION, multiple\n"
                        "TOURNAMENT HALLS are spread around\p"
-                       "They are used for competetive battling\n"
+                       "They are used for competitive battling\n"
                        "and all have a TOURNAMENT MASTER.\p"
                        "When you beat the TOURNAMENT MASTER\n"
                        "you'll obtain a gift when you beat\l"
@@ -125,7 +125,7 @@ script FirwealdCity_TournamentHallLobby_EventScript_JoinTournament {
 }
 
 script FirwealdCity_TournamentHallLobby_EventScript_Maniac {
-    msgbox("Competetive POKéMON battles\n"
+    msgbox("Competitive POKéMON battles\n"
            "are so cool!", MSGBOX_NPC)
     end
 }

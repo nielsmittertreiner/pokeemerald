@@ -170,7 +170,7 @@ FirwealdCity_TournamentHallLobby_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_1:
 FirwealdCity_TournamentHallLobby_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_2:
 	.string "Across the EURUS REGION, multiple\n"
 	.string "TOURNAMENT HALLS are spread around\p"
-	.string "They are used for competetive battling\n"
+	.string "They are used for competitive battling\n"
 	.string "and all have a TOURNAMENT MASTER.\p"
 	.string "When you beat the TOURNAMENT MASTER\n"
 	.string "you'll obtain a gift when you beat\l"
@@ -204,7 +204,7 @@ FirwealdCity_TournamentHallLobby_EventScript_JoinTournament_Text_0:
 	.string "you must save your data. Is that okay?$"
 
 FirwealdCity_TournamentHallLobby_EventScript_Maniac_Text_0:
-	.string "Competetive POKéMON battles\n"
+	.string "Competitive POKéMON battles\n"
 	.string "are so cool!$"
 
 FirwealdCity_TournamentHallLobby_EventScript_Beauty_Text_0:
