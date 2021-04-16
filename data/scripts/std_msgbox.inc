@@ -2,13 +2,13 @@ Std_MsgboxNPC: @ 8271315
 	lock
 	faceplayer
 	specialvar VAR_RESULT, IsPlayerInFlashCave
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, 0
 	call_if_eq Std_MsgboxLoadSpeechBubble
 	message 0x0
 	waitmessage
 	waitbuttonpress
 	specialvar VAR_RESULT, IsPlayerInFlashCave
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, 0
 	call_if_eq Std_MsgboxDestroySpeechBubble
 	release
 	return
