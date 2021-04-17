@@ -101,11 +101,11 @@
 #define FLAG_MURENA_SHOWN_RELICANTH          0x57
 #define FLAG_MET_SCOTT_ON_LITOR              0x58
 #define FLAG_MET_JULIA_ON_LITOR              0x59
-#define FLAG_RECEIVED_BIKE                   0x5A
-#define FLAG_WATTSON_REMATCH_AVAILABLE       0x5B
-#define FLAG_COLLECTED_ALL_SILVER_SYMBOLS    0x5C
-#define FLAG_GOOD_LUCK_SAFARI_ZONE           0x5D // Set after talking to NPC blocking Safari Zone entrance/exit once.
-#define FLAG_RECEIVED_WAILMER_PAIL           0x5E
+#define FLAG_OUREA_CAVES_GENERATOR_1         0x5A
+#define FLAG_OUREA_CAVES_GENERATOR_2         0x5B
+#define FLAG_OUREA_CAVES_GENERATOR_3         0x5C
+#define FLAG_OUREA_CAVES_GENERATOR_4         0x5D
+#define FLAG_OUREA_CAVES_GENERATOR_5         0x5E
 #define FLAG_RECEIVED_POKEBLOCK_CASE         0x5F
 #define FLAG_RECEIVED_SECRET_POWER           0x60
 #define FLAG_MET_TEAM_AQUA_HARBOR            0x61
@@ -523,7 +523,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_403_SUPER_POTION              (FLAG_HIDDEN_ITEMS_START + 0x08)
 #define FLAG_HIDDEN_ITEM_ROUTE_403_GREAT_BALL                (FLAG_HIDDEN_ITEMS_START + 0x09)
 #define FLAG_HIDDEN_ITEM_ROUTE_405_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x0A)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL            (FLAG_HIDDEN_ITEMS_START + 0x0B)
+#define FLAG_HIDDEN_ITEM_ROUTE_406_GREAT_BALL                (FLAG_HIDDEN_ITEMS_START + 0x0B)
 #define FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_1        (FLAG_HIDDEN_ITEMS_START + 0x0D)
 #define FLAG_HIDDEN_ITEM_UNDERWATER_124_CALCIUM              (FLAG_HIDDEN_ITEMS_START + 0x24)
 #define FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_2        (FLAG_HIDDEN_ITEMS_START + 0x26)
@@ -669,8 +669,8 @@
 #define FLAG_HIDE_LITOR_TOWN_SCOTT                                  0x285
 #define FLAG_HIDE_NAVIRE_TOWN_FISHERMAN                             0x286
 #define FLAG_HIDE_NAVIRE_TOWN_BOAT                                  0x287
-#define FLAG_UNUSED_0x288                                           0x288
-#define FLAG_UNUSED_0x289                                           0x289
+#define FLAG_HIDE_ROUTE_406_HIKER1                                  0x288
+#define FLAG_HIDE_OUREA_CAVE_B2F_HIKER1                             0x289
 #define FLAG_UNUSED_0x28A                                           0x28A
 #define FLAG_UNUSED_0x28B                                           0x28B
 #define FLAG_UNUSED_0x28C                                           0x28C

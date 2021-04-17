@@ -105,8 +105,13 @@
     "Route403",
     "Route404",
     "Route405",
+    "Route406",
     "AcrenForest",
-    "ForestTunnel"
+    "ForestTunnel",
+    "OureaCave_1F",
+    "OureaCave_B1F",
+    "OureaCave_B2F",
+    "OureaCave_B3F"
   ],
   "gMapGroup1": [
     "LittlerootTown_BrendansHouse_1F",

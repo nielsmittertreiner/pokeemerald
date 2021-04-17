@@ -4900,6 +4900,56 @@
       "secondary_tileset": "gTileset_Slateport",
       "border_filepath": "data/layouts/Route405/border.bin",
       "blockdata_filepath": "data/layouts/Route405/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE406",
+      "name": "Route406_Layout",
+      "width": 80,
+      "height": 80,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Fortree",
+      "border_filepath": "data/layouts/Route406/border.bin",
+      "blockdata_filepath": "data/layouts/Route406/map.bin"
+    },
+    {
+      "id": "LAYOUT_OUREA_1F_CAVE",
+      "name": "OureaCave_1F_Layout",
+      "width": 51,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/OureaCave_1F/border.bin",
+      "blockdata_filepath": "data/layouts/OureaCave_1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_OUREA_CAVE_B1F",
+      "name": "OureaCave_B1F_Layout",
+      "width": 36,
+      "height": 16,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/OureaCave_B1F/border.bin",
+      "blockdata_filepath": "data/layouts/OureaCave_B1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_OUREA_CAVE_B2F",
+      "name": "OureaCave_B2F_Layout",
+      "width": 90,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/OureaCave_B2F/border.bin",
+      "blockdata_filepath": "data/layouts/OureaCave_B2F/map.bin"
+    },
+    {
+      "id": "LAYOUT_OUREA_CAVE_B3F",
+      "name": "OureaCave_B3F_Layout",
+      "width": 40,
+      "height": 80,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/OureaCave_B3F/border.bin",
+      "blockdata_filepath": "data/layouts/OureaCave_B3F/map.bin"
     }
   ]
 }

@@ -335,18 +335,18 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Route404_Sarah},
     },
 
-    [TRAINER_GRUNT_MT_PYRE_2] =
+    [TRAINER_ROUTE406_NEWT] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_TEAM_AQUA,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
-        .trainerPic = TRAINER_PIC_AQUA_GRUNT_M,
-        .trainerName = _("GRUNT"),
+        .trainerClass = TRAINER_CLASS_HIKER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+        .trainerPic = TRAINER_PIC_HIKER,
+        .trainerName = _("NEWT"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_GruntMtPyre2),
-        .party = {.NoItemDefaultMoves = sParty_GruntMtPyre2},
+        .partySize = ARRAY_COUNT(sParty_Route406_Newt),
+        .party = {.NoItemDefaultMoves = sParty_Route406_Newt},
     },
 
     [TRAINER_GRUNT_MT_PYRE_3] =

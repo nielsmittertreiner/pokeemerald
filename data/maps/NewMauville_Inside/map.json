@@ -215,7 +215,7 @@
       "x": 33,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_NEW_MAUVILLE_STATE",
+      "var": "VAR_OUREA_CAVES_LIGHTS_STATE",
       "var_value": "1",
       "script": "NewMauville_Inside_EventScript_RedButton"
     }

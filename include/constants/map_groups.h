@@ -70,8 +70,13 @@
 #define MAP_ROUTE403            (65 | (0 << 8))
 #define MAP_ROUTE404            (66 | (0 << 8))
 #define MAP_ROUTE405            (67 | (0 << 8))
-#define MAP_ACREN_FOREST        (68 | (0 << 8))
-#define MAP_FOREST_TUNNEL       (69 | (0 << 8))
+#define MAP_ROUTE406            (68 | (0 << 8))
+#define MAP_ACREN_FOREST        (69 | (0 << 8))
+#define MAP_FOREST_TUNNEL       (70 | (0 << 8))
+#define MAP_OUREA_CAVE_1F       (71 | (0 << 8))
+#define MAP_OUREA_CAVE_B1F      (72 | (0 << 8))
+#define MAP_OUREA_CAVE_B2F      (73 | (0 << 8))
+#define MAP_OUREA_CAVE_B3F      (74 | (0 << 8))
 
 // Map Group 1
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))

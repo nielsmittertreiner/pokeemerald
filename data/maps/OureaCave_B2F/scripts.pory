@@ -1,0 +1,147 @@
+const LOCALID_HIKER = 1
+
+mapscripts OureaCave_B2F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(OureaCaves_EventScript_SetCaveLights)
+        if (var(VAR_OUREA_CAVES_STATE) == 1) {
+            setobjectxyperm(LOCALID_HIKER, 82, 14)
+            setobjectmovementtype(LOCALID_HIKER, MOVEMENT_TYPE_FACE_UP)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_OUREA_CAVES_STATE, 1: OureaCave_B2F_EventScript_AfterEarthquakeScene
+    ]
+}
+
+script OureaCave_B2F_EventScript_AfterEarthquakeScene {
+    lock
+    applymovement(LOCALID_HIKER, OureaCave_B2F_Movement_HikerAndPlayerWalkForward)
+    applymovement(OBJ_EVENT_ID_PLAYER, OureaCave_B2F_Movement_HikerAndPlayerWalkForward)
+    waitmovement(0)
+    delay(30)
+    msgbox("…")
+    closemessage
+    applymovement(LOCALID_HIKER, Common_Movement_FaceDown)
+    waitmovement(0)
+    call(OureaCave_B2F_EventScript_HikerAsksPlayerForHelp)
+    msgbox("Ahhh! You're rock solid\n"
+           "HOHOHO!\p"
+           "Thanks so much for wanting to help!")
+    closemessage
+    applymovement(LOCALID_HIKER, OureaCave_B2F_Movement_HikerWalksToGenerator)
+    applymovement(OBJ_EVENT_ID_PLAYER, OureaCave_B2F_Movement_PlayerWalksToGenerator)
+    waitmovement(0)
+    msgbox("See this right here?\n"
+           "These are power switches.\p"
+           "If you flip the switch on 'em\n"
+           "they turn the lights on.\p"
+           "Just go through the caves 'n flip 'em all.\n"
+           "I'm sure your POKéMON will protect you.")
+    closemessage
+    applymovement(LOCALID_HIKER, Common_Movement_FaceDown)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox("To  help you clear any debris that might\n"
+           "be in your way, take this.")
+    closemessage
+    giveitem(ITEM_HM06, 1)
+    msgbox("Teach this to one of your POKéMON\n"
+           "to clear rocks that may have fallen\l"
+           "during the earthquake and to\l"
+           "get our workers out safely.\p"
+           "Now…\n"
+           "Why don't you try turning this one on.")
+    closemessage
+    applymovement(LOCALID_HIKER, Common_Movement_WalkInPlaceFastestLeft)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setvar(VAR_OUREA_CAVES_STATE, 2)
+    release
+    end
+}
+
+script OureaCave_B2F_EventScript_HikerAsksPlayerForHelp {
+    msgbox("Hmmm…\n"
+           "It seems the earthquake knocked out\l"
+           "the power grid…\p"
+           "Can you maybe help us get it back up?\n"
+           "That way we can evacuate safely.", MSGBOX_YESNO)
+    closemessage
+
+    switch (var(VAR_RESULT)) {
+        case YES:
+            break
+        case NO:
+            goto(OureaCave_B2F_EventScript_HikerAsksPlayerForHelp)
+        case MULTI_B_PRESSED:
+            goto(OureaCave_B2F_EventScript_HikerAsksPlayerForHelp)
+    }
+    return
+}
+
+script OureaCave_B2F_EventScript_PreventPlayerWander {
+    applymovement(LOCALID_HIKER, OureaCave_B2F_Movement_HikerWalkToPlayerOnStairs)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox("Come on now…")
+    closemessage
+    applymovement(LOCALID_HIKER, OureaCave_B2F_Movement_HikerAndPlayerWalkBackToGenerator)
+    applymovement(OBJ_EVENT_ID_PLAYER, OureaCave_B2F_Movement_HikerAndPlayerWalkBackToGenerator)
+    waitmovement(0)
+    msgbox("Show me how you flip that switch!")
+    closemessage
+    end
+}
+
+script OureaCave_B2F_EventScript_Hiker {
+    if (flag(FLAG_OUREA_CAVES_GENERATOR_2)) {
+        msgbox("Nice work, you found another.\p"
+               "Keep on going!", MSGBOX_NPC)
+        end
+    } elif (flag(FLAG_OUREA_CAVES_GENERATOR_1)) {
+        msgbox("Good job, now go find the others.", MSGBOX_NPC)
+        end
+    }
+    msgbox("Try turning it on!", MSGBOX_NPC)
+    end
+}
+
+script OureaCave_B2F_EventScript_WarpHoleCustom1 {
+    lockall
+	delay(20)
+	applymovement(OBJ_EVENT_ID_PLAYER, Movement_SetInvisible)
+	waitmovement(0)
+	playse(SE_FALL)
+	delay(60)
+    warpholecustom(MAP_OUREA_CAVE_B3F, 5, 4)
+    waitstate
+	end
+}
+
+movement OureaCave_B2F_Movement_HikerAndPlayerWalkForward {
+    walk_up * 3
+}
+
+movement OureaCave_B2F_Movement_HikerWalksToGenerator {
+    walk_up
+    walk_right
+    walk_up * 5
+    face_left
+}
+
+movement OureaCave_B2F_Movement_PlayerWalksToGenerator {
+    walk_up * 2
+    walk_right
+    walk_up * 4
+    face_left
+}
+
+movement OureaCave_B2F_Movement_HikerWalkToPlayerOnStairs {
+    walk_down * 2
+}
+
+movement OureaCave_B2F_Movement_HikerAndPlayerWalkBackToGenerator {
+    walk_up * 2
+    face_left
+}

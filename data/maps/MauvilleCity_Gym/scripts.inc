@@ -79,7 +79,7 @@ MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
 	compare VAR_RESULT, TRUE
 	goto_if_eq MauvilleCity_Gym_EventScript_WattsonRematch
 	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_GiveShockWave2
-	compare VAR_NEW_MAUVILLE_STATE, 2
+	compare VAR_OUREA_CAVES_LIGHTS_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release

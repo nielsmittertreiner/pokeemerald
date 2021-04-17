@@ -4,7 +4,7 @@ MauvilleCity_BikeShop_MapScripts:: @ 820EBBB
 MauvilleCity_BikeShop_EventScript_Rydel:: @ 820EBBC
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_AskSwitchBikes
+	goto_if_set FLAG_OUREA_CAVES_GENERATOR_1, MauvilleCity_BikeShop_EventScript_AskSwitchBikes
 	goto_if_set FLAG_MET_JULIA_ON_LITOR, MauvilleCity_BikeShop_EventScript_SkipGreeting
 	msgbox MauvilleCity_BikeShop_Text_RydelGreeting, MSGBOX_DEFAULT
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
@@ -38,7 +38,7 @@ MauvilleCity_BikeShop_EventScript_NotFar:: @ 820EC3D
 	end
 
 MauvilleCity_BikeShop_EventScript_YesFar:: @ 820EC4A
-	setflag FLAG_RECEIVED_BIKE
+	setflag FLAG_OUREA_CAVES_GENERATOR_1
 	goto MauvilleCity_BikeShop_EventScript_ChooseBike
 	end
 

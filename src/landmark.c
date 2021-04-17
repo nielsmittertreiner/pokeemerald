@@ -390,7 +390,6 @@ static const struct LandmarkList gLandmarkLists[] =
     {MAPSEC_ROUTE_434, 0, Landmarks_OceanCurrent},
     {MAPSEC_ROUTE_434, 1, Landmarks_OceanCurrent},
     {MAPSEC_ROUTE_434, 2, Landmarks_Route134_2},
-    {MAPSEC_MT_CHIMNEY, 2, Landmarks_MtChimney_2},
     {MAPSEC_NONE, 0, NULL},
 };
 

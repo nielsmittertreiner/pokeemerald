@@ -303,11 +303,11 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Route404_Sarah[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMtPyre2[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_Route406_Newt[] = {
     {
     .iv = 0,
-    .lvl = 32,
-    .species = SPECIES_CARVANHA,
+    .lvl = 20,
+    .species = SPECIES_GEODUDE,
     }
 };
 

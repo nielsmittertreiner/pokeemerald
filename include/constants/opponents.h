@@ -25,7 +25,7 @@
 #define TRAINER_MURENA_CITY_GRUNT            21
 #define TRAINER_ROUTE404_WILLIAM             22
 #define TRAINER_ROUTE404_SARAH               23
-#define TRAINER_GRUNT_MT_PYRE_2              24
+#define TRAINER_ROUTE406_NEWT                24
 #define TRAINER_GRUNT_MT_PYRE_3              25
 #define TRAINER_GRUNT_WEATHER_INST_4         26
 #define TRAINER_GRUNT_AQUA_HIDEOUT_5         27

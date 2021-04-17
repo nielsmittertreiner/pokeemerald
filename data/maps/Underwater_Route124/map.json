@@ -58,7 +58,7 @@
       "y": 54,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_406_GREAT_BALL"
     },
     {
       "type": "hidden_item",

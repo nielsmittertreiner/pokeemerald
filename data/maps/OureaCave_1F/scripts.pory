@@ -1,0 +1,12 @@
+mapscripts OureaCave_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(OureaCaves_EventScript_SetCaveLights)
+    }
+}
+
+script OureaCave_1F_EventScript_Hiker1 {
+    msgbox("See those complicated boxes there?\p"
+           "They're used to control the lights\n"
+           "in the OUREA CAVES.", MSGBOX_NPC)
+    end
+}

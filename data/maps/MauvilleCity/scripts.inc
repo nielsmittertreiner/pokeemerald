@@ -19,7 +19,7 @@ MauvilleCity_OnTransition: @ 81DF38B
 MauvilleCity_EventScript_MoveWattsonBackToGym:: @ 81DF3A9
 	clearflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
 	setflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
-	setflag FLAG_WATTSON_REMATCH_AVAILABLE
+	setflag FLAG_OUREA_CAVES_GENERATOR_2
 	return
 
 MauvilleCity_EventScript_Boy:: @ 81DF3B3
@@ -425,7 +425,7 @@ MauvilleCity_EventScript_Wattson:: @ 81DF73A
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_TM24_FROM_WATTSON, MauvilleCity_EventScript_ReceivedThunderbolt
-	compare VAR_NEW_MAUVILLE_STATE, 2
+	compare VAR_OUREA_CAVES_LIGHTS_STATE, 2
 	goto_if_eq MauvilleCity_EventScript_CompletedNewMauville
 	goto_if_set FLAG_GOT_BASEMENT_KEY_FROM_WATTSON, MauvilleCity_EventScript_BegunNewMauville
 	msgbox MauvilleCity_Text_WattsonNeedFavorTakeKey, MSGBOX_DEFAULT

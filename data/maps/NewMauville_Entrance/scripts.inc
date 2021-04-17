@@ -4,7 +4,7 @@ NewMauville_Entrance_MapScripts:: @ 82372AD
 	.byte 0
 
 NewMauville_Entrance_OnLoad: @ 82372B8
-	compare VAR_NEW_MAUVILLE_STATE, 0
+	compare VAR_OUREA_CAVES_LIGHTS_STATE, 0
 	call_if_eq NewMauville_Entrance_EventScript_CloseDoor
 	end
 
@@ -41,7 +41,7 @@ NewMauville_Entrance_EventScript_Door:: @ 82372FF
 	setmetatile 5, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile5, 1
 	special DrawWholeMapView
 	playse SE_BANG
-	setvar VAR_NEW_MAUVILLE_STATE, 1
+	setvar VAR_OUREA_CAVES_LIGHTS_STATE, 1
 	releaseall
 	end
 

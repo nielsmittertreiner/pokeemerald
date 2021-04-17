@@ -146,8 +146,8 @@
 #define VAR_SUNSET_TOWN_FOLLOWER_STATE_2                 (SPECIAL_STATE_VARS_START + 0x6)
 #define VAR_FISHERMAN_FERRY_LOCATION                     (SPECIAL_STATE_VARS_START + 0x7) // Fisherman Ferry Location
 #define VAR_FISHERMAN_FERRY_STATE                        (SPECIAL_STATE_VARS_START + 0x8)
-#define VAR_MT_PYRE_STATE                                (SPECIAL_STATE_VARS_START + 0x9)
-#define VAR_NEW_MAUVILLE_STATE                           (SPECIAL_STATE_VARS_START + 0xA)
+#define VAR_OUREA_CAVES_STATE                            (SPECIAL_STATE_VARS_START + 0x9)
+#define VAR_OUREA_CAVES_LIGHTS_STATE                     (SPECIAL_STATE_VARS_START + 0xA)
 #define VAR_UNUSED_0x40BB                                (SPECIAL_STATE_VARS_START + 0xB) // Unused Var
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON                (SPECIAL_STATE_VARS_START + 0xC)
 #define VAR_JAGGED_PASS_ASH_WEATHER                      (SPECIAL_STATE_VARS_START + 0xD)

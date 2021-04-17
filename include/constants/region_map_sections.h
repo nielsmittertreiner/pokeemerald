@@ -57,7 +57,7 @@
 #define MAPSEC_UNDERWATER_128               0x35
 #define MAPSEC_UNDERWATER_SOOTOPOLIS        0x36
 #define MAPSEC_ACREN_FOREST                 0x37
-#define MAPSEC_MT_CHIMNEY                   0x38
+#define MAPSEC_OUREA_CAVES                  0x38
 #define MAPSEC_SAFARI_ZONE                  0x39
 #define MAPSEC_BATTLE_FRONTIER              0x3A
 #define MAPSEC_PETALBURG_WOODS              0x3B

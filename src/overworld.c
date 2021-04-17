@@ -1103,6 +1103,12 @@ u16 GetCurrLocationDefaultMusic(void)
      && GetSav1Weather() == WEATHER_SUNNY)
         return MUS_CELEBI;
 
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE406)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE406)
+     && gSaveBlock1Ptr->pos.x < 43
+     && gSaveBlock1Ptr->pos.y < 32)
+        return MUS_ROUTE403;
+
     music = GetLocationMusic(&gSaveBlock1Ptr->location);
     if (music != MUS_ROUTE118)
     {

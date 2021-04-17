@@ -1,0 +1,126 @@
+const LOCALID_HIKER1 = 2
+const LOCALID_HIKER2 = 3
+
+mapscripts Route406_MapScripts {}
+
+script Route406_EventScript_InitializeOureaCaveStoryline {
+    lock
+    delay(30)
+    playse(SE_PIN)
+    applymovement(LOCALID_HIKER1, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_HIKER1, Common_Movement_FaceDown)
+    waitmovement(0)
+    load_speech_bubble(LOCALID_HIKER1)
+    msgbox("Earthquake! Get down!")
+    destroy_speech_bubble
+    closemessage
+    playse(SE_M_EARTHQUAKE)
+    setvar(VAR_0x8004, 0)  // vertical pan
+	setvar(VAR_0x8005, 8)  // horizontal pan
+	setvar(VAR_0x8006, 20) // num shakes
+	setvar(VAR_0x8007, 5)  // shake delay
+    special(ShakeCameraSilent)
+    waitstate
+    setvar(VAR_0x8004, 0)  // vertical pan
+	setvar(VAR_0x8005, 5)  // horizontal pan
+	setvar(VAR_0x8006, 16) // num shakes
+	setvar(VAR_0x8007, 5)  // shake delay
+    special(ShakeCameraSilent)
+    waitstate
+    setvar(VAR_0x8004, 0)  // vertical pan
+	setvar(VAR_0x8005, 3)  // horizontal pan
+	setvar(VAR_0x8006, 8)  // num shakes
+	setvar(VAR_0x8007, 5)  // shake delay
+    special(ShakeCameraSilent)
+    waitstate
+    delay(30)
+    applymovement(LOCALID_HIKER1, Route406_Movement_Hiker1LookAround)
+    waitmovement(0)
+    load_speech_bubble(LOCALID_HIKER1)
+    msgbox("Phew, it seems the quake settled down…")
+    destroy_speech_bubble
+    closemessage
+    playse(SE_PIN)
+    applymovement(LOCALID_HIKER1, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    delay(30)
+    applymovement(LOCALID_HIKER1, Route406_Movement_Hiker1RunToPlayer)
+    waitmovement(0)
+    load_speech_bubble(LOCALID_HIKER1)
+    msgbox("Wait… what's a kid like you\n"
+           "doing here?!\p"
+           "You could've gotten hurt!\p"
+           "Come with me…")
+    destroy_speech_bubble
+    closemessage
+    applymovement(LOCALID_HIKER1, Route406_Movement_Hiker1TakePlayerToCave)
+    applymovement(OBJ_EVENT_ID_PLAYER, Route406_Movement_PlayerWalkToCave)
+    waitmovement(0)
+    setflag(FLAG_HIDE_ROUTE_406_HIKER1)
+    setvar(VAR_OUREA_CAVES_STATE, 1)
+    setvar(VAR_OUREA_CAVES_LIGHTS_STATE, 1)
+    warp(MAP_OUREA_CAVE_B2F, 5, 0, 0)
+    waitstate
+    release
+    end
+}
+
+script Route406_EventScript_Sign {
+    special(ShowEndOfCurrentBetaScreen)
+    waitbuttonpress
+    special(HideEndOfCurrentBetaScreen)
+    release
+    end
+}
+
+script Route406_EventScript_Newt {
+    trainerbattle_single(TRAINER_ROUTE406_NEWT, Route406_Text_NewtIntro, Route406_Text_NewtDefeat,)
+    msgbox(Route406_Text_PostBattle, MSGBOX_NPC)
+    end
+}
+
+movement Route406_Movement_Hiker1LookAround {
+    face_left
+    delay_16
+    delay_16
+    face_right
+    delay_16
+    delay_16
+    face_left
+    delay_16
+    delay_16
+    face_right
+    delay_16
+}
+
+movement Route406_Movement_Hiker1RunToPlayer {
+    walk_fast_right * 3
+    face_up
+}
+
+movement Route406_Movement_Hiker1TakePlayerToCave {
+    walk_left * 6
+    walk_up
+    set_invisible
+}
+
+movement Route406_Movement_PlayerWalkToCave {
+    walk_down
+    walk_left * 6
+    walk_up
+}
+
+text Route406_Text_NewtIntro {
+    "What's someone like you doing here\n"
+    "all unprepared?"
+}
+
+text Route406_Text_NewtDefeat {
+    "You seem to be more prepared that I am…"
+}
+
+text Route406_Text_PostBattle {
+    "Watch out for falling rocks in\n"
+    "these parts."
+}

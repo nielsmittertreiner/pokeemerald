@@ -148,7 +148,7 @@
       "x": 22,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_MT_PYRE_STATE",
+      "var": "VAR_OUREA_CAVES_STATE",
       "var_value": "0",
       "script": "MtPyre_Summit_EventScript_TeamAquaTrigger0"
     },
@@ -157,7 +157,7 @@
       "x": 23,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_MT_PYRE_STATE",
+      "var": "VAR_OUREA_CAVES_STATE",
       "var_value": "0",
       "script": "MtPyre_Summit_EventScript_TeamAquaTrigger1"
     },
@@ -166,7 +166,7 @@
       "x": 24,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_MT_PYRE_STATE",
+      "var": "VAR_OUREA_CAVES_STATE",
       "var_value": "0",
       "script": "MtPyre_Summit_EventScript_TeamAquaTrigger2"
     },
@@ -175,7 +175,7 @@
       "x": 22,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_MT_PYRE_STATE",
+      "var": "VAR_OUREA_CAVES_STATE",
       "var_value": "2",
       "script": "MtPyre_Summit_EventScript_ArchieMaxieTrigger0"
     },
@@ -184,7 +184,7 @@
       "x": 23,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_MT_PYRE_STATE",
+      "var": "VAR_OUREA_CAVES_STATE",
       "var_value": "2",
       "script": "MtPyre_Summit_EventScript_ArchieMaxieTrigger1"
     },
@@ -193,7 +193,7 @@
       "x": 24,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_MT_PYRE_STATE",
+      "var": "VAR_OUREA_CAVES_STATE",
       "var_value": "2",
       "script": "MtPyre_Summit_EventScript_ArchieMaxieTrigger2"
     }

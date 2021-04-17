@@ -1,0 +1,204 @@
+OureaCaves_EventScript_SetCaveLights::
+	switch VAR_OUREA_CAVES_LIGHTS_STATE
+	case 1, OureaCaves_EventScript_SetCaveLights_3
+	case 2, OureaCaves_EventScript_SetCaveLights_4
+	case 3, OureaCaves_EventScript_SetCaveLights_5
+	case 4, OureaCaves_EventScript_SetCaveLights_6
+	case 5, OureaCaves_EventScript_SetCaveLights_7
+	case 6, OureaCaves_EventScript_SetCaveLights_8
+OureaCaves_EventScript_SetCaveLights_1:
+	return
+
+OureaCaves_EventScript_SetCaveLights_3:
+	setflashradius 5
+	goto OureaCaves_EventScript_SetCaveLights_1
+
+OureaCaves_EventScript_SetCaveLights_4:
+	setflashradius 4
+	goto OureaCaves_EventScript_SetCaveLights_1
+
+OureaCaves_EventScript_SetCaveLights_5:
+	setflashradius 3
+	goto OureaCaves_EventScript_SetCaveLights_1
+
+OureaCaves_EventScript_SetCaveLights_6:
+	setflashradius 2
+	goto OureaCaves_EventScript_SetCaveLights_1
+
+OureaCaves_EventScript_SetCaveLights_7:
+	setflashradius 1
+	goto OureaCaves_EventScript_SetCaveLights_1
+
+OureaCaves_EventScript_SetCaveLights_8:
+	setflashradius 0
+	goto OureaCaves_EventScript_SetCaveLights_1
+
+
+OureaCaves_EventScript_AnimateCaveLights::
+	playse SE_SWITCH
+	switch VAR_OUREA_CAVES_LIGHTS_STATE
+	case 1, OureaCaves_EventScript_AnimateCaveLights_3
+	case 2, OureaCaves_EventScript_AnimateCaveLights_4
+	case 3, OureaCaves_EventScript_AnimateCaveLights_5
+	case 4, OureaCaves_EventScript_AnimateCaveLights_6
+	case 5, OureaCaves_EventScript_AnimateCaveLights_7
+	case 6, OureaCaves_EventScript_AnimateCaveLights_8
+OureaCaves_EventScript_AnimateCaveLights_1:
+	return
+
+OureaCaves_EventScript_AnimateCaveLights_3:
+	animateflash 5
+	goto OureaCaves_EventScript_AnimateCaveLights_1
+
+OureaCaves_EventScript_AnimateCaveLights_4:
+	animateflash 4
+	goto OureaCaves_EventScript_AnimateCaveLights_1
+
+OureaCaves_EventScript_AnimateCaveLights_5:
+	animateflash 3
+	goto OureaCaves_EventScript_AnimateCaveLights_1
+
+OureaCaves_EventScript_AnimateCaveLights_6:
+	animateflash 2
+	goto OureaCaves_EventScript_AnimateCaveLights_1
+
+OureaCaves_EventScript_AnimateCaveLights_7:
+	animateflash 1
+	goto OureaCaves_EventScript_AnimateCaveLights_1
+
+OureaCaves_EventScript_AnimateCaveLights_8:
+	animateflash 0
+	goto OureaCaves_EventScript_AnimateCaveLights_1
+
+
+OureaCaves_EventScript_LightGeneratorBoxLogic::
+	compare VAR_OUREA_CAVES_STATE, 0
+	goto_if_eq OureaCaves_EventScript_LightGeneratorBoxLogic_2
+	msgbox OureaCaves_EventScript_LightGeneratorBoxLogic_Text_1, MSGBOX_YESNO
+	switch VAR_RESULT
+	case YES, OureaCaves_EventScript_LightGeneratorBoxLogic_6
+	case NO, OureaCaves_EventScript_LightGeneratorBoxLogic_7
+	case MULTI_B_PRESSED, OureaCaves_EventScript_LightGeneratorBoxLogic_8
+OureaCaves_EventScript_LightGeneratorBoxLogic_4:
+	return
+
+OureaCaves_EventScript_LightGeneratorBoxLogic_2:
+	msgbox OureaCaves_EventScript_LightGeneratorBoxLogic_Text_0
+	closemessage
+	end
+
+OureaCaves_EventScript_LightGeneratorBoxLogic_6:
+	msgbox OureaCaves_EventScript_LightGeneratorBoxLogic_Text_2
+	closemessage
+	addvar VAR_OUREA_CAVES_LIGHTS_STATE, 1
+	call OureaCaves_EventScript_AnimateCaveLights
+	call OureaCaves_EventScript_SetCaveLights
+	goto OureaCaves_EventScript_LightGeneratorBoxLogic_4
+
+OureaCaves_EventScript_LightGeneratorBoxLogic_7:
+	closemessage
+	end
+
+OureaCaves_EventScript_LightGeneratorBoxLogic_8:
+	closemessage
+	end
+
+
+OureaCaves_EventScript_GeneratorAlreadyTurnedOn::
+	msgbox OureaCaves_EventScript_GeneratorAlreadyTurnedOn_Text_0
+	closemessage
+	end
+
+
+OureaCaves_EventScript_LightGeneratorBox1::
+	goto_if_set FLAG_OUREA_CAVES_GENERATOR_1, OureaCaves_EventScript_LightGeneratorBox1_2
+OureaCaves_EventScript_LightGeneratorBox1_1:
+	call OureaCaves_EventScript_LightGeneratorBoxLogic
+	playse SE_PIN
+	applymovement 1, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement 1, Common_Movement_FaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	waitmovement 0
+	msgbox OureaCaves_EventScript_LightGeneratorBox1_Text_0
+	closemessage
+	setflag FLAG_OUREA_CAVES_GENERATOR_1
+	setvar VAR_OUREA_CAVES_STATE, 3
+	end
+
+OureaCaves_EventScript_LightGeneratorBox1_2:
+	goto OureaCaves_EventScript_GeneratorAlreadyTurnedOn
+	goto OureaCaves_EventScript_LightGeneratorBox1_1
+
+
+OureaCaves_EventScript_LightGeneratorBox2::
+	goto_if_set FLAG_OUREA_CAVES_GENERATOR_2, OureaCaves_EventScript_LightGeneratorBox2_2
+OureaCaves_EventScript_LightGeneratorBox2_1:
+	call OureaCaves_EventScript_LightGeneratorBoxLogic
+	setflag FLAG_OUREA_CAVES_GENERATOR_2
+	end
+
+OureaCaves_EventScript_LightGeneratorBox2_2:
+	goto OureaCaves_EventScript_GeneratorAlreadyTurnedOn
+	goto OureaCaves_EventScript_LightGeneratorBox2_1
+
+
+OureaCaves_EventScript_LightGeneratorBox3::
+	goto_if_set FLAG_OUREA_CAVES_GENERATOR_3, OureaCaves_EventScript_LightGeneratorBox3_2
+OureaCaves_EventScript_LightGeneratorBox3_1:
+	call OureaCaves_EventScript_LightGeneratorBoxLogic
+	setflag FLAG_OUREA_CAVES_GENERATOR_3
+	end
+
+OureaCaves_EventScript_LightGeneratorBox3_2:
+	goto OureaCaves_EventScript_GeneratorAlreadyTurnedOn
+	goto OureaCaves_EventScript_LightGeneratorBox3_1
+
+
+OureaCaves_EventScript_LightGeneratorBox4::
+	goto_if_set FLAG_OUREA_CAVES_GENERATOR_4, OureaCaves_EventScript_LightGeneratorBox4_2
+OureaCaves_EventScript_LightGeneratorBox4_1:
+	call OureaCaves_EventScript_LightGeneratorBoxLogic
+	setflag FLAG_OUREA_CAVES_GENERATOR_4
+	end
+
+OureaCaves_EventScript_LightGeneratorBox4_2:
+	goto OureaCaves_EventScript_GeneratorAlreadyTurnedOn
+	goto OureaCaves_EventScript_LightGeneratorBox4_1
+
+
+OureaCaves_EventScript_LightGeneratorBox5::
+	goto_if_set FLAG_OUREA_CAVES_GENERATOR_5, OureaCaves_EventScript_LightGeneratorBox5_2
+OureaCaves_EventScript_LightGeneratorBox5_1:
+	call OureaCaves_EventScript_LightGeneratorBoxLogic
+	setflag FLAG_OUREA_CAVES_GENERATOR_4
+	end
+
+OureaCaves_EventScript_LightGeneratorBox5_2:
+	goto OureaCaves_EventScript_GeneratorAlreadyTurnedOn
+	goto OureaCaves_EventScript_LightGeneratorBox5_1
+
+
+OureaCaves_EventScript_LightGeneratorBoxLogic_Text_0:
+	.string "It looks like a generator of\n"
+	.string "some sort…$"
+
+OureaCaves_EventScript_LightGeneratorBoxLogic_Text_1:
+	.string "It's a power generator wired up to\n"
+	.string "the lights in the cave.\p"
+	.string "Do you want to turn it on?$"
+
+OureaCaves_EventScript_LightGeneratorBoxLogic_Text_2:
+	.string "You turned on the generator.$"
+
+OureaCaves_EventScript_GeneratorAlreadyTurnedOn_Text_0:
+	.string "This generator is already turned on.$"
+
+OureaCaves_EventScript_LightGeneratorBox1_Text_0:
+	.string "Nice one!\n"
+	.string "You flipped the switch the right way!\p"
+	.string "Not that there's really a way to do it\n"
+	.string "wrong…\p"
+	.string "Anyway, there should be 5 more of these\n"
+	.string "generators scattered around…\p"
+	.string "Good luck!$"

@@ -40,7 +40,7 @@ NewMauville_Inside_EventScript_ShowVoltorb3:: @ 8237449
 	return
 
 NewMauville_Inside_OnLoad: @ 823744D
-	compare VAR_NEW_MAUVILLE_STATE, 2
+	compare VAR_OUREA_CAVES_LIGHTS_STATE, 2
 	call_if_eq NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
 	end
 
@@ -148,7 +148,7 @@ NewMauville_Inside_EventScript_RedButton:: @ 8237725
 	lockall
 	msgbox NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped, MSGBOX_DEFAULT
 	call NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
-	setvar VAR_NEW_MAUVILLE_STATE, 2
+	setvar VAR_OUREA_CAVES_LIGHTS_STATE, 2
 	releaseall
 	end
 
@@ -167,7 +167,7 @@ NewMauville_Inside_EventScript_SetGeneratorOffMetatiles:: @ 823773A
 
 NewMauville_Inside_EventScript_Generator:: @ 823778F
 	lockall
-	compare VAR_NEW_MAUVILLE_STATE, 2
+	compare VAR_OUREA_CAVES_LIGHTS_STATE, 2
 	goto_if_eq NewMauville_Inside_EventScript_GeneratorOff
 	msgbox NewMauville_Inside_Text_GeneratorRadiatingHeat, MSGBOX_DEFAULT
 	releaseall

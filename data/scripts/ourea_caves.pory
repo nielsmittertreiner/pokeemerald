@@ -1,0 +1,145 @@
+const LOCALID_HIKER = 1
+
+script OureaCaves_EventScript_SetCaveLights {
+    switch (var(VAR_OUREA_CAVES_LIGHTS_STATE)) {
+        case 1:
+            setflashradius(5)
+            break
+        case 2:
+            setflashradius(4)
+            break
+        case 3:
+            setflashradius(3)
+            break
+        case 4:
+            setflashradius(2)
+            break
+        case 5:
+            setflashradius(1)
+            break
+        case 6:
+            setflashradius(0)
+            break
+    }
+    return
+}
+
+script OureaCaves_EventScript_AnimateCaveLights {
+    playse(SE_SWITCH)
+    switch (var(VAR_OUREA_CAVES_LIGHTS_STATE)) {
+        case 1:
+            animateflash(5)
+            break
+        case 2:
+            animateflash(4)
+            break
+        case 3:
+            animateflash(3)
+            break
+        case 4:
+            animateflash(2)
+            break
+        case 5:
+            animateflash(1)
+            break
+        case 6:
+            animateflash(0)
+            break
+    }
+    return
+}
+
+script OureaCaves_EventScript_LightGeneratorBoxLogic {
+    if (var(VAR_OUREA_CAVES_STATE) == 0) {
+        msgbox("It looks like a generator of\n"
+               "some sort…")
+        closemessage
+        end
+    }
+    msgbox("It's a power generator wired up to\n"
+           "the lights in the cave.\p"
+           "Do you want to turn it on?", MSGBOX_YESNO)
+    switch (var(VAR_RESULT)) {
+        case YES:
+            msgbox("You turned on the generator.")
+            closemessage
+            addvar(VAR_OUREA_CAVES_LIGHTS_STATE, 1)
+            call(OureaCaves_EventScript_AnimateCaveLights)
+            call(OureaCaves_EventScript_SetCaveLights)
+            break
+        case NO:
+            closemessage
+            end
+        case MULTI_B_PRESSED:
+            closemessage
+            end
+    }
+    return
+}
+
+script OureaCaves_EventScript_GeneratorAlreadyTurnedOn {
+    msgbox("This generator is already turned on.")
+    closemessage
+    end
+}
+
+script OureaCaves_EventScript_LightGeneratorBox1 {
+    if (flag(FLAG_OUREA_CAVES_GENERATOR_1)) {
+        goto(OureaCaves_EventScript_GeneratorAlreadyTurnedOn)
+    }
+    call(OureaCaves_EventScript_LightGeneratorBoxLogic)
+    playse(SE_PIN)
+    applymovement(LOCALID_HIKER, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_HIKER, Common_Movement_FaceDown)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox("Nice one!\n"
+           "You flipped the switch the right way!\p"
+           "Not that there's really a way to do it\n"
+           "wrong…\p"
+           "Anyway, there should be 5 more of these\n"
+           "generators scattered around…\p"
+           "Good luck!")
+    closemessage
+    setflag(FLAG_OUREA_CAVES_GENERATOR_1)
+    setvar(VAR_OUREA_CAVES_STATE, 3)
+    end
+}
+
+script OureaCaves_EventScript_LightGeneratorBox2 {
+    if (flag(FLAG_OUREA_CAVES_GENERATOR_2)) {
+        goto(OureaCaves_EventScript_GeneratorAlreadyTurnedOn)
+    }
+    call(OureaCaves_EventScript_LightGeneratorBoxLogic)
+    setflag(FLAG_OUREA_CAVES_GENERATOR_2)
+    end
+}
+
+script OureaCaves_EventScript_LightGeneratorBox3 {
+    if (flag(FLAG_OUREA_CAVES_GENERATOR_3)) {
+        goto(OureaCaves_EventScript_GeneratorAlreadyTurnedOn)
+    }
+    call(OureaCaves_EventScript_LightGeneratorBoxLogic)
+    setflag(FLAG_OUREA_CAVES_GENERATOR_3)
+    end
+}
+
+script OureaCaves_EventScript_LightGeneratorBox4 {
+    if (flag(FLAG_OUREA_CAVES_GENERATOR_4)) {
+        goto(OureaCaves_EventScript_GeneratorAlreadyTurnedOn)
+    }
+    call(OureaCaves_EventScript_LightGeneratorBoxLogic)
+    setflag(FLAG_OUREA_CAVES_GENERATOR_4)
+    end
+}
+
+script OureaCaves_EventScript_LightGeneratorBox5 {
+    if (flag(FLAG_OUREA_CAVES_GENERATOR_5)) {
+        goto(OureaCaves_EventScript_GeneratorAlreadyTurnedOn)
+    }
+    call(OureaCaves_EventScript_LightGeneratorBoxLogic)
+    setflag(FLAG_OUREA_CAVES_GENERATOR_4)
+    end
+}
+

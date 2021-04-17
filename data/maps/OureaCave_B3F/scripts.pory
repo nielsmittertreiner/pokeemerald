@@ -1,0 +1,6 @@
+mapscripts OureaCave_B3F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(OureaCaves_EventScript_SetCaveLights)
+    }
+}
+
