@@ -177,7 +177,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
 
 EWRAM_DATA u8 gLastViewedMonIndex = 0;
 static EWRAM_DATA u8 sMoveSlotToReplace = 0;
-ALIGNED(4) static EWRAM_DATA u8 sAnimDelayTaskId = 0;
+ALIGNED(4) static EWRAM_DATA u8 sUnknownTaskId = 0;
 
 // forward declarations
 static bool8 LoadGraphics(void);
@@ -298,7 +298,6 @@ static void SpriteCb_MoveSelector(struct Sprite *sprite);
 static void DestroyMoveSelectorSprites(u8 firstArrayId);
 static void SetMainMoveSelectorColor(u8 whichColor);
 static void KeepMoveSelectorVisible(u8 firstSpriteId);
-static void SummaryScreen_DestroyAnimDelayTask(void);
 
 // const rom data
 #include "data/text/move_descriptions.h"
@@ -710,7 +709,7 @@ static void (*const sTextPrinterTasks[])(u8 taskId) =
 };
 
 static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
-static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GRAY}"); // This is also affected by palettes, apparently
+static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GREY}"); // This is also affected by palettes, apparently
 static const u8 sStatsLeftColumnLayout[] = _("{DYNAMIC 0}/{DYNAMIC 1}\n{DYNAMIC 2}\n{DYNAMIC 3}");
 static const u8 sStatsRightColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
 static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
@@ -1174,7 +1173,8 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     }
 
     sMonSummaryScreen->currPageIndex = sMonSummaryScreen->minPageIndex;
-    SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
+    sMonSummaryScreen->splitIconSpriteId = 0xFF;
+    SummaryScreen_SetUnknownTaskId(0xFF);
 
     if (gMonSpritesGfxPtr == NULL)
         sub_806F2AC(0, 0);
@@ -1562,7 +1562,7 @@ static void CloseSummaryScreen(u8 taskId)
     {
         SetMainCallback2(sMonSummaryScreen->callback);
         gLastViewedMonIndex = sMonSummaryScreen->curMonIndex;
-        SummaryScreen_DestroyAnimDelayTask();
+        SummaryScreen_DestroyUnknownTask();
         ResetSpriteData();
         FreeAllSpritePalettes();
         StopCryAndClearCrySongs();
@@ -1680,7 +1680,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
         StopCryAndClearCrySongs();
         break;
     case 1:
-        SummaryScreen_DestroyAnimDelayTask();
+        SummaryScreen_DestroyUnknownTask();
         DestroySpriteAndFreeResources(&gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]]);
         break;
     case 2:
@@ -4025,19 +4025,17 @@ static void SpriteCB_Pokemon(struct Sprite *sprite)
     }
 }
 
-// Track and then destroy Task_PokemonSummaryAnimateAfterDelay
-// Normally destroys itself but it can be interrupted before the animation starts
-void SummaryScreen_SetAnimDelayTaskId(u8 taskId)
+void SummaryScreen_SetUnknownTaskId(u8 taskId)
 {
-    sAnimDelayTaskId = taskId;
+    sUnknownTaskId = taskId;
 }
 
-static void SummaryScreen_DestroyAnimDelayTask(void)
+void SummaryScreen_DestroyUnknownTask(void)
 {
-    if (sAnimDelayTaskId != TASK_NONE)
+    if (sUnknownTaskId != TASK_NONE)
     {
-        DestroyTask(sAnimDelayTaskId);
-        sAnimDelayTaskId = TASK_NONE;
+        DestroyTask(sUnknownTaskId);
+        sUnknownTaskId = TASK_NONE;
     }
 }
 

@@ -364,8 +364,8 @@ static void UpdateWeatherGammaShift(void)
 
 static void FadeInScreenWithWeather(void)
 {
-    if (++gWeatherPtr->fadeInTimer > 1)
-        gWeatherPtr->fadeInFirstFrame = FALSE;
+    if (++gWeatherPtr->unknown_6CB > 1)
+        gWeatherPtr->unknown_6CA = 0;
 
     switch (gWeatherPtr->currWeather)
     {
@@ -709,7 +709,7 @@ static bool8 LightenSpritePaletteInFog(u8 paletteIndex)
     return FALSE;
 }
 
-void ApplyWeatherGammaShiftIfIdle(s8 gammaIndex)
+void sub_80ABC48(s8 gammaIndex)
 {
     if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_IDLE)
     {
@@ -727,7 +727,7 @@ void sub_80ABC7C(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay)
         gWeatherPtr->gammaTargetIndex = gammaTargetIndex;
         gWeatherPtr->gammaStepFrameCounter = 0;
         gWeatherPtr->gammaStepDelay = gammaStepDelay;
-        ApplyWeatherGammaShiftIfIdle(gammaIndex);
+        sub_80ABC48(gammaIndex);
     }
 }
 
@@ -792,8 +792,8 @@ void FadeScreen(u8 mode, s8 delay)
             BeginNormalPaletteFade(PALETTES_ALL, delay, 16, 0, fadeColor);
 
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
-        gWeatherPtr->fadeInFirstFrame = TRUE;
-        gWeatherPtr->fadeInTimer = 0;
+        gWeatherPtr->unknown_6CA = 1;
+        gWeatherPtr->unknown_6CB = 0;
         Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
         gWeatherPtr->readyForInit = TRUE;
     }
@@ -812,7 +812,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
     switch (gWeatherPtr->palProcessingState)
     {
     case WEATHER_PAL_STATE_SCREEN_FADING_IN:
-        if (gWeatherPtr->fadeInFirstFrame)
+        if (gWeatherPtr->unknown_6CA != 0)
         {
             if (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL)
                 MarkFogSpritePalToLighten(paletteIndex);
@@ -847,13 +847,12 @@ void ApplyWeatherGammaShiftToPal(u8 paletteIndex)
     ApplyGammaShift(paletteIndex, 1, gWeatherPtr->gammaIndex);
 }
 
-// Unused
-static bool8 IsFirstFrameOfWeatherFadeIn(void)
+u8 sub_80ABF20(void)
 {
     if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_SCREEN_FADING_IN)
-        return gWeatherPtr->fadeInFirstFrame;
+        return gWeatherPtr->unknown_6CA;
     else
-        return FALSE;
+        return 0;
 }
 
 void LoadCustomWeatherSpritePalette(const struct SpritePalette *palette)
@@ -885,50 +884,50 @@ bool8 LoadDroughtWeatherPalettes(void)
     return FALSE;
 }
 
-static void SetDroughtGamma(s8 gammaIndex)
+void sub_80ABFE0(s8 gammaIndex)
 {
-    ApplyWeatherGammaShiftIfIdle(-gammaIndex - 1);
+    sub_80ABC48(-gammaIndex - 1);
 }
 
-void DroughtStateInit(void)
+void sub_80ABFF0(void)
 {
-    gWeatherPtr->droughtBrightnessStage = 0;
-    gWeatherPtr->droughtTimer = 0;
-    gWeatherPtr->droughtState = 0;
-    gWeatherPtr->droughtLastBrightnessStage = 0;
+    gWeatherPtr->unknown_73C = 0;
+    gWeatherPtr->unknown_740 = 0;
+    gWeatherPtr->unknown_742 = 0;
+    gWeatherPtr->unknown_73E = 0;
 }
 
-void DroughtStateRun(void)
+void sub_80AC01C(void)
 {
-    switch (gWeatherPtr->droughtState)
+    switch (gWeatherPtr->unknown_742)
     {
     case 0:
-        if (++gWeatherPtr->droughtTimer > 5)
+        if (++gWeatherPtr->unknown_740 > 5)
         {
-            gWeatherPtr->droughtTimer = 0;
-            SetDroughtGamma(gWeatherPtr->droughtBrightnessStage++);
-            if (gWeatherPtr->droughtBrightnessStage > 5)
+            gWeatherPtr->unknown_740 = 0;
+            sub_80ABFE0(gWeatherPtr->unknown_73C++);
+            if (gWeatherPtr->unknown_73C > 5)
             {
-                gWeatherPtr->droughtLastBrightnessStage = gWeatherPtr->droughtBrightnessStage;
-                gWeatherPtr->droughtState = 1;
-                gWeatherPtr->droughtTimer = 60;
+                gWeatherPtr->unknown_73E = gWeatherPtr->unknown_73C;
+                gWeatherPtr->unknown_742 = 1;
+                gWeatherPtr->unknown_740 = 0x3C;
             }
         }
         break;
     case 1:
-        gWeatherPtr->droughtTimer = (gWeatherPtr->droughtTimer + 3) & 0x7F;
-        gWeatherPtr->droughtBrightnessStage = ((gSineTable[gWeatherPtr->droughtTimer] - 1) >> 6) + 2;
-        if (gWeatherPtr->droughtBrightnessStage != gWeatherPtr->droughtLastBrightnessStage)
-            SetDroughtGamma(gWeatherPtr->droughtBrightnessStage);
-        gWeatherPtr->droughtLastBrightnessStage = gWeatherPtr->droughtBrightnessStage;
+        gWeatherPtr->unknown_740 = (gWeatherPtr->unknown_740 + 3) & 0x7F;
+        gWeatherPtr->unknown_73C = ((gSineTable[gWeatherPtr->unknown_740] - 1) >> 6) + 2;
+        if (gWeatherPtr->unknown_73C != gWeatherPtr->unknown_73E)
+            sub_80ABFE0(gWeatherPtr->unknown_73C);
+        gWeatherPtr->unknown_73E = gWeatherPtr->unknown_73C;
         break;
     case 2:
-        if (++gWeatherPtr->droughtTimer > 5)
+        if (++gWeatherPtr->unknown_740 > 5)
         {
-            gWeatherPtr->droughtTimer = 0;
-            SetDroughtGamma(--gWeatherPtr->droughtBrightnessStage);
-            if (gWeatherPtr->droughtBrightnessStage == 3)
-                gWeatherPtr->droughtState = 0;
+            gWeatherPtr->unknown_740 = 0;
+            sub_80ABFE0(--gWeatherPtr->unknown_73C);
+            if (gWeatherPtr->unknown_73C == 3)
+                gWeatherPtr->unknown_742 = 0;
         }
         break;
     }
@@ -989,39 +988,38 @@ bool8 Weather_UpdateBlend(void)
     return FALSE;
 }
 
-// Unused. Uses the same numbering scheme as the coord events
-static void SetFieldWeather(u8 weather)
+void sub_80AC274(u8 a)
 {
-    switch (weather)
+    switch (a)
     {
-    case COORD_EVENT_WEATHER_SUNNY_CLOUDS:
+    case 1:
         SetWeather(WEATHER_SUNNY_CLOUDS);
         break;
-    case COORD_EVENT_WEATHER_SUNNY:
+    case 2:
         SetWeather(WEATHER_SUNNY);
         break;
-    case COORD_EVENT_WEATHER_RAIN:
+    case 3:
         SetWeather(WEATHER_RAIN);
         break;
-    case COORD_EVENT_WEATHER_SNOW:
+    case 4:
         SetWeather(WEATHER_SNOW);
         break;
-    case COORD_EVENT_WEATHER_RAIN_THUNDERSTORM:
+    case 5:
         SetWeather(WEATHER_RAIN_THUNDERSTORM);
         break;
-    case COORD_EVENT_WEATHER_FOG_HORIZONTAL:
+    case 6:
         SetWeather(WEATHER_FOG_HORIZONTAL);
         break;
-    case COORD_EVENT_WEATHER_FOG_DIAGONAL:
+    case 7:
         SetWeather(WEATHER_FOG_DIAGONAL);
         break;
-    case COORD_EVENT_WEATHER_VOLCANIC_ASH:
+    case 8:
         SetWeather(WEATHER_VOLCANIC_ASH);
         break;
-    case COORD_EVENT_WEATHER_SANDSTORM:
+    case 9:
         SetWeather(WEATHER_SANDSTORM);
         break;
-    case COORD_EVENT_WEATHER_SHADE:
+    case 10:
         SetWeather(WEATHER_SHADE);
         break;
     }
@@ -1085,7 +1083,7 @@ void SetWeatherScreenFadeOut(void)
     gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_OUT;
 }
 
-void SetWeatherPalStateIdle(void)
+void sub_80AC3E4(void)
 {
     gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
 }

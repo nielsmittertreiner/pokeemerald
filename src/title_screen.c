@@ -64,9 +64,7 @@ static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/
 
 
 
-// Used to blend "Emerald Version" as it passes over over the Pokémon banner.
-// Also used by the intro to blend the Game Freak name/logo in and out as they appear and disappear
-const u16 gTitleScreenAlphaBlend[64] =
+const u16 gIntroWaterDropAlphaBlend[] =
 {
     BLDALPHA_BLEND(16, 0),
     BLDALPHA_BLEND(16, 1),
@@ -105,7 +103,7 @@ const u16 gTitleScreenAlphaBlend[64] =
 
 static const struct OamData sVersionBannerLeftOamData =
 {
-    .y = DISPLAY_HEIGHT,
+    .y = 160,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -122,7 +120,7 @@ static const struct OamData sVersionBannerLeftOamData =
 
 static const struct OamData sVersionBannerRightOamData =
 {
-    .y = DISPLAY_HEIGHT,
+    .y = 160,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -193,7 +191,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
 
 static const struct OamData sOamData_CopyrightBanner =
 {
-    .y = DISPLAY_HEIGHT,
+    .y = 160,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -305,7 +303,7 @@ static const struct SpritePalette sSpritePalette_PressStart[] =
 
 static const struct OamData sPokemonLogoShineOamData =
 {
-    .y = DISPLAY_HEIGHT,
+    .y = 160,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
@@ -366,7 +364,7 @@ static void SpriteCB_VersionBannerLeft(struct Sprite *sprite)
             sprite->pos1.y++;
         if (sprite->data[0] != 0)
             sprite->data[0]--;
-        SetGpuReg(REG_OFFSET_BLDALPHA, gTitleScreenAlphaBlend[sprite->data[0]]);
+        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[sprite->data[0]]);
     }
 }
 
@@ -390,7 +388,7 @@ static void SpriteCB_PressStartCopyrightBanner(struct Sprite *sprite)
     {
         sprite->data[1]++;
         // Alternate between hidden and shown every 16th frame
-        if (sprite->data[1] & 16)
+        if (sprite->data[1] & 0x10)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;
@@ -430,7 +428,7 @@ static void CreateCopyrightBanner(s16 x, s16 y)
 
 static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
 {
-    if (sprite->pos1.x < DISPLAY_WIDTH + 32)
+    if (sprite->pos1.x < 272)
     {
         if (sprite->data[0]) // Flash background
         {
@@ -473,7 +471,7 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
 
 static void SpriteCB_PokemonLogoShine2(struct Sprite *sprite)
 {
-    if (sprite->pos1.x < DISPLAY_WIDTH + 32)
+    if (sprite->pos1.x < 272)
         sprite->pos1.x += 8;
     else
         DestroySprite(sprite);
@@ -597,11 +595,11 @@ void CB2_InitTitleScreen(void)
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WIN1H, 0);
         SetGpuReg(REG_OFFSET_WIN1V, 0);
-        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
-        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WINOBJ_ALL);
+        SetGpuReg(REG_OFFSET_WININ, 0x1F1F);
+        SetGpuReg(REG_OFFSET_WINOUT, 0x3F1F);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_LIGHTEN);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        SetGpuReg(REG_OFFSET_BLDY, 12);
+        SetGpuReg(REG_OFFSET_BLDY, 0xC);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(26) | BGCNT_16COLOR | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(27) | BGCNT_16COLOR | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(9) | BGCNT_256COLOR | BGCNT_AFF256x256);

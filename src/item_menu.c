@@ -711,7 +711,7 @@ bool8 SetupBagMenu(void)
         gMain.state++;
         break;
     case 16:
-        CreateItemMenuSwapLine();
+        sub_80D4FAC();
         gMain.state++;
         break;
     case 17:
@@ -791,7 +791,7 @@ bool8 LoadBagMenu_Graphics(void)
             gBagMenu->graphicsLoadState++;
             break;
         default:
-            LoadListMenuSwapLineGfx();
+            LoadListMenuArrowsGfx();
             gBagMenu->graphicsLoadState = 0;
             return TRUE;
     }
@@ -1379,7 +1379,7 @@ void BagMenu_SwapItems(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_MoveVar1Where);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     BagMenu_Print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
-    UpdateItemMenuSwapLinePos(data[1]);
+    sub_80D4FEC(data[1]);
     BagDestroyPocketSwitchArrowPair();
     BagMenu_PrintCursor_(data[0], 2);
     gTasks[taskId].func = Task_HandleSwappingItemsInput;
@@ -1402,8 +1402,8 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
         {
             input = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &gBagPositionStruct.scrollPosition[gBagPositionStruct.pocket], &gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]);
-            SetItemMenuSwapLineInvisibility(FALSE);
-            UpdateItemMenuSwapLinePos(gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]);
+            sub_80D4FC8(0);
+            sub_80D4FEC(gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]);
             switch (input)
             {
                 case LIST_NOTHING_CHOSEN:
@@ -1441,7 +1441,7 @@ void sub_81AC498(u8 taskId)
             gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]--;
         LoadBagItemListBuffers(gBagPositionStruct.pocket);
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
-        SetItemMenuSwapLineInvisibility(TRUE);
+        sub_80D4FC8(1);
         CreatePocketSwitchArrowPair();
         gTasks[taskId].func = Task_BagMenu_HandleInput;
     }
@@ -1459,7 +1459,7 @@ void sub_81AC590(u8 taskId)
         gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket]--;
     LoadBagItemListBuffers(gBagPositionStruct.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
-    SetItemMenuSwapLineInvisibility(TRUE);
+    sub_80D4FC8(1);
     CreatePocketSwitchArrowPair();
     gTasks[taskId].func = Task_BagMenu_HandleInput;
 }

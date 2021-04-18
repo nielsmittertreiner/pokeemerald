@@ -1,5 +1,5 @@
-#ifndef GUARD_GBA_DEFINES_H
-#define GUARD_GBA_DEFINES_H
+#ifndef GUARD_GBA_DEFINES
+#define GUARD_GBA_DEFINES
 
 #include <stddef.h>
 
@@ -76,4 +76,4 @@
 
 #define TOTAL_OBJ_TILE_COUNT 1024
 
-#endif // GUARD_GBA_DEFINES_H
+#endif // GUARD_GBA_DEFINES

@@ -593,7 +593,7 @@ static bool8 MailReadBuildGraphics(void)
             }
             break;
         case 15:
-            if (Overworld_LinkRecvQueueLengthMoreThan2() == TRUE)
+            if (sub_8087598() == TRUE)
             {
                 return FALSE;
             }

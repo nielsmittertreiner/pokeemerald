@@ -1298,7 +1298,7 @@ u8 CreateRecordMixingLights(void)
     else
     {
         struct Sprite *sprite = &gSprites[spriteId];
-        GetMapCoordsFromSpritePos(16, 13, &sprite->pos1.x, &sprite->pos1.y);
+        sub_8092FF0(16, 13, &sprite->pos1.x, &sprite->pos1.y);
         sprite->coordOffsetEnabled = TRUE;
         sprite->pos1.x += 16;
         sprite->pos1.y += 2;

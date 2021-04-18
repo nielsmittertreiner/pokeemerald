@@ -762,16 +762,25 @@ void BufferContestName(u8 *dest, u8 category)
     StringCopy(dest, sContestNames[category]);
 }
 
-// Used by the Contest Lady's TV show to determine how well she performed
-u8 GetContestLadyPokeblockState(void)
+// used in tv.c to determine sTVShowState for Contest Lady show
+// if return val is 1, sTVShowState is 1
+// if return val is 2, sTVShowState is 3
+// if return val is 0, sTVShowState is 2
+u8 sub_818E880(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD)
-        return CONTEST_LADY_GOOD;
+    {
+        return 1;
+    }
     else if (sContestLadyPtr->numGoodPokeblocksGiven == 0)
-        return CONTEST_LADY_BAD;
+    {
+        return 2;
+    }
     else
-        return CONTEST_LADY_NORMAL;
+    {
+        return 0;
+    }
 }
 
 
@@ -805,7 +814,7 @@ void Script_BufferContestLadyCategoryAndMonName(void)
 
 void OpenPokeblockCaseForContestLady(void)
 {
-    OpenPokeblockCase(PBLOCK_CASE_GIVE, CB2_ReturnToField);
+    OpenPokeblockCase(3, CB2_ReturnToField);
 }
 
 void SetContestLadyGivenPokeblock(void)

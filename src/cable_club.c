@@ -1053,31 +1053,29 @@ static void Task_EnterCableClubSeat(u8 taskId)
     case 1:
         if (IsFieldMessageBoxHidden())
         {
-            SetInCableClubSeat();
+            sub_8087288();
             SetLocalLinkPlayerId(gSpecialVar_0x8005);
             task->tState = 2;
         }
         break;
     case 2:
-        switch (GetCableClubPartnersReady())
+        switch (sub_8087214())
         {
-        case CABLE_SEAT_WAITING:
+        case 0:
             break;
-        case CABLE_SEAT_SUCCESS:
-            // Partners linked and ready, switch to relevant link function
+        case 1:
             HideFieldMessageBox();
             task->tState = 0;
-            SetStartedCableClubActivity();
+            sub_80872C4();
             SwitchTaskToFollowupFunc(taskId);
             break;
-        case CABLE_SEAT_FAILED:
+        case 2:
             task->tState = 3;
             break;
         }
         break;
     case 3:
-        // Exit, failure
-        SetLinkWaitingForScript();
+        sub_808729C();
         sub_8197AE8(TRUE);
         DestroyTask(taskId);
         EnableBothScriptContexts();

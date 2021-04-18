@@ -69,7 +69,7 @@ static bool8 TryStartCoordEventScript(struct MapPosition *);
 static bool8 TryStartWarpEventScript(struct MapPosition *, u16);
 static bool8 TryStartMiscWalkingScripts(u16);
 static bool8 TryStartStepCountScript(u16);
-static void UpdateFriendshipStepCounter(void);
+static void UpdateHappinessStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
 
 void FieldClearPlayerInput(struct FieldInput *input)
@@ -603,7 +603,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     }
 
     IncrementRematchStepCounter();
-    UpdateFriendshipStepCounter();
+    UpdateHappinessStepCounter();
     UpdateFarawayIslandStepCounter();
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
@@ -668,15 +668,14 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     return FALSE;
 }
 
-// Unused
-static void ClearFriendshipStepCounter(void)
+void Unref_ClearHappinessStepCounter(void)
 {
-    VarSet(VAR_FRIENDSHIP_STEP_COUNTER, 0);
+    VarSet(VAR_HAPPINESS_STEP_COUNTER, 0);
 }
 
-static void UpdateFriendshipStepCounter(void)
+static void UpdateHappinessStepCounter(void)
 {
-    u16 *ptr = GetVarPointer(VAR_FRIENDSHIP_STEP_COUNTER);
+    u16 *ptr = GetVarPointer(VAR_HAPPINESS_STEP_COUNTER);
     int i;
 
     (*ptr)++;

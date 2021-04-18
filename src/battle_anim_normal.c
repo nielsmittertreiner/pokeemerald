@@ -12,7 +12,7 @@ static void AnimSimplePaletteBlend_Step(struct Sprite *);
 static void AnimComplexPaletteBlend(struct Sprite *);
 static void AnimComplexPaletteBlend_Step1(struct Sprite *);
 static void AnimComplexPaletteBlend_Step2(struct Sprite *);
-static void AnimCirclingSparkle(struct Sprite *);
+static void AnimUnused_81159B4(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain_Step(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain_UpdateCoordOffsetEnabled(void);
@@ -92,7 +92,7 @@ const struct SpriteTemplate gComplexPaletteBlendSpriteTemplate =
     .callback = AnimComplexPaletteBlend,
 };
 
-static const union AnimCmd sAnim_CirclingSparkle[] =
+static const union AnimCmd sAnim_Unused_085972A4[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -102,21 +102,21 @@ static const union AnimCmd sAnim_CirclingSparkle[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_CirclingSparkle[] =
+static const union AnimCmd *const sAnims_Unused_085972BC[] =
 {
-    sAnim_CirclingSparkle,
+    sAnim_Unused_085972A4,
 };
 
 // Unused
-static const struct SpriteTemplate sCirclingSparkleSpriteTemplate =
+const struct SpriteTemplate gUnusedSpriteTemplate_085972C0 =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_CirclingSparkle,
+    .anims = sAnims_Unused_085972BC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimCirclingSparkle,
+    .callback = AnimUnused_81159B4,
 };
 
 const struct SpriteTemplate gShakeMonOrTerrainSpriteTemplate =
@@ -398,7 +398,7 @@ static void AnimComplexPaletteBlend_Step2(struct Sprite *sprite)
     }
 }
 
-static void AnimCirclingSparkle(struct Sprite *sprite)
+static void AnimUnused_81159B4(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];

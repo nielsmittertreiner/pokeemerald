@@ -138,19 +138,17 @@ SkyPillar_Top_EventScript_AwakenRayquaza:: @ 823979A
 	releaseall
 	end
 
-@ Rayquaza has unusual movement frames
-@ See comments, or sAnimTable_Rayquaza
 SkyPillar_Top_Movement_RayquazaStir: @ 823983A
 	delay_16
-	walk_in_place_fast_left  @ Coiled, awake
+	walk_in_place_fast_left
 	delay_16
 	delay_16
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_left  @ Coiled, mouth open
+	walk_in_place_left
 	delay_16
-	walk_in_place_right  @ Normal, awake
+	walk_in_place_right
 	delay_16
 	delay_16
 	delay_16
@@ -161,11 +159,11 @@ SkyPillar_Top_Movement_RayquazaStir: @ 823983A
 
 SkyPillar_Top_Movement_RayquazaFlyOff: @ 823984B
 	delay_16
-	walk_in_place_down  @ Coiled, asleep
+	walk_in_place_down
 	delay_8
-	walk_in_place_right  @ Normal, awake
+	walk_in_place_right
 	delay_8
-	walk_fastest_up  @ Fly up
+	walk_fastest_up
 	slide_up
 	slide_up
 	slide_up

@@ -147,7 +147,7 @@ static const struct SpritePalette sSpritePalettes_Clock[] =
 
 static const struct OamData sOam_ClockHand =
 {
-    .y = DISPLAY_HEIGHT,
+    .y = 160,
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64),
     .priority = 1,
@@ -199,7 +199,7 @@ static const struct SpriteTemplate sSpriteTemplate_HourHand =
 
 static const struct OamData sOam_PeriodIndicator =
 {
-    .y = DISPLAY_HEIGHT,
+    .y = 160,
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 3,

@@ -1,5 +1,5 @@
-#ifndef GUARD_BATTLE_GFX_SFX_UTIL_H
-#define GUARD_BATTLE_GFX_SFX_UTIL_H
+#ifndef GUARD_BATTLE_GFX_SFX_UTIL
+#define GUARD_BATTLE_GFX_SFX_UTIL
 
 void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
@@ -45,4 +45,4 @@ void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
 bool32 ShouldPlayNormalMonCry(struct Pokemon *mon);
 
-#endif // GUARD_BATTLE_GFX_SFX_UTIL_H
+#endif // GUARD_BATTLE_GFX_SFX_UTIL

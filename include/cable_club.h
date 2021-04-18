@@ -2,7 +2,6 @@
 #define GUARD_CABLE_CLUB_H
 
 #include "task.h"
-#include "constants/cable_club.h"
 
 void CreateTask_EnterCableClubSeat(TaskFunc taskFunc);
 u8 CreateTask_ReestablishCableClubLink(void);

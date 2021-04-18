@@ -131,14 +131,14 @@ static const u8 gDebugText_Credits_CreditsPatron[]      = _("{COLOR}{BLUE}CAANTH
 static const u8 gDebugText_Credits_CreditsHelpingHand[] = _("{COLOR}{RED}ETHAN, N3RL, SPACESAUR, SENNA");
 
 // GodMode Window Strings
-static const u8 gDebugText_GodMode_GodModeExplaination[] = _("{COLOR}{DARK_GRAY}YOU ARE ABOUT TO ENTER GODMODE!\nCOLLISION, ENCOUNTERS AND TRAINERS\nWILL BE DISABLED!");
-static const u8 gDebugText_GodMode_EnableGodMode[]       = _("{A_BUTTON} {COLOR}{GREEN}ENABLE GODMODE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_GodMode_DisableGodMode[]      = _("{A_BUTTON} {COLOR}{RED}DISABLE GODMODE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_GodMode_GodModeExplaination[] = _("{COLOR}{DARK_GREY}YOU ARE ABOUT TO ENTER GODMODE!\nCOLLISION, ENCOUNTERS AND TRAINERS\nWILL BE DISABLED!");
+static const u8 gDebugText_GodMode_EnableGodMode[]       = _("{A_BUTTON} {COLOR}{GREEN}ENABLE GODMODE   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
+static const u8 gDebugText_GodMode_DisableGodMode[]      = _("{A_BUTTON} {COLOR}{RED}DISABLE GODMODE   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
 
 // GiveMon Window Strings
-static const u8 gDebugText_GiveMon_GiveMonExplaination[] = _("{COLOR}{DARK_GRAY}YOU ARE ABOUT OVERWRITE YOUR\nCURRENT PARTY WITH A HANDCHOSEN ONE,\nMADE BY BSBOB!\n{COLOR}{RED}YOUR CURRENT PARTY WILL BE LOST!");
-static const u8 gDebugText_Party_RevievedBobParty[]      = _("{COLOR}{GREEN}RECEIVED BSBOB'S PARTY   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_Party_AlreadyHasBobParty[]    = _("{COLOR}{GREEN}YOU ALREADY HAVE BSBOB'S PARTY!   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_GiveMon_GiveMonExplaination[] = _("{COLOR}{DARK_GREY}YOU ARE ABOUT OVERWRITE YOUR\nCURRENT PARTY WITH A HANDCHOSEN ONE,\nMADE BY BSBOB!\n{COLOR}{RED}YOUR CURRENT PARTY WILL BE LOST!");
+static const u8 gDebugText_Party_RevievedBobParty[]      = _("{COLOR}{GREEN}RECEIVED BSBOB'S PARTY   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
+static const u8 gDebugText_Party_AlreadyHasBobParty[]    = _("{COLOR}{GREEN}YOU ALREADY HAVE BSBOB'S PARTY!   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
 
 // Utility Menu Strings
 static const u8 gDebugText_Utility_SaveBlocks[]   = _("{COLOR}{GREEN}SAVEBLOCKS");
@@ -149,11 +149,11 @@ static const u8 gDebugText_Utility_ChangeName[]   = _("{COLOR}{BLUE}CHANGE NAME"
 static const u8 gDebugText_Utility_ChangeGender[] = _("{COLOR}{BLUE}CHANGE GENDER");
 
 // Gender Change Window Strings
-static const u8 gDebugText_GenderChange_GenderChangeExplaination[] = _("{COLOR}{DARK_GRAY}YOU ARE ABOUT TO CHANGE YOUR GENDER!\n{COLOR}{GREEN}WALK THROUGH A DOOR{COLOR}{DARK_GRAY} TO UPDATE YOUR\nPLAYER SPRITE.");
-static const u8 gDebugText_GenderChange_ChangeToFemale[]           = _("{A_BUTTON} {COLOR}{GREEN}CHANGE TO FEMALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_GenderChange_ChangeToMale[]             = _("{A_BUTTON} {COLOR}{GREEN}CHANGE TO MALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_GenderChange_ChangedToFemale[]          = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO FEMALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_GenderChange_ChangedToMale[]            = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO MALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_GenderChange_GenderChangeExplaination[] = _("{COLOR}{DARK_GREY}YOU ARE ABOUT TO CHANGE YOUR GENDER!\n{COLOR}{GREEN}WALK THROUGH A DOOR{COLOR}{DARK_GREY} TO UPDATE YOUR\nPLAYER SPRITE.");
+static const u8 gDebugText_GenderChange_ChangeToFemale[]           = _("{A_BUTTON} {COLOR}{GREEN}CHANGE TO FEMALE   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
+static const u8 gDebugText_GenderChange_ChangeToMale[]             = _("{A_BUTTON} {COLOR}{GREEN}CHANGE TO MALE   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
+static const u8 gDebugText_GenderChange_ChangedToFemale[]          = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO FEMALE   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
+static const u8 gDebugText_GenderChange_ChangedToMale[]            = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO MALE   {B_BUTTON} {COLOR}{DARK_GREY}CANCEL");
 
 // Party Menu Strings
 static const u8 gDebugText_Party_GiveMon[]   = _("{COLOR}{RED}GIVE MON");
@@ -162,23 +162,23 @@ static const u8 gDebugText_Party_HealParty[] = _("{COLOR}{GREEN}HEAL PARTY");
 // Flags Menu Strings
 static const u8 gDebugText_Flag_FlagDef[]   = _("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
 static const u8 gDebugText_Flag_FlagHex[]   = _("{STR_VAR_1}         0x{STR_VAR_2}");
-static const u8 gDebugText_Flag_FlagSet[]   = _("{COLOR}{GREEN}TRUE{COLOR}{DARK_GRAY}");
-static const u8 gDebugText_Flag_FlagUnset[] = _("{COLOR}{RED}FALSE{COLOR}{DARK_GRAY}");
+static const u8 gDebugText_Flag_FlagSet[]   = _("{COLOR}{GREEN}TRUE{COLOR}{DARK_GREY}");
+static const u8 gDebugText_Flag_FlagUnset[] = _("{COLOR}{RED}FALSE{COLOR}{DARK_GREY}");
 
 // Var Menu Strings
-static const u8 gDebugText_Var_VariableDef[] = _("VAR: {COLOR}{GREEN}{STR_VAR_1}\n{COLOR}{DARK_GRAY}VAL: {STR_VAR_3}\n{STR_VAR_2}");
+static const u8 gDebugText_Var_VariableDef[] = _("VAR: {COLOR}{GREEN}{STR_VAR_1}\n{COLOR}{DARK_GREY}VAL: {STR_VAR_3}\n{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableHex[] = _("{STR_VAR_1}       0x{STR_VAR_2}");
-static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{GREEN}{STR_VAR_3}{COLOR}{DARK_GRAY}\n{STR_VAR_2}{A_BUTTON}");
+static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{GREEN}{STR_VAR_3}{COLOR}{DARK_GREY}\n{STR_VAR_2}{A_BUTTON}");
 
 // Warp Menu Strings
 static const u8 gDebugText_Util_WarpToMap[]                = _("WARP TO MAP WARP");
-static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] = _("{COLOR}{GREEN}GROUP: {STR_VAR_1}{COLOR}{DARK_GRAY}          \n                 \n\n{STR_VAR_3}     ");
-static const u8 gDebugText_Util_WarpToMap_SelectMap[]      = _("{COLOR}{GREEN}MAP: {STR_VAR_1}{COLOR}{DARK_GRAY}            \nMAPSEC:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
-static const u8 gDebugText_Util_WarpToMap_SelectWarp[]     = _("WARP:             \n{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GRAY}                \n                                  \n{STR_VAR_3}     ");
+static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] = _("{COLOR}{GREEN}GROUP: {STR_VAR_1}{COLOR}{DARK_GREY}          \n                 \n\n{STR_VAR_3}     ");
+static const u8 gDebugText_Util_WarpToMap_SelectMap[]      = _("{COLOR}{GREEN}MAP: {STR_VAR_1}{COLOR}{DARK_GREY}            \nMAPSEC:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
+static const u8 gDebugText_Util_WarpToMap_SelectWarp[]     = _("WARP:             \n{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GREY}                \n                                  \n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelectMax[]      = _("{STR_VAR_1} / {STR_VAR_2}");
 
 // Check SaveBlock Strings
-static const u8 gDebugText_SaveBlocks_SaveBlockSize[] = _("{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GRAY} IS\n{STR_VAR_2} BYTES");
+static const u8 gDebugText_SaveBlocks_SaveBlockSize[] = _("{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GREY} IS\n{STR_VAR_2} BYTES");
 static const u8 gDebugText_SaveBlocks_SaveBlock1[]    = _("SAVEBLOCK1");
 static const u8 gDebugText_SaveBlocks_SaveBlock2[]    = _("SAVEBLOCK2");
 

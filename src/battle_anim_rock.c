@@ -142,37 +142,37 @@ static const struct SubspriteTable sFlyingSandSubspriteTable[] =
     {ARRAY_COUNT(sFlyingSandSubsprites), sFlyingSandSubsprites},
 };
 
-static const union AnimCmd sAnim_Rock_Biggest[] =
+static const union AnimCmd sAnim_BasicRock_0[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Rock_Bigger[] =
+static const union AnimCmd sAnim_BasicRock_1[] =
 {
     ANIMCMD_FRAME(16, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Rock_Big[] =
+static const union AnimCmd sAnim_WeatherBallRockDown_0[] =
 {
     ANIMCMD_FRAME(32, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Rock_Small[] =
+static const union AnimCmd sAnim_WeatherBallRockDown_1[] =
 {
     ANIMCMD_FRAME(48, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Rock_Smaller[] =
+static const union AnimCmd sAnim_TwisterRock_0[] =
 {
     ANIMCMD_FRAME(64, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Rock_Smallest[] =
+static const union AnimCmd sAnim_TwisterRock_1[] =
 {
     ANIMCMD_FRAME(80, 1),
     ANIMCMD_END,
@@ -180,12 +180,16 @@ static const union AnimCmd sAnim_Rock_Smallest[] =
 
 static const union AnimCmd *const sAnims_BasicRock[] =
 {
-    sAnim_Rock_Biggest,
-    sAnim_Rock_Bigger,
-    sAnim_Rock_Big,
-    sAnim_Rock_Small,
-    sAnim_Rock_Smaller,
-    sAnim_Rock_Smallest,
+    sAnim_BasicRock_0,
+    sAnim_BasicRock_1,
+    sAnim_WeatherBallRockDown_0,
+    sAnim_WeatherBallRockDown_1,
+};
+
+static const union AnimCmd *const sAnims_TwisterRock[] =
+{
+    sAnim_TwisterRock_0,
+    sAnim_TwisterRock_1,
 };
 
 const struct SpriteTemplate gAncientPowerRockSpriteTemplate =
@@ -277,7 +281,7 @@ const struct SpriteTemplate gTwisterRockSpriteTemplate =
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = &sAnims_BasicRock[4],
+    .anims = sAnims_TwisterRock,
     .images = NULL,
     .affineAnims = sAffineAnims_BasicRock,
     .callback = AnimMoveTwisterParticle,
@@ -496,7 +500,7 @@ static void AnimFlyingSandCrescent(struct Sprite *sprite)
     {
         if (gBattleAnimArgs[3] != 0 && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         {
-            sprite->pos1.x = DISPLAY_WIDTH + 64;
+            sprite->pos1.x = 304;
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
             sprite->data[5] = 1;
             sprite->oam.matrixNum = ST_OAM_HFLIP;
@@ -523,7 +527,7 @@ static void AnimFlyingSandCrescent(struct Sprite *sprite)
 
         if (sprite->data[5] == 0)
         {
-            if (sprite->pos1.x + sprite->pos2.x > DISPLAY_WIDTH + 32)
+            if (sprite->pos1.x + sprite->pos2.x > 272)
             {
                 sprite->callback = DestroyAnimSprite;
             }
