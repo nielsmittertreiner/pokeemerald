@@ -615,6 +615,7 @@ gSongTable:: @ 86B49F0
 	song mus_route403, 0, 0
 	song mus_sunset, 0, 0
 	song mus_celebi, 0, 0
+	song mus_murena, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

@@ -2,7 +2,7 @@
   "id": "MAP_MURENA_CITY_SHIPYARD",
   "name": "MurenaCity_Shipyard",
   "layout": "LAYOUT_MURENA_CITY_SHIPYARD",
-  "music": "MUS_SLATEPORT",
+  "music": "MUS_MURENA",
   "region_map_section": "MAPSEC_MURENA_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
