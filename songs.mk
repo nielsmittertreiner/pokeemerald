@@ -1274,3 +1274,6 @@ $(MID_SUBDIR)/mus_sunset.s: %.s: %.mid
 
 $(MID_SUBDIR)/mus_celebi.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G195 -v100
+
+$(MID_SUBDIR)/mus_murena.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G196 -v100
