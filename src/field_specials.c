@@ -86,7 +86,9 @@ static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
+#ifdef DEBUG
 static EWRAM_DATA u8 sEndOfCurrentBetaScreenWindowId = 0;
+#endif
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
 
@@ -136,8 +138,10 @@ bool8 IsPlayerInMurenaCity(void);
 void SpawnMurenaCityWingullObject(u8 taskId);
 bool8 CheckMurenaCityRelicanth(void);
 void CheckPokeCenterLocation(void);
+#ifdef DEBUG
 void ShowEndOfCurrentBetaScreen(void);
 void HideEndOfCurrentBetaScreen(void);
+#endif
 bool8 IsPlayerInFlashCave(void);
 #ifndef FREE_LINK_BATTLE_RECORDS
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
@@ -4546,7 +4550,7 @@ void CheckPokeCenterLocation(void)
     GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
 }
 
-#if DEBUG
+#ifdef DEBUG
 
 static const u8 gText_EndOfCurrentBetaThankYou[]  = _("{COLOR}{GREEN}THANK YOU!");
 static const u8 gText_EndOfCurrentBetaMessage[]   = _("YOU'VE REACHED THE END OF THIS BETA RELEASE!\nTHANK YOU FOR PLAYING AND I HOPE\nYOU'LL STAY ON THIS JOURNEY WITH ME!");
@@ -4590,6 +4594,8 @@ void HideEndOfCurrentBetaScreen(void)
     EnableBothScriptContexts();
 }
 
+#endif
+
 bool8 IsPlayerInFlashCave(void)
 {
     if (Overworld_GetFlashLevel() > 1)
@@ -4597,5 +4603,3 @@ bool8 IsPlayerInFlashCave(void)
 
     return FALSE;
 }
-
-#endif

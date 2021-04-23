@@ -542,7 +542,7 @@ gSpecials:: @ 81DBA64
 	def_special CheckPokeCenterLocation
 	def_special ShakeCameraSilent
 	def_special IsPlayerInFlashCave
-	.if DEBUG
+	.ifdef DDEBUG
 	def_special ShowEndOfCurrentBetaScreen
 	def_special HideEndOfCurrentBetaScreen
 	.endif
