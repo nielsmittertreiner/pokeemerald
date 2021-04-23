@@ -67,10 +67,8 @@ script Route406_EventScript_InitializeOureaCaveStoryline {
 }
 
 script Route406_EventScript_Sign {
-    special(ShowEndOfCurrentBetaScreen)
-    waitbuttonpress
-    special(HideEndOfCurrentBetaScreen)
-    release
+    msgbox("{LEFT_ARROW} NAVIRE TOWN\n"
+           "{UP_ARROW} OUREA CAVES", MSGBOX_SIGN)
     end
 }
 
