@@ -49,7 +49,7 @@
 
 // general purpose vars
 #define GENERAL_PURPOSE_VARS_START                       0x4020
-#define VAR_WEATHER                                      (GENERAL_PURPOSE_VARS_START + 0x0) 
+#define VAR_RECYCLE_GOODS                                (GENERAL_PURPOSE_VARS_START + 0x0) 
 #define VAR_REPEL_STEP_COUNT                             (GENERAL_PURPOSE_VARS_START + 0x1) 
 #define VAR_ICE_STEP_COUNT                               (GENERAL_PURPOSE_VARS_START + 0x2) 
 #define VAR_STARTER_MON                                  (GENERAL_PURPOSE_VARS_START + 0x3)  // 0=Treecko, 1=Torchic, 2=Mudkip
@@ -59,7 +59,7 @@
 #define VAR_CYCLING_ROAD_RECORD_COLLISIONS               (GENERAL_PURPOSE_VARS_START + 0x7) 
 #define VAR_CYCLING_ROAD_RECORD_TIME_L                   (GENERAL_PURPOSE_VARS_START + 0x8) 
 #define VAR_CYCLING_ROAD_RECORD_TIME_H                   (GENERAL_PURPOSE_VARS_START + 0x9) 
-#define VAR_HAPPINESS_STEP_COUNTER                       (GENERAL_PURPOSE_VARS_START + 0xA) 
+#define VAR_FRIENDSHIP_STEP_COUNTER                      (GENERAL_PURPOSE_VARS_START + 0xA) 
 #define VAR_POISON_STEP_COUNTER                          (GENERAL_PURPOSE_VARS_START + 0xB) 
 #define VAR_RESET_RTC_ENABLE                             (GENERAL_PURPOSE_VARS_START + 0xC) 
 #define VAR_ENIGMA_BERRY_AVAILABLE                       (GENERAL_PURPOSE_VARS_START + 0xD) 
