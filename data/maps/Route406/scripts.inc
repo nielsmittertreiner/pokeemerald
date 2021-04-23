@@ -63,10 +63,7 @@ Route406_EventScript_InitializeOureaCaveStoryline::
 
 
 Route406_EventScript_Sign::
-	special ShowEndOfCurrentBetaScreen
-	waitbuttonpress
-	special HideEndOfCurrentBetaScreen
-	release
+	msgbox Route406_EventScript_Sign_Text_0, MSGBOX_SIGN
 	end
 
 
@@ -130,6 +127,10 @@ Route406_EventScript_InitializeOureaCaveStoryline_Text_2:
 	.string "doing here?!\p"
 	.string "You could've gotten hurt!\p"
 	.string "Come with me…$"
+
+Route406_EventScript_Sign_Text_0:
+	.string "{LEFT_ARROW} NAVIRE TOWN\n"
+	.string "{UP_ARROW} OUREA CAVES$"
 
 Route406_Text_NewtIntro::
 	.string "What's someone like you doing here\n"
