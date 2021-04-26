@@ -982,10 +982,7 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BATTLE_ARENA] = gText_BattleArena,
     [STDSTRING_BATTLE_PIKE] = gText_BattlePike,
     [STDSTRING_BATTLE_PYRAMID] = gText_BattlePyramid,
-
     [STDSTRING_MEDICINE] = gText_Medicine,
-    [STDSTRING_BATTLEITEMS] = gText_BattleItems,
-    [STDSTRING_POWERUP] = gText_PowerUp,
 };
 
 static const u8 sLinkServicesMultichoiceIds[] = 

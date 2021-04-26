@@ -54,13 +54,13 @@ static const union AnimCmd sSpriteAnim_Bag_Closed[] =
 
 static const union AnimCmd sSpriteAnim_Bag_Items[] =
 {
-    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(128, 4),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_Bag_Medicine[] =
 {
-    ANIMCMD_FRAME(192, 4),
+    ANIMCMD_FRAME(64, 4),
     ANIMCMD_END
 };
 
@@ -70,21 +70,9 @@ static const union AnimCmd sSpriteAnim_Bag_Pokeballs[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Bag_BattleItems[] =
-{
-    ANIMCMD_FRAME(64, 4),
-    ANIMCMD_END
-};
-
 static const union AnimCmd sSpriteAnim_Bag_Berries[] =
 {
-    ANIMCMD_FRAME(192, 4),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_Bag_PowerUp[] =
-{
-    ANIMCMD_FRAME(256, 4),
+    ANIMCMD_FRAME(384, 4),
     ANIMCMD_END
 };
 
@@ -96,7 +84,7 @@ static const union AnimCmd sSpriteAnim_Bag_TMsHMs[] =
 
 static const union AnimCmd sSpriteAnim_Bag_KeyItems[] =
 {
-    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(192, 4),
     ANIMCMD_END
 };
 
@@ -106,9 +94,7 @@ static const union AnimCmd *const sBagSpriteAnimTable[] =
     sSpriteAnim_Bag_Items,
     sSpriteAnim_Bag_Medicine,
     sSpriteAnim_Bag_Pokeballs,
-    sSpriteAnim_Bag_BattleItems,
     sSpriteAnim_Bag_Berries,
-    sSpriteAnim_Bag_PowerUp,
     sSpriteAnim_Bag_TMsHMs,
     sSpriteAnim_Bag_KeyItems
 };
@@ -136,12 +122,12 @@ static const union AffineAnimCmd *const sBagAffineAnimCmds[] =
 
 const struct CompressedSpriteSheet gBagMaleSpriteSheet =
 {
-    gBagMaleTiles, 0x3000, TAG_BAG_GFX
+    gBagMaleTiles, 0x4000, TAG_BAG_GFX
 };
 
 const struct CompressedSpriteSheet gBagFemaleSpriteSheet =
 {
-    gBagFemaleTiles, 0x3000, TAG_BAG_GFX
+    gBagFemaleTiles, 0x4000, TAG_BAG_GFX
 };
 
 const struct CompressedSpritePalette gBagPaletteTable =
@@ -444,7 +430,7 @@ void RemoveBagSprite(u8 id)
 void AddBagVisualSprite(u8 bagPocketId)
 {
     u8 *spriteId = &gBagMenu->spriteId[0];
-    *spriteId = CreateSprite(&gBagSpriteTemplate, 68, 66, 0);
+    *spriteId = CreateSprite(&gBagSpriteTemplate, 64, 40, 0);
     SetBagVisualPocketId(bagPocketId, FALSE);
     //SetBagVisualPocketId(-1, FALSE);
 }
@@ -502,7 +488,7 @@ void AddSwitchPocketRotatingBallSprite(s16 rotationDirection)
     u8 *spriteId = &gBagMenu->spriteId[1];
     LoadSpriteSheet(&gRotatingBallTable);
     LoadSpritePalette(&gRotatingBallPaletteTable);
-    *spriteId = CreateSprite(&gRotatingBallSpriteTemplate, 16, 16, 0);
+    *spriteId = CreateSprite(&gRotatingBallSpriteTemplate, 16, 88, 0);
     gSprites[*spriteId].data[0] = rotationDirection;
 }
 
@@ -548,8 +534,8 @@ void AddBagItemIconSprite(u16 itemId, u8 id)
         if (iconSpriteId != MAX_SPRITES)
         {
             *spriteId = iconSpriteId;
-            gSprites[iconSpriteId].pos2.x = 24;
-            gSprites[iconSpriteId].pos2.y = 88;
+            gSprites[iconSpriteId].pos2.x = 20;
+            gSprites[iconSpriteId].pos2.y = 20;
         }
     }
 }
