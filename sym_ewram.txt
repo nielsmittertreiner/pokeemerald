@@ -149,3 +149,6 @@
 	.include "src/trainer_hill.o"
 	.include "src/rayquaza_scene.o"
 	.include "src/speech_bubble.o"
+
+gSoundInfo:
+    .space 0xFB0
