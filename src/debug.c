@@ -74,6 +74,7 @@ static void DebugAction_CheckSaveBlockSize(u8);
 static void DebugAction_ChangePlayerName(u8);
 static void DebugAction_OpenGenderChange(u8);
 static void DebugAction_ChangePlayerGender(u8);
+static void DebugAction_ChangePlayerVisiblity(u8);
 
 // Party Functions
 static void DebugAction_GiveMons(u8);
@@ -82,7 +83,7 @@ static void DebugAction_HealParty(u8);
 static void DebugAction_Cancel(u8);
 
 #define DEBUG_MAIN_MENU_WIDTH 7
-#define DEBUG_UTILITY_MENU_WIDTH 12
+#define DEBUG_UTILITY_MENU_WIDTH 11
 #define DEBUG_PARTY_MENU_WIDTH 10
 
 #define DEBUG_CREDITS_DISPLAY_WIDTH 26
@@ -141,12 +142,13 @@ static const u8 gDebugText_Party_RevievedBobParty[]      = _("{COLOR}{GREEN}RECE
 static const u8 gDebugText_Party_AlreadyHasBobParty[]    = _("{COLOR}{GREEN}YOU ALREADY HAVE BSBOB'S PARTY!   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
 
 // Utility Menu Strings
-static const u8 gDebugText_Utility_SaveBlocks[]   = _("{COLOR}{GREEN}SAVEBLOCKS");
-static const u8 gDebugText_Utility_ManageFlag[]   = _("{COLOR}{RED}MANAGE FLAGS");
-static const u8 gDebugText_Utility_ManageVars[]   = _("{COLOR}{RED}MANAGE VARS");
-static const u8 gDebugText_Utility_Warp[]         = _("{COLOR}{RED}WARP");
-static const u8 gDebugText_Utility_ChangeName[]   = _("{COLOR}{BLUE}CHANGE NAME");
-static const u8 gDebugText_Utility_ChangeGender[] = _("{COLOR}{BLUE}CHANGE GENDER");
+static const u8 gDebugText_Utility_SaveBlocks[]      = _("{COLOR}{GREEN}SAVEBLOCKS");
+static const u8 gDebugText_Utility_ManageFlag[]      = _("{COLOR}{RED}MANAGE FLAGS");
+static const u8 gDebugText_Utility_ManageVars[]      = _("{COLOR}{RED}MANAGE VARS");
+static const u8 gDebugText_Utility_Warp[]            = _("{COLOR}{RED}WARP");
+static const u8 gDebugText_Utility_ChangeName[]      = _("{COLOR}{BLUE}CHANGE NAME");
+static const u8 gDebugText_Utility_ChangeGender[]    = _("{COLOR}{BLUE}CHANGE GENDER");
+static const u8 gDebugText_Utility_PlayerInvisible[] = _("{COLOR}{BLUE}INVISIBLE");
 
 // Gender Change Window Strings
 static const u8 gDebugText_GenderChange_GenderChangeExplaination[] = _("{COLOR}{DARK_GRAY}YOU ARE ABOUT TO CHANGE YOUR GENDER!\n{COLOR}{GREEN}WALK THROUGH A DOOR{COLOR}{DARK_GRAY} TO UPDATE YOUR\nPLAYER SPRITE.");
@@ -233,7 +235,6 @@ static const u16 gBobMonHeldItems[] =
     ITEM_LEFTOVERS
 };
 
-// Main Menu
 enum {
     DEBUG_MENU_ITEM_CREDITS,
     DEBUG_MENU_ITEM_GODMODE,
@@ -242,7 +243,6 @@ enum {
     DEBUG_MENU_ITEM_CANCEL,
 };
 
-// Utility Menu
 enum {
     DEBUG_MENU_ITEM_SAVEBLOCKS,
     DEBUG_MENU_ITEM_MANAGE_FLAGS,
@@ -250,6 +250,7 @@ enum {
     DEBUG_MENU_ITEM_WARP,
     DEBUG_MENU_ITEM_CHANGE_NAME,
     DEBUG_MENU_ITEM_CHANGE_GENDER,
+    DEBUG_MENU_ITEM_PLAYER_INVISIBLE,
 };
 
 enum {
@@ -275,6 +276,7 @@ static const struct ListMenuItem sDebugMenuItems_Utility[] =
     [DEBUG_MENU_ITEM_WARP] = {gDebugText_Utility_Warp, DEBUG_MENU_ITEM_WARP},
     [DEBUG_MENU_ITEM_CHANGE_NAME] = {gDebugText_Utility_ChangeName, DEBUG_MENU_ITEM_CHANGE_NAME},
     [DEBUG_MENU_ITEM_CHANGE_GENDER] = {gDebugText_Utility_ChangeGender, DEBUG_MENU_ITEM_CHANGE_GENDER},
+    [DEBUG_MENU_ITEM_PLAYER_INVISIBLE] = {gDebugText_Utility_PlayerInvisible, DEBUG_MENU_ITEM_PLAYER_INVISIBLE},
 };
 
 static const struct ListMenuItem sDebugMenuItems_Party[] =
@@ -301,6 +303,7 @@ static void (*const sDebugMenuActions_Utility[])(u8) =
     [DEBUG_MENU_ITEM_WARP] = DebugAction_OpenWarpMenu,
     [DEBUG_MENU_ITEM_CHANGE_NAME] = DebugAction_ChangePlayerName,
     [DEBUG_MENU_ITEM_CHANGE_GENDER] = DebugAction_OpenGenderChange,
+    [DEBUG_MENU_ITEM_PLAYER_INVISIBLE] = DebugAction_ChangePlayerVisiblity,
 };
 
 static void (*const sDebugMenuActions_Party[])(u8) =
@@ -1514,7 +1517,7 @@ static void DebugAction_OpenGenderChange(u8 taskId)
 
 static void DebugAction_ChangePlayerGender(u8 taskId)
 {
-    struct ObjectEvent *objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (gSaveBlock2Ptr->playerGender == MALE)
         gSaveBlock2Ptr->playerGender = FEMALE;
@@ -1522,6 +1525,23 @@ static void DebugAction_ChangePlayerGender(u8 taskId)
         gSaveBlock2Ptr->playerGender = MALE;
 
     ResetInitialPlayerAvatarState();
+}
+
+static void DebugAction_ChangePlayerVisiblity(u8 taskId)
+{
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    if (!objectEvent->invisible)
+    {
+        objectEvent->invisible = TRUE;
+        PlaySE(SE_PC_OFF);
+    } else
+    {
+        objectEvent->invisible = FALSE;
+        PlaySE(SE_PC_LOGIN);
+    }
+
+    FlagToggle(FLAG_IS_INVISIBLE);
 }
 
 // Party Functions

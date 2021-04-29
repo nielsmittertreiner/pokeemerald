@@ -1439,6 +1439,11 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     gPlayerAvatar.spriteId = objectEvent->spriteId;
     gPlayerAvatar.gender = gender;
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_5 | PLAYER_AVATAR_FLAG_ON_FOOT);
+
+#if DEBUG
+    if (FlagGet(FLAG_IS_INVISIBLE))
+        objectEvent->invisible = TRUE;
+#endif
     
     CreateFollowerAvatar();
 }

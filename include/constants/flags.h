@@ -47,7 +47,7 @@
 #define FLAG_DISABLE_TRAINERS           0x23 // Disables Trainers Seeing You
 #define FLAG_DISABLE_OBJECT_COLLISION   0x24 // Disables Object Event Collision
 #define FLAG_HAS_BOB_PARTY              0x25 // BSBob's Party has been given
-#define FLAG_UNUSED_0x026               0x26 // Unused Flag
+#define FLAG_IS_INVISIBLE               0x26 // Turns Player invisible on player sprite init
 #define FLAG_UNUSED_0x027               0x27 // Unused Flag
 #define FLAG_UNUSED_0x028               0x28 // Unused Flag
 #define FLAG_UNUSED_0x029               0x29 // Unused Flag
