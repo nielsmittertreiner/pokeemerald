@@ -123,6 +123,9 @@ void LoadSpecialReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     struct SpritePalette filteredPalette;
 
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG_ALL | BLDCNT_EFFECT_BLEND);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
+
     if (paletteIndex == 0xFF)
     {
         ApplyReflectionFilter(baseTag, filteredData);
@@ -131,7 +134,6 @@ void LoadSpecialReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite
         paletteIndex = LoadSpritePalette(&filteredPalette);
     }
     sprite->oam.paletteNum = paletteIndex;
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
     sprite->oam.objMode = 1;
 }
 
