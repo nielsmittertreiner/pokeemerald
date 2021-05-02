@@ -825,7 +825,8 @@ static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
      && MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) != TRUE
      && MetatileBehavior_IsMtPyreHole(metatileBehavior) != TRUE
      && MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsWarpOrBridge(metatileBehavior) != TRUE)
+     && MetatileBehavior_IsWarpOrBridge(metatileBehavior) != TRUE
+     && MetatileBehavior_IsSidewaysWarp(metatileBehavior) != TRUE)
         return FALSE;
     return TRUE;
 }

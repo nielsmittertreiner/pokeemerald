@@ -105,7 +105,7 @@ static const u8 sTileBitAttributes[] =
     [MB_UNUSED_5C] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_5D] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_UNUSED_5E] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_5F] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SIDEWAYS_WARP] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_NON_ANIMATED_DOOR] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_LADDER] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_EAST_ARROW_WARP] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
@@ -1575,6 +1575,14 @@ bool8 MetatileBehavior_IsRockStairs(u8 metatileBehavior)
 bool8 MetatileBehavior_IsFirwealdClosedDoor(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_FIRWEALD_CLOSED_DOOR)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysWarp(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_WARP)
         return TRUE;
     else
         return FALSE;
