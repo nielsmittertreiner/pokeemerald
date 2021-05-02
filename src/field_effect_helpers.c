@@ -106,12 +106,22 @@ static void ApplyReflectionFilter(u8 paletteNum, u16 *dest)
         r = src[i] & 0x1F;
         g = (src[i] >> 5) & 0x1F;
         b = (src[i] >> 10) & 0x1F;
+
+        r += 5;
+        g += 5;
         b += 10;
 
+        if (r > 31)
+            r = 30;
+        
+        if (g > 31)
+            g = 30;
+        
         if (b > 31)
-            b = 31;
-        *dest++ = (b << 10) | (g << 5) | r;
-  }
+            b = 30;
+
+        *dest++ = r | (g << 5) | (b << 10);
+    }
 }
 
 void LoadSpecialReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -123,9 +133,6 @@ void LoadSpecialReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     struct SpritePalette filteredPalette;
 
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG_ALL | BLDCNT_EFFECT_BLEND);
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
-
     if (paletteIndex == 0xFF)
     {
         ApplyReflectionFilter(baseTag, filteredData);
@@ -134,7 +141,7 @@ void LoadSpecialReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite
         paletteIndex = LoadSpritePalette(&filteredPalette);
     }
     sprite->oam.paletteNum = paletteIndex;
-    sprite->oam.objMode = 1;
+    sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
 }
 
 static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
