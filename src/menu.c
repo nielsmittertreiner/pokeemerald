@@ -522,7 +522,7 @@ u16 sub_8197A38(void)
 u8 AddMapNamePopUpWindow(void)
 {
     if (sMapNamePopupWindowId == WINDOW_NONE)
-        sMapNamePopupWindowId = sub_8198AA4(0, 1, 1, 10, 3, 14, 0x107);
+        sMapNamePopupWindowId = sub_8198AA4(0, 0, 0, 30, 3, 14, 0x107);
     return sMapNamePopupWindowId;
 }
 
