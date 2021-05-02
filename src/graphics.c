@@ -1154,11 +1154,14 @@ const u32 gUnknown_08D98CC8[] = INCBIN_U32("graphics/interface/status_tilemap0.b
 const u32 gBagMaleTiles[] = INCBIN_U32("graphics/misc/bag_male.4bpp.lz");
 const u32 gBagFemaleTiles[] = INCBIN_U32("graphics/misc/bag_female.4bpp.lz");
 const u32 gBagPalette[] = INCBIN_U32("graphics/misc/bag.gbapal.lz");
+const u32 gBagShadowTiles[] = INCBIN_U32("graphics/misc/bag_shadow.4bpp.lz");
+const u32 gBagShadowPalette[] = INCBIN_U32("graphics/misc/bag_shadow.gbapal.lz");
 
 const u32 gBagScreenMale_Pal[] = INCBIN_U32("graphics/interface/bag_screen_male.gbapal.lz");
 const u32 gBagScreenFemale_Pal[] = INCBIN_U32("graphics/interface/bag_screen_female.gbapal.lz");
 
 const u32 gBagScreen_Gfx[] = INCBIN_U32("graphics/interface/bag_screen.4bpp.lz");
+const u32 gBagScreen_Pal[] = INCBIN_U32("graphics/interface/bag_screen.gbapal.lz");
 const u32 gBagScreen_GfxTileMap[] = INCBIN_U32("graphics/interface/bag_screen_tilemap.bin.lz");
 
 const u32 gBattleFrontierGfx_PyramidBag[] = INCBIN_U32("graphics/interface/bag_pyramid.4bpp.lz");

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "berry.h"
 #include "decompress.h"
+#include "gpu_regs.h"
 #include "graphics.h"
 #include "item.h"
 #include "item_menu.h"
@@ -413,6 +414,44 @@ static const struct SpriteTemplate gBerryCheckCircleSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
+const struct CompressedSpriteSheet gBagShadowSpriteSheet =
+{
+    gBagShadowTiles, 0x2000, TAG_BAG_SHADOW_GFX
+};
+
+const struct CompressedSpritePalette gBagShadowPaletteTable =
+{
+    gBagShadowPalette, TAG_BAG_SHADOW_GFX
+};
+
+static const struct OamData sBagShadowOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const struct SpriteTemplate gBagShadowSpriteTemplate =
+{
+    .tileTag = TAG_BAG_SHADOW_GFX,
+    .paletteTag = TAG_BAG_SHADOW_GFX,
+    .oam = &sBagShadowOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
 // code
 void RemoveBagSprite(u8 id)
 {
@@ -430,7 +469,7 @@ void RemoveBagSprite(u8 id)
 void AddBagVisualSprite(u8 bagPocketId)
 {
     u8 *spriteId = &gBagMenu->spriteId[0];
-    *spriteId = CreateSprite(&gBagSpriteTemplate, 64, 40, 0);
+    *spriteId = CreateSprite(&gBagSpriteTemplate, 56, 47, 0);
     SetBagVisualPocketId(bagPocketId, FALSE);
     //SetBagVisualPocketId(-1, FALSE);
 }
@@ -534,8 +573,8 @@ void AddBagItemIconSprite(u16 itemId, u8 id)
         if (iconSpriteId != MAX_SPRITES)
         {
             *spriteId = iconSpriteId;
-            gSprites[iconSpriteId].pos2.x = 20;
-            gSprites[iconSpriteId].pos2.y = 20;
+            gSprites[iconSpriteId].pos2.x = 24;
+            gSprites[iconSpriteId].pos2.y = 141;
         }
     }
 }
@@ -633,4 +672,13 @@ u8 CreateSpinningBerrySprite(u8 berryId, u8 x, u8 y, bool8 startAffine)
 u8 CreateBerryFlavorCircleSprite(s16 x)
 {
     return CreateSprite(&gBerryCheckCircleSpriteTemplate, x, 116, 0);
+}
+
+void CreateBagShadowSprite(void)
+{
+    u8 *spriteId = &gBagMenu->spriteId[11];
+    *spriteId = CreateSprite(&gBagShadowSpriteTemplate, 56, 77, 1);
+
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 12));
 }
