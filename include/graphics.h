@@ -3873,9 +3873,21 @@ extern const u16 gFireRedMenuElements3_Pal[16];
 extern const u8 gFireRedMenuElements_Gfx[];
 
 // item menu graphics
-extern const u32 gBagScreen_Gfx[];
-extern const u32 gBagScreen_GfxTileMap[];
-extern const u32 gBagScreen_Pal[];
+extern const u32 gBagScreenGrass_Gfx[];
+extern const u32 gBagScreenGrass_Pal[];
+extern const u32 gBagScreenGrass_GfxTileMap[];
+extern const u32 gBagScreenSand_Gfx[];
+extern const u32 gBagScreenSand_Pal[];
+extern const u32 gBagScreenSand_GfxTileMap[];
+extern const u32 gBagScreenMountain_Gfx[];
+extern const u32 gBagScreenMountain_Pal[];
+extern const u32 gBagScreenMountain_GfxTileMap[];
+extern const u32 gBagScreenWater_Gfx[];
+extern const u32 gBagScreenWater_Pal[];
+extern const u32 gBagScreenWater_GfxTileMap[];
+extern const u32 gBagScreenInterior_Gfx[];
+extern const u32 gBagScreenInterior_Pal[];
+extern const u32 gBagScreenInterior_GfxTileMap[];
 extern const u32 gBagScreenFemale_Pal[];
 extern const u32 gBagScreenMale_Pal[];
 extern const u8 gBagMenuHMIcon_Gfx[];

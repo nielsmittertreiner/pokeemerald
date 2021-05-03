@@ -567,7 +567,7 @@ static bool8 LoadPyramidBagGfx(void)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(2, gBagScreen_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, gBagScreenGrass_Gfx, 0, 0, 0);
         gPyramidBagMenu->state++;
         break;
     case 1:

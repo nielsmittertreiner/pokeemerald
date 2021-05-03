@@ -1160,9 +1160,21 @@ const u32 gBagShadowPalette[] = INCBIN_U32("graphics/misc/bag_shadow.gbapal.lz")
 const u32 gBagScreenMale_Pal[] = INCBIN_U32("graphics/interface/bag_screen_male.gbapal.lz");
 const u32 gBagScreenFemale_Pal[] = INCBIN_U32("graphics/interface/bag_screen_female.gbapal.lz");
 
-const u32 gBagScreen_Gfx[] = INCBIN_U32("graphics/interface/bag_screen.4bpp.lz");
-const u32 gBagScreen_Pal[] = INCBIN_U32("graphics/interface/bag_screen.gbapal.lz");
-const u32 gBagScreen_GfxTileMap[] = INCBIN_U32("graphics/interface/bag_screen_tilemap.bin.lz");
+const u32 gBagScreenGrass_Gfx[] = INCBIN_U32("graphics/interface/bag_screen_grass.4bpp.lz");
+const u32 gBagScreenGrass_Pal[] = INCBIN_U32("graphics/interface/bag_screen_grass.gbapal.lz");
+const u32 gBagScreenGrass_GfxTileMap[] = INCBIN_U32("graphics/interface/bag_screen_grass_tilemap.bin.lz");
+const u32 gBagScreenSand_Gfx[] = INCBIN_U32("graphics/interface/bag_screen_sand.4bpp.lz");
+const u32 gBagScreenSand_Pal[] = INCBIN_U32("graphics/interface/bag_screen_sand.gbapal.lz");
+const u32 gBagScreenSand_GfxTileMap[] = INCBIN_U32("graphics/interface/bag_screen_sand_tilemap.bin.lz");
+const u32 gBagScreenMountain_Gfx[] = INCBIN_U32("graphics/interface/bag_screen_mountain.4bpp.lz");
+const u32 gBagScreenMountain_Pal[] = INCBIN_U32("graphics/interface/bag_screen_mountain.gbapal.lz");
+const u32 gBagScreenMountain_GfxTileMap[] = INCBIN_U32("graphics/interface/bag_screen_mountain_tilemap.bin.lz");
+const u32 gBagScreenWater_Gfx[] = INCBIN_U32("graphics/interface/bag_screen_water.4bpp.lz");
+const u32 gBagScreenWater_Pal[] = INCBIN_U32("graphics/interface/bag_screen_water.gbapal.lz");
+const u32 gBagScreenWater_GfxTileMap[] = INCBIN_U32("graphics/interface/bag_screen_water_tilemap.bin.lz");
+const u32 gBagScreenInterior_Gfx[] = INCBIN_U32("graphics/interface/bag_screen_interior.4bpp.lz");
+const u32 gBagScreenInterior_Pal[] = INCBIN_U32("graphics/interface/bag_screen_interior.gbapal.lz");
+const u32 gBagScreenInterior_GfxTileMap[] = INCBIN_U32("graphics/interface/bag_screen_interior_tilemap.bin.lz");
 
 const u32 gBattleFrontierGfx_PyramidBag[] = INCBIN_U32("graphics/interface/bag_pyramid.4bpp.lz");
 const u32 gBattleFrontierGfx_PyramidBag_Pal[] = INCBIN_U32("graphics/interface/bag_pyramid.gbapal.lz"); // female palette is first and male is second.
