@@ -2276,7 +2276,6 @@ static u8 TrySpinPlayerForWarp(struct ObjectEvent *object, s16 *delayTimer)
     return sSpinDirections[object->facingDirection];
 }
 
-//sideways stairs
 u8 GetRightSideStairsDirection(u8 direction)
 {
     switch (direction)
@@ -2343,4 +2342,3 @@ bool8 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u8 direction)
         return FALSE;
     #endif
 }
-
