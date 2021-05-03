@@ -66,8 +66,8 @@ SunsetTown_EventScript_PlayerHouseSign::
 	return
 
 
-SunsetTown_EventScript_AlexHouseSign::
-	msgbox SunsetTown_EventScript_AlexHouseSign_Text_0, MSGBOX_SIGN
+SunsetTown_EventScript_JuliaHouseSign::
+	msgbox SunsetTown_EventScript_JuliaHouseSign_Text_0, MSGBOX_SIGN
 	return
 
 
@@ -264,8 +264,8 @@ SunsetTown_EventScript_TownSign_Text_0:
 SunsetTown_EventScript_PlayerHouseSign_Text_0:
 	.string "{PLAYER}'s HOUSE$"
 
-SunsetTown_EventScript_AlexHouseSign_Text_0:
-	.string "ALEX's HOUSE$"
+SunsetTown_EventScript_JuliaHouseSign_Text_0:
+	.string "JULIA's HOUSE$"
 
 SunsetTown_EventScript_LabSign_Text_0:
 	.string "PROFESSOR CONIFER'S\n"

@@ -1,7 +1,7 @@
 {
   "id": "MAP_SUNSET_TOWN_ALEXS_HOUSE_1F",
-  "name": "SunsetTown_AlexsHouse_1F",
-  "layout": "LAYOUT_SUNSET_TOWN_ALEXS_HOUSE_1F",
+  "name": "SunsetTown_JuliasHouse_1F",
+  "layout": "LAYOUT_SUNSET_TOWN_JULIAS_HOUSE_1F",
   "music": "MUS_SUNSET",
   "region_map_section": "MAPSEC_SUNSET_TOWN",
   "requires_flash": false,
@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SunsetTown_AlexsHouse_1F_EventScript_Item_Ball",
+      "script": "SunsetTown_JuliasHouse_1F_EventScript_Item_Ball",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SunsetTown_AlexsHouse_1F_EventScript_Woman",
+      "script": "SunsetTown_JuliasHouse_1F_EventScript_Woman",
       "flag": "0"
     }
   ],

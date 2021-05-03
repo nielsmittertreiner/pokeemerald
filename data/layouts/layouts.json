@@ -4472,24 +4472,24 @@
       "blockdata_filepath": "data/layouts/SunsetTown_House1/map.bin"
     },
     {
-      "id": "LAYOUT_SUNSET_TOWN_ALEXS_HOUSE_1F",
-      "name": "SunsetTown_AlexsHouse_1F_Layout",
+      "id": "LAYOUT_SUNSET_TOWN_JULIAS_HOUSE_1F",
+      "name": "SunsetTown_JuliasHouse_1F_Layout",
       "width": 11,
       "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BrendansMaysHouse",
-      "border_filepath": "data/layouts/SunsetTown_AlexsHouse_1F/border.bin",
-      "blockdata_filepath": "data/layouts/SunsetTown_AlexsHouse_1F/map.bin"
+      "border_filepath": "data/layouts/SunsetTown_JuliasHouse_1F/border.bin",
+      "blockdata_filepath": "data/layouts/SunsetTown_JuliasHouse_1F/map.bin"
     },
     {
-      "id": "LAYOUT_SUNSET_TOWN_ALEXS_HOUSE_2F",
-      "name": "SunsetTown_AlexsHouse_2F_Layout",
+      "id": "LAYOUT_SUNSET_TOWN_JULIAS_HOUSE_2F",
+      "name": "SunsetTown_JuliasHouse_2F_Layout",
       "width": 9,
       "height": 8,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BrendansMaysHouse",
-      "border_filepath": "data/layouts/SunsetTown_AlexsHouse_2F/border.bin",
-      "blockdata_filepath": "data/layouts/SunsetTown_AlexsHouse_2F/map.bin"
+      "border_filepath": "data/layouts/SunsetTown_JuliasHouse_2F/border.bin",
+      "blockdata_filepath": "data/layouts/SunsetTown_JuliasHouse_2F/map.bin"
     },
     {
       "id": "LAYOUT_CEDARRED_TOWN",

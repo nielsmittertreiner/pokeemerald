@@ -1,7 +1,7 @@
 {
   "id": "MAP_SUNSET_TOWN_ALEXS_HOUSE_2F",
-  "name": "SunsetTown_AlexsHouse_2F",
-  "layout": "LAYOUT_SUNSET_TOWN_ALEXS_HOUSE_2F",
+  "name": "SunsetTown_JuliasHouse_2F",
+  "layout": "LAYOUT_SUNSET_TOWN_JULIAS_HOUSE_2F",
   "music": "MUS_SUNSET",
   "region_map_section": "MAPSEC_SUNSET_TOWN",
   "requires_flash": false,
@@ -35,7 +35,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SunsetTown_AlexsHouse_2F_EventScript_NES"
+      "script": "SunsetTown_JuliasHouse_2F_EventScript_NES"
     },
     {
       "type": "sign",
@@ -43,7 +43,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SunsetTown_AlexsHouse_2F_EventScript_Notebook"
+      "script": "SunsetTown_JuliasHouse_2F_EventScript_Notebook"
     },
     {
       "type": "sign",
@@ -51,7 +51,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SunsetTown_AlexsHouse_2F_EventScript_AlexsPC"
+      "script": "SunsetTown_JuliasHouse_2F_EventScript_AlexsPC"
     }
   ]
 }

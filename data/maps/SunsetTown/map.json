@@ -151,7 +151,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SunsetTown_EventScript_AlexHouseSign"
+      "script": "SunsetTown_EventScript_JuliaHouseSign"
     },
     {
       "type": "sign",

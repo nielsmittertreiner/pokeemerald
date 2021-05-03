@@ -1,0 +1,16 @@
+mapscripts SunsetTown_JuliasHouse_1F_MapScripts {}
+
+script SunsetTown_JuliasHouse_1F_EventScript_Woman {
+    msgbox("Hi there {PLAYER}, you and JULIA\n"
+	       "have become quite close friends\l"
+	       "since you both were young.\p"
+	       "It's good to see you again!", MSGBOX_NPC)
+    end
+}
+
+script SunsetTown_JuliasHouse_1F_EventScript_Item_Ball {
+    msgbox("It's a POKéBALL from JULIA's MOM.\n"
+	       "What could be inside…")
+    closemessage
+    end
+}

@@ -1,0 +1,19 @@
+mapscripts SunsetTown_JuliasHouse_2F_MapScripts {}
+
+script SunsetTown_JuliasHouse_2F_EventScript_NES {
+    msgbox("It's a NES with a GameBoy Advance SP\n"
+	       "plugged in as a controller.", MSGBOX_SIGN)
+    end
+}
+
+script SunsetTown_JuliasHouse_2F_EventScript_Notebook {
+    msgbox("It's a notebook with drawings\n"
+	       "JULIA made of some POKéMON.$", MSGBOX_SIGN)
+    end
+}
+
+script SunsetTown_JuliasHouse_2F_EventScript_AlexsPC {
+    msgbox("It's JULIA's PC…\p"
+	       "Better get going!$ ", MSGBOX_SIGN)
+    end
+}

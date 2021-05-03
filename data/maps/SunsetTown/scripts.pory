@@ -56,8 +56,8 @@ script SunsetTown_EventScript_PlayerHouseSign {
     msgbox("{PLAYER}'s HOUSE", MSGBOX_SIGN)
 }
 
-script SunsetTown_EventScript_AlexHouseSign {
-    msgbox("ALEX's HOUSE", MSGBOX_SIGN)
+script SunsetTown_EventScript_JuliaHouseSign {
+    msgbox("JULIA's HOUSE", MSGBOX_SIGN)
 }
 
 script SunsetTown_EventScript_LabSign {
