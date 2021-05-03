@@ -1039,11 +1039,10 @@
 	.4byte \offset
 	.endm
 
-	@ Opens the Pokemart system, offering the specified products for sale. If tmshopid is 0, it won't be treated as a TM shop.
-	.macro pokemart products:req, tmshopid = 0
+	@ Opens the Pokemart system, offering the specified products for sale.
+	.macro pokemart products:req
 	.byte 0x86
 	.4byte \products
-	.2byte \tmshopid
 	.endm
 
 	@ Opens the Pokemart system and treats the list of items as decorations.
