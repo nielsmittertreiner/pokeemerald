@@ -239,7 +239,7 @@
 #define VAR_UNUSED_0x4083                                (SPECIAL_STATE_VARS_START + 0x63) // Unused Var
 #define VAR_BIRCH_LAB_STATE                              (SPECIAL_STATE_VARS_START + 0x64)
 #define VAR_PETALBURG_GYM_STATE                          (SPECIAL_STATE_VARS_START + 0x65) // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman 
-#define VAR_0x4086                                       (SPECIAL_STATE_VARS_START + 0x66)
+#define VAR_CONTEST_HALL_STATE                           (SPECIAL_STATE_VARS_START + 0x66)
 #define VAR_0x4087                                       (SPECIAL_STATE_VARS_START + 0x67)
 #define VAR_CONTEST_TYPE                                 (SPECIAL_STATE_VARS_START + 0x68)
 #define VAR_0x4089                                       (SPECIAL_STATE_VARS_START + 0x69)
