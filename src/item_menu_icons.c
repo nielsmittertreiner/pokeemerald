@@ -471,7 +471,6 @@ void AddBagVisualSprite(u8 bagPocketId)
     u8 *spriteId = &gBagMenu->spriteId[0];
     *spriteId = CreateSprite(&gBagSpriteTemplate, 56, 47, 0);
     SetBagVisualPocketId(bagPocketId, FALSE);
-    //SetBagVisualPocketId(-1, FALSE);
 }
 
 void SetBagVisualPocketId(u8 bagPocketId, bool8 isSwitchingPockets)
@@ -677,7 +676,10 @@ u8 CreateBerryFlavorCircleSprite(s16 x)
 void CreateBagShadowSprite(void)
 {
     u8 *spriteId = &gBagMenu->spriteId[11];
-    *spriteId = CreateSprite(&gBagShadowSpriteTemplate, 56, 77, 1);
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        *spriteId = CreateSprite(&gBagShadowSpriteTemplate, 56, 76, 1);
+    else
+        *spriteId = CreateSprite(&gBagShadowSpriteTemplate, 56, 74, 1);
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 12));
