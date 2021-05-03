@@ -1,10 +1,39 @@
+const LOCALID_WOMAN = 2
+
 mapscripts SunsetTown_JuliasHouse_1F_MapScripts {}
 
 script SunsetTown_JuliasHouse_1F_EventScript_Woman {
-    msgbox("Hi there {PLAYER}, you and JULIA\n"
-	       "have become quite close friends\l"
-	       "since you both were young.\p"
-	       "It's good to see you again!", MSGBOX_NPC)
+    switch (var(VAR_JULIA_STATE)) {
+        case 0:
+            checkplayergender
+            switch (var(VAR_RESULT)) {
+                case 0:
+                    msgbox("Hi there! You must be {PLAYER},\n"
+	                       "PROFESSOR CONIFER's son right?\p"
+	                       "… … …\p"
+	                       "JULIA is not here right now, she's\n"
+                           "at the GREENERY SHOP in ACREN FOREST\l"
+                           "buying some flowers for someone.\p"
+                           "If you want to meet her, you should\n"
+                           "go there.", MSGBOX_NPC)
+                    break
+                case 1:
+                    msgbox("Hi there! You must be {PLAYER},\n"
+	                       "PROFESSOR CONIFER's daughter right?\p"
+	                       "… … …\p"
+	                       "JULIA is not here right now, she's\n"
+                           "at the GREENERY SHOP in ACREN FOREST\l"
+                           "buying some flowers for someone.\p"
+                           "If you want to meet her, you should\n"
+                           "go there.", MSGBOX_NPC)
+                    break
+            }
+            break
+        default:
+            msgbox("Oh hi there {PLAYER}!\n"
+                   "I hope you're doing alright.", MSGBOX_NPC)
+            break
+    }
     end
 }
 
