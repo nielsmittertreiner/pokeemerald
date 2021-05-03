@@ -16,17 +16,6 @@
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
 
-// enums
-enum MapPopUp_Themes
-{
-    MAPPOPUP_THEME_WOOD,
-    MAPPOPUP_THEME_MARBLE,
-    MAPPOPUP_THEME_STONE,
-    MAPPOPUP_THEME_BRICK,
-    MAPPOPUP_THEME_UNDERWATER,
-    MAPPOPUP_THEME_STONE2,
-};
-
 // static functions
 static void Task_MapNamePopUpWindow(u8 taskId);
 static void ShowMapNamePopUpWindow(void);
@@ -170,7 +159,7 @@ static void ShowMapNamePopUpWindow(void)
     const u8* mapDisplayHeaderSource;
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(15, 6));
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(15, 5));
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 
     if (InBattlePyramid())
