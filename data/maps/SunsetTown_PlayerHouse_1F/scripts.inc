@@ -42,8 +42,38 @@ SunsetTown_PlayerHouse_1F_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0:
 
 
 SunsetTown_PlayerHouse_1F_EventScript_Mom::
-	msgbox SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_0, MSGBOX_NPC
+	lock
+	faceplayer
+	load_speech_bubble 1
+	msgbox SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_0, MSGBOX_YESNO
+	destroy_speech_bubble
+	closemessage
+	switch VAR_RESULT
+	case YES, SunsetTown_PlayerHouse_1F_EventScript_Mom_3
+	case NO, SunsetTown_PlayerHouse_1F_EventScript_Mom_4
+	case MULTI_B_PRESSED, SunsetTown_PlayerHouse_1F_EventScript_Mom_5
+SunsetTown_PlayerHouse_1F_EventScript_Mom_1:
+	msgbox SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_2, MSGBOX_NPC
 	end
+
+SunsetTown_PlayerHouse_1F_EventScript_Mom_3:
+	fadescreen FADE_TO_BLACK
+	playfanfare MUS_HEAL
+	waitfanfare
+	special HealPlayerParty
+	fadescreen FADE_FROM_BLACK
+	load_speech_bubble 1
+	msgbox SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_1
+	destroy_speech_bubble
+	closemessage
+	release
+	end
+
+SunsetTown_PlayerHouse_1F_EventScript_Mom_4:
+	goto SunsetTown_PlayerHouse_1F_EventScript_Mom_1
+
+SunsetTown_PlayerHouse_1F_EventScript_Mom_5:
+	goto SunsetTown_PlayerHouse_1F_EventScript_Mom_1
 
 
 SunsetTown_PlayerHouse_1F_Movement_PlayerWalksToMom:
@@ -75,5 +105,14 @@ SunsetTown_PlayerHouse_1F_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_1:
 	.string "I have no idea what it is, though…$"
 
 SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_0:
-	.string "Have fun on your adventure\n"
+	.string "Do you want to rest here\n"
+	.string "for a while, dear?$"
+
+SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_1:
+	.string "Phew, that must be refreshing right?\p"
+	.string "Now have fun on your adventure\n"
 	.string "dear! Stay safe.$"
+
+SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_2:
+	.string "Have fun on your adventure\n"
+	.string "dear! Stay safe out there.$"

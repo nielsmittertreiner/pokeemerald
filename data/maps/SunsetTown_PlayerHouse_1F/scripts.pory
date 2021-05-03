@@ -37,8 +37,35 @@ mapscripts SunsetTown_PlayerHouse_1F_MapScripts {
 }
 
 script SunsetTown_PlayerHouse_1F_EventScript_Mom {
+    lock
+    faceplayer
+    load_speech_bubble(LOCALID_MOM)
+    msgbox("Do you want to rest here\n"
+           "for a while, dear?", MSGBOX_YESNO)
+    destroy_speech_bubble
+    closemessage
+    switch (var(VAR_RESULT)) {
+        case YES:
+            fadescreen(FADE_TO_BLACK)
+            playfanfare(MUS_HEAL)
+	        waitfanfare
+            special(HealPlayerParty)
+            fadescreen(FADE_FROM_BLACK)
+            load_speech_bubble(LOCALID_MOM)
+            msgbox("Phew, that must be refreshing right?\p"
+                   "Now have fun on your adventure\n"
+                   "dear! Stay safe.")
+            destroy_speech_bubble
+            closemessage
+            release
+            end
+        case NO:
+            break
+        case MULTI_B_PRESSED:
+            break
+    }
     msgbox("Have fun on your adventure\n"
-           "dear! Stay safe.", MSGBOX_NPC)
+           "dear! Stay safe out there.", MSGBOX_NPC)
     end
 }
 
