@@ -88,8 +88,8 @@
 #define MAP_SUNSET_TOWN_PLAYER_HOUSE_2F          (6 | (1 << 8))
 #define MAP_SUNSET_TOWN_PROFESSOR_CONIFER_LAB    (7 | (1 << 8))
 #define MAP_SUNSET_TOWN_HOUSE1                   (8 | (1 << 8))
-#define MAP_SUNSET_TOWN_ALEXS_HOUSE_1F           (9 | (1 << 8))
-#define MAP_SUNSET_TOWN_ALEXS_HOUSE_2F           (10 | (1 << 8))
+#define MAP_SUNSET_TOWN_JULIAS_HOUSE_1F          (9 | (1 << 8))
+#define MAP_SUNSET_TOWN_JULIAS_HOUSE_2F          (10 | (1 << 8))
 
 // Map Group 2
 #define MAP_OLDALE_TOWN_HOUSE1              (0 | (2 << 8))
