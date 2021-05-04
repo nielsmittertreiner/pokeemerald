@@ -76,17 +76,17 @@
       "dest_warp_id": 0
     },
     {
-      "x": 6,
-      "y": 15,
-      "elevation": 0,
-      "dest_map": "MAP_SUNSET_TOWN_ALEXS_HOUSE_1F",
-      "dest_warp_id": 0
-    },
-    {
       "x": 15,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_SUNSET_TOWN_HOUSE1",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 6,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_SUNSET_TOWN_JULIAS_HOUSE_1F",
       "dest_warp_id": 0
     }
   ],
