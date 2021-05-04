@@ -1,5 +1,5 @@
 {
-  "id": "MAP_SUNSET_TOWN_ALEXS_HOUSE_1F",
+  "id": "MAP_SUNSET_TOWN_JULIAS_HOUSE_1F",
   "name": "SunsetTown_JuliasHouse_1F",
   "layout": "LAYOUT_SUNSET_TOWN_JULIAS_HOUSE_1F",
   "music": "MUS_SUNSET",
@@ -53,7 +53,7 @@
       "x": 1,
       "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_SUNSET_TOWN_ALEXS_HOUSE_2F",
+      "dest_map": "MAP_SUNSET_TOWN_JULIAS_HOUSE_2F",
       "dest_warp_id": 0
     }
   ],
