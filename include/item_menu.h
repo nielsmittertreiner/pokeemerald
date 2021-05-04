@@ -34,6 +34,12 @@
 #define ITEMMENUACTION_CONFIRM_2    13
 #define ITEMMENUACTION_DUMMY        14
 
+#define ITEMMENUGRAPHICS_GRASS       0
+#define ITEMMENUGRAPHICS_WATER       1
+#define ITEMMENUGRAPHICS_SAND        2
+#define ITEMMENUGRAPHICS_MOUNTAIN    3
+#define ITEMMENUGRAPHICS_INTERIOR    4
+
 // Exported type declarations
 struct BagStruct
 {
