@@ -2626,6 +2626,8 @@ static u8 BagMenu_GetGraphicsId(void)
         }
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ACREN_FOREST) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ACREN_FOREST))
             return ITEMMENUGRAPHICS_GRASS;
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FOREST_TUNNEL) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(FOREST_TUNNEL))
+            return ITEMMENUGRAPHICS_MOUNTAIN;
     case MAP_TYPE_UNDERGROUND:
         return ITEMMENUGRAPHICS_MOUNTAIN;
     case MAP_TYPE_UNDERWATER:
