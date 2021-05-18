@@ -495,6 +495,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_AIRLOCK_MEMBER_F] =         &gObjectEventGraphicsInfo_AirlockMemberF,
     [OBJ_EVENT_GFX_PHYLLOS] =                  &gObjectEventGraphicsInfo_Phyllos,
     [OBJ_EVENT_GFX_SCOTT_SHIRTLESS] =          &gObjectEventGraphicsInfo_ScottShirtless,
+    [OBJ_EVENT_GFX_CONSTRUCTION_WORKER] =      &gObjectEventGraphicsInfo_ConstructionWorker,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

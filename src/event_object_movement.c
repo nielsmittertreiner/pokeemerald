@@ -468,6 +468,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_JULIA                   0x1124
 #define OBJ_EVENT_PAL_TAG_TEAM_AIRLOCK_GRUNT      0x1125
 #define OBJ_EVENT_PAL_TAG_PHYLLOS                 0x1126
+#define OBJ_EVENT_PAL_TAG_CONSTRUCTION_WORKER     0x1127
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/field_effects/field_effect_object_template_pointers.h"
@@ -514,9 +515,10 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
-    {gObjectEventPalette_Julia,             OBJ_EVENT_PAL_TAG_JULIA},
-    {gObjectEventPalette_TeamAirlockGrunt,  OBJ_EVENT_PAL_TAG_TEAM_AIRLOCK_GRUNT},
-    {gObjectEventPalette_Phyllos,           OBJ_EVENT_PAL_TAG_PHYLLOS},
+    {gObjectEventPal_Julia,                 OBJ_EVENT_PAL_TAG_JULIA},
+    {gObjectEventPal_TeamAirlockGrunt,      OBJ_EVENT_PAL_TAG_TEAM_AIRLOCK_GRUNT},
+    {gObjectEventPal_Phyllos,               OBJ_EVENT_PAL_TAG_PHYLLOS},
+    {gObjectEventPal_ConstructionWorker,    OBJ_EVENT_PAL_TAG_CONSTRUCTION_WORKER},
     {NULL,                                  0x0000},
 };
 #include "data/object_events/berry_tree_graphics_tables.h"
