@@ -1,34 +1,35 @@
-const LOCALID_HIKER = 1
+const LOCALID_CONSTRUCTION_WORKER = 1
 
 mapscripts OureaCave_B2F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(OureaCaves_EventScript_SetCaveLights)
         if (var(VAR_OUREA_CAVES_STATE) == 1) {
-            setobjectxyperm(LOCALID_HIKER, 82, 14)
-            setobjectmovementtype(LOCALID_HIKER, MOVEMENT_TYPE_FACE_UP)
+            setobjectxyperm(LOCALID_CONSTRUCTION_WORKER, 82, 14)
+            setobjectmovementtype(LOCALID_CONSTRUCTION_WORKER, MOVEMENT_TYPE_FACE_UP)
         }
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_OUREA_CAVES_STATE, 1: OureaCave_B2F_EventScript_AfterEarthquakeScene
+        VAR_TEMP_F, 0: OureaCaves_EventScript_TryShowMapNamePopup
     ]
 }
 
 script OureaCave_B2F_EventScript_AfterEarthquakeScene {
     lock
-    applymovement(LOCALID_HIKER, OureaCave_B2F_Movement_HikerAndPlayerWalkForward)
+    applymovement(LOCALID_CONSTRUCTION_WORKER, OureaCave_B2F_Movement_HikerAndPlayerWalkForward)
     applymovement(OBJ_EVENT_ID_PLAYER, OureaCave_B2F_Movement_HikerAndPlayerWalkForward)
     waitmovement(0)
     delay(30)
     msgbox("…")
     closemessage
-    applymovement(LOCALID_HIKER, Common_Movement_FaceDown)
+    applymovement(LOCALID_CONSTRUCTION_WORKER, Common_Movement_FaceDown)
     waitmovement(0)
     call(OureaCave_B2F_EventScript_HikerAsksPlayerForHelp)
     msgbox("Ahhh! You're rock solid\n"
            "HOHOHO!\p"
            "Thanks so much for wanting to help!")
     closemessage
-    applymovement(LOCALID_HIKER, OureaCave_B2F_Movement_HikerWalksToGenerator)
+    applymovement(LOCALID_CONSTRUCTION_WORKER, OureaCave_B2F_Movement_HikerWalksToGenerator)
     applymovement(OBJ_EVENT_ID_PLAYER, OureaCave_B2F_Movement_PlayerWalksToGenerator)
     waitmovement(0)
     msgbox("See this right here?\n"
@@ -38,7 +39,7 @@ script OureaCave_B2F_EventScript_AfterEarthquakeScene {
            "Just go through the caves 'n flip 'em all.\n"
            "I'm sure your POKéMON will protect you.")
     closemessage
-    applymovement(LOCALID_HIKER, Common_Movement_FaceDown)
+    applymovement(LOCALID_CONSTRUCTION_WORKER, Common_Movement_FaceDown)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
     waitmovement(0)
     msgbox("To  help you clear any debris that might\n"
@@ -52,7 +53,7 @@ script OureaCave_B2F_EventScript_AfterEarthquakeScene {
            "Now…\n"
            "Why don't you try turning this one on.")
     closemessage
-    applymovement(LOCALID_HIKER, Common_Movement_WalkInPlaceFastestLeft)
+    applymovement(LOCALID_CONSTRUCTION_WORKER, Common_Movement_WalkInPlaceFastestLeft)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     waitmovement(0)
     setvar(VAR_OUREA_CAVES_STATE, 2)
@@ -80,13 +81,13 @@ script OureaCave_B2F_EventScript_HikerAsksPlayerForHelp {
 }
 
 script OureaCave_B2F_EventScript_PreventPlayerWander {
-    applymovement(LOCALID_HIKER, OureaCave_B2F_Movement_HikerWalkToPlayerOnStairs)
+    applymovement(LOCALID_CONSTRUCTION_WORKER, OureaCave_B2F_Movement_HikerWalkToPlayerOnStairs)
     waitmovement(0)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
     waitmovement(0)
     msgbox("Come on now…")
     closemessage
-    applymovement(LOCALID_HIKER, OureaCave_B2F_Movement_HikerAndPlayerWalkBackToGenerator)
+    applymovement(LOCALID_CONSTRUCTION_WORKER, OureaCave_B2F_Movement_HikerAndPlayerWalkBackToGenerator)
     applymovement(OBJ_EVENT_ID_PLAYER, OureaCave_B2F_Movement_HikerAndPlayerWalkBackToGenerator)
     waitmovement(0)
     msgbox("Show me how you flip that switch!")
@@ -107,7 +108,7 @@ script OureaCave_B2F_EventScript_Hiker {
     end
 }
 
-script OureaCave_B2F_EventScript_WarpHoleCustom1 {
+script OureaCave_B2F_EventScript_WarpHole {
     lockall
 	delay(20)
 	applymovement(OBJ_EVENT_ID_PLAYER, Movement_SetInvisible)
@@ -117,6 +118,25 @@ script OureaCave_B2F_EventScript_WarpHoleCustom1 {
     warpholecustom(MAP_OUREA_CAVE_B3F, 5, 4)
     waitstate
 	end
+}
+
+script OureaCave_B2F_EventScript_Hiker2 {
+    msgbox("Har har!\n"
+           "Did I spook ya?!"
+           "It's fun to spook people when\n"
+           "it's dark.", MSGBOX_NPC)
+    end
+}
+
+script OureaCave_B2F_EventScript_Robin {
+    trainerbattle_single(TRAINER_OUREA_CAVE_B2F_ROBIN, OureaCave_B2F_Text_RobinIntro, OureaCave_B2F_Text_RobinDefeat)
+    msgbox(OureaCave_B2F_Text_RobinPostBattle, MSGBOX_NPC)
+    end
+}
+
+script OureaCave_B2F_EventScript_ItemGreatBall {
+    finditem(ITEM_GREAT_BALL)
+    end
 }
 
 movement OureaCave_B2F_Movement_HikerAndPlayerWalkForward {
@@ -144,4 +164,18 @@ movement OureaCave_B2F_Movement_HikerWalkToPlayerOnStairs {
 movement OureaCave_B2F_Movement_HikerAndPlayerWalkBackToGenerator {
     walk_up * 2
     face_left
+}
+
+text OureaCave_B2F_Text_RobinIntro {
+    "You'll have to look up to us when\n"
+    "we take to the skies!"
+}
+
+text OureaCave_B2F_Text_RobinDefeat {
+    "Hmmm maybe instead of looking down\n"
+    "I should look back now…"
+}
+
+text OureaCave_B2F_Text_RobinPostBattle {
+    "Phew… That battle was intense!"
 }

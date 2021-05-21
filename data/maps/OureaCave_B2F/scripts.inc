@@ -16,6 +16,7 @@ OureaCave_B2F_MapScripts_MAP_SCRIPT_ON_TRANSITION_1:
 
 OureaCave_B2F_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 	map_script_2 VAR_OUREA_CAVES_STATE, 1, OureaCave_B2F_EventScript_AfterEarthquakeScene
+	map_script_2 VAR_TEMP_F, 0, OureaCaves_EventScript_TryShowMapNamePopup
 	.2byte 0
 
 
@@ -105,7 +106,7 @@ OureaCave_B2F_EventScript_Hiker_3:
 	end
 
 
-OureaCave_B2F_EventScript_WarpHoleCustom1::
+OureaCave_B2F_EventScript_WarpHole::
 	lockall
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
@@ -114,6 +115,22 @@ OureaCave_B2F_EventScript_WarpHoleCustom1::
 	delay 60
 	warpholecustom MAP_OUREA_CAVE_B3F, 5, 4
 	waitstate
+	end
+
+
+OureaCave_B2F_EventScript_Hiker2::
+	msgbox OureaCave_B2F_EventScript_Hiker2_Text_0, MSGBOX_NPC
+	end
+
+
+OureaCave_B2F_EventScript_Robin::
+	trainerbattle_single TRAINER_OUREA_CAVE_B2F_ROBIN, OureaCave_B2F_Text_RobinIntro, OureaCave_B2F_Text_RobinDefeat
+	msgbox OureaCave_B2F_Text_RobinPostBattle, MSGBOX_NPC
+	end
+
+
+OureaCave_B2F_EventScript_ItemGreatBall::
+	finditem ITEM_GREAT_BALL
 	end
 
 
@@ -206,3 +223,20 @@ OureaCave_B2F_EventScript_Hiker_Text_1:
 
 OureaCave_B2F_EventScript_Hiker_Text_2:
 	.string "Try turning it on!$"
+
+OureaCave_B2F_EventScript_Hiker2_Text_0:
+	.string "Har har!\n"
+	.string "Did I spook ya?!"
+	.string "It's fun to spook people when\n"
+	.string "it's dark.$"
+
+OureaCave_B2F_Text_RobinIntro::
+	.string "You'll have to look up to us when\n"
+	.string "we take to the skies!$"
+
+OureaCave_B2F_Text_RobinDefeat::
+	.string "Hmmm maybe instead of looking down\n"
+	.string "I should look back now…$"
+
+OureaCave_B2F_Text_RobinPostBattle::
+	.string "Phew… That battle was intense!$"

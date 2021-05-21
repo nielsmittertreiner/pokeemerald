@@ -111,7 +111,10 @@
     "OureaCave_1F",
     "OureaCave_B1F",
     "OureaCave_B2F",
-    "OureaCave_B3F"
+    "OureaCave_B3F",
+    "OureaCave_B4F_LowTide",
+    "OureaCave_B4F_HighTide",
+    "OureaCave_B4F_HiddenRoom"
   ],
   "gMapGroup1": [
     "LittlerootTown_BrendansHouse_1F",

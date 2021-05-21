@@ -1120,3 +1120,6 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/maps/OureaCave_B1F/scripts.inc"
 	.include "data/maps/OureaCave_B2F/scripts.inc"
 	.include "data/maps/OureaCave_B3F/scripts.inc"
+	.include "data/maps/OureaCave_B4F_LowTide/scripts.inc"
+	.include "data/maps/OureaCave_B4F_HighTide/scripts.inc"
+	.include "data/maps/OureaCave_B4F_HiddenRoom/scripts.inc"

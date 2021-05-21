@@ -1,5 +1,10 @@
 const LOCALID_HIKER = 1
 
+script OureaCaves_EventScript_TryShowMapNamePopup {
+    special(TryShowOureaCaveMapNamePopup)
+    end
+}
+
 script OureaCaves_EventScript_SetCaveLights {
     switch (var(VAR_OUREA_CAVES_LIGHTS_STATE)) {
         case 1:
@@ -139,7 +144,6 @@ script OureaCaves_EventScript_LightGeneratorBox5 {
         goto(OureaCaves_EventScript_GeneratorAlreadyTurnedOn)
     }
     call(OureaCaves_EventScript_LightGeneratorBoxLogic)
-    setflag(FLAG_OUREA_CAVES_GENERATOR_4)
+    setflag(FLAG_OUREA_CAVES_GENERATOR_5)
     end
 }
-

@@ -1,0 +1,41 @@
+{
+  "id": "MAP_OUREA_CAVE_B4F_HIDDEN_ROOM",
+  "name": "OureaCave_B4F_HiddenRoom",
+  "layout": "LAYOUT_OUREA_CAVE_B4F_HIDDEN_ROOM",
+  "music": "MUS_PETALBURG_WOODS",
+  "region_map_section": "MAPSEC_OUREA_CAVES",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_OUREA_CAVE_B4F_LOW_TIDE",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OureaCave_B4F_HiddenRoom_EventScript_WaterStone"
+    }
+  ]
+}

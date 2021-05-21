@@ -106,7 +106,7 @@
 #define FLAG_OUREA_CAVES_GENERATOR_3         0x5C
 #define FLAG_OUREA_CAVES_GENERATOR_4         0x5D
 #define FLAG_OUREA_CAVES_GENERATOR_5         0x5E
-#define FLAG_RECEIVED_POKEBLOCK_CASE         0x5F
+#define FLAG_MOVE_TUTOR_TAUGHT_KARATE_CHOP   0x5F
 #define FLAG_RECEIVED_SECRET_POWER           0x60
 #define FLAG_MET_TEAM_AQUA_HARBOR            0x61
 #define FLAG_TV_EXPLAINED                    0x62
@@ -669,11 +669,11 @@
 #define FLAG_HIDE_LITOR_TOWN_SCOTT                                  0x285
 #define FLAG_HIDE_NAVIRE_TOWN_FISHERMAN                             0x286
 #define FLAG_HIDE_NAVIRE_TOWN_BOAT                                  0x287
-#define FLAG_HIDE_ROUTE_406_HIKER1                                  0x288
-#define FLAG_HIDE_OUREA_CAVE_B2F_HIKER1                             0x289
-#define FLAG_UNUSED_0x28A                                           0x28A
-#define FLAG_UNUSED_0x28B                                           0x28B
-#define FLAG_UNUSED_0x28C                                           0x28C
+#define FLAG_HIDE_ROUTE_406_CONSTRUCTION_WORKER                     0x288
+#define FLAG_HIDE_OUREA_CAVE_B2F_CONSTRUCTION_WORKER                0x289
+#define FLAG_HIDE_OUREA_CAVE_B3F_ROCK1                              0x28A
+#define FLAG_RECIEVED_OUREA_CAVE_B3F_HIDDEN_ROOM_WATER_STONE        0x28B
+#define FLAG_HIDE_OUREA_CAVE_B4F_LOW_TIDE_CONSTRUCTION_WORKERS      0x28C
 #define FLAG_UNUSED_0x28D                                           0x28D
 #define FLAG_UNUSED_0x28E                                           0x28E
 #define FLAG_UNUSED_0x28F                                           0x28F
@@ -1027,8 +1027,8 @@
 #define FLAG_ITEM_ACREN_FOREST_POKE_BALL                            0x3E9
 #define FLAG_ITEM_FIRWEALD_CITY_HYPER_POTION                        0x3EA
 #define FLAG_ITEM_NAVIRE_TOWN_NUGGET                                0x3EB
-#define FLAG_ITEM_ROUTE_106_PROTEIN                                 0x3EC
-#define FLAG_ITEM_ROUTE_109_PP_UP                                   0x3ED
+#define FLAG_ITEM_OUREA_CAVE_B2F_GREAT_BALL                         0x3EC
+#define FLAG_ITEM_ROUTE_406_SUPER_POTION                            0x3ED
 #define FLAG_ITEM_ROUTE_109_RARE_CANDY                              0x3EE
 #define FLAG_ITEM_ROUTE_110_DIRE_HIT                                0x3EF
 #define FLAG_ITEM_ROUTE_111_TM_37                                   0x3F0
@@ -1355,7 +1355,7 @@
 #define FLAG_IS_CHAMPION                            (SYSTEM_FLAGS + 0x1F) // Seems to be related to linking.
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
-#define FLAG_UNUSED_0x881                           (SYSTEM_FLAGS + 0x21) // Unused Flag
+#define FLAG_SYS_OUREA_TIDE                         (SYSTEM_FLAGS + 0x21) // Unused Flag
 #define FLAG_UNUSED_0x882                           (SYSTEM_FLAGS + 0x22) // Unused Flag
 #define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
 #define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag

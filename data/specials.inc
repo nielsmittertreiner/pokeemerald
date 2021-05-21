@@ -542,6 +542,8 @@ gSpecials:: @ 81DBA64
 	def_special CheckPokeCenterLocation
 	def_special ShakeCameraSilent
 	def_special IsPlayerInFlashCave
+	def_special UpdateOureaCaveTides
+	def_special TryShowOureaCaveMapNamePopup
 	.ifdef DEBUG
 	def_special ShowEndOfCurrentBetaScreen
 	def_special HideEndOfCurrentBetaScreen

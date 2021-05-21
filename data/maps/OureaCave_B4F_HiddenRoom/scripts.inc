@@ -1,0 +1,39 @@
+OureaCave_B4F_HiddenRoom_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, OureaCave_B4F_HiddenRoom_MapScripts_MAP_SCRIPT_ON_LOAD
+	map_script MAP_SCRIPT_ON_TRANSITION, OureaCave_B4F_HiddenRoom_MapScripts_MAP_SCRIPT_ON_TRANSITION
+	.byte 0
+
+OureaCave_B4F_HiddenRoom_MapScripts_MAP_SCRIPT_ON_LOAD:
+	goto_if_set FLAG_RECIEVED_OUREA_CAVE_B3F_HIDDEN_ROOM_WATER_STONE, OureaCave_B4F_HiddenRoom_MapScripts_MAP_SCRIPT_ON_LOAD_1
+	return
+
+OureaCave_B4F_HiddenRoom_MapScripts_MAP_SCRIPT_ON_LOAD_1:
+	setmetatile 4, 4, METATILE_Cave_ShoalCave_BlueStone_Small, 1
+	special DrawWholeMapView
+	return
+
+OureaCave_B4F_HiddenRoom_MapScripts_MAP_SCRIPT_ON_TRANSITION:
+	call OureaCaves_EventScript_SetCaveLights
+	return
+
+
+OureaCave_B4F_HiddenRoom_EventScript_WaterStone::
+	lock
+	goto_if_set FLAG_RECIEVED_OUREA_CAVE_B3F_HIDDEN_ROOM_WATER_STONE, OureaCave_B4F_HiddenRoom_EventScript_WaterStone_2
+	finditem ITEM_WATER_STONE
+	delay 10
+	setflag FLAG_RECIEVED_OUREA_CAVE_B3F_HIDDEN_ROOM_WATER_STONE
+	setmetatile 4, 4, METATILE_Cave_ShoalCave_BlueStone_Small, 1
+	special DrawWholeMapView
+	release
+	end
+
+OureaCave_B4F_HiddenRoom_EventScript_WaterStone_2:
+	msgbox OureaCave_B4F_HiddenRoom_EventScript_WaterStone_Text_0
+	release
+	end
+
+
+OureaCave_B4F_HiddenRoom_EventScript_WaterStone_Text_0:
+	.string "There was a WATER STONE here once.\n"
+	.string "Now there's nothing…$"

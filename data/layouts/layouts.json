@@ -4904,7 +4904,7 @@
     {
       "id": "LAYOUT_ROUTE406",
       "name": "Route406_Layout",
-      "width": 80,
+      "width": 90,
       "height": 80,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Fortree",
@@ -4950,6 +4950,36 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/OureaCave_B3F/border.bin",
       "blockdata_filepath": "data/layouts/OureaCave_B3F/map.bin"
+    },
+    {
+      "id": "LAYOUT_OUREA_CAVE_B4F_LOW_TIDE",
+      "name": "OureaCave_B4F_LowTide_Layout",
+      "width": 42,
+      "height": 29,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/OureaCave_B4F_LowTide/border.bin",
+      "blockdata_filepath": "data/layouts/OureaCave_B4F_LowTide/map.bin"
+    },
+    {
+      "id": "LAYOUT_OUREA_CAVE_B4F_HIGH_TIDE",
+      "name": "OureaCave_B4F_HighTide_Layout",
+      "width": 42,
+      "height": 29,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/OureaCave_B4F_HighTide/border.bin",
+      "blockdata_filepath": "data/layouts/OureaCave_B4F_HighTide/map.bin"
+    },
+    {
+      "id": "LAYOUT_OUREA_CAVE_B4F_HIDDEN_ROOM",
+      "name": "OureaCave_B4F_HiddenRoom_Layout",
+      "width": 9,
+      "height": 13,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/OureaCave_B4F_HiddenRoom/border.bin",
+      "blockdata_filepath": "data/layouts/OureaCave_B4F_HiddenRoom/map.bin"
     }
   ]
 }

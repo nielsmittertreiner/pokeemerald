@@ -303,40 +303,50 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Route404_Sarah[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Route406_Newt[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_Route406_Terrance[] = {
     {
     .iv = 0,
     .lvl = 20,
-    .species = SPECIES_GEODUDE,
-    }
-};
-
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntMtPyre3[] = {
-    {
-    .iv = 0,
-    .lvl = 30,
-    .species = SPECIES_POOCHYENA,
+    .species = SPECIES_ARON,
     },
     {
     .iv = 0,
-    .lvl = 30,
-    .species = SPECIES_CARVANHA,
+    .lvl = 20,
+    .species = SPECIES_ARON,
+    },
+    {
+    .iv = 0,
+    .lvl = 20,
+    .species = SPECIES_ARON,
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntWeatherInst4[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_OureaCaveB2F_Robin[] = {
     {
     .iv = 0,
-    .lvl = 28,
-    .species = SPECIES_CARVANHA,
+    .lvl = 24,
+    .species = SPECIES_SKARMORY,
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_GruntAquaHideout5[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_OureaCaveB3F_Jonathan[] = {
     {
     .iv = 0,
-    .lvl = 32,
-    .species = SPECIES_CARVANHA,
+    .lvl = 24,
+    .species = SPECIES_ONIX,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_OureaCaveB3F_Lawrence[] = {
+    {
+    .iv = 0,
+    .lvl = 22,
+    .species = SPECIES_MANKEY,
+    },
+    {
+    .iv = 0,
+    .lvl = 23,
+    .species = SPECIES_HITMONLEE,
     }
 };
 

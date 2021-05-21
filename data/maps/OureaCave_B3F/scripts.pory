@@ -1,6 +1,186 @@
+const LOCALID_BLACK_BELT_1 = 1
+const LOCALID_BLACK_BELT_2 = 4
+
 mapscripts OureaCave_B3F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
+        special(UpdateOureaCaveTides)
         call(OureaCaves_EventScript_SetCaveLights)
+        if (flag(FLAG_HIDE_OUREA_CAVE_B3F_ROCK1)) {
+            setobjectxyperm(LOCALID_BLACK_BELT_1, 7, 49)
+            setobjectxyperm(LOCALID_BLACK_BELT_2, 4, 46)
+            setobjectmovementtype(LOCALID_BLACK_BELT_1, MOVEMENT_TYPE_WANDER_AROUND)
+            setobjectmovementtype(LOCALID_BLACK_BELT_2, MOVEMENT_TYPE_WANDER_AROUND)
+        }
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_F, 0: OureaCaves_EventScript_TryShowMapNamePopup
+    ]
+}
+
+script OureaCave_B3F_EventScript_BreakableRock {
+    lockall
+	checkpartymove(MOVE_ROCK_SMASH)
+    if (var(VAR_RESULT) == PARTY_SIZE) {
+        goto(EventScript_CantSmashRock)
+    }
+    setfieldeffectargument(0, VAR_RESULT)
+    bufferpartymonnick(0, VAR_RESULT)
+    buffermovename(1, MOVE_ROCK_SMASH)
+    msgbox(Text_WantToSmash, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(EventScript_CancelSmash)
+    }
+    msgbox(Text_MonUsedFieldMove, MSGBOX_DEFAULT)
+    closemessage
+    dofieldeffect(FLDEFF_USE_ROCK_SMASH)
+    waitstate
+    applymovement(VAR_LAST_TALKED, Movement_SmashRock)
+	waitmovement(0)
+	removeobject(VAR_LAST_TALKED)
+    playse(SE_PIN)
+    applymovement(LOCALID_BLACK_BELT_1, Common_Movement_ExclamationMark)
+    delay(8)
+    playse(SE_PIN)
+    applymovement(LOCALID_BLACK_BELT_2, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_BLACK_BELT_1, OureaCave_B3F_Movment_BlackBeltWalkToPlayer)
+    applymovement(LOCALID_BLACK_BELT_2, Common_Movement_FaceDown)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+    waitmovement(0)
+    goto(OureaCave_B3F_EventScript_KarateChopTutor)
+	releaseall
+	end
+}
+
+script OureaCave_B3F_EventScript_KarateChopTutor {
+    if (flag(FLAG_HIDE_OUREA_CAVE_B3F_ROCK1)) {
+        if (flag(FLAG_MOVE_TUTOR_TAUGHT_KARATE_CHOP)) {
+            msgbox("How'd that KARATE CHOP turn out?", MSGBOX_NPC)
+            end
+        }
+        lock
+        faceplayer
+        load_speech_bubble(LOCALID_BLACK_BELT_1)
+        msgbox("Wow kid! You broke that rock like a twig!\n"
+               "Maybe we can learn something from you?\p"
+               "You know what, I can teach one of your\n"
+               "POKéMON KARATE CHOP. Right?", MSGBOX_YESNO)
+        destroy_speech_bubble
+        closemessage
+        if (var(VAR_RESULT) == NO) {
+            goto(OureaCave_B3F_EventScript_KarateChopDeclined)
+        }
+        call(MoveTutor_EventScript_CanOnlyBeLearnedOnce)
+        if (var(VAR_RESULT) == NO) {
+            goto(OureaCave_B3F_EventScript_KarateChopDeclined)
+        }
+        load_speech_bubble(LOCALID_BLACK_BELT_1)
+        msgbox("Which POKéMON shall I teach\n"
+               "KARATE CHOP, hmmm?")
+        destroy_speech_bubble
+        closemessage
+        setvar(VAR_0x8005, TUTOR_MOVE_KARATE_CHOP)
+        call(MoveTutor_EventScript_OpenPartyMenu)
+        if (var(VAR_RESULT) == 0) {
+            goto(OureaCave_B3F_EventScript_KarateChopDeclined)
+        }
+        setflag(FLAG_MOVE_TUTOR_TAUGHT_KARATE_CHOP)
+        load_speech_bubble(LOCALID_BLACK_BELT_1)
+        msgbox("FIGHTING-type moves are super-\n"
+               "effective against ROCK- and\l"
+               "GROUND-types!\p"
+               "This move will crush them.")
+        destroy_speech_bubble
+        closemessage
+        release
+        end
+    } else {
+        msgbox("We're black belts. We're practicing\n"
+               "to break this rock!\p"
+               "We're not moving until this rock\n"
+               "is broken.", MSGBOX_NPC)
+        setobjectmovementtype(LOCALID_BLACK_BELT_1, MOVEMENT_TYPE_RUN_IN_PLACE_LEFT)
+        end
+    }
+}
+
+script OureaCave_B3F_EventScript_KarateChopDeclined {
+    msgbox("Alright then, come back when you\n"
+           "change your mind though.", MSGBOX_NPC)
+    end
+}
+
+script OureaCave_B3F_EventScript_BlackBelt2 {
+    if (flag(FLAG_HIDE_OUREA_CAVE_B3F_ROCK1)) {
+        msgbox("Wow! You broke that rock like it\n"
+               "was nothing!\p"
+               "You're really strong!", MSGBOX_NPC)
+        end
+    } else {
+        msgbox("We're black belts. We're practicing\n"
+               "to break this rock!\p"
+               "You'll be here for a while if we\n"
+               "can't break it…", MSGBOX_NPC)
+        setobjectmovementtype(LOCALID_BLACK_BELT_2, MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT)
+        end
+    }
+}
+
+script OureaCave_B3F_EventScript_WarpHole {
+    lockall
+	delay(20)
+	applymovement(OBJ_EVENT_ID_PLAYER, Movement_SetInvisible)
+	waitmovement(0)
+	playse(SE_FALL)
+	delay(60)
+    warpholecustom(MAP_OUREA_CAVE_B4F_LOW_TIDE, 15, 5)
+    waitstate
+	end
+}
+
+script OureaCave_B3F_EventScript_Jonathan {
+    trainerbattle_single(TRAINER_OUREA_CAVE_B3F_JONATHAN, OureaCave_B3F_Text_JonathanIntro, OureaCave_B3F_Text_JonathanDefeat)
+    msgbox(OureaCave_B3F_Text_JonathanPostBattle, MSGBOX_NPC)
+    end
+}
+
+script OureaCave_B3F_EventScript_Lawrence {
+    trainerbattle_single(TRAINER_OUREA_CAVE_B3F_LAWRENCE, OureaCave_B3F_Text_LawrenceIntro, OureaCave_B3F_Text_LawrenceDefeat)
+    msgbox(OureaCave_B3F_Text_LawrencePostBattle, MSGBOX_NPC)
+    end
+}
+
+movement OureaCave_B3F_Movment_BlackBeltWalkToPlayer {
+    walk_down
+    face_left
+}
+
+text OureaCave_B3F_Text_JonathanIntro {
+    "My moves are rock solid!\n"
+    "Let's see if you can power through…"
+}
+
+text OureaCave_B3F_Text_JonathanDefeat {
+    "Somehow my power has\n"
+    "eroded before you…"
+}
+
+text OureaCave_B3F_Text_JonathanPostBattle {
+    "Are my battling skills\n"
+    "crumbling apart?"
+}
+
+text OureaCave_B3F_Text_LawrenceIntro {
+    "After training here for a whole year\n"
+    "I have become one with the mountain."
+}
+
+text OureaCave_B3F_Text_LawrenceDefeat {
+    "Another year to go it seems…"
+}
+
+text OureaCave_B3F_Text_LawrencePostBattle {
+    "Come back next year and maybe we'll\n"
+    "battle again hehe!"
 }
 

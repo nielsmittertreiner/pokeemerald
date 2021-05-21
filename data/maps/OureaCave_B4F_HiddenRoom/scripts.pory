@@ -1,0 +1,29 @@
+mapscripts OureaCave_B4F_HiddenRoom_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_RECIEVED_OUREA_CAVE_B3F_HIDDEN_ROOM_WATER_STONE)) {
+            setmetatile(4, 4, METATILE_Cave_ShoalCave_BlueStone_Small, 1)
+            special(DrawWholeMapView)
+        }
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        call(OureaCaves_EventScript_SetCaveLights)
+    }
+}
+
+script OureaCave_B4F_HiddenRoom_EventScript_WaterStone {
+    lock 
+    if (flag(FLAG_RECIEVED_OUREA_CAVE_B3F_HIDDEN_ROOM_WATER_STONE)) {
+        msgbox("There was a WATER STONE here once.\n"
+               "Now there's nothing…")
+        release
+        end
+    }
+
+    finditem(ITEM_WATER_STONE)
+    delay(10)
+    setflag(FLAG_RECIEVED_OUREA_CAVE_B3F_HIDDEN_ROOM_WATER_STONE)
+    setmetatile(4, 4, METATILE_Cave_ShoalCave_BlueStone_Small, 1)
+    special(DrawWholeMapView)
+    release
+    end
+}

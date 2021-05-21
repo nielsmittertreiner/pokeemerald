@@ -116,3 +116,42 @@ void UpdateBirchState(u16 days)
     *state += days;
     *state %= 7;
 }
+
+void UpdateOureaCaveTides(void)
+{
+    static const u8 tide[] =
+    {
+        0, // 00
+        0, // 01
+        0, // 02
+        0, // 03
+        1, // 04
+        1, // 05
+        1, // 06
+        1, // 07
+        1, // 08
+        0, // 09
+        0, // 10
+        0, // 11
+        0, // 12
+        0, // 13
+        0, // 14
+        1, // 15
+        1, // 16
+        1, // 17
+        1, // 18
+        1, // 19
+        1, // 20
+        1, // 21
+        1, // 22
+        0, // 23
+    };
+    if (IsMapTypeOutdoors(GetLastUsedWarpMapType()))
+    {
+        RtcCalcLocalTime();
+        if (tide[gLocalTime.hours])
+            FlagSet(FLAG_SYS_OUREA_TIDE);
+        else
+            FlagClear(FLAG_SYS_OUREA_TIDE);
+    }
+}

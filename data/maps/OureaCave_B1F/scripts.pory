@@ -2,4 +2,7 @@ mapscripts OureaCave_B1F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(OureaCaves_EventScript_SetCaveLights)
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_F, 0: OureaCaves_EventScript_TryShowMapNamePopup
+    ]
 }

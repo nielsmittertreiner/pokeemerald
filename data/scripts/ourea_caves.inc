@@ -1,3 +1,8 @@
+OureaCaves_EventScript_TryShowMapNamePopup::
+	special TryShowOureaCaveMapNamePopup
+	end
+
+
 OureaCaves_EventScript_SetCaveLights::
 	switch VAR_OUREA_CAVES_LIGHTS_STATE
 	case 1, OureaCaves_EventScript_SetCaveLights_3
@@ -171,7 +176,7 @@ OureaCaves_EventScript_LightGeneratorBox5::
 	goto_if_set FLAG_OUREA_CAVES_GENERATOR_5, OureaCaves_EventScript_LightGeneratorBox5_2
 OureaCaves_EventScript_LightGeneratorBox5_1:
 	call OureaCaves_EventScript_LightGeneratorBoxLogic
-	setflag FLAG_OUREA_CAVES_GENERATOR_4
+	setflag FLAG_OUREA_CAVES_GENERATOR_5
 	end
 
 OureaCaves_EventScript_LightGeneratorBox5_2:

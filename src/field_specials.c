@@ -142,6 +142,7 @@ void ShowEndOfCurrentBetaScreen(void);
 void HideEndOfCurrentBetaScreen(void);
 #endif
 bool8 IsPlayerInFlashCave(void);
+void TryShowOureaCaveMapNamePopup(void);
 #ifndef FREE_LINK_BATTLE_RECORDS
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
 #else
@@ -4601,4 +4602,13 @@ bool8 IsPlayerInFlashCave(void)
         return  TRUE;
 
     return FALSE;
+}
+
+void TryShowOureaCaveMapNamePopup(void)
+{
+    VarSet(VAR_TEMP_F, 1);
+    if (IsMapTypeOutdoors(GetLastUsedWarpMapType()))
+    {
+        ShowMapNamePopup();
+    }
 }

@@ -1,3 +1,4 @@
+const LOCALID_LEMONADE_HIKER = 1
 const LOCALID_HIKER1 = 2
 const LOCALID_HIKER2 = 3
 
@@ -57,7 +58,7 @@ script Route406_EventScript_InitializeOureaCaveStoryline {
     applymovement(LOCALID_HIKER1, Route406_Movement_Hiker1TakePlayerToCave)
     applymovement(OBJ_EVENT_ID_PLAYER, Route406_Movement_PlayerWalkToCave)
     waitmovement(0)
-    setflag(FLAG_HIDE_ROUTE_406_HIKER1)
+    setflag(FLAG_HIDE_ROUTE_406_CONSTRUCTION_WORKER)
     setvar(VAR_OUREA_CAVES_STATE, 1)
     setvar(VAR_OUREA_CAVES_LIGHTS_STATE, 1)
     warp(MAP_OUREA_CAVE_B2F, 5, 0, 0)
@@ -66,15 +67,65 @@ script Route406_EventScript_InitializeOureaCaveStoryline {
     end
 }
 
-script Route406_EventScript_Sign {
-    msgbox("{LEFT_ARROW} NAVIRE TOWN\n"
-           "{UP_ARROW} OUREA CAVES", MSGBOX_SIGN)
+script Route406_EventScript_Hiker1 {
+    if (var(VAR_OUREA_CAVES_STATE) > 0 && var(VAR_OUREA_CAVES_STATE < 4)) {
+        msgbox("Phew, that earthquake was quite\n"
+               "heavy!\p"
+               "I can withstand quite some more though!\n"
+               "Hahaha!", MSGBOX_NPC)
+        end
+    } else {
+        msgbox("Us HIKERS belong in the mountains!\p"
+               "On ROUTE 406 and the OUREA CAVES, I\n"
+               "usually meet other comrades!", MSGBOX_NPC)
+        end
+    }
+}
+
+script Route406_EventScript_Hiker2 {
+    lock
+    face_down
+    if (flag(FLAG_TEMP_1)) {
+        applymovement(LOCALID_LEMONADE_HIKER, Common_Movement_FaceLeft)
+        waitmovement(0)
+        delay(60)
+        applymovement(LOCALID_LEMONADE_HIKER, Common_Movement_FaceRight)
+        waitmovement(0)
+        load_speech_bubble(LOCALID_LEMONADE_HIKER)
+        msgbox("I wonder what's down there?")
+        destroy_speech_bubble
+        closemessage
+    } else {
+        load_speech_bubble(LOCALID_LEMONADE_HIKER)
+        msgbox("Hah, you thought I would fight\n"
+           "you didn't you?\p"
+           "Well… I could but I really don't\n"
+           "feel like it now.\l"
+           "Instead take a break, drink up\l"
+           "and enjoy the view with me!")
+        destroy_speech_bubble
+        closemessage
+        giveitem(ITEM_LEMONADE, 1)
+        closemessage
+    }
+    release
     end
 }
 
-script Route406_EventScript_Newt {
-    trainerbattle_single(TRAINER_ROUTE406_NEWT, Route406_Text_NewtIntro, Route406_Text_NewtDefeat,)
-    msgbox(Route406_Text_PostBattle, MSGBOX_NPC)
+script Route406_EventScript_Terrance {
+    trainerbattle_single(TRAINER_ROUTE406_TERRANCE, Route406_Text_TerranceIntro, Route406_Text_TerranceDefeat)
+    msgbox(Route406_Text_TerrancePostBattle, MSGBOX_NPC)
+    end
+}
+
+script Route406_EventScript_ItemSuperPotion {
+    finditem(ITEM_SUPER_POTION)
+    end
+}
+
+script Route406_EventScript_Sign {
+    msgbox("{LEFT_ARROW} NAVIRE TOWN\n"
+           "{UP_ARROW} OUREA CAVES", MSGBOX_SIGN)
     end
 }
 
@@ -109,16 +160,16 @@ movement Route406_Movement_PlayerWalkToCave {
     walk_up
 }
 
-text Route406_Text_NewtIntro {
-    "What's someone like you doing here\n"
-    "all unprepared?"
+text Route406_Text_TerranceIntro {
+    "You know what's pretty metal?\n"
+    "Rock climbing!"
 }
 
-text Route406_Text_NewtDefeat {
+text Route406_Text_TerranceDefeat {
     "You seem to be more prepared that I am…"
 }
 
-text Route406_Text_PostBattle {
+text Route406_Text_TerrancePostBattle {
     "Watch out for falling rocks in\n"
     "these parts."
 }

@@ -1,0 +1,186 @@
+const LOCALID_CONSTRUCTION_WORKER_1 = 1
+const LOCALID_CONSTRUCTION_WORKER_2 = 2
+
+mapscripts OureaCave_B4F_LowTide_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(OureaCaves_EventScript_SetCaveLights)
+        special(UpdateOureaCaveTides)
+        if (flag(FLAG_SYS_OUREA_TIDE)) {
+            setmaplayoutindex(LAYOUT_OUREA_CAVE_B4F_HIGH_TIDE)
+        } else {
+            setmaplayoutindex(LAYOUT_OUREA_CAVE_B4F_LOW_TIDE)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_F, 0: OureaCaves_EventScript_TryShowMapNamePopup
+    ]
+}
+
+script OureaCave_B4F_LowTide_EventScript_ConstructionWorker1 {
+    lock
+    faceplayer
+    if (var(VAR_OUREA_CAVES_LIGHTS_STATE) < 6) {
+        msgbox("I heard from the BOSS that you're\n"
+               "supposed to be helping us?\p"
+               "Well err, not to be that person, but…\p"
+               "It's still a bit dark here, don't you agree?")
+        closemessage
+        release
+        end
+    } elif (var(VAR_OUREA_CAVES_LIGHTS_STATE) == 6) {
+        goto(OureaCave_B4F_LowTide_EventScript_CompletedLightBoxCutscene)
+    }
+}
+
+script OureaCave_B4F_LowTide_EventScript_ConstructionWorker2 {
+    lock
+    faceplayer
+    if (var(VAR_OUREA_CAVES_LIGHTS_STATE) < 6) {
+        msgbox("I heard from the BOSS that you're\n"
+               "supposed to be helping us?\p"
+               "Well err, not to be that person, but…\p"
+               "It's still a bit dark here,\n"
+               "don't you agree?")
+        closemessage
+        release
+        end
+    } elif (var(VAR_OUREA_CAVES_LIGHTS_STATE) == 6) {
+        goto(OureaCave_B4F_LowTide_EventScript_CompletedLightBoxCutscene)
+    }
+}
+
+script OureaCave_B4F_LowTide_EventScript_CompletedLightBoxCutscene {
+    msgbox("Har har!\n"
+           "You've done it!\p"
+           "I can finally see clearly again.\p"
+           "Mining can be dangerous work, so being\n"
+           "able to see properly is very important!\p"
+           "Y'know, we've heard there are FOSSILS\n"
+           "in other caves of the EURUS REGION…\p"
+           "Maybe you'll meet some of our other\n"
+           "workers there too!", MSGBOX_NPC)
+    getplayerxy(VAR_TEMP_1, VAR_TEMP_2)
+    switch (var(VAR_TEMP_2)) {
+        case 12:
+            call(OureaCave_B4F_LowTide_EventScript_DoCallCutsceneForWorker1)
+            break
+        case 13:
+            call(OureaCave_B4F_LowTide_EventScript_DoCallCutsceneForWorker2)
+            break
+    }
+    release
+    end
+}
+
+script OureaCave_B4F_LowTide_EventScript_DoCallCutsceneForWorker1 {
+    playse(SE_POKENAV_CALL)
+    delay(60)
+    applymovement(LOCALID_CONSTRUCTION_WORKER_2, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    turnobject(LOCALID_CONSTRUCTION_WORKER_2, DIR_NORTH)
+    delay(30)
+    load_speech_bubble(LOCALID_CONSTRUCTION_WORKER_2)
+    call(OureaCave_B4F_LowTide_EventScript_DoCallDialogue)
+    turnobject(LOCALID_CONSTRUCTION_WORKER_1, DIR_SOUTH)
+    delay(60)
+    load_speech_bubble(LOCALID_CONSTRUCTION_WORKER_1)
+    msgbox("Ah alright, I see now…")
+    destroy_speech_bubble
+    closemessage
+    turnobject(LOCALID_CONSTRUCTION_WORKER_1, DIR_WEST)
+    load_speech_bubble(LOCALID_CONSTRUCTION_WORKER_1)
+    call(OureaCave_B4F_LowTide_EventScript_DoAfterCallDialogue)
+    applymovement(OBJ_EVENT_ID_PLAYER, OureaCave_B4F_LowTide_Movement_PlayerWalkDown)
+    applymovement(LOCALID_CONSTRUCTION_WORKER_1, OureaCave_B4F_LowTide_Movement_ConstructionWorkerWalkOffScreen)
+    applymovement(LOCALID_CONSTRUCTION_WORKER_2, OureaCave_B4F_LowTide_Movement_ConstructionWorker2FollowOffScreen)
+    waitmovement(0)
+    hideobjectat(LOCALID_CONSTRUCTION_WORKER_1, MAP_OUREA_CAVE_B4F_LOW_TIDE)
+    hideobjectat(LOCALID_CONSTRUCTION_WORKER_2, MAP_OUREA_CAVE_B4F_LOW_TIDE)
+    setflag(FLAG_HIDE_OUREA_CAVE_B4F_LOW_TIDE_CONSTRUCTION_WORKERS)
+    return
+}
+
+script OureaCave_B4F_LowTide_EventScript_DoCallCutsceneForWorker2 {
+    playse(SE_POKENAV_CALL)
+    delay(60)
+    applymovement(LOCALID_CONSTRUCTION_WORKER_1, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    turnobject(LOCALID_CONSTRUCTION_WORKER_1, DIR_SOUTH)
+    delay(30)
+    load_speech_bubble(LOCALID_CONSTRUCTION_WORKER_1)
+    call(OureaCave_B4F_LowTide_EventScript_DoCallDialogue)
+    turnobject(LOCALID_CONSTRUCTION_WORKER_2, DIR_NORTH)
+    delay(60)
+    load_speech_bubble(LOCALID_CONSTRUCTION_WORKER_2)
+    msgbox("Ah alright, I see now…")
+    destroy_speech_bubble
+    closemessage
+    turnobject(LOCALID_CONSTRUCTION_WORKER_2, DIR_WEST)
+    load_speech_bubble(LOCALID_CONSTRUCTION_WORKER_2)
+    call(OureaCave_B4F_LowTide_EventScript_DoAfterCallDialogue)
+    applymovement(OBJ_EVENT_ID_PLAYER, OureaCave_B4F_LowTide_Movement_PlayerWalkUp)
+    applymovement(LOCALID_CONSTRUCTION_WORKER_2, OureaCave_B4F_LowTide_Movement_ConstructionWorkerWalkOffScreen)
+    applymovement(LOCALID_CONSTRUCTION_WORKER_1, OureaCave_B4F_LowTide_Movement_ConstructionWorker1FollowOffScreen)
+    waitmovement(0)
+    hideobjectat(LOCALID_CONSTRUCTION_WORKER_1, MAP_OUREA_CAVE_B4F_LOW_TIDE)
+    hideobjectat(LOCALID_CONSTRUCTION_WORKER_2, MAP_OUREA_CAVE_B4F_LOW_TIDE)
+    setflag(FLAG_HIDE_OUREA_CAVE_B4F_LOW_TIDE_CONSTRUCTION_WORKERS)
+    return
+}
+
+script OureaCave_B4F_LowTide_EventScript_DoCallDialogue {
+    msgbox("Mhm…\n"
+           "Yes, alright.\n"
+           "Understood sir.")
+    destroy_speech_bubble
+    closemessage
+    return
+}
+
+script OureaCave_B4F_LowTide_EventScript_DoAfterCallDialogue {
+    msgbox("Now that the lights are on again,\n"
+           "the BOSS want us to get back to work…\p"
+           "Sigh… It's a never ending cycle…\p"
+           "Anyway, have safe travels and thanks\n"
+           "for the help!")
+    destroy_speech_bubble
+    closemessage
+    return
+}
+
+script OureaCave_B4F_LowTide_EventScript_OldMan {
+    msgbox("Isn't it beautiful how the water\n"
+           "floods this cave partially from\l"
+           "time to time?\p"
+           "The tides are a wonderful natural\n"
+           "phenomenon, don't you agree?", MSGBOX_NPC)
+    end
+}
+
+movement OureaCave_B4F_LowTide_Movement_PlayerWalkDown {
+    walk_down
+    face_up
+}
+
+movement OureaCave_B4F_LowTide_Movement_PlayerWalkUp {
+    walk_up
+    face_down
+}
+
+
+movement OureaCave_B4F_LowTide_Movement_ConstructionWorkerWalkOffScreen {
+    walk_left * 7
+    walk_up * 7
+}
+
+movement OureaCave_B4F_LowTide_Movement_ConstructionWorker2FollowOffScreen {
+    walk_up
+    walk_left * 7
+    walk_up * 7
+}
+
+movement OureaCave_B4F_LowTide_Movement_ConstructionWorker1FollowOffScreen {
+    walk_down
+    walk_left * 7
+    walk_up * 7
+}

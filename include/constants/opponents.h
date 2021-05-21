@@ -25,10 +25,10 @@
 #define TRAINER_MURENA_CITY_GRUNT            21
 #define TRAINER_ROUTE404_WILLIAM             22
 #define TRAINER_ROUTE404_SARAH               23
-#define TRAINER_ROUTE406_NEWT                24
-#define TRAINER_GRUNT_MT_PYRE_3              25
-#define TRAINER_GRUNT_WEATHER_INST_4         26
-#define TRAINER_GRUNT_AQUA_HIDEOUT_5         27
+#define TRAINER_ROUTE406_TERRANCE            24
+#define TRAINER_OUREA_CAVE_B2F_ROBIN         25
+#define TRAINER_OUREA_CAVE_B3F_JONATHAN      26
+#define TRAINER_OUREA_CAVE_B3F_LAWRENCE      27
 #define TRAINER_GRUNT_AQUA_HIDEOUT_6         28
 #define TRAINER_FREDRICK                     29
 #define TRAINER_MATT                         30

@@ -335,60 +335,60 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Route404_Sarah},
     },
 
-    [TRAINER_ROUTE406_NEWT] =
+    [TRAINER_ROUTE406_TERRANCE] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_HIKER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
         .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("NEWT"),
+        .trainerName = _("TERRANCE"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Route406_Newt),
-        .party = {.NoItemDefaultMoves = sParty_Route406_Newt},
+        .partySize = ARRAY_COUNT(sParty_Route406_Terrance),
+        .party = {.NoItemDefaultMoves = sParty_Route406_Terrance},
     },
 
-    [TRAINER_GRUNT_MT_PYRE_3] =
+    [TRAINER_OUREA_CAVE_B2F_ROBIN] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_TEAM_AQUA,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
-        .trainerPic = TRAINER_PIC_AQUA_GRUNT_M,
-        .trainerName = _("GRUNT"),
+        .trainerClass = TRAINER_CLASS_BIRD_KEEPER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_COOL,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER,
+        .trainerName = _("ROBIN"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_GruntMtPyre3),
-        .party = {.NoItemDefaultMoves = sParty_GruntMtPyre3},
+        .partySize = ARRAY_COUNT(sParty_OureaCaveB2F_Robin),
+        .party = {.NoItemDefaultMoves = sParty_OureaCaveB2F_Robin},
     },
 
-    [TRAINER_GRUNT_WEATHER_INST_4] =
+    [TRAINER_OUREA_CAVE_B3F_JONATHAN] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_TEAM_AQUA,
-        .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA,
-        .trainerPic = TRAINER_PIC_AQUA_GRUNT_F,
-        .trainerName = _("GRUNT"),
+        .trainerClass = TRAINER_CLASS_HIKER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_HIKER,
+        .trainerPic = TRAINER_PIC_HIKER,
+        .trainerName = _("JONATHAN"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_GruntWeatherInst4),
-        .party = {.NoItemDefaultMoves = sParty_GruntWeatherInst4},
+        .partySize = ARRAY_COUNT(sParty_OureaCaveB3F_Jonathan),
+        .party = {.NoItemDefaultMoves = sParty_OureaCaveB3F_Jonathan},
     },
 
-    [TRAINER_GRUNT_AQUA_HIDEOUT_5] =
+    [TRAINER_OUREA_CAVE_B3F_LAWRENCE] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_TEAM_AQUA,
-        .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA,
-        .trainerPic = TRAINER_PIC_AQUA_GRUNT_F,
-        .trainerName = _("GRUNT"),
+        .trainerClass = TRAINER_CLASS_CAMPER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_CAMPER,
+        .trainerName = _("LAWRENCE"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout5),
-        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout5},
+        .partySize = ARRAY_COUNT(sParty_OureaCaveB3F_Lawrence),
+        .party = {.NoItemDefaultMoves = sParty_OureaCaveB3F_Lawrence},
     },
 
     [TRAINER_GRUNT_AQUA_HIDEOUT_6] =
