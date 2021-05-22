@@ -2,3 +2,12 @@ script Debug_EventScript_DoConfetti {
     special(DoDomeConfetti)
     waitstate
 }
+
+script Debug_EventScript_ShowEndOfCurrentBeta {
+    lock
+    special(ShowEndOfCurrentBetaScreen)
+    waitbuttonpress
+    special(HideEndOfCurrentBetaScreen)
+    release
+    end
+}

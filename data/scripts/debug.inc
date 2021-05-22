@@ -3,3 +3,12 @@ Debug_EventScript_DoConfetti::
 	waitstate
 	return
 
+
+Debug_EventScript_ShowEndOfCurrentBeta::
+	lock
+	special ShowEndOfCurrentBetaScreen
+	waitbuttonpress
+	special HideEndOfCurrentBetaScreen
+	release
+	end
+
