@@ -121,6 +121,11 @@ NavireTown_EventScript_ItemNugget::
 	end
 
 
+NavireTown_EventScript_FishingClubSign::
+	msgbox NavireTown_EventScript_FishingClubSign_Text_0, MSGBOX_SIGN
+	end
+
+
 NavireTown_EventScript_TownSign::
 	msgbox NavireTown_EventScript_TownSign_Text_0, MSGBOX_SIGN
 	end
@@ -255,6 +260,9 @@ NavireTown_EventScript_Boy_Text_0:
 	.string "are sent towards the mainland through\l"
 	.string "the port of MURENA CITY.\p"
 	.string "Boats are so cool!$"
+
+NavireTown_EventScript_FishingClubSign_Text_0:
+	.string "NAVIRE TOWN FISHING CLUB$"
 
 NavireTown_EventScript_TownSign_Text_0:
 	.string "NAVIRE TOWN\n"

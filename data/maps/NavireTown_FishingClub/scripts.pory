@@ -1,0 +1,98 @@
+const LOCALID_FISHERMAN_1 = 1
+const LOCALID_FISHERMAN_2 = 2
+
+mapscripts NavireTown_FishingClub_MapScripts {}
+
+script NavireTown_FishingClub_EventScript_Fisherman1 {
+    msgbox("Shhh, don't disturb me.\n"
+           "I'm watching a documentary about the\l"
+           "MAGIKARP mating season…", MSGBOX_NPC)
+    applymovement(LOCALID_FISHERMAN_1, Common_Movement_FaceUp)
+    waitmovement(0)
+    end
+}
+
+script NavireTown_FishingClub_EventScript_Fisherman2 {
+    lock
+    faceplayer
+    
+    if (flag(FLAG_RECEIVED_OLD_ROD))
+    {
+        load_speech_bubble(LOCALID_FISHERMAN_2)
+        msgbox("If you notice a fish on your hook,\n"
+               "quickly reel it in by pressing the\l"
+               "{A_BUTTON} BUTTON!\p"
+               "Good luck and have fun fishing!")
+        destroy_speech_bubble
+        closemessage
+        release
+        end
+    }
+    load_speech_bubble(LOCALID_FISHERMAN_2)
+    msgbox("That beautiful lady right there\n"
+           "is my wife. She loves fish just as\l"
+           "much as I do. We're a perfect couple.\p"
+           "Do you also like fish?", MSGBOX_YESNO)
+    destroy_speech_bubble
+    closemessage
+
+    if (var(VAR_RESULT) == YES)
+    {
+        load_speech_bubble(LOCALID_FISHERMAN_2)
+        msgbox("Yes! That's the right answer!\p"
+               "Hmmm, I see you don't have a fishing\n"
+               "rod though…")
+        destroy_speech_bubble
+        closemessage
+        delay(30)
+        load_speech_bubble(LOCALID_FISHERMAN_2)
+        msgbox("… … …")
+        delay(60)
+        destroy_speech_bubble
+        closemessage
+        load_speech_bubble(LOCALID_FISHERMAN_2)
+        msgbox("You know what, take this one!\n"
+               "It's yours now!")
+        destroy_speech_bubble
+        closemessage
+        giveitem(ITEM_OLD_ROD, 1)
+        closemessage
+        load_speech_bubble(LOCALID_FISHERMAN_2)
+        msgbox("Throw this rod out in open waters\n"
+               "and who knows what you'll catch!")
+        destroy_speech_bubble
+        closemessage
+        setflag(FLAG_RECEIVED_OLD_ROD)
+    }
+    else
+    {
+        load_speech_bubble(LOCALID_FISHERMAN_2)
+        msgbox("Oh, that's too bad for you.\n"
+               "You're missing out on the fun!")
+        destroy_speech_bubble
+        closemessage
+    }
+    release
+    end
+}
+
+script NavireTown_FishingClub_EventScript_Fisherman3 {
+    msgbox("I've tried both the SKEWERS of\n"
+           "MURENA CITY and the dishes from here.\p"
+           "I gotta say I like this better.", MSGBOX_NPC)
+    end
+}
+
+script NavireTown_FishingClub_EventScript_Woman {
+    msgbox("I always try to make the most\n"
+           "delicious meals with the fish the\l"
+           "men gather during the day.\p"
+           "I've heard some lady in MURENA CITY\n"
+           "also cooks some wonderful dishes.", MSGBOX_NPC)
+    end
+}
+
+script NavireTown_FishingClub_EventScript_Painting {
+    msgbox("It's a wonderfully drawn painting…", MSGBOX_SIGN)
+    end
+}

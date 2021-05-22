@@ -1,0 +1,9 @@
+mapscripts NavireTown_House2_MapScripts {}
+
+script NavireTown_House2_EventScript_Man {
+    msgbox("I single handedly planted all\n"
+           "these trees around my house.\p"
+           "I personally think they're\n"
+           "beautiful.", MSGBOX_NPC)
+    end
+}

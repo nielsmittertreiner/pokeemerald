@@ -1,0 +1,8 @@
+mapscripts NavireTown_House1_MapScripts {}
+
+script NavireTown_House1_EventScript_Girl {
+    msgbox("I quite enjoy the salty air here and\n"
+           "sometimes I also go for a walk at\l"
+           "ROUTE 406.", MSGBOX_NPC)
+    end
+}

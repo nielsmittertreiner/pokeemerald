@@ -168,6 +168,12 @@
 #define MAP_VERDANTURF_TOWN_WANDAS_HOUSE            (6 | (6 << 8))
 #define MAP_VERDANTURF_TOWN_FRIENDSHIP_RATERS_HOUSE (7 | (6 << 8))
 #define MAP_VERDANTURF_TOWN_HOUSE                   (8 | (6 << 8))
+#define MAP_NAVIRE_TOWN_POKEMON_CENTER_1F           (9 | (6 << 8))
+#define MAP_NAVIRE_TOWN_POKEMON_CENTER_2F           (10 | (6 << 8))
+#define MAP_NAVIRE_TOWN_FISHING_CLUB                (11 | (6 << 8))
+#define MAP_NAVIRE_TOWN_HOUSE1                      (12 | (6 << 8))
+#define MAP_NAVIRE_TOWN_HOUSE2                      (13 | (6 << 8))
+#define MAP_NAVIRE_TOWN_HOUSE3                      (14 | (6 << 8))
 
 // Map Group 7
 #define MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F (0 | (7 << 8))

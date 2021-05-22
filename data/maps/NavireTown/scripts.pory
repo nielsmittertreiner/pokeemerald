@@ -133,6 +133,11 @@ script NavireTown_EventScript_ItemNugget {
     end
 }
 
+script NavireTown_EventScript_FishingClubSign {
+    msgbox("NAVIRE TOWN FISHING CLUB", MSGBOX_SIGN)
+    end
+}
+
 script NavireTown_EventScript_TownSign {
     msgbox("NAVIRE TOWN\n"
            "“Sea crashing back on the mainland.”", MSGBOX_SIGN)

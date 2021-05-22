@@ -4980,6 +4980,66 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/OureaCave_B4F_HiddenRoom/border.bin",
       "blockdata_filepath": "data/layouts/OureaCave_B4F_HiddenRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_NAVIRE_TOWN_POKEMON_CENTER_1F",
+      "name": "NavireTown_PokemonCenter_1F_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonCenter",
+      "border_filepath": "data/layouts/NavireTown_PokemonCenter_1F/border.bin",
+      "blockdata_filepath": "data/layouts/NavireTown_PokemonCenter_1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_NAVIRE_TOWN_POKEMON_CENTER_2F",
+      "name": "NavireTown_PokemonCenter_2F_Layout",
+      "width": 14,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonCenter",
+      "border_filepath": "data/layouts/NavireTown_PokemonCenter_2F/border.bin",
+      "blockdata_filepath": "data/layouts/NavireTown_PokemonCenter_2F/map.bin"
+    },
+    {
+      "id": "LAYOUT_NAVIRE_TOWN_FISHING_CLUB",
+      "name": "NavireTown_FishingClub_Layout",
+      "width": 12,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/NavireTown_FishingClub/border.bin",
+      "blockdata_filepath": "data/layouts/NavireTown_FishingClub/map.bin"
+    },
+    {
+      "id": "LAYOUT_NAVIRE_TOWN_HOUSE1",
+      "name": "NavireTown_House1_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/NavireTown_House1/border.bin",
+      "blockdata_filepath": "data/layouts/NavireTown_House1/map.bin"
+    },
+    {
+      "id": "LAYOUT_NAVIRE_TOWN_HOUSE2",
+      "name": "NavireTown_House2_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/NavireTown_House2/border.bin",
+      "blockdata_filepath": "data/layouts/NavireTown_House2/map.bin"
+    },
+    {
+      "id": "LAYOUT_NAVIRE_TOWN_HOUSE3",
+      "name": "NavireTown_House3_Layout",
+      "width": 14,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/NavireTown_House3/border.bin",
+      "blockdata_filepath": "data/layouts/NavireTown_House3/map.bin"
     }
   ]
 }

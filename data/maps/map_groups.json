@@ -202,7 +202,13 @@
     "VerdanturfTown_PokemonCenter_2F",
     "VerdanturfTown_WandasHouse",
     "VerdanturfTown_FriendshipRatersHouse",
-    "VerdanturfTown_House"
+    "VerdanturfTown_House",
+    "NavireTown_PokemonCenter_1F",
+    "NavireTown_PokemonCenter_2F",
+    "NavireTown_FishingClub",
+    "NavireTown_House1",
+    "NavireTown_House2",
+    "NavireTown_House3"
   ],
   "gMapGroup7": [
     "PacifidlogTown_PokemonCenter_1F",

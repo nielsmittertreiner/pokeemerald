@@ -1,0 +1,8 @@
+mapscripts NavireTown_PokemonCenter_1F_MapScripts {}
+
+script MurenaCity_PokemonCenter_1F_EventScript_ConstructionWorker {
+    msgbox("Phew…\n"
+           "Being a construction worker is hard!\p"
+           "Man, I'm glad to have a break.", MSGBOX_NPC)
+    end
+}

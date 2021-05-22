@@ -1,0 +1,14 @@
+mapscripts NavireTown_House3_MapScripts {}
+
+script NavireTown_House3_EventScript_FatMan {
+    msgbox("Oomph, I'm so full.\n"
+           "Maybe I should eat a bit less…", MSGBOX_NPC)
+    end
+}
+
+script NavireTown_House3_EventScript_Man {
+    msgbox("Sometimes you can even feel\n"
+           "the vibrations of the work done\l"
+           "at the OUREA CAVES all the way here.", MSGBOX_NPC)
+    end
+}
