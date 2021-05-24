@@ -1,4 +1,5 @@
 const LOCALID_FEEBAS_SELLER = 4
+const LOCALID_SKEWER_SELLER = 5
 const LOCALID_ARTIST = 9
 const LOCALID_OLD_WOMAN = 12
 const LOCALID_OLD_MAN = 15
@@ -386,7 +387,55 @@ script MurenaCity_EventScript_Wingull {
 }
 
 script MurenaCity_EventScript_MarketSalesWoman {
-    giveitem(ITEM_TENTACOOL_SKEWER, 1)
+    lock
+    faceplayer
+    load_speech_bubble(LOCALID_SKEWER_SELLER)
+    msgbox("Hey there!\n"
+           "I make MURENA CITY's delicacy, the\l"
+           "famous TENTACOOL SKEWERS!")
+    destroy_speech_bubble
+    closemessage
+    showmoneybox(0, 0, 0)
+    load_speech_bubble(LOCALID_SKEWER_SELLER)
+    msgbox("One delicious skewer for ¥250?", MSGBOX_YESNO)
+    destroy_speech_bubble
+    closemessage
+    if (var(VAR_RESULT) == YES)
+    {
+        checkmoney(250, 0)
+        if (var(VAR_RESULT) == FALSE)
+        {
+            load_speech_bubble(LOCALID_SKEWER_SELLER)
+            msgbox("I'm sorry, but that's not\n"
+                   "quite enough dear.")
+            destroy_speech_bubble
+            closemessage
+            release
+            end
+        }
+        delay(10)
+        playse(SE_SHOP)
+        removemoney(250, 0)
+        updatemoneybox(0, 0)
+        delay(30)
+        hidemoneybox
+        giveitem(ITEM_TENTACOOL_SKEWER, 1)
+        load_speech_bubble(LOCALID_SKEWER_SELLER)
+        msgbox("Eat up dear!")
+        destroy_speech_bubble
+        closemessage
+    }
+    else
+    {
+        hidemoneybox
+        load_speech_bubble(LOCALID_SKEWER_SELLER)
+        msgbox("That's okay too dear,\n"
+               "I'll be right here if you want to\l"
+               "taste one.")
+        destroy_speech_bubble
+        closemessage
+    }
+    release
     end
 }
 

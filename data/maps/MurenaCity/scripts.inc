@@ -364,7 +364,51 @@ MurenaCity_EventScript_Wingull::
 
 
 MurenaCity_EventScript_MarketSalesWoman::
+	lock
+	faceplayer
+	load_speech_bubble 5
+	msgbox MurenaCity_EventScript_MarketSalesWoman_Text_0
+	destroy_speech_bubble
+	closemessage
+	showmoneybox 0, 0, 0
+	load_speech_bubble 5
+	msgbox MurenaCity_EventScript_MarketSalesWoman_Text_1, MSGBOX_YESNO
+	destroy_speech_bubble
+	closemessage
+	compare VAR_RESULT, YES
+	goto_if_eq MurenaCity_EventScript_MarketSalesWoman_2
+	hidemoneybox
+	load_speech_bubble 5
+	msgbox MurenaCity_EventScript_MarketSalesWoman_Text_4
+	destroy_speech_bubble
+	closemessage
+MurenaCity_EventScript_MarketSalesWoman_1:
+	release
+	end
+
+MurenaCity_EventScript_MarketSalesWoman_2:
+	checkmoney 250, 0
+	compare VAR_RESULT, FALSE
+	goto_if_eq MurenaCity_EventScript_MarketSalesWoman_6
+	delay 10
+	playse SE_SHOP
+	removemoney 250, 0
+	updatemoneybox 0, 0
+	delay 30
+	hidemoneybox
 	giveitem ITEM_TENTACOOL_SKEWER, 1
+	load_speech_bubble 5
+	msgbox MurenaCity_EventScript_MarketSalesWoman_Text_3
+	destroy_speech_bubble
+	closemessage
+	goto MurenaCity_EventScript_MarketSalesWoman_1
+
+MurenaCity_EventScript_MarketSalesWoman_6:
+	load_speech_bubble 5
+	msgbox MurenaCity_EventScript_MarketSalesWoman_Text_2
+	destroy_speech_bubble
+	closemessage
+	release
 	end
 
 
@@ -847,6 +891,26 @@ MurenaCity_EventScript_OldMan_Text_4:
 	.string "not possess…\p"
 	.string "If you could find it for me…\n"
 	.string "I shall be very grateful…$"
+
+MurenaCity_EventScript_MarketSalesWoman_Text_0:
+	.string "Hey there!\n"
+	.string "I make MURENA CITY's delicacy, the\l"
+	.string "famous TENTACOOL SKEWERS!$"
+
+MurenaCity_EventScript_MarketSalesWoman_Text_1:
+	.string "One delicious skewer for ¥250?$"
+
+MurenaCity_EventScript_MarketSalesWoman_Text_2:
+	.string "I'm sorry, but that's not\n"
+	.string "quite enough dear.$"
+
+MurenaCity_EventScript_MarketSalesWoman_Text_3:
+	.string "Eat up dear!$"
+
+MurenaCity_EventScript_MarketSalesWoman_Text_4:
+	.string "That's okay too dear,\n"
+	.string "I'll be right here if you want to\l"
+	.string "taste one.$"
 
 MurenaCity_EventScript_MarketSalesMan_Text_0:
 	.string "If I sell anything?\n"
