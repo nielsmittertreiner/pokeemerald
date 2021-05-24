@@ -46,5 +46,5 @@ FirwealdCity_House1_EventScript_Lass_Text_0:
 	.string "myself…$"
 
 FirwealdCity_House1_EventScript_LittleGirl_Text_0:
-	.string "Weeee\n"
+	.string "Weeee!\n"
 	.string "Grandpa's ZIGZAGOON is so adorable!$"

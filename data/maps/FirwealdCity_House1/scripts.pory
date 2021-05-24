@@ -23,7 +23,7 @@ script FirwealdCity_House1_EventScript_Lass {
 }
 
 script FirwealdCity_House1_EventScript_LittleGirl {
-    msgbox("Weeee\n"
+    msgbox("Weeee!\n"
            "Grandpa's ZIGZAGOON is so adorable!", MSGBOX_NPC)
     end
 }
