@@ -122,7 +122,7 @@ script OureaCave_B2F_EventScript_WarpHole {
 
 script OureaCave_B2F_EventScript_Hiker2 {
     msgbox("Har har!\n"
-           "Did I spook ya?!"
+           "Did I spook ya?!\p"
            "It's fun to spook people when\n"
            "it's dark.", MSGBOX_NPC)
     end

@@ -226,7 +226,7 @@ OureaCave_B2F_EventScript_Hiker_Text_2:
 
 OureaCave_B2F_EventScript_Hiker2_Text_0:
 	.string "Har har!\n"
-	.string "Did I spook ya?!"
+	.string "Did I spook ya?!\p"
 	.string "It's fun to spook people when\n"
 	.string "it's dark.$"
 

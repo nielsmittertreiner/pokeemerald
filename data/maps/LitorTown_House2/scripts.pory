@@ -2,8 +2,9 @@ mapscripts LitorTown_House2_MapScripts {}
 
 script LitorTown_House2_EventScript_Lass {
     msgbox("My PIKACHU and I usually train on\n"
-           "ROUTE 404 and 405, because ELECTRIC-type\l"
-           "is super effective to FLYING- and WATER-type.", MSGBOX_NPC)
+           "ROUTE 404 and 405, because\l"
+           "ELECTRIC-type is super effective to\l"
+           "FLYING- and WATER-type.", MSGBOX_NPC)
     end
 }
 
