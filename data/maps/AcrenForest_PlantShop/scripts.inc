@@ -88,6 +88,7 @@ AcrenForest_PlantShop_EventScript_ShopOwner_2:
 	end
 
 
+.align 2
 AcrenForest_PlantShop_PokemartDecor_Plants:
     .2byte DECOR_PRETTY_FLOWERS
 	.2byte DECOR_TROPICAL_PLANT

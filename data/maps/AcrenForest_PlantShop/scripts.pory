@@ -101,6 +101,7 @@ script AcrenForest_PlantShop_EventScript_ShopOwner {
 }
 
 raw `
+    .align 2
 AcrenForest_PlantShop_PokemartDecor_Plants:
     .2byte DECOR_PRETTY_FLOWERS
 	.2byte DECOR_TROPICAL_PLANT
