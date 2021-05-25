@@ -14,7 +14,7 @@
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 
-#define OBJ_EVENT_PAL_TAG_NPC_1 0x1103 // duplicate of define in event_object_movement.c
+#define OBJ_EVENT_PAL_TAG_REFLECTION 0x1103 // duplicate of define in event_object_movement.c
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 
 static void UpdateObjectReflectionSprite(struct Sprite *);
@@ -127,7 +127,7 @@ static void ApplyReflectionFilter(u8 paletteNum, u16 *dest)
 void LoadSpecialReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     u16 baseTag = gSprites[objectEvent->spriteId].oam.paletteNum;
-    u16 paletteTag = baseTag + OBJ_EVENT_PAL_TAG_NONE + 0x1000;
+    u16 paletteTag = baseTag + OBJ_EVENT_PAL_TAG_REFLECTION;
     u8 paletteIndex = IndexOfSpritePaletteTag(paletteTag);
     u16 filteredData[16] = {0};
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
@@ -150,7 +150,7 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
     struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
     struct SpritePalette filteredPalette;
     u16 baseTag = mainSprite->oam.paletteNum;
-    u16 paletteTag = baseTag + OBJ_EVENT_PAL_TAG_NONE + 0x1000;
+    u16 paletteTag = baseTag + OBJ_EVENT_PAL_TAG_REFLECTION;
     u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
     u16 filteredData[16] = {0};
 
