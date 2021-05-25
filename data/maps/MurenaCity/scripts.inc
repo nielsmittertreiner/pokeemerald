@@ -443,7 +443,8 @@ MurenaCity_EventScript_BugCatcher::
 
 
 MurenaCity_EventScript_Woman::
-	return
+	msgbox MurenaCity_EventScript_Woman_Text_0, MSGBOX_NPC
+	end
 
 
 MurenaCity_EventScript_OldWoman::
@@ -939,6 +940,10 @@ MurenaCity_EventScript_Sailor3_Text_0:
 MurenaCity_EventScript_BugCatcher_Text_0:
 	.string "I wonder what BUG-types live\n"
 	.string "across the EURUS region.$"
+
+MurenaCity_EventScript_Woman_Text_0:
+	.string "Just watching ships go to and\n"
+	.string "from the SHIPYARD is oddly calming…$"
 
 MurenaCity_EventScript_OldWoman_Text_0:
 	.string "Oh, how it's changed here.\n"

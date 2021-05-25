@@ -480,7 +480,9 @@ script MurenaCity_EventScript_BugCatcher {
 }
 
 script MurenaCity_EventScript_Woman {
-    
+    msgbox("Just watching ships go to and\n"
+           "from the SHIPYARD is oddly calming…", MSGBOX_NPC)
+    end
 }
 
 script MurenaCity_EventScript_OldWoman {
