@@ -339,7 +339,7 @@ AcrenForest_EventScript_DescribeIllegalCamp_2:
 
 AcrenForest_EventScript_WarnBoss::
 	lock
-	playbgm MUS_ENCOUNTER_AQUA, 0x00
+	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	applymovement 29, Common_Movement_ExclamationMark
 	waitmovement 0
 	load_speech_bubble 29

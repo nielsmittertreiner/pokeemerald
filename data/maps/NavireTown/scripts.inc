@@ -64,7 +64,7 @@ NavireTown_EventScript_SailToLitor::
 	waitmovement 0
 	delay 30
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_SAILING, 0
+	playbgm MUS_SAILING, FALSE
 	applymovement OBJ_EVENT_ID_PLAYER, NavireTown_Movement_SailToLitor
 	applymovement 1, NavireTown_Movement_SailToLitor
 	waitmovement 0

@@ -371,7 +371,7 @@ script AcrenForest_EventScript_DescribeIllegalCamp {
 
 script AcrenForest_EventScript_WarnBoss {
     lock
-    playbgm(MUS_ENCOUNTER_AQUA, 0x00)
+    playbgm(MUS_ENCOUNTER_AQUA, FALSE)
     applymovement(LOCALID_TEAMAIRLOCKGRUNT_GUARD, Common_Movement_ExclamationMark)
     waitmovement(0)
     load_speech_bubble(LOCALID_TEAMAIRLOCKGRUNT_GUARD)

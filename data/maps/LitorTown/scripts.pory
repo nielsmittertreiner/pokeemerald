@@ -102,7 +102,7 @@ script LitorTown_EventScript_SailToMurena {
     }
     hideobjectat(OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN)
     setflag(FLAG_DONT_TRANSITION_MUSIC)
-    playbgm(MUS_SAILING, 0)
+    playbgm(MUS_SAILING, FALSE)
     applymovement(OBJ_EVENT_ID_PLAYER, LitorTown_Movement_SailToMurena)
     applymovement(LOCALID_BOAT_LITOR, LitorTown_Movement_SailToMurena)
     waitmovement(0)
@@ -140,7 +140,7 @@ script LitorTown_EventScript_SailToNavire {
     hideobjectat(OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN)
     delay(30)
     setflag(FLAG_DONT_TRANSITION_MUSIC)
-    playbgm(MUS_SAILING, 0)
+    playbgm(MUS_SAILING, FALSE)
     applymovement(OBJ_EVENT_ID_PLAYER, LitorTown_Movement_SailToNavire)
     applymovement(LOCALID_BOAT_LITOR, LitorTown_Movement_SailToNavire)
     waitmovement(0)

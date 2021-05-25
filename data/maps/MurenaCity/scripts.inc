@@ -35,7 +35,7 @@ MurenaCity_EventScript_SetUpSailing::
 
 MurenaCity_EventScript_SailToLitor::
 	setvar VAR_FISHERMAN_FERRY_STATE, 0
-	playbgm MUS_SAILING, 0
+	playbgm MUS_SAILING, FALSE
 	applymovement OBJ_EVENT_ID_PLAYER, MurenaCity_Movement_SailToLitor
 	applymovement 10, MurenaCity_Movement_SailToLitor
 	waitmovement 0
@@ -74,7 +74,7 @@ MurenaCity_EventScript_SailToLitor::
 
 
 MurenaCity_EventScript_TeamAirlockEncounter::
-	playbgm MUS_ENCOUNTER_AQUA, 0
+	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 	waitmovement 0
 	load_speech_bubble 20

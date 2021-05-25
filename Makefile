@@ -67,12 +67,14 @@ override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
 ROM := pokevanadium.gba
 OBJ_DIR := build/vanadium
 LIBPATH := -L ../../tools/agbcc/lib
+LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 ifeq ($(DDEBUG),1)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
 ROM := pokevanadium_debug.gba
 OBJ_DIR := build/vanadium
 LIBPATH := -L ../../tools/agbcc/lib
+LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 endif
 else
 CC1              = $(shell $(CC) --print-prog-name=cc1) -quiet
@@ -80,12 +82,14 @@ override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi 
 ROM := pokevanadium_modern.gba
 OBJ_DIR := build/vanadium_modern
 LIBPATH := -L "$(dir $(shell $(CC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(CC) -mthumb -print-file-name=libc.a))"
+LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 ifeq ($(DDEBUG),1)
 CC1              = $(shell $(CC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -g
 ROM := pokevanadium_debug_modern.gba
 OBJ_DIR := build/vanadium_debug_modern
 LIBPATH := -L "$(dir $(shell $(CC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(CC) -mthumb -print-file-name=libc.a))"
+LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 endif
 endif
 
@@ -95,8 +99,6 @@ CPPFLAGS += -I tools/agbcc/include -I tools/agbcc
 endif
 
 LDFLAGS = -Map ../../$(MAP)
-
-LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := tools/gbagfx/gbagfx$(EXE)

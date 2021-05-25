@@ -103,7 +103,7 @@ LitorTown_EventScript_SailToMurena::
 LitorTown_EventScript_SailToMurena_1:
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_SAILING, 0
+	playbgm MUS_SAILING, FALSE
 	applymovement OBJ_EVENT_ID_PLAYER, LitorTown_Movement_SailToMurena
 	applymovement 1, LitorTown_Movement_SailToMurena
 	waitmovement 0
@@ -147,7 +147,7 @@ LitorTown_EventScript_SailToNavire_1:
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITOR_TOWN
 	delay 30
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_SAILING, 0
+	playbgm MUS_SAILING, FALSE
 	applymovement OBJ_EVENT_ID_PLAYER, LitorTown_Movement_SailToNavire
 	applymovement 1, LitorTown_Movement_SailToNavire
 	waitmovement 0
