@@ -19,7 +19,8 @@ static EWRAM_DATA u8 sID = 0;
 void LoadTailFromScript(void);
 void LoadTailAutoFromScript(void);
 
-void LoadTail(s16 x, s16 y) {
+void LoadTail(s16 x, s16 y)
+{
     struct CompressedSpriteSheet sheet;
     struct SpritePalette palSheet;
     struct SpriteTemplate spriteTemp1;
@@ -67,7 +68,8 @@ void LoadTail(s16 x, s16 y) {
                  Q_8_8(IMAGE_HEIGHT / (double)(TEXTBOX_Y - y))); // calculate y scale factor
 }
 
-void LoadTailFromObjectEventId(u32 id) {
+void LoadTailFromObjectEventId(u32 id)
+{
     struct ObjectEvent *objectEvent;
     struct Sprite *sprite;
     s16 x, y;
@@ -90,7 +92,8 @@ void DestroyTail(void)
     FreeSpriteTilesByTag(TAG_SPEECH_BUBBLE_TAIL);
 }
 
-void LoadTailFromScript(void) {
+void LoadTailFromScript(void)
+{
     s16 x = (s16)(VarGet(gSpecialVar_0x8005));
     s16 y = (s16)(VarGet(gSpecialVar_0x8006));
     LoadTail(x, y);
