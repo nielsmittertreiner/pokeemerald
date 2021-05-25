@@ -1,4 +1,5 @@
 #include "global.h"
+#include "graphics.h"
 #include "speech_bubble.h"
 #include "event_data.h"
 #include "decompress.h"
@@ -6,62 +7,62 @@
 #include "constants/event_objects.h"
 #include "event_object_movement.h"
 
-static const u32 sTailGfx[] = INCBIN_U32("graphics/speech_bubble/speech_bubble_tail.4bpp.lz");
-static const u16 sTailPal[] = INCBIN_U16("graphics/speech_bubble/speech_bubble_tail.gbapal");
-
-static const struct Tail sTail = 
+static const struct OamData sSpeechBubbleOamData =
 {
-    sTailGfx, sTailPal, SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64),
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
 };
 
-static EWRAM_DATA u8 sID = 0;
+static const struct CompressedSpriteSheet gSpeechBubbleSpriteSheet =
+{
+    gSpeechBubbleTiles, 0x1000, TAG_SPEECH_BUBBLE_TAIL_GFX
+};
+
+static const struct SpritePalette gSpeechBubblePalette =
+{
+    sSpeechBubblePalette, TAG_SPEECH_BUBBLE_TAIL_GFX
+};
+
+static const struct SpriteTemplate gSpeechBubbleSpriteTemplate =
+{
+    .tileTag = TAG_SPEECH_BUBBLE_TAIL_GFX,
+    .paletteTag = TAG_SPEECH_BUBBLE_TAIL_GFX,
+    .oam = &sSpeechBubbleOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static EWRAM_DATA u8 gSpeechBubbleGraphics = 0;
 
 void LoadTailFromScript(void);
 void LoadTailAutoFromScript(void);
 
 void LoadTail(s16 x, s16 y)
-{
-    struct CompressedSpriteSheet sheet;
-    struct SpritePalette palSheet;
-    struct SpriteTemplate spriteTemp1;
-    struct OamData oam = {0};
-    
+{ 
     s16 textboxX = (x < 120) ? TEXTBOX_LEFT_X : TEXTBOX_RIGHT_X;
 
-    if (GetSpriteTileStartByTag(TAG_SPEECH_BUBBLE_TAIL) == 0xFFFF)
-    {
-        const u8 *gfxPtr = (const u8*)(sTail.gfx);
+    if (GetSpriteTileStartByTag(TAG_SPEECH_BUBBLE_TAIL_GFX) == 0xFFFF)
+        LoadCompressedSpriteSheet(&gSpeechBubbleSpriteSheet);
 
-        sheet.tag = TAG_SPEECH_BUBBLE_TAIL;
-        sheet.data = sTail.gfx;
-        sheet.size = (gfxPtr[3] << 16) | (gfxPtr[2] << 8) | gfxPtr[1];
+    if (IndexOfSpritePaletteTag(TAG_SPEECH_BUBBLE_TAIL_GFX) == 0xFF)
+        LoadSpritePalette(&gSpeechBubblePalette);
 
-        LoadCompressedSpriteSheet(&sheet);
-    }
-
-    if (IndexOfSpritePaletteTag(TAG_SPEECH_BUBBLE_TAIL) == 0xFF)
-    {
-        palSheet.tag = TAG_SPEECH_BUBBLE_TAIL;
-        palSheet.data = sTail.pal;
-
-        LoadSpritePalette(&palSheet);
-    }
-
-
-    oam.size = sTail.size;
-    oam.shape = sTail.shape;
-    oam.priority = 0;
-    oam.affineMode = ST_OAM_AFFINE_DOUBLE;
-
-    spriteTemp1 = gDummySpriteTemplate;
-    spriteTemp1.oam = &oam;
-    spriteTemp1.paletteTag = spriteTemp1.tileTag = TAG_SPEECH_BUBBLE_TAIL;
-
-    // place sprite at the midpoint between the textbox point and input point
-    sID = CreateSprite(&spriteTemp1, (textboxX + x) / 2, (TEXTBOX_Y + y) / 2, 0); 
-
-    InitSpriteAffineAnim(&gSprites[sID]);
-    SetOamMatrix(gSprites[sID].oam.matrixNum, 
+    gSpeechBubbleGraphics = CreateSprite(&gSpeechBubbleSpriteTemplate, (textboxX + x) / 2, (TEXTBOX_Y + y) / 2, 0);
+    InitSpriteAffineAnim(&gSprites[gSpeechBubbleGraphics]);
+    SetOamMatrix(gSprites[gSpeechBubbleGraphics].oam.matrixNum, 
                  Q_8_8(1), 
                  Q_8_8(1.0 / ((float)(y - TEXTBOX_Y) / -(x - textboxX))), // calculate x shear factor
                  Q_8_8(0), 
@@ -87,9 +88,10 @@ void LoadTailFromObjectEventId(u32 id)
 
 void DestroyTail(void)
 {
-    DestroySprite(&gSprites[sID]);
-    FreeSpritePaletteByTag(TAG_SPEECH_BUBBLE_TAIL);
-    FreeSpriteTilesByTag(TAG_SPEECH_BUBBLE_TAIL);
+    FreeSpriteOamMatrix(&gSprites[gSpeechBubbleGraphics]);
+    FreeSpritePaletteByTag(TAG_SPEECH_BUBBLE_TAIL_GFX);
+    FreeSpriteTilesByTag(TAG_SPEECH_BUBBLE_TAIL_GFX);
+    DestroySprite(&gSprites[gSpeechBubbleGraphics]);
 }
 
 void LoadTailFromScript(void)
