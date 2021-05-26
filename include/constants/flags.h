@@ -1029,7 +1029,7 @@
 #define FLAG_ITEM_NAVIRE_TOWN_NUGGET                                0x3EB
 #define FLAG_ITEM_OUREA_CAVE_B2F_GREAT_BALL                         0x3EC
 #define FLAG_ITEM_ROUTE_406_SUPER_POTION                            0x3ED
-#define FLAG_ITEM_ROUTE_109_RARE_CANDY                              0x3EE
+#define FLAG_ITEM_ROUTE_402_POTION                                  0x3EE
 #define FLAG_ITEM_ROUTE_110_DIRE_HIT                                0x3EF
 #define FLAG_ITEM_ROUTE_111_TM_37                                   0x3F0
 #define FLAG_ITEM_ROUTE_111_STARDUST                                0x3F1

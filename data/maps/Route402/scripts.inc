@@ -37,6 +37,11 @@ Route402_EventScript_Fisherman2_3:
 	end
 
 
+Route402_EventScript_ItemPotion::
+	finditem ITEM_POTION
+	end
+
+
 Route402_EventScript_Timmy::
 	trainerbattle_single TRAINER_ROUTE_402_TIMMY, Route402_Text_TimmyIntro, Route402_Text_TimmyDefeat
 	msgbox Route402_Text_TimmyPostBattle, MSGBOX_NPC

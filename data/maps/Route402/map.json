@@ -115,6 +115,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route402_EventScript_Boy",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 25,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route402_EventScript_ItemPotion",
+      "flag": "FLAG_ITEM_ROUTE_402_POTION"
     }
   ],
   "warp_events": [
@@ -131,13 +144,6 @@
       "elevation": 0,
       "dest_map": "MAP_ACREN_FOREST",
       "dest_warp_id": 4
-    },
-    {
-      "x": 24,
-      "y": 9,
-      "elevation": 0,
-      "dest_map": "MAP_ROUTE402",
-      "dest_warp_id": 0
     }
   ],
   "coord_events": [
