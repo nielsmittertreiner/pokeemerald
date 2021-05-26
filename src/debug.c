@@ -111,9 +111,9 @@ static void DebugAction_Cancel(u8);
 
 #define BOB_OTID 23501
 
-// Copy from `include/map_groups.h`
 // Keep this up to date with new maps for the EURUS REGION!
-static const u8 MAP_GROUP_COUNT[] = {70, 10, 12, 13, 13, 14, 9, 7, 7, 14, 8, 17, 10, 23, 13, 15, 15, 2, 2, 2, 3, 1, 1, 1, 108, 61, 89, 2, 1, 13, 1, 1, 3, 1, 0};
+static const s32 gMapGroupCount = 14;
+static const u8 gMapGroupContentsCount[] = {12, 8, 7, 6, 6, 7, 6, 9, 2, 57, 34, 108, 89, 61};
 
 // Debug EventScripts
 extern const u8 Debug_EventScript_DoConfetti[];
@@ -839,7 +839,7 @@ static void DebugTask_HandleMenuInput_SelectMapGroup(u8 taskId)
         }
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
-        ConvertIntToDecimalStringN(gStringVar2, 33, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(gStringVar2, gMapGroupCount, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringExpandPlaceholders(gStringVar1, gDebugText_Util_WarpToMap_SelectMax);
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
         StringExpandPlaceholders(gStringVar4, gDebugText_Util_WarpToMap_SelectMapGroup);
@@ -873,7 +873,7 @@ static void DebugTask_HandleMenuInput_SelectMapGroup(u8 taskId)
 
 static void DebugTask_HandleMenuInput_SelectMapNumber(u8 taskId)
 {
-    u8 max_value = MAP_GROUP_COUNT[gTasks[taskId].data[5]]; //maps in the selected map group
+    u8 max_value = gMapGroupContentsCount[gTasks[taskId].data[5]]; //maps in the selected map group
 
     if (gMain.newKeys & DPAD_ANY)
     {
@@ -903,7 +903,7 @@ static void DebugTask_HandleMenuInput_SelectMapNumber(u8 taskId)
 
         FillWindowPixelBuffer(gTasks[taskId].data[2], PIXEL_FILL(1));
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
-        ConvertIntToDecimalStringN(gStringVar2, MAP_GROUP_COUNT[gTasks[taskId].data[5]]-1, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(gStringVar2, gMapGroupContentsCount[gTasks[taskId].data[5]]-1, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringExpandPlaceholders(gStringVar1, gDebugText_Util_WarpToMap_SelectMax);
         GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(gTasks[taskId].data[5], gTasks[taskId].data[3])->regionMapSectionId, 0);
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
@@ -1408,7 +1408,7 @@ static void DebugAction_OpenWarpMenu(u8 taskId)
 
     // Display Warp
     ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
-    ConvertIntToDecimalStringN(gStringVar2, 33, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar2, gMapGroupCount, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar1, gDebugText_Util_WarpToMap_SelectMax);
     StringCopy(gStringVar3, gText_DigitIndicator[0]);
     StringExpandPlaceholders(gStringVar4, gDebugText_Util_WarpToMap_SelectMapGroup);
