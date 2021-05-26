@@ -88,7 +88,7 @@ AcrenForest_PlantShop_EventScript_ShopOwner_2:
 	end
 
 
-.align 2
+    .align 2
 AcrenForest_PlantShop_PokemartDecor_Plants:
     .2byte DECOR_PRETTY_FLOWERS
 	.2byte DECOR_TROPICAL_PLANT
@@ -119,7 +119,8 @@ AcrenForest_PlantShop_EventScript_Lady::
 	end
 
 
-AcrenForest_PlantShop_EventScript_Logger::
+AcrenForest_PlantShop_EventScript_Camper::
+	msgbox AcrenForest_PlantShop_EventScript_Camper_Text_0, MSGBOX_NPC
 	end
 
 
@@ -184,11 +185,11 @@ AcrenForest_PlantShop_EventScript_ShopOwner_Text_3:
 	.string "I'll see you later then, {PLAYER}!$"
 
 AcrenForest_PlantShop_EventScript_ShopOwner_Text_4:
-	.string "Welcome to my PLANT SHOP!\n"
+	.string "Welcome to my GREENERY SHOP!\n"
 	.string "How can I help you?$"
 
 AcrenForest_PlantShop_EventScript_ShopOwner_Text_5:
-	.string "Please visit my BERRY SHOP again!$"
+	.string "Please visit my GREENERY SHOP again!$"
 
 AcrenForest_PlantShop_EventScript_Kecleon_Text_0:
 	.string "KECLEON seems to be having fun\n"
@@ -197,3 +198,8 @@ AcrenForest_PlantShop_EventScript_Kecleon_Text_0:
 AcrenForest_PlantShop_EventScript_Lady_Text_0:
 	.string "These flowers smell amazing!\n"
 	.string "I think I'll buy these.$"
+
+AcrenForest_PlantShop_EventScript_Camper_Text_0:
+	.string "Camping by the water is so nice.\n"
+	.string "Sometimes you get to see some\l"
+	.string "very pretty WATER-type POKéMON!$"

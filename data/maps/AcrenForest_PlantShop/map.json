@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AcrenForest_PlantShop_EventScript_Logger",
+      "script": "AcrenForest_PlantShop_EventScript_Camper",
       "flag": "0"
     },
     {

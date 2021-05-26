@@ -90,12 +90,12 @@ script AcrenForest_PlantShop_EventScript_ShopOwner {
         end
     }
     load_speech_bubble(LOCALID_SHOPOWNER)
-    message("Welcome to my PLANT SHOP!\n"
+    message("Welcome to my GREENERY SHOP!\n"
 	       "How can I help you?")
     waitmessage
     pokemartdecoration(AcrenForest_PlantShop_PokemartDecor_Plants)
     destroy_speech_bubble
-    msgbox("Please visit my BERRY SHOP again!", MSGBOX_NPC)
+    msgbox("Please visit my GREENERY SHOP again!", MSGBOX_NPC)
     release
     end
 }
@@ -135,7 +135,10 @@ script AcrenForest_PlantShop_EventScript_Lady {
     end
 }
 
-script AcrenForest_PlantShop_EventScript_Logger {
+script AcrenForest_PlantShop_EventScript_Camper {
+    msgbox("Camping by the water is so nice.\n"
+           "Sometimes you get to see some\l"
+           "very pretty WATER-type POKéMON!", MSGBOX_NPC)
     end
 }
 
