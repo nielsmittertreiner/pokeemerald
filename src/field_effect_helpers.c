@@ -14,7 +14,6 @@
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 
-#define OBJ_EVENT_PAL_TAG_REFLECTION 0x1103 // duplicate of define in event_object_movement.c
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 
 static void UpdateObjectReflectionSprite(struct Sprite *);
@@ -37,7 +36,8 @@ static void LoadFieldEffectPalette_(u8 fieldEffect, bool8 updateGammaType);
 
 void LoadSpecialReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 
-extern u16 gReflectionPaletteBuffer[];
+extern u16 gReflectionPaletteUnfadedBuffer[];
+extern u16 gReflectionPaletteFadedBuffer[];
 
 // Used by several field effects to determine which of a group it is
 #define sFldEff    data[1]
@@ -97,7 +97,7 @@ void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite 
         LoadSpecialReflectionPalette(objectEvent, sprite);
 }
 
-static void ApplyReflectionFilter(u8 paletteNum, u16 *dest)
+static void ApplyPondReflectionFilter(u8 paletteNum, u16 *dest)
 {
     u8 i, val, r, g, b;
     u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
@@ -124,55 +124,64 @@ static void ApplyReflectionFilter(u8 paletteNum, u16 *dest)
     }
 }
 
+static void ApplyIceReflectionFilter(u8 paletteNum, u16 *dest)
+{
+    u8 i, val, r, g, b;
+    u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
+    for (i = 0; i < 16; i++)
+    {
+        r = src[i] & 0x1F;
+        g = (src[i] >> 5) & 0x1F;
+        b = (src[i] >> 10) & 0x1F;
+
+        r -= 5;
+        g += 3;
+        b += 16;
+
+        if (r > 31)
+            r = 0;
+        
+        if (g > 31)
+            g = 31;
+
+        if (b > 31)
+          b = 31;
+
+        *dest++ = (b << 10) | (g << 5) | r;
+    }
+}
+
 void LoadSpecialReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    u16 baseTag = gSprites[objectEvent->spriteId].oam.paletteNum;
-    u16 paletteTag = baseTag + OBJ_EVENT_PAL_TAG_REFLECTION;
-    u8 paletteIndex = IndexOfSpritePaletteTag(paletteTag);
-    u16 filteredData[16] = {0};
-    const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-    struct SpritePalette filteredPalette;
+    struct SpritePalette reflectionPalette;
+    u16 paletteTag = gSprites[objectEvent->spriteId].oam.paletteNum;
 
-    if (paletteIndex == 0xFF)
-    {
-        ApplyReflectionFilter(baseTag, filteredData);
-        filteredPalette.tag = paletteTag;
-        filteredPalette.data = filteredData;
-        paletteIndex = LoadSpritePalette(&filteredPalette);
-    }
-    sprite->oam.paletteNum = paletteIndex;
-    sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
+    CpuCopy16(&gPlttBufferUnfaded[0x100 + sprite->oam.paletteNum * 16], gReflectionPaletteUnfadedBuffer, 32);
+    if (sprite->sIsStillReflection)
+        ApplyIceReflectionFilter(gSprites[objectEvent->spriteId].oam.paletteNum, gReflectionPaletteFadedBuffer);
+    else
+        ApplyPondReflectionFilter(gSprites[objectEvent->spriteId].oam.paletteNum, gReflectionPaletteFadedBuffer);
+    
+    reflectionPalette.tag = GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum) + 0x1000;
+    reflectionPalette.data = gReflectionPaletteFadedBuffer;
+    LoadSpritePalette(&reflectionPalette);
+    sprite->oam.paletteNum = IndexOfSpritePaletteTag(reflectionPalette.tag);
+    UpdatePaletteGammaType(sprite->oam.paletteNum, GAMMA_ALT);
+    UpdateSpritePaletteWithWeather(sprite->oam.paletteNum);
 }
 
 static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
 {
-    struct ObjectEvent *objectEvent = &gObjectEvents[reflectionSprite->data[0]];
-    struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
-    struct SpritePalette filteredPalette;
-    u16 baseTag = mainSprite->oam.paletteNum;
-    u16 paletteTag = baseTag + OBJ_EVENT_PAL_TAG_REFLECTION;
-    u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-    u16 filteredData[16] = {0};
-
-    if (!objectEvent->active || !objectEvent->hasReflection || objectEvent->localId != reflectionSprite->data[1])
+    struct ObjectEvent *objectEvent;
+    struct Sprite *mainSprite;
+    objectEvent = &gObjectEvents[reflectionSprite->sReflectionObjEventId];
+    mainSprite = &gSprites[objectEvent->spriteId];
+    if (!objectEvent->active || !objectEvent->hasReflection || objectEvent->localId != reflectionSprite->sReflectionObjEventLocalId)
     {
         reflectionSprite->inUse = FALSE;
-        FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
     }
     else
     {
-        reflectionSprite->inUse = FALSE;
-        FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
-        reflectionSprite->inUse = TRUE;
-
-        if (paletteNum == 0xFF)
-        {
-            ApplyReflectionFilter(baseTag, filteredData);
-            filteredPalette.tag = paletteTag;
-            filteredPalette.data = filteredData;
-            paletteNum = LoadSpritePalette(&filteredPalette);
-        }
-        reflectionSprite->oam.paletteNum = paletteNum;
         reflectionSprite->oam.shape = mainSprite->oam.shape;
         reflectionSprite->oam.size = mainSprite->oam.size;
         reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | ST_OAM_VFLIP;
@@ -187,10 +196,8 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         reflectionSprite->pos2.x = mainSprite->pos2.x;
         reflectionSprite->pos2.y = -mainSprite->pos2.y;
         reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
-
         if (objectEvent->hideReflection == TRUE)
             reflectionSprite->invisible = TRUE;
-
         if (reflectionSprite->sIsStillReflection == FALSE)
         {
             // Sets the reflection sprite's rot/scale matrix to the appropriate

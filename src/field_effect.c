@@ -36,7 +36,8 @@
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
 EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
-EWRAM_DATA u16 gReflectionPaletteBuffer[0x10] = {0};
+EWRAM_DATA u16 gReflectionPaletteUnfadedBuffer[0x10] = {0};
+EWRAM_DATA u16 gReflectionPaletteFadedBuffer[0x10] = {0};
 // Static type declarations
 
 static void Task_PokecenterHeal(u8 taskId);
