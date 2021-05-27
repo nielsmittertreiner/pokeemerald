@@ -4101,6 +4101,7 @@ static struct PokemonJumpRecords *GetPokeJumpRecords(void)
 
 void ResetPokemonJumpRecords(void)
 {
+    #ifndef FREE_POKEMON_JUMP
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     records->jumpsInRow = 0;
     records->bestJumpScore = 0;
@@ -4108,10 +4109,12 @@ void ResetPokemonJumpRecords(void)
     records->gamesWithMaxPlayers = 0;
     records->unused2 = 0;
     records->unused1 = 0;
+    #endif
 }
 
 static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRow)
 {
+    #ifndef FREE_POKEMON_JUMP
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     bool32 newRecord = FALSE;
 
@@ -4123,13 +4126,18 @@ static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRo
         records->excellentsInRow = excellentsInRow, newRecord = TRUE;
 
     return newRecord;
+    #else
+    return FALSE;
+    #endif
 }
 
 static void IncrementGamesWithMaxPlayers(void)
 {
+    #ifndef FREE_POKEMON_JUMP
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     if (records->gamesWithMaxPlayers < 9999)
         records->gamesWithMaxPlayers++;
+    #endif
 }
 
 void ShowPokemonJumpRecords(void)
