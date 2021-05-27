@@ -37,15 +37,12 @@
 #include "constants/songs.h"
 
 // Functions
-// Window Functions
 void Debug_OpenDebugMenu(void);
 static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_ShowPartySubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_DestroyMenu(u8);
 static void Debug_DestroyExtraWindow(u8);
-
-// Input Handlers
 static void DebugTask_HandleMenuInput_Main(u8);
 static void DebugTask_HandleMenuInput_Utility(u8);
 static void DebugTask_HandleMenuInput_Party(u8);
@@ -59,14 +56,10 @@ static void DebugTask_HandleInput_Credits(u8);
 static void DebugTask_HandleInput_GodMode(u8);
 static void DebugTask_HandleInput_GenderChange(u8);
 static void DebugTask_HandleInput_GiveMon(u8);
-
-// Main Menu Functions
 static void DebugAction_OpenCredits(u8);
 static void DebugAction_OpenGodMode(u8);
 static void DebugAction_OpenUtilityMenu(u8);
 static void DebugAction_OpenPartyMenu(u8);
-
-// Utility Functions
 static void DebugAction_ManageFlags(u8);
 static void DebugAction_ManageVars(u8);
 static void DebugAction_SetVarValue(u8);
@@ -76,133 +69,80 @@ static void DebugAction_ChangePlayerName(u8);
 static void DebugAction_OpenGenderChange(u8);
 static void DebugAction_ChangePlayerGender(u8);
 static void DebugAction_ChangePlayerVisiblity(u8);
-
-// Party Functions
 static void DebugAction_GiveMons(u8);
 static void DebugAction_HealParty(u8);
-
 static void DebugAction_Cancel(u8);
-
-#define DEBUG_MAIN_MENU_WIDTH 7
-#define DEBUG_UTILITY_MENU_WIDTH 11
-#define DEBUG_PARTY_MENU_WIDTH 10
-
-#define DEBUG_CREDITS_DISPLAY_WIDTH 26
-#define DEBUG_CREDITS_DISPLAY_HEIGHT 13
-
-#define DEBUG_GODMODE_DISPLAY_WIDTH 26
-#define DEBUG_GODMODE_DISPLAY_HEIGHT 8
-
-#define DEBUG_NUMBER_DISPLAY_WIDTH 14
-#define DEBUG_NUMBER_DISPLAY_HEIGHT 3
-
-#define DEBUG_WARP_DISPLAY_WIDTH 14
-#define DEBUG_WARP_DISPLAY_HEIGHT 4
-
-#define DEBUG_SAVEBLOCK_DISPLAY_WIDTH 15
-#define DEBUG_SAVEBLOCK_DISPLAY_HEIGHT 2
-
-#define DEBUG_HELP_WINDOW_WIDTH 28
-#define DEBUG_HELP_WINDOW_HEIGHT 2
 
 #define DEBUG_NUMBER_DIGITS_FLAGS 4
 #define DEBUG_NUMBER_DIGITS_VARIABLES 5
-
 #define TAG_CONFETTI 1001
-
 #define BOB_OTID 23501
 
-// Keep this up to date with new maps for the EURUS REGION!
+// Keep this up to date with new maps for the Eurus Region
 static const s32 gMapGroupCount = 14;
 static const u8 gMapGroupContentsCount[] = {12, 8, 7, 6, 6, 7, 6, 9, 2, 57, 34, 108, 89, 61};
 
-// Debug EventScripts
 extern const u8 Debug_EventScript_DoConfetti[];
 
-// Main Menu Strings
 static const u8 gDebugText_Credits[] = _("{COLOR}{GREEN}CREDITS");
 static const u8 gDebugText_GodMode[] = _("{COLOR}{RED}GODMODE");
 static const u8 gDebugText_Utility[] = _("{COLOR}{BLUE}UTILITY");
-static const u8 gDebugText_Party[]   = _("{COLOR}{BLUE}PARTY");
-static const u8 gDebugText_Cancel[]  = _("CANCEL");
-
-// Credits Window Strings
-static const u8 gDebugText_Credits_CreditsList[]        = _("{STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
-static const u8 gDebugText_Credits_CreditsFriend[]      = _("{COLOR}{GREEN}JENA197, MOXIC");
-static const u8 gDebugText_Credits_CreditsPatron[]      = _("{COLOR}{BLUE}CAANTHS");
+static const u8 gDebugText_Party[] = _("{COLOR}{BLUE}PARTY");
+static const u8 gDebugText_Cancel[] = _("CANCEL");
+static const u8 gDebugText_Credits_CreditsList[] = _("{STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
+static const u8 gDebugText_Credits_CreditsFriend[] = _("{COLOR}{GREEN}JENA197, MOXIC");
+static const u8 gDebugText_Credits_CreditsPatron[] = _("{COLOR}{BLUE}CAANTHS");
 static const u8 gDebugText_Credits_CreditsHelpingHand[] = _("{COLOR}{RED}ETHAN, N3RL, SPACESAUR, SENNA");
-
-// GodMode Window Strings
 static const u8 gDebugText_GodMode_GodModeExplaination[] = _("{COLOR}{DARK_GRAY}YOU ARE ABOUT TO ENTER GODMODE!\nCOLLISION, ENCOUNTERS AND TRAINERS\nWILL BE DISABLED!");
-static const u8 gDebugText_GodMode_EnableGodMode[]       = _("{A_BUTTON} {COLOR}{GREEN}ENABLE GODMODE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_GodMode_DisableGodMode[]      = _("{A_BUTTON} {COLOR}{RED}DISABLE GODMODE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-
-// GiveMon Window Strings
+static const u8 gDebugText_GodMode_EnableGodMode[] = _("{A_BUTTON} {COLOR}{GREEN}ENABLE GODMODE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_GodMode_DisableGodMode[] = _("{A_BUTTON} {COLOR}{RED}DISABLE GODMODE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
 static const u8 gDebugText_GiveMon_GiveMonExplaination[] = _("{COLOR}{DARK_GRAY}YOU ARE ABOUT OVERWRITE YOUR\nCURRENT PARTY WITH A HANDCHOSEN ONE,\nMADE BY BSBOB!\n{COLOR}{RED}YOUR CURRENT PARTY WILL BE LOST!");
-static const u8 gDebugText_Party_RevievedBobParty[]      = _("{COLOR}{GREEN}RECEIVED BSBOB'S PARTY   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_Party_AlreadyHasBobParty[]    = _("{COLOR}{GREEN}YOU ALREADY HAVE BSBOB'S PARTY!   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-
-// Utility Menu Strings
-static const u8 gDebugText_Utility_SaveBlocks[]      = _("{COLOR}{GREEN}SAVEBLOCKS");
-static const u8 gDebugText_Utility_ManageFlag[]      = _("{COLOR}{RED}MANAGE FLAGS");
-static const u8 gDebugText_Utility_ManageVars[]      = _("{COLOR}{RED}MANAGE VARS");
-static const u8 gDebugText_Utility_Warp[]            = _("{COLOR}{RED}WARP");
-static const u8 gDebugText_Utility_ChangeName[]      = _("{COLOR}{BLUE}CHANGE NAME");
-static const u8 gDebugText_Utility_ChangeGender[]    = _("{COLOR}{BLUE}CHANGE GENDER");
+static const u8 gDebugText_Party_RevievedBobParty[] = _("{COLOR}{GREEN}RECEIVED BSBOB'S PARTY   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_Party_AlreadyHasBobParty[] = _("{COLOR}{GREEN}YOU ALREADY HAVE BSBOB'S PARTY!   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_Utility_SaveBlocks[] = _("{COLOR}{GREEN}SAVEBLOCKS");
+static const u8 gDebugText_Utility_ManageFlag[] = _("{COLOR}{RED}MANAGE FLAGS");
+static const u8 gDebugText_Utility_ManageVars[] = _("{COLOR}{RED}MANAGE VARS");
+static const u8 gDebugText_Utility_Warp[] = _("{COLOR}{RED}WARP");
+static const u8 gDebugText_Utility_ChangeName[] = _("{COLOR}{BLUE}CHANGE NAME");
+static const u8 gDebugText_Utility_ChangeGender[] = _("{COLOR}{BLUE}CHANGE GENDER");
 static const u8 gDebugText_Utility_PlayerInvisible[] = _("{COLOR}{BLUE}INVISIBLE");
-
-// Gender Change Window Strings
 static const u8 gDebugText_GenderChange_GenderChangeExplaination[] = _("{COLOR}{DARK_GRAY}YOU ARE ABOUT TO CHANGE YOUR GENDER!\n{COLOR}{GREEN}WALK THROUGH A DOOR{COLOR}{DARK_GRAY} TO UPDATE YOUR\nPLAYER SPRITE.");
-static const u8 gDebugText_GenderChange_ChangeToFemale[]           = _("{A_BUTTON} {COLOR}{GREEN}CHANGE TO FEMALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_GenderChange_ChangeToMale[]             = _("{A_BUTTON} {COLOR}{GREEN}CHANGE TO MALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_GenderChange_ChangedToFemale[]          = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO FEMALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-static const u8 gDebugText_GenderChange_ChangedToMale[]            = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO MALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
-
-// Party Menu Strings
-static const u8 gDebugText_Party_GiveMon[]   = _("{COLOR}{RED}GIVE MON");
+static const u8 gDebugText_GenderChange_ChangeToFemale[] = _("{A_BUTTON} {COLOR}{GREEN}CHANGE TO FEMALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_GenderChange_ChangeToMale[] = _("{A_BUTTON} {COLOR}{GREEN}CHANGE TO MALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_GenderChange_ChangedToFemale[] = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO FEMALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_GenderChange_ChangedToMale[] = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO MALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
+static const u8 gDebugText_Party_GiveMon[] = _("{COLOR}{RED}GIVE MON");
 static const u8 gDebugText_Party_HealParty[] = _("{COLOR}{GREEN}HEAL PARTY");
-
-// Flags Menu Strings
-static const u8 gDebugText_Flag_FlagDef[]   = _("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
-static const u8 gDebugText_Flag_FlagHex[]   = _("{STR_VAR_1}         0x{STR_VAR_2}");
-static const u8 gDebugText_Flag_FlagSet[]   = _("{COLOR}{GREEN}TRUE{COLOR}{DARK_GRAY}");
+static const u8 gDebugText_Flag_FlagDef[] = _("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
+static const u8 gDebugText_Flag_FlagHex[] = _("{STR_VAR_1}         0x{STR_VAR_2}");
+static const u8 gDebugText_Flag_FlagSet[] = _("{COLOR}{GREEN}TRUE{COLOR}{DARK_GRAY}");
 static const u8 gDebugText_Flag_FlagUnset[] = _("{COLOR}{RED}FALSE{COLOR}{DARK_GRAY}");
-
-// Var Menu Strings
 static const u8 gDebugText_Var_VariableDef[] = _("VAR: {COLOR}{GREEN}{STR_VAR_1}\n{COLOR}{DARK_GRAY}VAL: {STR_VAR_3}\n{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableHex[] = _("{STR_VAR_1}       0x{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{GREEN}{STR_VAR_3}{COLOR}{DARK_GRAY}\n{STR_VAR_2}{A_BUTTON}");
-
-// Warp Menu Strings
-static const u8 gDebugText_Util_WarpToMap[]                = _("WARP TO MAP WARP");
+static const u8 gDebugText_Util_WarpToMap[] = _("WARP TO MAP WARP");
 static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] = _("{COLOR}{GREEN}GROUP: {STR_VAR_1}{COLOR}{DARK_GRAY}          \n                 \n\n{STR_VAR_3}     ");
-static const u8 gDebugText_Util_WarpToMap_SelectMap[]      = _("{COLOR}{GREEN}MAP: {STR_VAR_1}{COLOR}{DARK_GRAY}            \nMAPSEC:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
-static const u8 gDebugText_Util_WarpToMap_SelectWarp[]     = _("WARP:             \n{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GRAY}                \n                                  \n{STR_VAR_3}     ");
-static const u8 gDebugText_Util_WarpToMap_SelectMax[]      = _("{STR_VAR_1} / {STR_VAR_2}");
-
-// Check SaveBlock Strings
+static const u8 gDebugText_Util_WarpToMap_SelectMap[] = _("{COLOR}{GREEN}MAP: {STR_VAR_1}{COLOR}{DARK_GRAY}            \nMAPSEC:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
+static const u8 gDebugText_Util_WarpToMap_SelectWarp[] = _("WARP:             \n{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GRAY}                \n                                  \n{STR_VAR_3}     ");
+static const u8 gDebugText_Util_WarpToMap_SelectMax[] = _("{STR_VAR_1} / {STR_VAR_2}");
 static const u8 gDebugText_SaveBlocks_SaveBlockSize[] = _("{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GRAY} IS\n{STR_VAR_2}/{STR_VAR_3} BYTES");
-static const u8 gDebugText_SaveBlocks_SaveBlock1[]    = _("SAVEBLOCK1");
-static const u8 gDebugText_SaveBlocks_SaveBlock2[]    = _("SAVEBLOCK2");
-
-// Help Strings
-static const u8 gDebugText_Help_Warning[]    = _("{COLOR}{RED}WARNING!");
-static const u8 gDebugText_Help_General[]    = _("{DPAD_UPDOWN} SELECT   {A_BUTTON} CONFIRM   {B_BUTTON} CANCEL");
-static const u8 gDebugText_Help_Credits[]    = _("{A_BUTTON} SUPRISE   {COLOR}{GREEN}{EMOJI_CIRCLE} FRIEND   {COLOR}{BLUE}{EMOJI_CIRCLE} PATRON   {COLOR}{RED}{EMOJI_CIRCLE} HELPING HAND");
-static const u8 gDebugText_Help_GiveMon[]    = _("{A_BUTTON} OVERWRITE PARTY   {B_BUTTON} CANCEL");
-static const u8 gDebugText_Help_Flags[]      = _("{DPAD_UPDOWN} FLAG   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} TOGGLE   {B_BUTTON} CANCEL");
-static const u8 gDebugText_Help_Vars[]       = _("{DPAD_UPDOWN} VAR/VAL   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} SELECT   {B_BUTTON} CANCEL");
-static const u8 gDebugText_Help_Warp[]       = _("{DPAD_UPDOWN} WARP DATA   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} SELECT   {B_BUTTON} CANCEL");
+static const u8 gDebugText_SaveBlocks_SaveBlock1[] = _("SAVEBLOCK1");
+static const u8 gDebugText_SaveBlocks_SaveBlock2[] = _("SAVEBLOCK2");
+static const u8 gDebugText_Help_Warning[] = _("{COLOR}{RED}WARNING!");
+static const u8 gDebugText_Help_General[] = _("{DPAD_UPDOWN} SELECT   {A_BUTTON} CONFIRM   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_Credits[] = _("{A_BUTTON} SUPRISE   {COLOR}{GREEN}{EMOJI_CIRCLE} FRIEND   {COLOR}{BLUE}{EMOJI_CIRCLE} PATRON   {COLOR}{RED}{EMOJI_CIRCLE} HELPING HAND");
+static const u8 gDebugText_Help_GiveMon[] = _("{A_BUTTON} OVERWRITE PARTY   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_Flags[] = _("{DPAD_UPDOWN} FLAG   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} TOGGLE   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_Vars[] = _("{DPAD_UPDOWN} VAR/VAL   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} SELECT   {B_BUTTON} CANCEL");
+static const u8 gDebugText_Help_Warp[] = _("{DPAD_UPDOWN} WARP DATA   {DPAD_LEFTRIGHT} DIGIT   {A_BUTTON} SELECT   {B_BUTTON} CANCEL");
 static const u8 gDebugText_Help_SaveBlocks[] = _("{DPAD_UPDOWN} SEEK   {B_BUTTON} BACK");
-
-// Digit Indicator Strings
-static const u8 digitInidicator_1[]        = _("{LEFT_ARROW}    +1                        {RIGHT_ARROW}");
-static const u8 digitInidicator_10[]       = _("{LEFT_ARROW}    +10                      {RIGHT_ARROW}");
-static const u8 digitInidicator_100[]      = _("{LEFT_ARROW}    +100                    {RIGHT_ARROW}");
-static const u8 digitInidicator_1000[]     = _("{LEFT_ARROW}    +1000                  {RIGHT_ARROW}");
-static const u8 digitInidicator_10000[]    = _("{LEFT_ARROW}    +10000                {RIGHT_ARROW}");
-static const u8 digitInidicator_100000[]   = _("{LEFT_ARROW}    +100000              {RIGHT_ARROW}");
-static const u8 digitInidicator_1000000[]  = _("{LEFT_ARROW}    +1000000            {RIGHT_ARROW}");
+static const u8 digitInidicator_1[] = _("{LEFT_ARROW}    +1                        {RIGHT_ARROW}");
+static const u8 digitInidicator_10[] = _("{LEFT_ARROW}    +10                      {RIGHT_ARROW}");
+static const u8 digitInidicator_100[] = _("{LEFT_ARROW}    +100                    {RIGHT_ARROW}");
+static const u8 digitInidicator_1000[] = _("{LEFT_ARROW}    +1000                  {RIGHT_ARROW}");
+static const u8 digitInidicator_10000[] = _("{LEFT_ARROW}    +10000                {RIGHT_ARROW}");
+static const u8 digitInidicator_100000[] = _("{LEFT_ARROW}    +100000              {RIGHT_ARROW}");
+static const u8 digitInidicator_1000000[] = _("{LEFT_ARROW}    +1000000            {RIGHT_ARROW}");
 static const u8 digitInidicator_10000000[] = _("{LEFT_ARROW}    +10000000          {RIGHT_ARROW}");
 
 const u8 * const gText_DigitIndicator[] =
@@ -236,90 +176,64 @@ static const u16 gBobMonHeldItems[] =
     ITEM_LEFTOVERS
 };
 
-enum {
-    DEBUG_MENU_ITEM_CREDITS,
-    DEBUG_MENU_ITEM_GODMODE,
-    DEBUG_MENU_ITEM_UTILITY,
-    DEBUG_MENU_ITEM_PARTY,
-    DEBUG_MENU_ITEM_CANCEL,
-};
-
-enum {
-    DEBUG_MENU_ITEM_SAVEBLOCKS,
-    DEBUG_MENU_ITEM_MANAGE_FLAGS,
-    DEBUG_MENU_ITEM_MANAGE_VARS,
-    DEBUG_MENU_ITEM_WARP,
-    DEBUG_MENU_ITEM_CHANGE_NAME,
-    DEBUG_MENU_ITEM_CHANGE_GENDER,
-    DEBUG_MENU_ITEM_PLAYER_INVISIBLE,
-};
-
-enum {
-    DEBUG_MENU_ITEM_GIVE_MONS,
-    DEBUG_MENU_ITEM_HEAL_PARTY,
-};
-
-// List Menu Items
 static const struct ListMenuItem sDebugMenuItems_Main[] =
 {
-    [DEBUG_MENU_ITEM_CREDITS] = {gDebugText_Credits, DEBUG_MENU_ITEM_CREDITS},
-    [DEBUG_MENU_ITEM_GODMODE] = {gDebugText_GodMode, DEBUG_MENU_ITEM_GODMODE},
-    [DEBUG_MENU_ITEM_UTILITY] = {gDebugText_Utility, DEBUG_MENU_ITEM_UTILITY},
-    [DEBUG_MENU_ITEM_PARTY] = {gDebugText_Party, DEBUG_MENU_ITEM_PARTY},
-    [DEBUG_MENU_ITEM_CANCEL] = {gDebugText_Cancel, DEBUG_MENU_ITEM_CANCEL},
+    {gDebugText_Credits, DEBUG_MENUITEM_CREDITS},
+    {gDebugText_GodMode, DEBUG_MENUITEM_GODMODE},
+    {gDebugText_Utility, DEBUG_MENUITEM_UTILITY},
+    {gDebugText_Party,   DEBUG_MENUITEM_PARTY},
+    {gDebugText_Cancel,  DEBUG_MENUITEM_CANCEL},
 };
 
 static const struct ListMenuItem sDebugMenuItems_Utility[] =
 {
-    [DEBUG_MENU_ITEM_SAVEBLOCKS] = {gDebugText_Utility_SaveBlocks, DEBUG_MENU_ITEM_SAVEBLOCKS},
-    [DEBUG_MENU_ITEM_MANAGE_FLAGS] = {gDebugText_Utility_ManageFlag, DEBUG_MENU_ITEM_MANAGE_FLAGS},
-    [DEBUG_MENU_ITEM_MANAGE_VARS] = {gDebugText_Utility_ManageVars, DEBUG_MENU_ITEM_MANAGE_VARS},
-    [DEBUG_MENU_ITEM_WARP] = {gDebugText_Utility_Warp, DEBUG_MENU_ITEM_WARP},
-    [DEBUG_MENU_ITEM_CHANGE_NAME] = {gDebugText_Utility_ChangeName, DEBUG_MENU_ITEM_CHANGE_NAME},
-    [DEBUG_MENU_ITEM_CHANGE_GENDER] = {gDebugText_Utility_ChangeGender, DEBUG_MENU_ITEM_CHANGE_GENDER},
-    [DEBUG_MENU_ITEM_PLAYER_INVISIBLE] = {gDebugText_Utility_PlayerInvisible, DEBUG_MENU_ITEM_PLAYER_INVISIBLE},
+    {gDebugText_Utility_SaveBlocks,      DEBUG_MENUITEM_SAVEBLOCKS},
+    {gDebugText_Utility_ManageFlag,      DEBUG_MENUITEM_MANAGE_FLAGS},
+    {gDebugText_Utility_ManageVars,      DEBUG_MENUITEM_MANAGE_VARS},
+    {gDebugText_Utility_Warp,            DEBUG_MENUITEM_WARP},
+    {gDebugText_Utility_ChangeName,      DEBUG_MENUITEM_CHANGE_NAME},
+    {gDebugText_Utility_ChangeGender,    DEBUG_MENUITEM_CHANGE_GENDER},
+    {gDebugText_Utility_PlayerInvisible, DEBUG_MENUITEM_PLAYER_INVISIBLE},
 };
 
 static const struct ListMenuItem sDebugMenuItems_Party[] =
 {
-    [DEBUG_MENU_ITEM_GIVE_MONS] = {gDebugText_Party_GiveMon, DEBUG_MENU_ITEM_GIVE_MONS},
-    [DEBUG_MENU_ITEM_HEAL_PARTY] = {gDebugText_Party_HealParty, DEBUG_MENU_ITEM_HEAL_PARTY},
+    {gDebugText_Party_GiveMon,   DEBUG_MENUITEM_GIVE_MONS},
+    {gDebugText_Party_HealParty, DEBUG_MENUITEM_HEAL_PARTY},
 };
 
-// Menu Actions
 static void (*const sDebugMenuActions_Main[])(u8) =
 {
-    [DEBUG_MENU_ITEM_CREDITS] = DebugAction_OpenCredits,
-    [DEBUG_MENU_ITEM_GODMODE] = DebugAction_OpenGodMode,
-    [DEBUG_MENU_ITEM_UTILITY] = DebugAction_OpenUtilityMenu,
-    [DEBUG_MENU_ITEM_PARTY] = DebugAction_OpenPartyMenu,
-    [DEBUG_MENU_ITEM_CANCEL] = DebugAction_Cancel,
+    [DEBUG_MENUITEM_CREDITS] = DebugAction_OpenCredits,
+    [DEBUG_MENUITEM_GODMODE] = DebugAction_OpenGodMode,
+    [DEBUG_MENUITEM_UTILITY] = DebugAction_OpenUtilityMenu,
+    [DEBUG_MENUITEM_PARTY] = DebugAction_OpenPartyMenu,
+    [DEBUG_MENUITEM_CANCEL] = DebugAction_Cancel,
 };
 
 static void (*const sDebugMenuActions_Utility[])(u8) =
 {
-    [DEBUG_MENU_ITEM_SAVEBLOCKS] = DebugAction_CheckSaveBlockSize,
-    [DEBUG_MENU_ITEM_MANAGE_FLAGS] = DebugAction_ManageFlags,
-    [DEBUG_MENU_ITEM_MANAGE_VARS] = DebugAction_ManageVars,
-    [DEBUG_MENU_ITEM_WARP] = DebugAction_OpenWarpMenu,
-    [DEBUG_MENU_ITEM_CHANGE_NAME] = DebugAction_ChangePlayerName,
-    [DEBUG_MENU_ITEM_CHANGE_GENDER] = DebugAction_OpenGenderChange,
-    [DEBUG_MENU_ITEM_PLAYER_INVISIBLE] = DebugAction_ChangePlayerVisiblity,
+    [DEBUG_MENUITEM_SAVEBLOCKS] = DebugAction_CheckSaveBlockSize,
+    [DEBUG_MENUITEM_MANAGE_FLAGS] = DebugAction_ManageFlags,
+    [DEBUG_MENUITEM_MANAGE_VARS] = DebugAction_ManageVars,
+    [DEBUG_MENUITEM_WARP] = DebugAction_OpenWarpMenu,
+    [DEBUG_MENUITEM_CHANGE_NAME] = DebugAction_ChangePlayerName,
+    [DEBUG_MENUITEM_CHANGE_GENDER] = DebugAction_OpenGenderChange,
+    [DEBUG_MENUITEM_PLAYER_INVISIBLE] = DebugAction_ChangePlayerVisiblity,
 };
 
 static void (*const sDebugMenuActions_Party[])(u8) =
 {
-    [DEBUG_MENU_ITEM_GIVE_MONS] = DebugAction_GiveMons,
-    [DEBUG_MENU_ITEM_HEAL_PARTY] = DebugAction_HealParty,
+    [DEBUG_MENUITEM_GIVE_MONS] = DebugAction_GiveMons,
+    [DEBUG_MENUITEM_HEAL_PARTY] = DebugAction_HealParty,
 };
 
-// Window Templates
 static const struct WindowTemplate sDebugMainMenuWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = DEBUG_MAIN_MENU_WIDTH,
+    .width = 7,
     .height = 2 * ARRAY_COUNT(sDebugMenuItems_Main),
     .paletteNum = 15,
     .baseBlock = 1,
@@ -330,8 +244,8 @@ static const struct WindowTemplate sDebugUtilityMenuWindowTemplate =
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = DEBUG_UTILITY_MENU_WIDTH,
-    .height = 2 * ARRAY_COUNT(sDebugMenuItems_Utility),
+    .width = 11,
+    .height = 14,
     .paletteNum = 15,
     .baseBlock = 1,
 };
@@ -341,7 +255,7 @@ static const struct WindowTemplate sDebugPartyMenuWindowTemplate =
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = DEBUG_PARTY_MENU_WIDTH,
+    .width = 10,
     .height = 2 * ARRAY_COUNT(sDebugMenuItems_Party),
     .paletteNum = 15,
     .baseBlock = 1,
@@ -352,8 +266,8 @@ static const struct WindowTemplate sDebugCreditsWindowTemplate =
     .bg = 0,
     .tilemapLeft = 2,
     .tilemapTop = 2,
-    .width = DEBUG_CREDITS_DISPLAY_WIDTH,
-    .height = DEBUG_CREDITS_DISPLAY_HEIGHT,
+    .width = 26,
+    .height = 13,
     .paletteNum = 15,
     .baseBlock = 1,
 };
@@ -363,8 +277,8 @@ static const struct WindowTemplate sDebugWarningWindowTemplate =
     .bg = 0,
     .tilemapLeft = 2,
     .tilemapTop = 4,
-    .width = DEBUG_GODMODE_DISPLAY_WIDTH,
-    .height = DEBUG_GODMODE_DISPLAY_HEIGHT,
+    .width = 26,
+    .height = 8,
     .paletteNum = 15,
     .baseBlock = 1,
 };
@@ -374,8 +288,8 @@ static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = DEBUG_NUMBER_DISPLAY_WIDTH,
-    .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
+    .width = 14,
+    .height = 6,
     .paletteNum = 15,
     .baseBlock = 128,
 };
@@ -385,8 +299,8 @@ static const struct WindowTemplate sDebugWarpDisplayWindowTemplate =
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = DEBUG_WARP_DISPLAY_WIDTH,
-    .height = 2 * DEBUG_WARP_DISPLAY_HEIGHT,
+    .width = 14,
+    .height = 8,
     .paletteNum = 15,
     .baseBlock = 128,
 };
@@ -396,8 +310,8 @@ static const struct WindowTemplate sDebugSaveBlockDisplayWindowTemplate =
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = DEBUG_SAVEBLOCK_DISPLAY_WIDTH,
-    .height = 2 * DEBUG_SAVEBLOCK_DISPLAY_HEIGHT,
+    .width = 15,
+    .height = 4,
     .paletteNum = 15,
     .baseBlock = 128,
 };
@@ -407,13 +321,12 @@ static const struct WindowTemplate sDebugHelpWindowTemplate =
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 18,
-    .width = DEBUG_HELP_WINDOW_WIDTH,
-    .height = DEBUG_HELP_WINDOW_HEIGHT,
+    .width = 28,
+    .height = 2,
     .paletteNum = 15,
     .baseBlock = 360,
 };
 
-// List Menu Templates
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Main =
 {
     .items = sDebugMenuItems_Main,
@@ -436,7 +349,6 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Party =
     .totalItems = ARRAY_COUNT(sDebugMenuItems_Party),
 };
 
-// Window Functions
 void Debug_OpenDebugMenu(void)
 {
     Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
@@ -470,7 +382,7 @@ static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate 
     menuTemplate.cursorShadowPal = 3;
     menuTemplate.lettersSpacing = 1;
     menuTemplate.itemVerticalPadding = 0;
-    menuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
+    menuTemplate.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
     menuTemplate.fontId = 1;
     menuTemplate.cursorKind = 0;
     menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
@@ -516,7 +428,7 @@ static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTem
     menuTemplate.cursorShadowPal = 3;
     menuTemplate.lettersSpacing = 1;
     menuTemplate.itemVerticalPadding = 0;
-    menuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
+    menuTemplate.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
     menuTemplate.fontId = 1;
     menuTemplate.cursorKind = 0;
     menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
@@ -595,7 +507,6 @@ static void Debug_DestroyExtraWindow(u8 taskId)
     DestroyTask(taskId);
 }
 
-// Input Handlers
 static void DebugTask_HandleMenuInput_Main(u8 taskId)
 {
     void (*func)(u8);
@@ -1000,7 +911,6 @@ static void DebugTask_HandleInput_CheckSaveBlockSize(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        //RemoveScrollIndicatorArrowPair(gTasks[taskId].data[3]);
         Debug_DestroyExtraWindow(taskId);
         DebugAction_OpenUtilityMenu(taskId);
     }
@@ -1150,7 +1060,6 @@ static void DebugTask_HandleInput_GiveMon(u8 taskId)
     }
 }
 
-// Main Menu Functions
 static void DebugAction_OpenCredits(u8 taskId)
 {
     u8 windowId1;
@@ -1243,7 +1152,6 @@ static void DebugAction_OpenPartyMenu(u8 taskId)
     Debug_ShowPartySubMenu(DebugTask_HandleMenuInput_Party, sDebugMenu_ListTemplate_Party);
 }
 
-// Utility Functions
 static void DebugAction_ManageFlags(u8 taskId)
 {
     u8 windowId1;
@@ -1451,9 +1359,6 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
-    // Display Scrolling Indicator
-    //tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 93, 6, 42, 0, 110, 110, 0);
-
     // Display SaveBlock1
     StringCopy(gStringVar1, gDebugText_SaveBlocks_SaveBlock1);
     ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock1), STR_CONV_MODE_RIGHT_ALIGN, 6);
@@ -1469,7 +1374,6 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
 
     gTasks[taskId].func = DebugTask_HandleInput_CheckSaveBlockSize;
     gTasks[taskId].data[1] = windowId1;
-    //gTasks[taskId].data[3] = tArrowTaskId;
 }
 
 static void DebugAction_ChangePlayerName(u8 taskId)
@@ -1547,7 +1451,6 @@ static void DebugAction_ChangePlayerVisiblity(u8 taskId)
     FlagToggle(FLAG_IS_INVISIBLE);
 }
 
-// Party Functions
 static void DebugAction_GiveMons(u8 taskId)
 {
     u8 windowId1;
@@ -1595,7 +1498,6 @@ static void DebugAction_HealParty(u8 taskId)
     PlaySE(SE_USE_ITEM);
 }
 
-// Cancel Function
 static void DebugAction_Cancel(u8 taskId)
 {
     Debug_DestroyExtraWindow(taskId);
