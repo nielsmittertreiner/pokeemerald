@@ -56,7 +56,7 @@ static const u8 sPotionDesc[] = _(
     "by 20 points.");
 
 static const u8 sAntidoteDesc[] = _(
-    "Heals a poisoned POKéMON");
+    "Heals a poisoned POKéMON.");
 
 static const u8 sBurnHealDesc[] = _(
     "Heals POKéMON of a burn.");
