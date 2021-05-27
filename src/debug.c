@@ -22,6 +22,7 @@
 #include "pokemon.h"
 #include "region_map.h"
 #include "save_location.h"
+#include "save.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "sound.h"
@@ -98,7 +99,7 @@ static void DebugAction_Cancel(u8);
 #define DEBUG_WARP_DISPLAY_WIDTH 14
 #define DEBUG_WARP_DISPLAY_HEIGHT 4
 
-#define DEBUG_SAVEBLOCK_DISPLAY_WIDTH 10
+#define DEBUG_SAVEBLOCK_DISPLAY_WIDTH 15
 #define DEBUG_SAVEBLOCK_DISPLAY_HEIGHT 2
 
 #define DEBUG_HELP_WINDOW_WIDTH 28
@@ -180,7 +181,7 @@ static const u8 gDebugText_Util_WarpToMap_SelectWarp[]     = _("WARP:           
 static const u8 gDebugText_Util_WarpToMap_SelectMax[]      = _("{STR_VAR_1} / {STR_VAR_2}");
 
 // Check SaveBlock Strings
-static const u8 gDebugText_SaveBlocks_SaveBlockSize[] = _("{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GRAY} IS\n{STR_VAR_2} BYTES");
+static const u8 gDebugText_SaveBlocks_SaveBlockSize[] = _("{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GRAY} IS\n{STR_VAR_2}/{STR_VAR_3} BYTES");
 static const u8 gDebugText_SaveBlocks_SaveBlock1[]    = _("SAVEBLOCK1");
 static const u8 gDebugText_SaveBlocks_SaveBlock2[]    = _("SAVEBLOCK2");
 
@@ -978,26 +979,28 @@ static void DebugTask_HandleInput_CheckSaveBlockSize(u8 taskId)
     if (gMain.newKeys & DPAD_UP)
     {
         StringCopy(gStringVar1, gDebugText_SaveBlocks_SaveBlock1);
-        ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock1), STR_CONV_MODE_LEFT_ALIGN, 6);
+        ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock1), STR_CONV_MODE_RIGHT_ALIGN, 6);
+        ConvertIntToDecimalStringN(gStringVar3, SECTOR_DATA_SIZE * 4, STR_CONV_MODE_RIGHT_ALIGN, 6);
     }
     
     if (gMain.newKeys & DPAD_DOWN)
     {
         StringCopy(gStringVar1, gDebugText_SaveBlocks_SaveBlock2);
-        ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock2), STR_CONV_MODE_LEFT_ALIGN, 6);
+        ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock2), STR_CONV_MODE_RIGHT_ALIGN, 6);
+        ConvertIntToDecimalStringN(gStringVar3, SECTOR_DATA_SIZE, STR_CONV_MODE_RIGHT_ALIGN, 6);
     }
     
     if (gMain.newKeys & DPAD_ANY)
     {
         PlaySE(SE_SELECT);
         FillWindowPixelBuffer(gTasks[taskId].data[1], PIXEL_FILL(1));
-        StringExpandPlaceholders(gStringVar3, gDebugText_SaveBlocks_SaveBlockSize);
-        AddTextPrinterParameterized(gTasks[taskId].data[1], 1, gStringVar3, 1, 1, 0, NULL);
+        StringExpandPlaceholders(gStringVar4, gDebugText_SaveBlocks_SaveBlockSize);
+        AddTextPrinterParameterized(gTasks[taskId].data[1], 1, gStringVar4, 1, 1, 0, NULL);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        RemoveScrollIndicatorArrowPair(gTasks[taskId].data[3]);
+        //RemoveScrollIndicatorArrowPair(gTasks[taskId].data[3]);
         Debug_DestroyExtraWindow(taskId);
         DebugAction_OpenUtilityMenu(taskId);
     }
@@ -1449,24 +1452,24 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
     DrawStdWindowFrame(windowId2, FALSE);
 
     // Display Scrolling Indicator
-    tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 93, 6, 42, 0, 110, 110, 0);
+    //tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 93, 6, 42, 0, 110, 110, 0);
 
     // Display SaveBlock1
     StringCopy(gStringVar1, gDebugText_SaveBlocks_SaveBlock1);
-    ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock1), STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar3, gDebugText_SaveBlocks_SaveBlockSize);
-    AddTextPrinterParameterized(windowId1, 1, gStringVar3, 1, 1, 0, NULL);
+    ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock1), STR_CONV_MODE_RIGHT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, (SECTOR_DATA_SIZE * 4), STR_CONV_MODE_RIGHT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar4, gDebugText_SaveBlocks_SaveBlockSize);
+    AddTextPrinterParameterized(windowId1, 1, gStringVar4, 1, 1, 0, NULL);
 
     // Display Help
-    StringExpandPlaceholders(gStringVar4, gDebugText_Help_SaveBlocks);
-    AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
+    AddTextPrinterParameterized(windowId2, 0, gDebugText_Help_SaveBlocks, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
     CopyWindowToVram(windowId2, 4);
 
     gTasks[taskId].func = DebugTask_HandleInput_CheckSaveBlockSize;
     gTasks[taskId].data[1] = windowId1;
-    gTasks[taskId].data[3] = tArrowTaskId;
+    //gTasks[taskId].data[3] = tArrowTaskId;
 }
 
 static void DebugAction_ChangePlayerName(u8 taskId)
