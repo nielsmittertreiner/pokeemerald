@@ -120,7 +120,6 @@ static const u8 gDebugText_Flag_FlagUnset[] = _("{COLOR}{RED}FALSE{COLOR}{DARK_G
 static const u8 gDebugText_Var_VariableDef[] = _("VAR: {COLOR}{GREEN}{STR_VAR_1}\n{COLOR}{DARK_GRAY}VAL: {STR_VAR_3}\n{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableHex[] = _("{STR_VAR_1}       0x{STR_VAR_2}");
 static const u8 gDebugText_Var_VariableVal[] = _("VAR: {STR_VAR_1}\nVAL: {COLOR}{GREEN}{STR_VAR_3}{COLOR}{DARK_GRAY}\n{STR_VAR_2}{A_BUTTON}");
-static const u8 gDebugText_Util_WarpToMap[] = _("WARP TO MAP WARP");
 static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] = _("{COLOR}{GREEN}GROUP: {STR_VAR_1}{COLOR}{DARK_GRAY}          \n                 \n\n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelectMap[] = _("{COLOR}{GREEN}MAP: {STR_VAR_1}{COLOR}{DARK_GRAY}            \nMAPSEC:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelectWarp[] = _("WARP:             \n{COLOR}{GREEN}{STR_VAR_1}{COLOR}{DARK_GRAY}                \n                                  \n{STR_VAR_3}     ");
