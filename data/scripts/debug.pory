@@ -3,6 +3,11 @@ script Debug_EventScript_DoConfetti {
     waitstate
 }
 
+script Debug_EventScript_ResetAllBerries {
+    goto(EventScript_ResetAllBerries)
+    end
+}
+
 script Debug_EventScript_ShowEndOfCurrentBeta {
     lock
     special(ShowEndOfCurrentBetaScreen)

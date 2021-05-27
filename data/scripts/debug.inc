@@ -4,6 +4,11 @@ Debug_EventScript_DoConfetti::
 	return
 
 
+Debug_EventScript_ResetAllBerries::
+	goto EventScript_ResetAllBerries
+	end
+
+
 Debug_EventScript_ShowEndOfCurrentBeta::
 	lock
 	special ShowEndOfCurrentBetaScreen
