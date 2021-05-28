@@ -384,16 +384,16 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .tilemapLeft = 14,
         .tilemapTop = 2,
         .width = 15,
-        .height = 16,
+        .height = 12,
         .paletteNum = 15,
         .baseBlock = 0x0032,
     },
     {
         .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 13,
-        .width = 14,
-        .height = 6,
+        .tilemapLeft = 5,
+        .tilemapTop = 15,
+        .width = 20,
+        .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x0122,
     },
@@ -694,8 +694,8 @@ static void BuyMenuBuildListMenuTemplate(void)
     gMultiuseListMenuTemplate = sShopBuyMenuListTemplate;
     gMultiuseListMenuTemplate.items = sListMenuItems;
     gMultiuseListMenuTemplate.totalItems = sMartInfo.itemCount + 1;
-    if (gMultiuseListMenuTemplate.totalItems > 8)
-        gMultiuseListMenuTemplate.maxShowed = 8;
+    if (gMultiuseListMenuTemplate.totalItems > 6)
+        gMultiuseListMenuTemplate.maxShowed = 6;
     else
         gMultiuseListMenuTemplate.maxShowed = gMultiuseListMenuTemplate.totalItems;
 
@@ -773,14 +773,14 @@ static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
 
 static void BuyMenuAddScrollIndicatorArrows(void)
 {
-    if (sShopData->scrollIndicatorsTaskId == TASK_NONE && sMartInfo.itemCount + 1 > 8)
+    if (sShopData->scrollIndicatorsTaskId == TASK_NONE && sMartInfo.itemCount + 1 > 6)
     {
         sShopData->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(
             SCROLL_ARROW_UP,
             172,
             12,
-            148,
-            sMartInfo.itemCount - 7,
+            112,
+            sMartInfo.itemCount - 5,
             TAG_SCROLL_ARROW,
             TAG_SCROLL_ARROW,
             &sShopData->scrollOffset);
@@ -816,7 +816,7 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
         {
             *spriteIdPtr = spriteId;
             gSprites[spriteId].pos2.x = 24;
-            gSprites[spriteId].pos2.y = 88;
+            gSprites[spriteId].pos2.y = 141;
         }
     }
     else
