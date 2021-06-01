@@ -52,6 +52,18 @@ mapscripts FirwealdCity_TournamentHallLobby_MapScripts {
 script FirwealdCity_TournamentHallLobby_EventScript_Attendant {
     lock
     faceplayer
+    if (flag(FLAG_BADGE01_GET))
+    {
+        load_speech_bubble(LOCALID_ATTENDANT)
+        msgbox("Congratulations!\n"
+               "You have already earned the CONIFER\l"
+               "BADGE.\p"
+               "We can't let you participate when you\n"
+               "already have this TOURNAMENT's BADGE…")
+        destroy_speech_bubble
+        release
+        end
+    }
     load_speech_bubble(LOCALID_ATTENDANT)
     message(FirwealdCity_TournamentHallLobby_Text_WelcomeToFirwealdCityTounamentHall)
     waitmessage

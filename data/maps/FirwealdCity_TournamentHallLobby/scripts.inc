@@ -45,30 +45,38 @@ FirwealdCity_TournamentHallLobby_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_2:
 FirwealdCity_TournamentHallLobby_EventScript_Attendant::
 	lock
 	faceplayer
+	goto_if_set FLAG_BADGE01_GET, FirwealdCity_TournamentHallLobby_EventScript_Attendant_2
 	load_speech_bubble 1
 	message FirwealdCity_TournamentHallLobby_Text_WelcomeToFirwealdCityTounamentHall
 	waitmessage
 	multichoice 22, 6, MULTI_TOURNAMENT_HALL_JOIN, 1
 	switch VAR_RESULT
-	case 0, FirwealdCity_TournamentHallLobby_EventScript_Attendant_2
-	case 1, FirwealdCity_TournamentHallLobby_EventScript_Attendant_3
-	case 2, FirwealdCity_TournamentHallLobby_EventScript_Attendant_4
+	case 0, FirwealdCity_TournamentHallLobby_EventScript_Attendant_5
+	case 1, FirwealdCity_TournamentHallLobby_EventScript_Attendant_6
+	case 2, FirwealdCity_TournamentHallLobby_EventScript_Attendant_7
 	return
 
 FirwealdCity_TournamentHallLobby_EventScript_Attendant_2:
+	load_speech_bubble 1
+	msgbox FirwealdCity_TournamentHallLobby_EventScript_Attendant_Text_0
+	destroy_speech_bubble
+	release
+	end
+
+FirwealdCity_TournamentHallLobby_EventScript_Attendant_5:
 	destroy_speech_bubble
 	closemessage
 	goto FirwealdCity_TournamentHallLobby_EventScript_JoinTournament
 	return
 
-FirwealdCity_TournamentHallLobby_EventScript_Attendant_3:
+FirwealdCity_TournamentHallLobby_EventScript_Attendant_6:
 	destroy_speech_bubble
 	closemessage
-	msgbox FirwealdCity_TournamentHallLobby_EventScript_Attendant_Text_0, MSGBOX_NPC
+	msgbox FirwealdCity_TournamentHallLobby_EventScript_Attendant_Text_1, MSGBOX_NPC
 	goto FirwealdCity_TournamentHallLobby_EventScript_Attendant
 	return
 
-FirwealdCity_TournamentHallLobby_EventScript_Attendant_4:
+FirwealdCity_TournamentHallLobby_EventScript_Attendant_7:
 	destroy_speech_bubble
 	closemessage
 	goto FirwealdCity_TournamentHallLobby_EventScript_CancelTournament
@@ -183,6 +191,13 @@ FirwealdCity_TournamentHallLobby_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_3:
 	.string "counter up front.$"
 
 FirwealdCity_TournamentHallLobby_EventScript_Attendant_Text_0:
+	.string "Congratulations!\n"
+	.string "You have already earned the CONIFER\l"
+	.string "BADGE.\p"
+	.string "We can't let you participate when you\n"
+	.string "already have this TOURNAMENT's BADGE…$"
+
+FirwealdCity_TournamentHallLobby_EventScript_Attendant_Text_1:
 	.string "This is the FIRWEALD CITY\n"
 	.string "TOURNAMENT HALL. Here trainers come\l"
 	.string "together to compete in advanced\l"
