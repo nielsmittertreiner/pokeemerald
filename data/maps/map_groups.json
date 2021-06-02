@@ -31,22 +31,6 @@
     "Route405",
     "Route406"
   ],
-  "gMapGroup_IndoorSunset": [
-    "SunsetTown_PlayerHouse_1F",
-    "SunsetTown_PlayerHouse_2F",
-    "SunsetTown_ProfessorConiferLab",
-    "SunsetTown_House1",
-    "SunsetTown_JuliasHouse_1F",
-    "SunsetTown_JuliasHouse_2F"
-  ],
-  "gMapGroup_IndoorCedarred": [
-    "CedarredTown_House1",
-    "CedarredTown_House2",
-    "CedarredTown_Mart",
-    "CedarredTown_LoggersCabin",
-    "CedarredTown_PokemonCenter_1F",
-    "CedarredTown_PokemonCenter_2F"
-  ],
   "gMapGroup_IndoorFirweald": [
     "FirwealdCity_House1",
     "FirwealdCity_Duplex",
@@ -66,6 +50,22 @@
     "MurenaCity_PokemonCenter_2F",
     "MurenaCity_Mart"
   ],
+  "gMapGroup_IndoorSunset": [
+    "SunsetTown_PlayerHouse_1F",
+    "SunsetTown_PlayerHouse_2F",
+    "SunsetTown_ProfessorConiferLab",
+    "SunsetTown_House1",
+    "SunsetTown_JuliasHouse_1F",
+    "SunsetTown_JuliasHouse_2F"
+  ],
+  "gMapGroup_IndoorCedarred": [
+    "CedarredTown_House1",
+    "CedarredTown_House2",
+    "CedarredTown_Mart",
+    "CedarredTown_LoggersCabin",
+    "CedarredTown_PokemonCenter_1F",
+    "CedarredTown_PokemonCenter_2F"
+  ],
   "gMapGroup_IndoorLitor": [
     "LitorTown_Bar",
     "LitorTown_House1",
@@ -82,10 +82,6 @@
     "NavireTown_House1",
     "NavireTown_House2",
     "NavireTown_House3"
-  ],
-  "gMapGroup_IndoorAcrenForest": [
-    "AcrenForest_PlantShop",
-    "AcrenForest_IllegalCabin"
   ],
   "gMapGroup_Dungeons": [
     "AcrenForest",
@@ -478,7 +474,7 @@
     "AlteringCave",
     "MeteorFalls_StevensCave"
   ],
-  "gMapGroup_OriginalSpecialArea":[
+  "gMapGroup_OriginalSpecialArea": [
     "SafariZone_Northwest",
     "SafariZone_North",
     "SafariZone_Southwest",
