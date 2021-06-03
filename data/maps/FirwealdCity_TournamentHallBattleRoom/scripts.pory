@@ -467,46 +467,43 @@ movement FirwealdCity_TournamentHallBattleRoom_Movement_PhyllosWalkToPlayer {
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_Opponent1Defeat {
-    "You may have bested me, but\n"
-    "you'll never get past PHYLLOS!"
+    "You may have bested me, but you'll\p"
+    "never get past PHYLLOS!"
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_Opponent2Defeat {
-    "No need to be so blue…\n"
-        "We will blossom again!"
+    "No need to be so blue…\p"
+    "We will blossom again!"
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_Opponent3Defeat {
-    "It seems the real\n"
-    "parasite is within…"
+    "It seems the real parasite is within…"
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_Opponent4Defeat {
-    "Shame all around me, if I\n"
-    "could only avenge this defeat…"
+    "Shame all around me, if I could\p"
+    "only avenge this defeat…"
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_Opponent5Defeat {
-    "You need to train your POKéMON?\n"
+    "You need to train your POKéMON?\p"
     "Not only catch a bunch?"
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_Opponent6Defeat {
-    "Why did mom give\n"
-    "me a CHIKORITA…"
+    "Why did mom give me a CHIKORITA…"
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_Opponent7Defeat {
-    "Mother, why did you name\n"
-    "me after a vegetable…"
+    "Mother, why did you name me after\p"
+    "a vegetable…"
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_Opponent8Defeat {
-    "Well that tasted\n"
-    "rather foul…"
+    "Well that tasted rather foul…"
 }
 
 text FirwealdCity_TournamentHallBattleRoom_Text_PhyllosDefeat {
-    "I can hear them chanting!\n"
+    "I can hear them chanting!\p"
     "{PLAYER}! {PLAYER}! {PLAYER}!"
 }

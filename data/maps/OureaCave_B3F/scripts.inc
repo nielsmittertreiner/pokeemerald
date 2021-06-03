@@ -209,7 +209,7 @@ OureaCave_B3F_Text_JonathanIntro::
 	.string "Let's see if you can power through…$"
 
 OureaCave_B3F_Text_JonathanDefeat::
-	.string "Somehow my power has\n"
+	.string "Somehow my power has\p"
 	.string "eroded before you…$"
 
 OureaCave_B3F_Text_JonathanPostBattle::

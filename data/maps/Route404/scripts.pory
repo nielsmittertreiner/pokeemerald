@@ -24,7 +24,7 @@ text Route404_Text_WilliamIntro {
 }
 
 text Route404_Text_WilliamDefeat {
-    "Huff puff puff…\n"
+    "Huff puff puff…\p"
     "Swimming is tiring…"
 }
 
@@ -39,7 +39,7 @@ text Route404_Text_SarahIntro {
 }
 
 text Route404_Text_SarahDefeat {
-    "SEAKING held on for longer than\n"
+    "SEAKING held on for longer than\p"
     "GOLDEEN ever did."
 }
 

@@ -151,8 +151,8 @@ Route403_Text_TimmyPostBattle::
 	.string "Now where did I keep that MOON STONE…?$"
 
 Route403_Text_TimmyDefeat::
-	.string "Guess sometimes you should\n"
-	.string "get your head out of the stars\l"
+	.string "Guess sometimes you should\p"
+	.string "get your head out of the stars\p"
 	.string "and come down to earth…$"
 
 Route403_Text_AnnaIntro::
@@ -160,7 +160,7 @@ Route403_Text_AnnaIntro::
 	.string "bed bugs bite!$"
 
 Route403_Text_AnnaDefeat::
-	.string "hwwwaahhhh.... Nooo JIGGLYPUFF don't\n"
+	.string "Hwwwaahhhh.... Nooo JIGGLYPUFF don't\p"
 	.string "put ME to sleep!$"
 
 Route403_Text_AnnaPostBattle::
@@ -174,9 +174,8 @@ Route403_Text_WarrenIntro::
 	.string "Bite where it stings!$"
 
 Route403_Text_WarrenDefeat::
-	.string "The only place that stings now\n"
-	.string "is my heart…\p"
-	.string "Fight me again when we're stronger!$"
+	.string "The only place that stings now\p"
+	.string "is my heart…$"
 
 Route403_Text_WarrenPostBattle::
 	.string "Fight me again when we're stronger!$"

@@ -88,7 +88,7 @@ Route402_Text_MimiIntro::
 	.string "Double the fun!$"
 
 Route402_Text_MimiDefeat::
-	.string "Even though we battled\n"
+	.string "Even though we battled\p"
 	.string "together we lost…$"
 
 Route402_Text_MimiNotEnoughMons::
@@ -119,7 +119,7 @@ Route402_Text_TimmyIntro::
 	.string "Go ZIGZAGOON!$"
 
 Route402_Text_TimmyDefeat::
-	.string "I guess I didn't train\n"
+	.string "I guess I didn't train\p"
 	.string "my ZIGZAGOON enough yet…$"
 
 Route402_Text_TimmyPostBattle::

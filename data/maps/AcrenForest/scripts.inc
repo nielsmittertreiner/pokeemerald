@@ -862,11 +862,11 @@ AcrenForest_EventScript_CelebiShrine_Text_0:
 	.string "around you…$"
 
 AcrenForest_Text_FrederickIntro::
-	.string "My RATTATA and I will become champions\n"
+	.string "My RATTATA and I will become champions\p"
 	.string "of the EURUS REGION!$"
 
 AcrenForest_Text_FrederickDefeat::
-	.string "Why would you crush my\n"
+	.string "Why would you crush my\p"
 	.string "hopes and dreams?!$"
 
 AcrenForest_Text_FrederickPostBattle::
@@ -898,8 +898,7 @@ AcrenForest_Text_MarishaIntro::
 	.string "far, far away.$"
 
 AcrenForest_Text_MarishaDefeat::
-	.string "You won't beat my parents\n"
-	.string "in a battle!$"
+	.string "You won't beat my parents in a battle!$"
 
 AcrenForest_Text_MarishaPostBattle::
 	.string "The country my parents are from\n"
@@ -910,8 +909,7 @@ AcrenForest_Text_LadaIntro::
 	.string "'cause I'm a machine in battle!$"
 
 AcrenForest_Text_LadaDefeat::
-	.string "Oh no!\n"
-	.string "I choked my engine!$"
+	.string "Oh no! I choked my engine!$"
 
 AcrenForest_Text_LadaPostBattle::
 	.string "I guess I ran out of gas…$"

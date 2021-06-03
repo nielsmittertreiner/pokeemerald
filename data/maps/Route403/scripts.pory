@@ -125,8 +125,8 @@ text Route403_Text_TimmyPostBattle {
 }
 
 text Route403_Text_TimmyDefeat {
-    "Guess sometimes you should\n"
-    "get your head out of the stars\l"
+    "Guess sometimes you should\p"
+    "get your head out of the stars\p"
     "and come down to earth…"
 }
 
@@ -136,8 +136,8 @@ text Route403_Text_AnnaIntro {
 }
 
 text Route403_Text_AnnaDefeat {
-    "hwwwaahhhh.... Nooo JIGGLYPUFF don't\n"
-    "put ME to sleep!"
+    "Hwwwaahhhh.... Nooo JIGGLYPUFF!\p"
+    "Don't put ME to sleep!"
 }
 
 text Route403_Text_AnnaPostBattle {
@@ -153,9 +153,8 @@ text Route403_Text_WarrenIntro {
 }
 
 text Route403_Text_WarrenDefeat {
-    "The only place that stings now\n"
-    "is my heart…\p"
-    "Fight me again when we're stronger!"
+    "The only place that stings now\p"
+    "is my heart…"
 }
 
 text Route403_Text_WarrenPostBattle {

@@ -621,12 +621,12 @@ movement AcrenForest_Movement_PhyllosWalkFromShrine_3 {
 }
 
 text AcrenForest_Text_FrederickIntro {
-    "My RATTATA and I will become champions\n"
+    "My RATTATA and I will become champions\p"
     "of the EURUS REGION!"
 }
 
 text AcrenForest_Text_FrederickDefeat {
-    "Why would you crush my\n"
+    "Why would you crush my\p"
     "hopes and dreams?!"
 }
 
@@ -667,8 +667,7 @@ text AcrenForest_Text_MarishaIntro {
 }
 
 text AcrenForest_Text_MarishaDefeat {
-    "You won't beat my parents\n"
-    "in a battle!"
+    "You won't beat my parents in a battle!"
 }
 
 text AcrenForest_Text_MarishaPostBattle {
@@ -682,8 +681,7 @@ text AcrenForest_Text_LadaIntro {
 }
 
 text AcrenForest_Text_LadaDefeat {
-    "Oh no!\n"
-    "I choked my engine!"
+    "Oh no! I choked my engine!"
 }
 
 text AcrenForest_Text_LadaPostBattle {

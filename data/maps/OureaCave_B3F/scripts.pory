@@ -161,7 +161,7 @@ text OureaCave_B3F_Text_JonathanIntro {
 }
 
 text OureaCave_B3F_Text_JonathanDefeat {
-    "Somehow my power has\n"
+    "Somehow my power has\p"
     "eroded before you…"
 }
 

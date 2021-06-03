@@ -235,7 +235,7 @@ OureaCave_B2F_Text_RobinIntro::
 	.string "we take to the skies!$"
 
 OureaCave_B2F_Text_RobinDefeat::
-	.string "Hmmm maybe instead of looking down\n"
+	.string "Hmmm maybe instead of looking down\p"
 	.string "I should look back now…$"
 
 OureaCave_B2F_Text_RobinPostBattle::

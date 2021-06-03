@@ -663,37 +663,34 @@ FirwealdCity_TournamentHallBattleRoom_EventScripts_Finals_Text_6:
 	.string "the entrance.$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent1Defeat::
-	.string "You may have bested me, but\n"
-	.string "you'll never get past PHYLLOS!$"
+	.string "You may have bested me, but you'll never\p"
+	.string "get past PHYLLOS!$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent2Defeat::
-	.string "No need to be so blue…\n"
+	.string "No need to be so blue…\p"
 	.string "We will blossom again!$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent3Defeat::
-	.string "It seems the real\n"
-	.string "parasite is within…$"
+	.string "It seems the real parasite is within…$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent4Defeat::
-	.string "Shame all around me, if I\n"
-	.string "could only avenge this defeat…$"
+	.string "Shame all around me, if I could\p"
+	.string "only avenge this defeat…$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent5Defeat::
-	.string "You need to train your POKéMON?\n"
+	.string "You need to train your POKéMON?\p"
 	.string "Not only catch a bunch?$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent6Defeat::
-	.string "Why did mom give\n"
-	.string "me a CHIKORITA…$"
+	.string "Why did mom give me a CHIKORITA…$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent7Defeat::
-	.string "Mother, why did you name\n"
-	.string "me after a vegetable…$"
+	.string "Mother, why did you name me after\p"
+	.string "a vegetable…$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent8Defeat::
-	.string "Well that tasted\n"
-	.string "rather foul…$"
+	.string "Well that tasted rather foul…$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_PhyllosDefeat::
-	.string "I can hear them chanting!\n"
+	.string "I can hear them chanting!\p"
 	.string "{PLAYER}! {PLAYER}! {PLAYER}!$"

@@ -70,7 +70,7 @@ text Route402_Text_MimiIntro {
 }
 
 text Route402_Text_MimiDefeat {
-    "Even though we battled\n"
+    "Even though we battled\p"
     "together we lost…"
 }
 
@@ -109,7 +109,7 @@ text Route402_Text_TimmyIntro {
 }
 
 text Route402_Text_TimmyDefeat {
-    "I guess I didn't train\n"
+    "I guess I didn't train\p"
     "my ZIGZAGOON enough yet…"
 }
 

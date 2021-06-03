@@ -28,7 +28,7 @@ Route404_Text_WilliamIntro::
 	.string "Try beating me in the water!$"
 
 Route404_Text_WilliamDefeat::
-	.string "Huff puff puff…\n"
+	.string "Huff puff puff…\p"
 	.string "Swimming is tiring…$"
 
 Route404_Text_WilliamPostBattle::
@@ -40,7 +40,7 @@ Route404_Text_SarahIntro::
 	.string "I'll try its new power on you!$"
 
 Route404_Text_SarahDefeat::
-	.string "SEAKING held on for longer than\n"
+	.string "SEAKING held on for longer than\p"
 	.string "GOLDEEN ever did.$"
 
 Route404_Text_SarahPostBattle::

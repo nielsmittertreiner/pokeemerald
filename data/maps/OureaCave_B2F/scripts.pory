@@ -172,7 +172,7 @@ text OureaCave_B2F_Text_RobinIntro {
 }
 
 text OureaCave_B2F_Text_RobinDefeat {
-    "Hmmm maybe instead of looking down\n"
+    "Hmmm maybe instead of looking down\p"
     "I should look back now…"
 }
 
