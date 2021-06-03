@@ -161,7 +161,25 @@ FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_16:
 	msgbox FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_Text_4
 	destroy_speech_bubble
 	closemessage
-	applymovement 1, FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoor
+	compare VAR_FACING, DIR_NORTH
+	goto_if_eq FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_19
+	compare VAR_FACING, DIR_EAST
+	goto_if_eq FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_20
+	compare VAR_FACING, DIR_WEST
+	goto_if_eq FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_21
+FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_18:
+	warpsilent MAP_FIRWEALD_CITY_TOURNAMENT_HALL_BATTLE_ROOM, 0xFF, 7, 5
+	waitstate
+	goto FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_1
+
+FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_17:
+	msgbox FirwealdCity_TournamentHallPreBattleRoom_EventScripts_InformPlayer_Text_1
+	destroy_speech_bubble
+	closemessage
+	goto FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_1
+
+FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_19:
+	applymovement 1, FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorNorth
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
@@ -172,15 +190,35 @@ FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_16:
 	waitmovement 0
 	closedoor 3, 1
 	waitdooranim
-	warpsilent MAP_FIRWEALD_CITY_TOURNAMENT_HALL_BATTLE_ROOM, 0xFF, 7, 5
-	waitstate
-	goto FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_1
+	goto FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_18
 
-FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_17:
-	msgbox FirwealdCity_TournamentHallPreBattleRoom_EventScripts_InformPlayer_Text_1
-	destroy_speech_bubble
-	closemessage
-	goto FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_1
+FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_20:
+	applymovement 1, FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorEast
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkRight
+	waitmovement 0
+	opendoor 3, 1
+	playse SE_SLIDING_DOOR
+	waitdooranim
+	applymovement OBJ_EVENT_ID_PLAYER, FirwealdCity_TournamentHallPreBattleRoom_Movement_PlayerWalkIntoDoor
+	waitmovement 0
+	closedoor 3, 1
+	waitdooranim
+	goto FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_18
+
+FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_21:
+	applymovement 1, FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorWest
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft
+	waitmovement 0
+	opendoor 3, 1
+	playse SE_SLIDING_DOOR
+	waitdooranim
+	applymovement OBJ_EVENT_ID_PLAYER, FirwealdCity_TournamentHallPreBattleRoom_Movement_PlayerWalkIntoDoor
+	waitmovement 0
+	closedoor 3, 1
+	waitdooranim
+	goto FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant_18
 
 
 FirwealdCity_TournamentHallPreBattleRoom_EventScripts_BulletinBoard::
@@ -227,8 +265,18 @@ FirwealdCity_TournamentHallPreBattleRoom_Movement_PlayerWalkToDoor:
 	walk_up
 	step_end
 
-FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoor:
+FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorNorth:
 	walk_right
+	face_left
+	step_end
+
+FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorEast:
+	walk_right
+	face_left
+	step_end
+
+FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorWest:
+	walk_left
 	face_left
 	step_end
 

@@ -109,17 +109,48 @@ script FirwealdCity_TournamentHallPreBattleRoom_EventScripts_Attendant {
                            "on your battle!")
                     destroy_speech_bubble
                     closemessage
-                    applymovement(LOCALID_ATTENDANT, FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoor)
-                    waitmovement(0)
-                    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp)
-                    waitmovement(0)
-                    opendoor(3, 1)
-                    playse(SE_SLIDING_DOOR)
-                    waitdooranim
-                    applymovement(OBJ_EVENT_ID_PLAYER, FirwealdCity_TournamentHallPreBattleRoom_Movement_PlayerWalkIntoDoor)
-                    waitmovement(0)
-                    closedoor(3, 1)
-                    waitdooranim
+                    if (var(VAR_FACING) == DIR_NORTH)
+                    {
+                        applymovement(LOCALID_ATTENDANT, FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorNorth)
+                        waitmovement(0)
+                        applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp)
+                        waitmovement(0)
+                        opendoor(3, 1)
+                        playse(SE_SLIDING_DOOR)
+                        waitdooranim
+                        applymovement(OBJ_EVENT_ID_PLAYER, FirwealdCity_TournamentHallPreBattleRoom_Movement_PlayerWalkIntoDoor)
+                        waitmovement(0)
+                        closedoor(3, 1)
+                        waitdooranim
+                    }
+                    elif (var(VAR_FACING) == DIR_EAST)
+                    {
+                        applymovement(LOCALID_ATTENDANT, FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorEast)
+                        waitmovement(0)
+                        applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkRight)
+                        waitmovement(0)
+                        opendoor(3, 1)
+                        playse(SE_SLIDING_DOOR)
+                        waitdooranim
+                        applymovement(OBJ_EVENT_ID_PLAYER, FirwealdCity_TournamentHallPreBattleRoom_Movement_PlayerWalkIntoDoor)
+                        waitmovement(0)
+                        closedoor(3, 1)
+                        waitdooranim
+                    }
+                    elif (var(VAR_FACING) == DIR_WEST)
+                    {
+                        applymovement(LOCALID_ATTENDANT, FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorWest)
+                        waitmovement(0)
+                        applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft)
+                        waitmovement(0)
+                        opendoor(3, 1)
+                        playse(SE_SLIDING_DOOR)
+                        waitdooranim
+                        applymovement(OBJ_EVENT_ID_PLAYER, FirwealdCity_TournamentHallPreBattleRoom_Movement_PlayerWalkIntoDoor)
+                        waitmovement(0)
+                        closedoor(3, 1)
+                        waitdooranim
+                    }
                     warpsilent(MAP_FIRWEALD_CITY_TOURNAMENT_HALL_BATTLE_ROOM, 0xFF, 7, 5)
                     waitstate
                 case NO:
@@ -201,8 +232,18 @@ movement FirwealdCity_TournamentHallPreBattleRoom_Movement_PlayerWalkToDoor {
     walk_up * 5
 }
 
-movement FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoor {
+movement FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorNorth {
     walk_right
+    face_left
+}
+
+movement FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorEast {
+    walk_right
+    face_left
+}
+
+movement FirwealdCity_TournamentHallPreBattleRoom_Movement_AttendantWalkAwayFromDoorWest {
+    walk_left
     face_left
 }
 
