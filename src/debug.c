@@ -201,8 +201,8 @@ static const struct ListMenuItem sDebugMenuItems_Utility[] =
 
 static const struct ListMenuItem sDebugMenuItems_Party[] =
 {
-    {gDebugText_Party_GiveMon,   DEBUG_MENUITEM_GIVE_MONS},
     {gDebugText_Party_HealParty, DEBUG_MENUITEM_HEAL_PARTY},
+    {gDebugText_Party_GiveMon,   DEBUG_MENUITEM_GIVE_MONS},
 };
 
 static void (*const sDebugMenuActions_Main[])(u8) =
@@ -228,8 +228,8 @@ static void (*const sDebugMenuActions_Utility[])(u8) =
 
 static void (*const sDebugMenuActions_Party[])(u8) =
 {
-    [DEBUG_MENUITEM_GIVE_MONS]  = DebugAction_GiveMons,
     [DEBUG_MENUITEM_HEAL_PARTY] = DebugAction_HealParty,
+    [DEBUG_MENUITEM_GIVE_MONS]  = DebugAction_GiveMons,
 };
 
 static const struct WindowTemplate sDebugMainMenuWindowTemplate =
