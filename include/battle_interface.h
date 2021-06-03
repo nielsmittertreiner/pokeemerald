@@ -44,6 +44,8 @@ enum
 #define TAG_STATUS_SUMMARY_BAR_PAL      0xD710
 #define TAG_STATUS_SUMMARY_BALLS_PAL    0xD712
 
+#define TAG_MOVE_TYPES                  0xD711
+
 enum
 {
     HEALTHBOX_ALL,
@@ -59,6 +61,11 @@ enum
     HEALTHBOX_SAFARI_ALL_TEXT,
     HEALTHBOX_SAFARI_BALLS_TEXT
 };
+
+extern const struct CompressedSpriteSheet sSpriteSheet_MoveTypes;
+extern const struct SpriteTemplate sSpriteTemplate_MoveTypes;
+extern const u8 sMoveTypeToOamPaletteNum[];
+extern const s16 gMoveTypeIconPositions[][2];
 
 u8 CreateBattlerHealthboxSprites(u8 battler);
 u8 CreateSafariPlayerHealthboxSprites(void);

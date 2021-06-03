@@ -12,7 +12,7 @@ u32 gUnusedWindowVar3;
 void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS];
 extern u32 gUnneededFireRedVariable;
 
-#define WINDOWS_MAX  32
+#define WINDOWS_MAX  48
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 EWRAM_DATA static struct Window* sWindowPtr = NULL;

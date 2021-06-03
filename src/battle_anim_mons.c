@@ -40,15 +40,15 @@ EWRAM_DATA static union AffineAnimCmd *gAnimTaskAffineAnim = NULL;
 static const struct UCoords8 sBattlerCoords[][4] =
 {
     {
-        { 72, 80 },
+        { 72, 96 },
         { 176, 40 },
         { 48, 40 },
-        { 112, 80 },
+        { 112, 96 },
     },
     {
-        { 32, 80 },
+        { 32, 96 },
         { 200, 40 },
-        { 90, 88 },
+        { 90, 96 },
         { 152, 32 },
     },
 };

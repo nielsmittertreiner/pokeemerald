@@ -1686,7 +1686,7 @@ void AnimTask_CreateSpotlight(u8 taskId)
     {
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
         gBattle_WIN1H = WIN_RANGE(0, DISPLAY_WIDTH);
-        gBattle_WIN1V = WIN_RANGE(120, DISPLAY_HEIGHT);
+        gBattle_WIN1V = WIN_RANGE(136, DISPLAY_HEIGHT);
         SetGpuReg(REG_OFFSET_WIN1H, gBattle_WIN1H);
         SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN1V);
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
