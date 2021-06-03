@@ -96,7 +96,7 @@ SlateportCity_EventScript_ScottScene:: @ 81DCD1C
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_SCOTT_MATCH_CALL
+	setflag FLAG_ENABLE_MRSTONE_MATCH_CALL
 	msgbox SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_SCOTT, SlateportCity_Movement_ScottExit
