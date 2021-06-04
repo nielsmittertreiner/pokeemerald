@@ -1484,7 +1484,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 // The corresponding WindowTemplate is gStandardBattleWindowTemplates[] within src/battle_bg.c
     { // 0 Standard battle message
         .fillValue = PIXEL_FILL(0xF),
-        .fontId = 1,
+        .fontId = 2,
         .x = 0,
         .y = 1,
         .letterSpacing = 0,
