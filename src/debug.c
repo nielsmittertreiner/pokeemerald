@@ -73,12 +73,11 @@ static void DebugAction_ChangePlayerGender(u8);
 static void DebugAction_ChangePlayerVisiblity(u8);
 static void DebugAction_GiveMons(u8);
 static void DebugAction_HealParty(u8);
+static void DebugAction_SaveParty(u8);
+static void DebugAction_LoadParty(u8);
 static void DebugAction_Cancel(u8);
 
-#define DEBUG_NUMBER_DIGITS_FLAGS 4
-#define DEBUG_NUMBER_DIGITS_VARIABLES 5
-#define TAG_CONFETTI 1001
-#define BOB_OTID 23501
+static EWRAM_DATA u8 gDebugPlayerPartyCount = 0;
 
 // Keep this up to date with new maps for the Eurus Region
 static const s32 gMapGroupCount = 14;
@@ -117,6 +116,8 @@ static const u8 gDebugText_GenderChange_ChangeToMale[] = _("{A_BUTTON} {COLOR}{G
 static const u8 gDebugText_GenderChange_ChangedToFemale[] = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO FEMALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
 static const u8 gDebugText_GenderChange_ChangedToMale[] = _("{A_BUTTON} {COLOR}{GREEN}CHANGED TO MALE   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
 static const u8 gDebugText_Party_GiveMon[] = _("{COLOR}{RED}GIVE MON");
+static const u8 gDebugText_Party_SaveParty[] = _("{COLOR}{BLUE}SAVE PARTY");
+static const u8 gDebugText_Party_LoadParty[] = _("{COLOR}{BLUE}LOAD PARTY");
 static const u8 gDebugText_Party_HealParty[] = _("{COLOR}{GREEN}HEAL PARTY");
 static const u8 gDebugText_Flag_FlagDef[] = _("FLAG: {STR_VAR_1}\n{STR_VAR_2}\n{STR_VAR_3}");
 static const u8 gDebugText_Flag_FlagHex[] = _("{STR_VAR_1}         0x{STR_VAR_2}");
@@ -205,6 +206,8 @@ static const struct ListMenuItem sDebugMenuItems_Utility[] =
 static const struct ListMenuItem sDebugMenuItems_Party[] =
 {
     {gDebugText_Party_HealParty, DEBUG_MENUITEM_HEAL_PARTY},
+    {gDebugText_Party_SaveParty, DEBUG_MENUITEM_SAVE_PARTY},
+    {gDebugText_Party_LoadParty, DEBUG_MENUITEM_LOAD_PARTY},
     {gDebugText_Party_GiveMon,   DEBUG_MENUITEM_GIVE_MONS},
 };
 
@@ -233,6 +236,8 @@ static void (*const sDebugMenuActions_Utility[])(u8) =
 static void (*const sDebugMenuActions_Party[])(u8) =
 {
     [DEBUG_MENUITEM_HEAL_PARTY] = DebugAction_HealParty,
+    [DEBUG_MENUITEM_SAVE_PARTY] = DebugAction_SaveParty,
+    [DEBUG_MENUITEM_LOAD_PARTY] = DebugAction_LoadParty,
     [DEBUG_MENUITEM_GIVE_MONS]  = DebugAction_GiveMons,
 };
 
@@ -1573,6 +1578,26 @@ static void DebugAction_HealParty(u8 taskId)
 {
     HealPlayerParty();
     PlaySE(SE_USE_ITEM);
+}
+
+static void DebugAction_SaveParty(u8 taskId)
+{
+    int i;
+
+    gSaveBlock1Ptr->playerPartyCount = gDebugPlayerPartyCount;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        gSaveBlock1Ptr->playerParty[i] = gPlayerParty[i];
+}
+
+static void DebugAction_LoadParty(u8 taskId)
+{
+    int i;
+
+    gDebugPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
 }
 
 static void DebugAction_Cancel(u8 taskId)
