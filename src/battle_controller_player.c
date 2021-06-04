@@ -106,16 +106,15 @@ static void HandleInputChooseMove(void);
 static void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
 static void MoveSelectionDestroyCursorAt(u8 cursorPos);
 static void MoveSelectionDisplayPpNumber(void);
-static void MoveSelectionDisplayPpString(void);
 static void MoveSelectionDisplayMoveType(void);
 static void SetMoveTypeSpriteInvisibility(u8 spriteArrayId, bool8 invisible);
 static void SetMoveTypeSpritePosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId);
 static void CreateMoveTypeIcons(void);
 static void DestroyMoveTypeIcons(void);
-static void UpdateMoveTypeIcons(void);
 static void SetMoveTypeIcons(void);
 static void MoveSelectionDisplayPowerNumber(void);
 static void MoveSelectionDisplayAccuracyNumber(void);
+static void MoveSelectionPowerAndAccuracyFillWindowPixelBuffer(void);
 static void MoveSelectionDisplayMoveNames(void);
 static void HandleMoveSwitching(void);
 static void SwitchIn_HandleSoundAndEnd(void);
@@ -272,6 +271,10 @@ static void HandleInputChooseAction(void)
         case 3:
             BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             break;
+        }
+        if (gSaveBlock2Ptr->showMovePowerAndAccuracy == FALSE)
+        {
+            MoveSelectionPowerAndAccuracyFillWindowPixelBuffer();
         }
         PlayerBufferExecCompleted();
     }
@@ -615,13 +618,9 @@ static void HandleInputChooseMove(void)
             MoveSelectionDisplayAccuracyNumber();
             gSaveBlock2Ptr->showMovePowerAndAccuracy = TRUE;
         }
-        else if (gSaveBlock2Ptr->showMovePowerAndAccuracy == TRUE)
+        else
         {
-            for (i = 0; i < 8; i++)
-            {
-                FillWindowPixelBuffer(28 + i, PIXEL_FILL(0xE));
-                CopyWindowToVram(28 + i, 3);
-            }
+            MoveSelectionPowerAndAccuracyFillWindowPixelBuffer();
             gSaveBlock2Ptr->showMovePowerAndAccuracy = FALSE;
         }
     }
@@ -777,7 +776,7 @@ static void HandleMoveSwitching(void)
         }
         MoveSelectionDisplayPpNumber();
         MoveSelectionDisplayMoveNames();
-        UpdateMoveTypeIcons();
+        SetMoveTypeIcons();
         MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
     }
     else if (JOY_NEW(B_BUTTON | SELECT_BUTTON))
@@ -786,7 +785,7 @@ static void HandleMoveSwitching(void)
         MoveSelectionDestroyCursorAt(gMultiUsePlayerCursor);
         MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
         gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseMove;
-        UpdateMoveTypeIcons();
+        SetMoveTypeIcons();
     }
     else if (JOY_NEW(DPAD_LEFT))
     {
@@ -1483,12 +1482,6 @@ static void MoveSelectionDisplayMoveNames(void)
     }
 }
 
-static void MoveSelectionDisplayPpString(void)
-{
-    StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 7);
-}
-
 static void MoveSelectionDisplayPpNumber(void)
 {
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
@@ -1557,11 +1550,6 @@ static void DestroyMoveTypeIcons(void)
     }
 }
 
-static void UpdateMoveTypeIcons(void)
-{
-    SetMoveTypeIcons();
-}
-
 static void SetMoveTypeIcons(void)
 {
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
@@ -1619,6 +1607,17 @@ static void MoveSelectionDisplayAccuracyNumber(void)
             txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, gBattleMoves[moveInfo->moves[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
             
         BattlePutTextOnWindow(gDisplayedStringBattle, 32 + i);
+    }
+}
+
+static void MoveSelectionPowerAndAccuracyFillWindowPixelBuffer(void)
+{
+    u8 i;
+
+    for (i = 0; i < (MAX_MON_MOVES * 2); i++)
+    {
+        FillWindowPixelBuffer(28 + i, PIXEL_FILL(0xE));
+        CopyWindowToVram(28 + i, 3);
     }
 }
 
@@ -2783,6 +2782,10 @@ void InitMoveSelectionsVarsAndStrings(void)
     {
         MoveSelectionDisplayPowerNumber();
         MoveSelectionDisplayAccuracyNumber();
+    }
+    else
+    {
+        MoveSelectionPowerAndAccuracyFillWindowPixelBuffer();
     }
     MoveSelectionDisplayPpNumber();
     MoveSelectionDisplayMoveNames();
