@@ -66,6 +66,7 @@ static void DebugAction_SetVarValue(u8);
 static void DebugAction_OpenWarpMenu(u8);
 static void DebugAction_CheckSaveBlockSize(u8);
 static void DebugAction_ResetAllBerries(u8);
+static void DebugAction_RestockBag(u8);
 static void DebugAction_ChangePlayerName(u8);
 static void DebugAction_OpenGenderChange(u8);
 static void DebugAction_ChangePlayerGender(u8);
@@ -103,6 +104,7 @@ static const u8 gDebugText_Party_RevievedBobParty[] = _("{COLOR}{GREEN}RECEIVED 
 static const u8 gDebugText_Party_AlreadyHasBobParty[] = _("{COLOR}{GREEN}YOU ALREADY HAVE BSBOB'S PARTY!   {B_BUTTON} {COLOR}{DARK_GRAY}CANCEL");
 static const u8 gDebugText_Utility_SaveBlocks[] = _("{COLOR}{GREEN}SAVEBLOCKS");
 static const u8 gDebugText_Utility_ResetBerries[] = _("{COLOR}{GREEN}RESET BERRIES");
+static const u8 gDebugText_Utility_RestockBag[] = _("{COLOR}{GREEN}RESTOCK BAG");
 static const u8 gDebugText_Utility_ManageFlag[] = _("{COLOR}{RED}MANAGE FLAGS");
 static const u8 gDebugText_Utility_ManageVars[] = _("{COLOR}{RED}MANAGE VARS");
 static const u8 gDebugText_Utility_Warp[] = _("{COLOR}{RED}WARP");
@@ -191,6 +193,7 @@ static const struct ListMenuItem sDebugMenuItems_Utility[] =
 {
     {gDebugText_Utility_SaveBlocks,      DEBUG_MENUITEM_SAVEBLOCKS},
     {gDebugText_Utility_ResetBerries,    DEBUG_MENUITEM_RESET_BERRIES},
+    {gDebugText_Utility_RestockBag,      DEBUG_MENUITEM_RESTOCK_BAG},
     {gDebugText_Utility_ManageFlag,      DEBUG_MENUITEM_MANAGE_FLAGS},
     {gDebugText_Utility_ManageVars,      DEBUG_MENUITEM_MANAGE_VARS},
     {gDebugText_Utility_Warp,            DEBUG_MENUITEM_WARP},
@@ -218,6 +221,7 @@ static void (*const sDebugMenuActions_Utility[])(u8) =
 {
     [DEBUG_MENUITEM_SAVEBLOCKS]       = DebugAction_CheckSaveBlockSize,
     [DEBUG_MENUITEM_RESET_BERRIES]    = DebugAction_ResetAllBerries,
+    [DEBUG_MENUITEM_RESTOCK_BAG]      = DebugAction_RestockBag,
     [DEBUG_MENUITEM_MANAGE_FLAGS]     = DebugAction_ManageFlags,
     [DEBUG_MENUITEM_MANAGE_VARS]      = DebugAction_ManageVars,
     [DEBUG_MENUITEM_WARP]             = DebugAction_OpenWarpMenu,
@@ -1384,6 +1388,69 @@ static void DebugAction_ResetAllBerries(u8 taskId)
 {
     PlaySE(SE_USE_ITEM);
     ScriptContext1_SetupScript(Debug_EventScript_ResetAllBerries);
+}
+
+static void DebugAction_RestockBag(u8 taskId)
+{
+    u16 i;
+
+
+    PlaySE(SE_USE_ITEM);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Items, BAG_ITEMS_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Medicine, BAG_MEDICINE_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Berries, BAG_BERRIES_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_TMHM, BAG_TMHM_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_KeyItems, BAG_KEYITEMS_COUNT);
+
+    i = ITEM_MASTER_BALL;
+    for (i = ITEM_MASTER_BALL; i < ITEM_PREMIER_BALL; i++)
+    {
+        AddBagItem(i, MAX_BAG_ITEM_CAPACITY);
+    }
+
+    i = ITEM_POTION;
+    for (i = ITEM_POTION; i < ITEM_LEAF_STONE; i++)
+    {
+        AddBagItem(i, MAX_BAG_ITEM_CAPACITY);
+        if (i >= ITEM_034 && i <= ITEM_03E || i == ITEM_048 || i == ITEM_052 || i >= ITEM_057 && i <= ITEM_05C)
+            RemoveBagItem(i, MAX_BAG_ITEM_CAPACITY);
+    }
+
+    i = FIRST_BERRY_INDEX;
+    for (i = FIRST_BERRY_INDEX; i < LAST_BERRY_INDEX; i++)
+    {
+        AddBagItem(i, MAX_BERRY_CAPACITY);
+    }
+
+    i = ITEM_BRIGHT_POWDER;
+    for (i = ITEM_BRIGHT_POWDER; i < ITEM_STICK; i++)
+    {
+        AddBagItem(i, MAX_BAG_ITEM_CAPACITY);
+    }
+
+    i = ITEM_MACH_BIKE;
+    for (i = ITEM_MACH_BIKE; i < ITEM_DEVON_SCOPE; i++)
+    {
+        AddBagItem(i, 1);
+        if (i == ITEM_10B)
+            RemoveBagItem(i, 1);
+    }
+
+    i = ITEM_TM01;
+    for (i = ITEM_TM01; i < ITEM_HM08; i++)
+    {
+        AddBagItem(i, 1);
+    }
+
+    AddBagItem(ITEM_MAGMA_EMBLEM, 1);
+    AddBagItem(ITEM_OLD_SEA_MAP, 1);
+
+    i = ITEM_TERMINAL_PASS;
+    for (i = ITEM_TERMINAL_PASS; i < ITEM_TENTACOOL_SKEWER; i++)
+    {
+        AddBagItem(i, 1);
+    }
 }
 
 static void DebugAction_ChangePlayerName(u8 taskId)
