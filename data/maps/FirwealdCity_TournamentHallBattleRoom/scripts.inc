@@ -663,8 +663,8 @@ FirwealdCity_TournamentHallBattleRoom_EventScripts_Finals_Text_6:
 	.string "the entrance.$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent1Defeat::
-	.string "You may have bested me, but you'll never\p"
-	.string "get past PHYLLOS!$"
+	.string "You may have bested me, but you'll\p"
+	.string "never get past PHYLLOS!$"
 
 FirwealdCity_TournamentHallBattleRoom_Text_Opponent2Defeat::
 	.string "No need to be so blue…\p"

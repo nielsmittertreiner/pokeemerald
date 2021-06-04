@@ -160,8 +160,8 @@ Route403_Text_AnnaIntro::
 	.string "bed bugs bite!$"
 
 Route403_Text_AnnaDefeat::
-	.string "Hwwwaahhhh.... Nooo JIGGLYPUFF don't\p"
-	.string "put ME to sleep!$"
+	.string "Hwwwaahhhh.... Nooo JIGGLYPUFF!\p"
+	.string "Don't put ME to sleep!$"
 
 Route403_Text_AnnaPostBattle::
 	.string "Maybe I should get into\n"
