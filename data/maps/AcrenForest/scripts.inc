@@ -139,10 +139,10 @@ AcrenForest_EventScript_PhyllosShrineCutscene::
 AcrenForest_EventScript_LoggersCutscene::
 	lock
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	compare VAR_TEMP_0, 29
+	compare VAR_TEMP_0, 55
 	goto_if_eq AcrenForest_EventScript_LoggersCutscene_2
-	compare VAR_TEMP_0, 29
-	goto_if_gt AcrenForest_EventScript_LoggersCutscene_3
+	compare VAR_TEMP_0, 56
+	goto_if_eq AcrenForest_EventScript_LoggersCutscene_3
 AcrenForest_EventScript_LoggersCutscene_1:
 	load_speech_bubble 17
 	msgbox AcrenForest_EventScript_LoggersCutscene_Text_0
@@ -208,8 +208,6 @@ AcrenForest_EventScript_Logger2::
 	compare VAR_ACREN_FOREST_STATE, 5
 	goto_if_eq AcrenForest_EventScript_Logger2_3
 	msgbox AcrenForest_EventScript_Logger2_Text_1, MSGBOX_NPC
-	turnobject 17, DIR_WEST
-	turnobject 18, DIR_WEST
 	end
 
 AcrenForest_EventScript_Logger2_2:

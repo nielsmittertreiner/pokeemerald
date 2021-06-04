@@ -175,10 +175,10 @@ script AcrenForest_EventScript_PhyllosShrineCutscene {
 script AcrenForest_EventScript_LoggersCutscene {
     lock
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    if (var(VAR_TEMP_0) == 29) {
+    if (var(VAR_TEMP_0) == 55) {
         applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp)
         waitmovement(0)
-    } elif (var(VAR_TEMP_0) > 29) {
+    } elif (var(VAR_TEMP_0) == 56) {
         applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp)
         applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft)
         applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
@@ -257,8 +257,6 @@ script AcrenForest_EventScript_Logger2 {
         end
     }
     msgbox("We'll handle it from here kid.", MSGBOX_NPC)
-    turnobject(LOCALID_LOGGER_1, DIR_WEST)
-    turnobject(LOCALID_LOGGER_2, DIR_WEST)
     end
 }
 
