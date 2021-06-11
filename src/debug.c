@@ -1584,6 +1584,7 @@ static void DebugAction_SaveParty(u8 taskId)
 {
     int i;
 
+    PlaySE(SE_FAINT);
     gSaveBlock1Ptr->playerPartyCount = gDebugPlayerPartyCount;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1594,6 +1595,7 @@ static void DebugAction_LoadParty(u8 taskId)
 {
     int i;
 
+    PlaySE(SE_BALL_OPEN);
     gDebugPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
 
     for (i = 0; i < PARTY_SIZE; i++)
