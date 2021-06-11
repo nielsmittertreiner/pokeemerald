@@ -1,5 +1,4 @@
 #if DEBUG
-
 #include "global.h"
 #include "debug.h"
 #include "confetti_util.h"
@@ -38,6 +37,7 @@
 
 // Functions
 void Debug_OpenDebugMenu(void);
+static void Debug_InitWindows(void);
 static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
 static void Debug_ShowPartySubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate);
@@ -241,171 +241,206 @@ static void (*const sDebugMenuActions_Party[])(u8) =
     [DEBUG_MENUITEM_GIVE_MONS]  = DebugAction_GiveMons,
 };
 
-static const struct WindowTemplate sDebugMainMenuWindowTemplate =
+static const struct WindowTemplate sDebugWindowTemplates[] =
 {
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 7,
-    .height = 2 * ARRAY_COUNT(sDebugMenuItems_Main),
-    .paletteNum = 15,
-    .baseBlock = 1,
+    [WIN_MAIN] =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 7,
+        .height = 2 * ARRAY_COUNT(sDebugMenuItems_Main),
+        .paletteNum = 15,
+        .baseBlock = 1,
+    },
+    [WIN_UTILITY] =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 11,
+        .height = 14,
+        .paletteNum = 15,
+        .baseBlock = 1,
+    },
+    [WIN_PARTY] =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 10,
+        .height = 2 * ARRAY_COUNT(sDebugMenuItems_Party),
+        .paletteNum = 15,
+        .baseBlock = 1,
+    },
+    [WIN_CREDITS] =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 2,
+        .width = 26,
+        .height = 13,
+        .paletteNum = 15,
+        .baseBlock = 1,
+    },
+    [WIN_WARNING] =
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 4,
+        .width = 26,
+        .height = 8,
+        .paletteNum = 15,
+        .baseBlock = 1,
+    },
+    [WIN_NUMBER] =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 14,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 128,
+    },
+    [WIN_WARP] =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 14,
+        .height = 8,
+        .paletteNum = 15,
+        .baseBlock = 128,
+    },
+    [WIN_SAVEBLOCK] =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 15,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 128,
+    },
+    [WIN_HELP] =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 18,
+        .width = 28,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 360,
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sDebugUtilityMenuWindowTemplate =
+static const struct ListMenuTemplate sDebugListMenuTemplates[] =
 {
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 11,
-    .height = 14,
-    .paletteNum = 15,
-    .baseBlock = 1,
-};
-
-static const struct WindowTemplate sDebugPartyMenuWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 10,
-    .height = 2 * ARRAY_COUNT(sDebugMenuItems_Party),
-    .paletteNum = 15,
-    .baseBlock = 1,
-};
-
-static const struct WindowTemplate sDebugCreditsWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 2,
-    .tilemapTop = 2,
-    .width = 26,
-    .height = 13,
-    .paletteNum = 15,
-    .baseBlock = 1,
-};
-
-static const struct WindowTemplate sDebugWarningWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 2,
-    .tilemapTop = 4,
-    .width = 26,
-    .height = 8,
-    .paletteNum = 15,
-    .baseBlock = 1,
-};
-
-static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 14,
-    .height = 6,
-    .paletteNum = 15,
-    .baseBlock = 128,
-};
-
-static const struct WindowTemplate sDebugWarpDisplayWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 14,
-    .height = 8,
-    .paletteNum = 15,
-    .baseBlock = 128,
-};
-
-static const struct WindowTemplate sDebugSaveBlockDisplayWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 15,
-    .height = 4,
-    .paletteNum = 15,
-    .baseBlock = 128,
-};
-
-static const struct WindowTemplate sDebugHelpWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 18,
-    .width = 28,
-    .height = 2,
-    .paletteNum = 15,
-    .baseBlock = 360,
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Main =
-{
-    .items = sDebugMenuItems_Main,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenuItems_Main),
-};
-
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utility = 
-{
-    .items = sDebugMenuItems_Utility,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenuItems_Utility),
-};
-
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Party = 
-{
-    .items = sDebugMenuItems_Party,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenuItems_Party),
+    [LIST_MAIN] =
+    {
+        .items = sDebugMenuItems_Main,
+        .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+        .itemPrintFunc = NULL,
+        .totalItems = ARRAY_COUNT(sDebugMenuItems_Main),
+        .maxShowed = ARRAY_COUNT(sDebugMenuItems_Main),
+        .windowId = 1,
+        .header_X = 0,
+        .item_X = 8,
+        .cursor_X = 0,
+        .upText_Y = 1,
+        .cursorPal = 2,
+        .fillValue = 1,
+        .cursorShadowPal = 3,
+        .lettersSpacing = 1,
+        .itemVerticalPadding = 0,
+        .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
+        .fontId = 1,
+        .cursorKind = 0,
+    },
+    [LIST_UTILITY] =
+    {
+        .items = sDebugMenuItems_Utility,
+        .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+        .itemPrintFunc = NULL,
+        .totalItems = ARRAY_COUNT(sDebugMenuItems_Utility),
+        .maxShowed = 7,
+        .windowId = 1,
+        .header_X = 0,
+        .item_X = 8,
+        .cursor_X = 0,
+        .upText_Y = 1,
+        .cursorPal = 2,
+        .fillValue = 1,
+        .cursorShadowPal = 3,
+        .lettersSpacing = 1,
+        .itemVerticalPadding = 0,
+        .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
+        .fontId = 1,
+        .cursorKind = 0,
+    },
+    [LIST_PARTY] =
+    {
+        .items = sDebugMenuItems_Party,
+        .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+        .itemPrintFunc = NULL,
+        .totalItems = ARRAY_COUNT(sDebugMenuItems_Party),
+        .maxShowed = ARRAY_COUNT(sDebugMenuItems_Party),
+        .windowId = 1,
+        .header_X = 0,
+        .item_X = 8,
+        .cursor_X = 0,
+        .upText_Y = 1,
+        .cursorPal = 2,
+        .fillValue = 1,
+        .cursorShadowPal = 3,
+        .lettersSpacing = 1,
+        .itemVerticalPadding = 0,
+        .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+        .fontId = 1,
+        .cursorKind = 0,
+    },
 };
 
 void Debug_OpenDebugMenu(void)
 {
-    Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+    Debug_InitWindows();
+    Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugListMenuTemplates[LIST_MAIN]);
+}
+
+static void Debug_InitWindows(void)
+{
+    u8 i;
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    
+    for (i = 0; i < ARRAY_COUNT(sDebugWindowTemplates); i++)
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
 }
 
 static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate)
 {
-    struct ListMenuTemplate menuTemplate;
+    //struct ListMenuTemplate menuTemplate;
     u8 windowId1;
     u8 windowId2;
     u8 menuTaskId;
     u8 inputTaskId;
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugMainMenuWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_MAIN]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
-    menuTemplate = ListMenuTemplate;
-    menuTemplate.maxShowed = ARRAY_COUNT(sDebugMenuItems_Main);
-    menuTemplate.windowId = windowId1;
-    menuTemplate.header_X = 0;
-    menuTemplate.item_X = 8;
-    menuTemplate.cursor_X = 0;
-    menuTemplate.upText_Y = 1;
-    menuTemplate.cursorPal = 2;
-    menuTemplate.fillValue = 1;
-    menuTemplate.cursorShadowPal = 3;
-    menuTemplate.lettersSpacing = 1;
-    menuTemplate.itemVerticalPadding = 0;
-    menuTemplate.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
-    menuTemplate.fontId = 1;
-    menuTemplate.cursorKind = 0;
-    menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
+    menuTaskId = ListMenuInit(&ListMenuTemplate, 0, 0);
 
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     inputTaskId = CreateTask(HandleInput, 3);
     gTasks[inputTaskId].data[0] = menuTaskId;
@@ -415,43 +450,25 @@ static void Debug_ShowMainMenu(void (*HandleInput)(u8), struct ListMenuTemplate 
 
 static void Debug_ShowUtilitySubMenu(void (*HandleInput)(u8), struct ListMenuTemplate ListMenuTemplate)
 {
-    struct ListMenuTemplate menuTemplate;
+    //struct ListMenuTemplate menuTemplate;
     u8 windowId1;
     u8 windowId2;
     u8 menuTaskId;
     u8 inputTaskId;
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugUtilityMenuWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_UTILITY]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
-    menuTemplate = ListMenuTemplate;
-    menuTemplate.maxShowed = 7;
-    menuTemplate.windowId = windowId1;
-    menuTemplate.header_X = 0;
-    menuTemplate.item_X = 8;
-    menuTemplate.cursor_X = 0;
-    menuTemplate.upText_Y = 1;
-    menuTemplate.cursorPal = 2;
-    menuTemplate.fillValue = 1;
-    menuTemplate.cursorShadowPal = 3;
-    menuTemplate.lettersSpacing = 1;
-    menuTemplate.itemVerticalPadding = 0;
-    menuTemplate.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
-    menuTemplate.fontId = 1;
-    menuTemplate.cursorKind = 0;
-    menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
+    menuTaskId = ListMenuInit(&ListMenuTemplate, 0, 0);
 
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     inputTaskId = CreateTask(HandleInput, 3);
     gTasks[inputTaskId].data[0] = menuTaskId;
@@ -467,30 +484,12 @@ static void Debug_ShowPartySubMenu(void (*HandleInput)(u8), struct ListMenuTempl
     u8 menuTaskId;
     u8 inputTaskId;
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugPartyMenuWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_PARTY]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
-    menuTemplate = ListMenuTemplate;
-    menuTemplate.maxShowed = ARRAY_COUNT(sDebugMenuItems_Party);
-    menuTemplate.windowId = windowId1;
-    menuTemplate.header_X = 0;
-    menuTemplate.item_X = 8;
-    menuTemplate.cursor_X = 0;
-    menuTemplate.upText_Y = 1;
-    menuTemplate.cursorPal = 2;
-    menuTemplate.fillValue = 1;
-    menuTemplate.cursorShadowPal = 3;
-    menuTemplate.lettersSpacing = 1;
-    menuTemplate.itemVerticalPadding = 0;
-    menuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
-    menuTemplate.fontId = 1;
-    menuTemplate.cursorKind = 0;
-    menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
+    menuTaskId = ListMenuInit(&ListMenuTemplate, 0, 0);
 
     // Display Help
     StringExpandPlaceholders(gStringVar4, gDebugText_Help_General);
@@ -556,7 +555,7 @@ static void DebugTask_HandleMenuInput_Utility(u8 taskId)
         PlaySE(SE_SELECT);
         Debug_DestroyExtraWindow(taskId);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugListMenuTemplates[LIST_MAIN]);
     }
 }
 
@@ -576,7 +575,7 @@ static void DebugTask_HandleMenuInput_Party(u8 taskId)
         PlaySE(SE_SELECT);
         Debug_DestroyExtraWindow(taskId);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugListMenuTemplates[LIST_MAIN]);
     }
 }
 
@@ -943,7 +942,7 @@ static void DebugTask_HandleInput_Credits(u8 taskId)
         FreeSpriteTilesByTag(TAG_CONFETTI);
         FreeSpritePaletteByTag(TAG_CONFETTI);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugListMenuTemplates[LIST_MAIN]);
     }
 }
 
@@ -971,7 +970,7 @@ static void DebugTask_HandleInput_GodMode(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugListMenuTemplates[LIST_MAIN]);
     }
 }
 
@@ -1069,7 +1068,7 @@ static void DebugTask_HandleInput_GiveMon(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+        Debug_ShowMainMenu(DebugTask_HandleMenuInput_Main, sDebugListMenuTemplates[LIST_MAIN]);
     }
 }
 
@@ -1082,11 +1081,8 @@ static void DebugAction_OpenCredits(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugCreditsWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_CREDITS]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
@@ -1102,7 +1098,7 @@ static void DebugAction_OpenCredits(u8 taskId)
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     gTasks[taskId].func = DebugTask_HandleInput_Credits;
     gTasks[taskId].data[2] = windowId1;
@@ -1119,11 +1115,8 @@ static void DebugAction_OpenGodMode(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugWarningWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_WARNING]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
@@ -1144,7 +1137,7 @@ static void DebugAction_OpenGodMode(u8 taskId)
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     gTasks[taskId].func = DebugTask_HandleInput_GodMode;
     gTasks[taskId].data[2] = windowId1;
@@ -1155,14 +1148,14 @@ static void DebugAction_OpenUtilityMenu(u8 taskId)
 {
     Debug_DestroyExtraWindow(taskId);
     Debug_DestroyMenu(taskId);
-    Debug_ShowUtilitySubMenu(DebugTask_HandleMenuInput_Utility, sDebugMenu_ListTemplate_Utility);
+    Debug_ShowUtilitySubMenu(DebugTask_HandleMenuInput_Utility, sDebugListMenuTemplates[LIST_UTILITY]);
 }
 
 static void DebugAction_OpenPartyMenu(u8 taskId)
 {
     Debug_DestroyExtraWindow(taskId);
     Debug_DestroyMenu(taskId);
-    Debug_ShowPartySubMenu(DebugTask_HandleMenuInput_Party, sDebugMenu_ListTemplate_Party);
+    Debug_ShowPartySubMenu(DebugTask_HandleMenuInput_Party, sDebugListMenuTemplates[LIST_PARTY]);
 }
 
 static void DebugAction_ManageFlags(u8 taskId)
@@ -1173,11 +1166,8 @@ static void DebugAction_ManageFlags(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugNumberDisplayWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_NUMBER]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
@@ -1198,7 +1188,7 @@ static void DebugAction_ManageFlags(u8 taskId)
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_Flags;
     gTasks[taskId].data[2] = windowId1;
@@ -1215,11 +1205,8 @@ static void DebugAction_ManageVars(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugNumberDisplayWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_NUMBER]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
@@ -1238,7 +1225,7 @@ static void DebugAction_ManageVars(u8 taskId)
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_Vars;
     gTasks[taskId].data[2] = windowId1;
@@ -1322,11 +1309,8 @@ static void DebugAction_OpenWarpMenu(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugWarpDisplayWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_WARP]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
@@ -1343,7 +1327,7 @@ static void DebugAction_OpenWarpMenu(u8 taskId)
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     gTasks[taskId].func = DebugTask_HandleMenuInput_SelectMapGroup;
     gTasks[taskId].data[2] = windowId1;
@@ -1364,11 +1348,8 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugSaveBlockDisplayWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_SAVEBLOCK]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
@@ -1383,7 +1364,7 @@ static void DebugAction_CheckSaveBlockSize(u8 taskId)
     AddTextPrinterParameterized(windowId2, 0, gDebugText_Help_SaveBlocks, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     gTasks[taskId].func = DebugTask_HandleInput_CheckSaveBlockSize;
     gTasks[taskId].data[1] = windowId1;
@@ -1472,11 +1453,8 @@ static void DebugAction_OpenGenderChange(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugWarningWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_WARNING]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
@@ -1497,7 +1475,7 @@ static void DebugAction_OpenGenderChange(u8 taskId)
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     gTasks[taskId].func = DebugTask_HandleInput_GenderChange;
     gTasks[taskId].data[2] = windowId1;
@@ -1542,11 +1520,8 @@ static void DebugAction_GiveMons(u8 taskId)
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
 
-    HideMapNamePopUpWindow();
-    LoadMessageBoxAndBorderGfx();
-
-    windowId1 = AddWindow(&sDebugWarningWindowTemplate);
-    windowId2 = AddWindow(&sDebugHelpWindowTemplate);
+    windowId1 = AddWindow(&sDebugWindowTemplates[WIN_WARNING]);
+    windowId2 = AddWindow(&sDebugWindowTemplates[WIN_HELP]);
     DrawStdWindowFrame(windowId1, FALSE);
     DrawStdWindowFrame(windowId2, FALSE);
 
@@ -1567,7 +1542,7 @@ static void DebugAction_GiveMons(u8 taskId)
     AddTextPrinterParameterized(windowId2, 0, gStringVar4, 1, 1, 0, NULL);
 
     CopyWindowToVram(windowId1, 3);
-    CopyWindowToVram(windowId2, 4);
+    CopyWindowToVram(windowId2, 3);
 
     gTasks[taskId].func = DebugTask_HandleInput_GiveMon;
     gTasks[taskId].data[2] = windowId1;
@@ -1608,5 +1583,4 @@ static void DebugAction_Cancel(u8 taskId)
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
 }
-
 #endif
