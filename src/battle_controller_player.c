@@ -1475,10 +1475,18 @@ static void MoveSelectionDisplayMoveNames(void)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         MoveSelectionDestroyCursorAt(i);
-        StringCopy(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
-        BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
+
         if (moveInfo->moves[i] != MOVE_NONE)
+        {
+            StringCopy(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
             gNumberOfMovesToChoose++;
+        }
+        else
+        {   
+            StringCopy(gDisplayedStringBattle, gText_ThreeDashes);
+        }
+
+        BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
     }
 }
 
@@ -1495,10 +1503,18 @@ static void MoveSelectionDisplayPpNumber(void)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
-        *(txtPtr)++ = CHAR_SLASH;
-        ConvertIntToDecimalStringN(txtPtr, moveInfo->maxPp[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24 + i);
+        if (moveInfo->moves[i] != MOVE_NONE)
+        {
+            txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+            *(txtPtr)++ = CHAR_SLASH;
+            ConvertIntToDecimalStringN(txtPtr, moveInfo->maxPp[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+            BattlePutTextOnWindow(gDisplayedStringBattle, 24 + i);
+        }
+        else
+        {
+            FillWindowPixelBuffer(24 + i, PIXEL_FILL(0xE));
+            CopyWindowToVram(24 + i, 3);
+        }
     }
 }
 
@@ -1581,12 +1597,20 @@ static void MoveSelectionDisplayPowerNumber(void)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (gBattleMoves[moveInfo->moves[i]].power > 2)
-            txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, gBattleMoves[moveInfo->moves[i]].power, STR_CONV_MODE_LEFT_ALIGN, 3);
+        if (moveInfo->moves[i] != MOVE_NONE)
+        {
+            if (gBattleMoves[moveInfo->moves[i]].power > 2)
+                txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, gBattleMoves[moveInfo->moves[i]].power, STR_CONV_MODE_LEFT_ALIGN, 3);
+            else
+                StringCopy(gDisplayedStringBattle, gText_ThreeDashes);
+
+            BattlePutTextOnWindow(gDisplayedStringBattle, 28 + i);
+        }
         else
-            StringCopy(gDisplayedStringBattle, gText_ThreeDashes);
-        
-        BattlePutTextOnWindow(gDisplayedStringBattle, 28 + i);
+        {
+            FillWindowPixelBuffer(28 + i, PIXEL_FILL(0xE));
+            CopyWindowToVram(28 + i, 3);
+        }
     }
 }
 
@@ -1601,12 +1625,20 @@ static void MoveSelectionDisplayAccuracyNumber(void)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (gBattleMoves[moveInfo->moves[i]].accuracy == 0)
-            StringCopy(gDisplayedStringBattle, gText_ThreeDashes);
+        if (moveInfo->moves[i] != MOVE_NONE)
+        {
+            if (gBattleMoves[moveInfo->moves[i]].accuracy == 0)
+                StringCopy(gDisplayedStringBattle, gText_ThreeDashes);
+            else
+                txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, gBattleMoves[moveInfo->moves[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
+            BattlePutTextOnWindow(gDisplayedStringBattle, 32 + i);
+        }
         else
-            txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, gBattleMoves[moveInfo->moves[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            
-        BattlePutTextOnWindow(gDisplayedStringBattle, 32 + i);
+        {
+            FillWindowPixelBuffer(32 + i, PIXEL_FILL(0xE));
+            CopyWindowToVram(32 + i, 3);
+        }
     }
 }
 
