@@ -86,14 +86,14 @@ struct
 
 static const sItemFunctions[MENUITEM_COUNT] =
 {
-    [MENUITEM_TEXTSPEED]   = {TextSpeed_DrawChoices, TextSpeed_ProcessInput},
-    [MENUITEM_BATTLESCENE] = {BattleScene_DrawChoices, BattleScene_ProcessInput},
-    [MENUITEM_BATTLESTYLE] = {BattleStyle_DrawChoices, BattleStyle_ProcessInput},
-    [MENUITEM_HEALTHBOXMODE]   = {Healthbox_DrawChoices, Healthbox_ProcessInput},
-    [MENUITEM_SOUND]       = {Sound_DrawChoices, Sound_ProcessInput},
-    [MENUITEM_BUTTONMODE]  = {ButtonMode_DrawChoices, ButtonMode_ProcessInput},
-    [MENUITEM_FRAMETYPE]   = {FrameType_DrawChoices, FrameType_ProcessInput},
-    [MENUITEM_CANCEL]      = {NULL, NULL},
+    [MENUITEM_TEXTSPEED]     = {TextSpeed_DrawChoices, TextSpeed_ProcessInput},
+    [MENUITEM_BATTLESCENE]   = {BattleScene_DrawChoices, BattleScene_ProcessInput},
+    [MENUITEM_BATTLESTYLE]   = {BattleStyle_DrawChoices, BattleStyle_ProcessInput},
+    [MENUITEM_HEALTHBOXMODE] = {Healthbox_DrawChoices, Healthbox_ProcessInput},
+    [MENUITEM_SOUND]         = {Sound_DrawChoices, Sound_ProcessInput},
+    [MENUITEM_BUTTONMODE]    = {ButtonMode_DrawChoices, ButtonMode_ProcessInput},
+    [MENUITEM_FRAMETYPE]     = {FrameType_DrawChoices, FrameType_ProcessInput},
+    [MENUITEM_CANCEL]        = {NULL, NULL},
 };
 
 // EWRAM vars
@@ -104,14 +104,14 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/misc/option_menu_t
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
-    [MENUITEM_TEXTSPEED]   = gText_TextSpeed,
-    [MENUITEM_BATTLESCENE] = gText_BattleScene,
-    [MENUITEM_BATTLESTYLE] = gText_BattleStyle,
-    [MENUITEM_HEALTHBOXMODE]   = gText_HealthboxMode,
-    [MENUITEM_SOUND]       = gText_Sound,
-    [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
-    [MENUITEM_FRAMETYPE]   = gText_Frame,
-    [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
+    [MENUITEM_TEXTSPEED]     = gText_TextSpeed,
+    [MENUITEM_BATTLESCENE]   = gText_BattleScene,
+    [MENUITEM_BATTLESTYLE]   = gText_BattleStyle,
+    [MENUITEM_HEALTHBOXMODE] = gText_HealthboxMode,
+    [MENUITEM_SOUND]         = gText_Sound,
+    [MENUITEM_BUTTONMODE]    = gText_ButtonMode,
+    [MENUITEM_FRAMETYPE]     = gText_Frame,
+    [MENUITEM_CANCEL]        = gText_OptionMenuCancel,
 };
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
