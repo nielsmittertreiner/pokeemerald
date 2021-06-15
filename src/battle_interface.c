@@ -2755,3 +2755,16 @@ static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 wi
     CpuCopy32(windowTileData, dest, windowWidth * TILE_SIZE_4BPP);
     CpuCopy32(windowTileData + 256, dest + 256, windowWidth * TILE_SIZE_4BPP);
 }
+
+void UpdatePlayerBattlerHealthboxCoords(s16 y)
+{
+    if (!IsDoubleBattle())
+    {
+        UpdateSpritePos(gHealthboxSpriteIds[B_SIDE_PLAYER], 158, y);
+    }
+    else
+    {
+        UpdateSpritePos(gHealthboxSpriteIds[B_POSITION_PLAYER_LEFT], 159, y - 12);
+        UpdateSpritePos(gHealthboxSpriteIds[B_POSITION_PLAYER_RIGHT], 171, y + 13);
+    }
+}
