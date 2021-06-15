@@ -1,7 +1,7 @@
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanMachBike;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSurfing;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFieldMove;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleNormal;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleMachBike;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleSurfing;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleFieldMove;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_QuintyPlump;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NinjaBoy;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Twin;
@@ -61,7 +61,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeLateStages;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanAcroBike;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleAcroBike;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfBirch;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man4;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man5;
@@ -109,7 +109,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayAcroBike;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMaySurfing;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayFieldMove;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cameraman;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanUnderwater;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleUnderwater;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayUnderwater;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MovingBox;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableCar;
@@ -248,13 +248,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Julia;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AirlockMemberM;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AirlockMemberF;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Phyllos;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ScottShirtless;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ConstructionWorker;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
-    [OBJ_EVENT_GFX_BRENDAN_NORMAL] =           &gObjectEventGraphicsInfo_BrendanNormal,
-    [OBJ_EVENT_GFX_BRENDAN_MACH_BIKE] =        &gObjectEventGraphicsInfo_BrendanMachBike,
-    [OBJ_EVENT_GFX_BRENDAN_SURFING] =          &gObjectEventGraphicsInfo_BrendanSurfing,
-    [OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE] =       &gObjectEventGraphicsInfo_BrendanFieldMove,
+    [OBJ_EVENT_GFX_PLAYER_MALE_NORMAL] =       &gObjectEventGraphicsInfo_PlayerMaleNormal,
+    [OBJ_EVENT_GFX_PLAYER_MALE_MACH_BIKE] =    &gObjectEventGraphicsInfo_PlayerMaleMachBike,
+    [OBJ_EVENT_GFX_PLAYER_MALE_SURFING] =      &gObjectEventGraphicsInfo_PlayerMaleSurfing,
+    [OBJ_EVENT_GFX_PLAYER_MALE_FIELD_MOVE] =   &gObjectEventGraphicsInfo_PlayerMaleFieldMove,
     [OBJ_EVENT_GFX_QUINTY_PLUMP] =             &gObjectEventGraphicsInfo_QuintyPlump,
     [OBJ_EVENT_GFX_NINJA_BOY] =                &gObjectEventGraphicsInfo_NinjaBoy,
     [OBJ_EVENT_GFX_TWIN] =                     &gObjectEventGraphicsInfo_Twin,
@@ -314,7 +314,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
     [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
     [OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES] =   &gObjectEventGraphicsInfo_BerryTreeLateStages,
-    [OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE] =        &gObjectEventGraphicsInfo_BrendanAcroBike,
+    [OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE] =        &gObjectEventGraphicsInfo_PlayerMaleAcroBike,
     [OBJ_EVENT_GFX_PROF_BIRCH] =               &gObjectEventGraphicsInfo_ProfBirch,
     [OBJ_EVENT_GFX_MAN_4] =                    &gObjectEventGraphicsInfo_Man4,
     [OBJ_EVENT_GFX_MAN_5] =                    &gObjectEventGraphicsInfo_Man5,
@@ -362,7 +362,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_RIVAL_MAY_SURFING] =        &gObjectEventGraphicsInfo_RivalMaySurfing,
     [OBJ_EVENT_GFX_RIVAL_MAY_FIELD_MOVE] =     &gObjectEventGraphicsInfo_RivalMayFieldMove,
     [OBJ_EVENT_GFX_CAMERAMAN] =                &gObjectEventGraphicsInfo_Cameraman,
-    [OBJ_EVENT_GFX_BRENDAN_UNDERWATER] =       &gObjectEventGraphicsInfo_BrendanUnderwater,
+    [OBJ_EVENT_GFX_PLAYER_MALE_UNDERWATER] =       &gObjectEventGraphicsInfo_PlayerMaleUnderwater,
     [OBJ_EVENT_GFX_MAY_UNDERWATER] =           &gObjectEventGraphicsInfo_MayUnderwater,
     [OBJ_EVENT_GFX_MOVING_BOX] =               &gObjectEventGraphicsInfo_MovingBox,
     [OBJ_EVENT_GFX_CABLE_CAR] =                &gObjectEventGraphicsInfo_CableCar,
@@ -494,7 +494,6 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_AIRLOCK_MEMBER_M] =         &gObjectEventGraphicsInfo_AirlockMemberM,
     [OBJ_EVENT_GFX_AIRLOCK_MEMBER_F] =         &gObjectEventGraphicsInfo_AirlockMemberF,
     [OBJ_EVENT_GFX_PHYLLOS] =                  &gObjectEventGraphicsInfo_Phyllos,
-    [OBJ_EVENT_GFX_SCOTT_SHIRTLESS] =          &gObjectEventGraphicsInfo_ScottShirtless,
     [OBJ_EVENT_GFX_CONSTRUCTION_WORKER] =      &gObjectEventGraphicsInfo_ConstructionWorker,
 };
 

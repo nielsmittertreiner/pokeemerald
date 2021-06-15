@@ -65,8 +65,6 @@ static u8 setup##_callback(struct ObjectEvent *objectEvent, struct Sprite *sprit
     return 0;\
 }
 
-static EWRAM_DATA u8 sCurrentReflectionType = 0;
-static EWRAM_DATA u16 sCurrentSpecialObjectPaletteTag = 0;
 static EWRAM_DATA struct LockedAnimObjectEvents *sLockedAnimObjectEvents = {0};
 
 static void MoveCoordsInDirection(u32, s16 *, s16 *, s16, s16);
@@ -154,8 +152,6 @@ static void DestroyLevitateMovementTask(u8);
 static bool8 NpcTakeStep(struct Sprite *sprite);
 
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
-
-const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
 static const struct SpriteTemplate sCameraSpriteTemplate = {
     .tileTag = 0,
@@ -444,7 +440,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_MOVING_BOX              0x110C
 #define OBJ_EVENT_PAL_TAG_CABLE_CAR               0x110D
 #define OBJ_EVENT_PAL_TAG_SSTIDAL                 0x110E
-#define OBJ_EVENT_PAL_TAG_KYOGRE                  0x111F
+#define OBJ_EVENT_PAL_TAG_KYOGRE                  0x110F
 #define OBJ_EVENT_PAL_TAG_GROUDON                 0x1110
 #define OBJ_EVENT_PAL_TAG_UNUSED                  0x1111
 #define OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW        0x1112
@@ -460,6 +456,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_TEAM_AIRLOCK_GRUNT      0x111C
 #define OBJ_EVENT_PAL_TAG_PHYLLOS                 0x111D
 #define OBJ_EVENT_PAL_TAG_CONSTRUCTION_WORKER     0x111E
+#define OBJ_EVENT_PAL_TAG_FISHERMAN               0x111F
 
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
@@ -502,6 +499,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_TeamAirlockGrunt,      OBJ_EVENT_PAL_TAG_TEAM_AIRLOCK_GRUNT},
     {gObjectEventPal_Phyllos,               OBJ_EVENT_PAL_TAG_PHYLLOS},
     {gObjectEventPal_ConstructionWorker,    OBJ_EVENT_PAL_TAG_CONSTRUCTION_WORKER},
+    {gObjectEventPal_Fisherman,             OBJ_EVENT_PAL_TAG_FISHERMAN},
     {NULL,                                  0x0000},
 };
 #include "data/object_events/berry_tree_graphics_tables.h"

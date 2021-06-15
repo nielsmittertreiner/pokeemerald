@@ -976,7 +976,7 @@ static const union AnimCmd *const sAnimTable_Rayquaza[] = {
     sAnim_RayquazaNormal,          // Go fastest East
 };
 
-static const union AnimCmd *const sAnimTable_BrendanMayNormal[] = {
+static const union AnimCmd *const sAnimTable_PlayerMaleFemaleNormal[] = {
     sAnim_FaceSouth,
     sAnim_FaceNorth,
     sAnim_FaceWest,
@@ -1154,7 +1154,7 @@ static const struct StepAnimTable sStepAnimTables[] = {
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = sAnimTable_BrendanMayNormal,
+        .anims = sAnimTable_PlayerMaleFemaleNormal,
         .animPos = {1, 3, 0, 2},
     },
     {

@@ -1,10 +1,10 @@
 #ifndef GUARD_CONSTANTS_EVENT_OBJECTS_H
 #define GUARD_CONSTANTS_EVENT_OBJECTS_H
 
-#define OBJ_EVENT_GFX_BRENDAN_NORMAL               0
-#define OBJ_EVENT_GFX_BRENDAN_MACH_BIKE            1
-#define OBJ_EVENT_GFX_BRENDAN_SURFING              2
-#define OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE           3
+#define OBJ_EVENT_GFX_PLAYER_MALE_NORMAL           0
+#define OBJ_EVENT_GFX_PLAYER_MALE_MACH_BIKE        1
+#define OBJ_EVENT_GFX_PLAYER_MALE_SURFING          2
+#define OBJ_EVENT_GFX_PLAYER_MALE_FIELD_MOVE       3
 #define OBJ_EVENT_GFX_QUINTY_PLUMP                 4
 #define OBJ_EVENT_GFX_NINJA_BOY                    5
 #define OBJ_EVENT_GFX_TWIN                         6
@@ -112,7 +112,7 @@
 #define OBJ_EVENT_GFX_RIVAL_MAY_SURFING          108
 #define OBJ_EVENT_GFX_RIVAL_MAY_FIELD_MOVE       109
 #define OBJ_EVENT_GFX_CAMERAMAN                  110
-#define OBJ_EVENT_GFX_BRENDAN_UNDERWATER         111
+#define OBJ_EVENT_GFX_PLAYER_MALE_UNDERWATER     111
 #define OBJ_EVENT_GFX_MAY_UNDERWATER             112
 #define OBJ_EVENT_GFX_MOVING_BOX                 113
 #define OBJ_EVENT_GFX_CABLE_CAR                  114
@@ -244,8 +244,7 @@
 #define OBJ_EVENT_GFX_AIRLOCK_MEMBER_M           240
 #define OBJ_EVENT_GFX_AIRLOCK_MEMBER_F           241
 #define OBJ_EVENT_GFX_PHYLLOS                    242
-#define OBJ_EVENT_GFX_SCOTT_SHIRTLESS            243
-#define OBJ_EVENT_GFX_CONSTRUCTION_WORKER        244
+#define OBJ_EVENT_GFX_CONSTRUCTION_WORKER        243
 
 #define NUM_OBJ_EVENT_GFX                        245
 
