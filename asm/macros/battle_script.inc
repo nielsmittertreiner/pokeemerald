@@ -1245,7 +1245,7 @@
 	.byte 0xf8
 	.byte \param0
 	.endm
-	
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1353,6 +1353,10 @@
 	
 	.macro playtrainerdefeatbgm battler:req
 	various \battler, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.endm
+
+	.macro showabilitypopup battler:req
+	various \battler, VARIOUS_ABILITY_POPUP
 	.endm
 	
 @ helpful macros

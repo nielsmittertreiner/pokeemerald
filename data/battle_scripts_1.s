@@ -368,6 +368,8 @@ BattleScript_EffectAbsorb::
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB
 	goto BattleScript_AbsorbUpdateHp
 BattleScript_AbsorbLiquidOoze::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	manipulatedamage DMG_CHANGE_SIGN
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB_OOZE
 BattleScript_AbsorbUpdateHp::
@@ -3289,6 +3291,8 @@ BattleScript_LeechSeedTurnDrain::
 	setbyte cMULTISTRING_CHOOSER, B_MSG_LEECH_SEED_DRAIN
 	goto BattleScript_LeechSeedTurnPrintAndUpdateHp
 BattleScript_LeechSeedTurnPrintLiquidOoze::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	setbyte cMULTISTRING_CHOOSER, B_MSG_LEECH_SEED_OOZE
 BattleScript_LeechSeedTurnPrintAndUpdateHp::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
@@ -3972,6 +3976,8 @@ BattleScript_ItemSteal::
 
 BattleScript_DrizzleActivates::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNMADEITRAIN
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES, NULL
@@ -3979,6 +3985,8 @@ BattleScript_DrizzleActivates::
 	end3
 
 BattleScript_SpeedBoostActivates::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNRAISEDSPEED
 	waitmessage B_WAIT_TIME_LONG
@@ -3986,6 +3994,8 @@ BattleScript_SpeedBoostActivates::
 
 BattleScript_TraceActivates::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNTRACED
 	waitmessage B_WAIT_TIME_LONG
 	end3
@@ -3993,6 +4003,8 @@ BattleScript_TraceActivates::
 BattleScript_RainDishActivates::
 	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
 	waitmessage B_WAIT_TIME_LONG
+	showabilitypopup BS_ATTACKER
+	pause 40
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
@@ -4000,6 +4012,8 @@ BattleScript_RainDishActivates::
 
 BattleScript_SandstreamActivates::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXWHIPPEDUPSANDSTORM
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES, NULL
@@ -4007,6 +4021,8 @@ BattleScript_SandstreamActivates::
 	end3
 
 BattleScript_ShedSkinActivates::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXCUREDYPROBLEM
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_ATTACKER
@@ -4025,6 +4041,8 @@ BattleScript_CastformChange::
 	end3
 
 BattleScript_DoCastformChange::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	docastformchangeanimation
 	waitstate
 	printstring STRINGID_PKMNTRANSFORMED
@@ -4039,6 +4057,8 @@ BattleScript_PauseIntimidateActivates:
 	pause B_WAIT_TIME_SHORT
 BattleScript_IntimidateActivates::
 	setbyte gBattlerTarget, 0
+	showabilitypopup BS_ATTACKER
+	pause 40
 	setstatchanger STAT_ATK, 1, TRUE
 BattleScript_IntimidateActivatesLoop:
 	trygetintimidatetarget BattleScript_IntimidateActivatesReturn
@@ -4065,6 +4085,8 @@ BattleScript_IntimidatePrevented:
 	
 BattleScript_DroughtActivates::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXINTENSIFIEDSUN
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES, NULL
@@ -4081,12 +4103,16 @@ BattleScript_TookAttack::
 
 BattleScript_SturdyPreventsOHKO::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNPROTECTEDBY
 	pause B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_DampStopsExplosion::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNPREVENTSUSAGE
 	pause B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -4096,6 +4122,8 @@ BattleScript_MoveHPDrain_PPLoss::
 BattleScript_MoveHPDrain::
 	attackstring
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
@@ -4109,6 +4137,8 @@ BattleScript_MonMadeMoveUseless_PPLoss::
 BattleScript_MonMadeMoveUseless::
 	attackstring
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXMADEYUSELESS
 	waitmessage B_WAIT_TIME_LONG
 	orbyte gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
@@ -4119,54 +4149,72 @@ BattleScript_FlashFireBoost_PPLoss::
 BattleScript_FlashFireBoost::
 	attackstring
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printfromtable gFlashFireStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_AbilityPreventsPhasingOut::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNANCHORSITSELFWITH
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_AbilityNoStatLoss::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNPREVENTSSTATLOSSWITH
 	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_BRNPrevention::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printfromtable gBRNPreventionStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_PRLZPrevention::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printfromtable gPRLZPreventionStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_PSNPrevention::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printfromtable gPSNPreventionStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_ObliviousPreventsAttraction::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNPREVENTSROMANCEWITH
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_FlinchPrevention::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXPREVENTSFLINCHING
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_OwnTempoPrevents::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNPREVENTSCONFUSIONWITH
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -4175,12 +4223,16 @@ BattleScript_SoundproofProtected::
 	attackstring
 	ppreduce
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXBLOCKSY
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_AbilityNoSpecificStatLoss::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXPREVENTSYLOSS
 	waitmessage B_WAIT_TIME_LONG
 	setbyte cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY
@@ -4188,16 +4240,22 @@ BattleScript_AbilityNoSpecificStatLoss::
 
 BattleScript_StickyHoldActivates::
 	pause B_WAIT_TIME_SHORT
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXMADEYINEFFECTIVE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_ColorChangeActivates::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNCHANGEDTYPEWITH
 	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_RoughSkinActivates::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
@@ -4207,6 +4265,8 @@ BattleScript_RoughSkinActivates::
 	return
 
 BattleScript_CuteCharmActivates::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	status2animation BS_ATTACKER, STATUS2_INFATUATION
 	printstring STRINGID_PKMNSXINFATUATEDY
 	waitmessage B_WAIT_TIME_LONG
@@ -4214,10 +4274,14 @@ BattleScript_CuteCharmActivates::
 
 BattleScript_ApplySecondaryEffect::
 	waitstate
+	showabilitypopup BS_ATTACKER
+	pause 40
 	seteffectsecondary
 	return
 
 BattleScript_SynchronizeActivates::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	waitstate
 	seteffectprimary
 	return
@@ -4229,6 +4293,8 @@ BattleScript_NoItemSteal::
 	return
 
 BattleScript_AbilityCuredStatus::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	printstring STRINGID_PKMNSXCUREDITSYPROBLEM
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_SCRIPTING
@@ -4246,6 +4312,8 @@ BattleScript_IgnoresAndUsesRandomMove::
 	jumptocalledmove FALSE
 
 BattleScript_MoveUsedLoafingAround::
+	showabilitypopup BS_ATTACKER
+	pause 40
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_INCAPABLE_OF_POWER, BattleScript_MoveUsedLoafingAroundMsg
 	setbyte gBattleCommunication, 0
 	various24 BS_ATTACKER

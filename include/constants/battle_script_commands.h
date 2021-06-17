@@ -29,6 +29,8 @@
 #define sWINDOWS_TYPE gBattleScripting + 0x24
 #define sMULTIPLAYER_ID gBattleScripting + 0x25
 #define sSPECIAL_TRAINER_BATTLE_TYPE gBattleScripting + 0x26
+#define sFIXED_ABILITY_POPUP gBattleScripting + 0x27
+#define sABILITY_OVERWRITE gBattleScripting + 0x28
 
 #define cEFFECT_CHOOSER gBattleCommunication + 3
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
@@ -88,6 +90,7 @@
 #define VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT 23
 #define VARIOUS_SET_TELEPORT_OUTCOME            25
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
+#define VARIOUS_ABILITY_POPUP                   27
 
 // Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0
