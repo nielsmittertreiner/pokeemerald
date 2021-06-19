@@ -1,7 +1,9 @@
 #include "global.h"
 #include "battle_pyramid.h"
 #include "bg.h"
+#include "main.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "menu.h"
@@ -20,6 +22,7 @@
 static void Task_MapNamePopUpWindow(u8 taskId);
 static void ShowMapNamePopUpWindow(void);
 static void LoadMapNamePopUpWindowBg(void);
+static void HBlankCB_MapNamePopupWindow(void);
 
 // EWRAM
 static EWRAM_DATA u8 sPopupTaskId = 0;
@@ -63,9 +66,9 @@ void ShowMapNamePopup(void)
         if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
         {
             sPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
-            SetGpuReg(REG_OFFSET_BG0VOFS, 40);
+            SetGpuReg(REG_OFFSET_BG0VOFS, 24);
             gTasks[sPopupTaskId].data[0] = 6;
-            gTasks[sPopupTaskId].data[2] = 40;
+            gTasks[sPopupTaskId].data[2] = 24;
         }
         else
         {
@@ -110,9 +113,9 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         break;
     case 2:
         task->data[2] += 2;
-        if (task->data[2] > 39)
+        if (task->data[2] > 23)
         {
-            task->data[2] = 40;
+            task->data[2] = 24;
             if (task->data[3])
             {
                 task->data[0] = 6;
@@ -134,6 +137,8 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         HideMapNamePopUpWindow();
         return;
     }
+    EnableInterrupts(INTR_FLAG_HBLANK);
+    SetHBlankCallback(HBlankCB_MapNamePopupWindow);
     SetGpuReg(REG_OFFSET_BG0VOFS, task->data[2]);
 }
 
@@ -144,9 +149,9 @@ void HideMapNamePopUpWindow(void)
         ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
         RemoveMapNamePopUpWindow();
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
-        SetGpuReg(REG_OFFSET_BLDCNT, 0);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        SetGpuRegBits(REG_OFFSET_WININ, 0);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ);
+        DisableInterrupts(INTR_FLAG_HBLANK);
+        SetHBlankCallback(NULL);
         DestroyTask(sPopupTaskId);
     }
 }
@@ -158,8 +163,6 @@ static void ShowMapNamePopUpWindow(void)
     u8 x;
     const u8* mapDisplayHeaderSource;
 
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(15, 5));
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 
     if (InBattlePyramid())
@@ -207,4 +210,24 @@ static void LoadMapNamePopUpWindowBg(void)
     PutWindowTilemap(popupWindowId);
     LoadPalette(sMapPopUp_Palette, 0xE0, sizeof(sMapPopUp_Palette));
     FillWindowPixelBuffer(popupWindowId, PIXEL_FILL(1));
+}
+
+static void HBlankCB_MapNamePopupWindow(void)
+{
+    struct Task *task = &gTasks[sPopupTaskId];
+    s16 currentOffset = 24 - task->data[2];
+
+    if (REG_VCOUNT < currentOffset || REG_VCOUNT > 160)
+    {
+        REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND;
+        REG_BLDALPHA = BLDALPHA_BLEND(15, 5);
+    }
+    else
+    {
+        gWeatherPtr->currBlendEVA = 8;
+        gWeatherPtr->currBlendEVB = 10;
+        gWeatherPtr->targetBlendEVA = 8;
+        gWeatherPtr->targetBlendEVB = 10;
+        REG_BLDALPHA = BLDALPHA_BLEND(8, 10);
+    }
 }
