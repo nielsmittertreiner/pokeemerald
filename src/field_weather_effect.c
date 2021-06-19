@@ -99,6 +99,7 @@ static const struct SpriteTemplate sCloudSpriteTemplate =
 
 void Clouds_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->gammaTargetIndex = 0;
     gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;
@@ -157,6 +158,7 @@ bool8 Clouds_Finish(void)
 
 void Sunny_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->gammaTargetIndex = 0;
     gWeatherPtr->gammaStepDelay = 20;
 }
@@ -238,6 +240,7 @@ static void UpdateDroughtBlend(u8);
 
 void Drought_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->gammaTargetIndex = 0;
@@ -475,6 +478,7 @@ static const struct SpriteSheet sRainSpriteSheet =
 
 void Rain_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->rainSpriteVisibleCounter = 0;
@@ -771,6 +775,7 @@ static void InitSnowflakeSpriteMovement(struct Sprite *);
 
 void Snow_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->gammaTargetIndex = 3;
@@ -1015,6 +1020,7 @@ enum {
 
 void Thunderstorm_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = TSTORM_STATE_LOAD_RAIN;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->rainSpriteVisibleCounter = 0;
@@ -1044,6 +1050,7 @@ static void SetThunderCounter(u16);
 
 void Downpour_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = TSTORM_STATE_LOAD_RAIN;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->rainSpriteVisibleCounter = 0;
@@ -1338,6 +1345,7 @@ static void DestroyFogHorizontalSprites(void);
 
 void FogHorizontal_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->gammaTargetIndex = 0;
@@ -1494,6 +1502,7 @@ static void UpdateAshSprite(struct Sprite *);
 
 void Ash_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->gammaTargetIndex = 0;
@@ -1705,6 +1714,7 @@ static void UpdateFogDiagonalSprite(struct Sprite *);
 
 void FogDiagonal_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = 0;
     gWeatherPtr->gammaTargetIndex = 0;
@@ -1920,6 +1930,7 @@ static void UpdateSandstormSwirlSprite(struct Sprite *);
 
 void Sandstorm_InitVars(void)
 {
+    Weather_SetBlendCoeffs(8, 10);
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = 0;
     gWeatherPtr->gammaTargetIndex = 0;
@@ -2221,6 +2232,7 @@ void Shade_InitVars(void)
     gWeatherPtr->initStep = 0;
     gWeatherPtr->gammaTargetIndex = 3;
     gWeatherPtr->gammaStepDelay = 20;
+    Weather_SetBlendCoeffs(8, 10);
 }
 
 void Shade_InitAll(void)
@@ -2274,6 +2286,7 @@ static const s16 sBubbleStartCoords[][2] =
 void Bubbles_InitVars(void)
 {
     FogHorizontal_InitVars();
+    Weather_SetBlendCoeffs(8, 10);
     if (!gWeatherPtr->bubblesSpritesCreated)
     {
         LoadSpriteSheet(&sWeatherBubbleSpriteSheet);
