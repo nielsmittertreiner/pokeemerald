@@ -20,8 +20,8 @@ mapscripts SunsetTown_PlayerHouse_1F_MapScripts {
             applymovement(OBJ_EVENT_ID_PLAYER, SunsetTown_PlayerHouse_1F_Movement_PlayerWalksToMom)
             waitmovement(0)
             load_speech_bubble(LOCALID_MOM)
-            msgbox("I've heard DAD has something for you\n"
-                   "Perhaps you should go check on him.\p"
+            msgbox("I've heard DAD has something for you.\n"
+                   "Perhaps you should go see him.\p"
                    "I have no idea what it is, though…")
             closemessage
             destroy_speech_bubble
@@ -64,8 +64,16 @@ script SunsetTown_PlayerHouse_1F_EventScript_Mom {
         case MULTI_B_PRESSED:
             break
     }
-    msgbox("Have fun on your adventure\n"
-           "dear! Stay safe out there.", MSGBOX_NPC)
+    if (var(VAR_SUNSET_TOWN_STATE) == 1)
+    {
+        msgbox("What would your dad have\n"
+               "for you?", MSGBOX_NPC)
+    }
+    else
+    {
+        msgbox("Have fun on your adventure,\n"
+               "dear! Stay safe out there.", MSGBOX_NPC)
+    }
     end
 }
 

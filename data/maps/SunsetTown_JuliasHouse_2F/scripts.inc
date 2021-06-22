@@ -18,8 +18,9 @@ SunsetTown_JuliasHouse_2F_EventScript_AlexsPC::
 
 
 SunsetTown_JuliasHouse_2F_EventScript_NES_Text_0:
-	.string "It's a NES with a GameBoy Advance SP\n"
-	.string "plugged in as a controller.$"
+	.string "It's a GameCube with a\n"
+	.string "GameBoy Advance SP plugged in\l"
+	.string "as a controller.$"
 
 SunsetTown_JuliasHouse_2F_EventScript_Notebook_Text_0:
 	.string "It's a notebook with drawings\n"

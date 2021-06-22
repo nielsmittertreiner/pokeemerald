@@ -53,7 +53,10 @@ SunsetTown_PlayerHouse_1F_EventScript_Mom::
 	case NO, SunsetTown_PlayerHouse_1F_EventScript_Mom_4
 	case MULTI_B_PRESSED, SunsetTown_PlayerHouse_1F_EventScript_Mom_5
 SunsetTown_PlayerHouse_1F_EventScript_Mom_1:
-	msgbox SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_2, MSGBOX_NPC
+	compare VAR_SUNSET_TOWN_STATE, 1
+	goto_if_eq SunsetTown_PlayerHouse_1F_EventScript_Mom_7
+	msgbox SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_3, MSGBOX_NPC
+SunsetTown_PlayerHouse_1F_EventScript_Mom_6:
 	end
 
 SunsetTown_PlayerHouse_1F_EventScript_Mom_3:
@@ -74,6 +77,10 @@ SunsetTown_PlayerHouse_1F_EventScript_Mom_4:
 
 SunsetTown_PlayerHouse_1F_EventScript_Mom_5:
 	goto SunsetTown_PlayerHouse_1F_EventScript_Mom_1
+
+SunsetTown_PlayerHouse_1F_EventScript_Mom_7:
+	msgbox SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_2, MSGBOX_NPC
+	goto SunsetTown_PlayerHouse_1F_EventScript_Mom_6
 
 
 SunsetTown_PlayerHouse_1F_Movement_PlayerWalksToMom:
@@ -100,8 +107,8 @@ SunsetTown_PlayerHouse_1F_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_0:
 	.string "Come here, quickly!$"
 
 SunsetTown_PlayerHouse_1F_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE_0_Text_1:
-	.string "I've heard DAD has something for you\n"
-	.string "Perhaps you should go check on him.\p"
+	.string "I've heard DAD has something for you.\n"
+	.string "Perhaps you should go see him.\p"
 	.string "I have no idea what it is, though…$"
 
 SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_0:
@@ -114,5 +121,9 @@ SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_1:
 	.string "dear! Stay safe.$"
 
 SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_2:
-	.string "Have fun on your adventure\n"
+	.string "What would your dad have\n"
+	.string "for you?$"
+
+SunsetTown_PlayerHouse_1F_EventScript_Mom_Text_3:
+	.string "Have fun on your adventure,\n"
 	.string "dear! Stay safe out there.$"

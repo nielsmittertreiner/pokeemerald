@@ -1,8 +1,9 @@
 mapscripts SunsetTown_JuliasHouse_2F_MapScripts {}
 
 script SunsetTown_JuliasHouse_2F_EventScript_NES {
-    msgbox("It's a NES with a GameBoy Advance SP\n"
-	       "plugged in as a controller.", MSGBOX_SIGN)
+    msgbox("It's a GameCube with a\n"
+	       "GameBoy Advance SP plugged in\l"
+           "as a controller.", MSGBOX_SIGN)
     end
 }
 
