@@ -11,7 +11,7 @@ EventScript_CutTree:: @ 82906BB
 	msgbox Text_WantToCut, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CancelCut
-	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	setfieldeffectargument 2, MOVE_CUT
 	closemessage
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
@@ -72,7 +72,7 @@ EventScript_RockSmash:: @ 82907A6
 	msgbox Text_WantToSmash, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CancelSmash
-	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	setfieldeffectargument 2, MOVE_ROCK_SMASH
 	closemessage
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
@@ -139,6 +139,7 @@ EventScript_StrengthBoulder:: @ 82908BA
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CancelStrength
 	closemessage
+	setfieldeffectargument 2, MOVE_STRENGTH
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto EventScript_ActivateStrength
@@ -178,7 +179,6 @@ Text_WantToStrength: @ 829092C
 	.string "Would you like to use STRENGTH?$"
 
 Text_MonUsedStrength: @ 829098C
-	.string "{STR_VAR_1} used STRENGTH!\p"
 	.string "{STR_VAR_1}'s STRENGTH made it\n"
 	.string "possible to move boulders around!$"
 
@@ -200,7 +200,7 @@ EventScript_UseWaterfall:: @ 8290A49
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndWaterfall
-	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
+	setfieldeffectargument 2, MOVE_WATERFALL
     call FollowerIntoPlayerScript
     callnative HideFollower
 	dofieldeffect FLDEFF_USE_WATERFALL
@@ -238,7 +238,7 @@ EventScript_UseDive:: @ 8290B0F
 	msgbox Text_WantToDive, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndDive
-	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+	setfieldeffectargument 2, MOVE_DIVE
 	call FollowerIntoPlayerScript
 	callnative HideFollower
 	setfieldeffectargument 0, VAR_0x8004
@@ -267,7 +267,7 @@ EventScript_UseDiveUnderwater:: @ 8290B5A
 	msgbox Text_WantToSurface, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndSurface
-	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+	setfieldeffectargument 2, MOVE_DIVE
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndSurface
 	end
