@@ -201,15 +201,6 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
-struct InGameClock
-{
-    s8 dayOfWeek;
-    s8 hours;
-    s8 minutes;
-    s8 seconds;
-    s8 vblanks;
-};
-
 struct Pokedex
 {
     /*0x00*/ u8 order;
@@ -575,7 +566,7 @@ struct SaveBlock2
     struct BattleFrontier frontier;
     struct Follower follower;
     u8 itemFlags[ITEM_FLAGS_COUNT];
-    struct InGameClock inGameClock;
+    struct Time time;
 };
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;

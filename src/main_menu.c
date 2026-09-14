@@ -1327,11 +1327,6 @@ static void Task_NewGameBirchSpeech_Init(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, 0);
     SetGpuReg(REG_OFFSET_BG0HOFS, 0);
     SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-
-    sTimeSelectionData[0] = 0;
-    sTimeSelectionData[1] = 7;
-    sTimeSelectionData[2] = 30;
-
     DmaFill16(3, 0, VRAM, VRAM_SIZE);
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
@@ -1377,12 +1372,12 @@ static void Task_NewGameBirchSpeech_DrawSetTimeDialogueWindow(u8 taskId)
 
 static void Task_NewGameBirchSpeech_WaitForPleaseSetTheTimeToPrint(u8 taskId)
 {
-    
     if (!RunTextPrintersAndIsPrinter0Active())
     {
+        
         DrawMainMenuWindowBorder(&sNewGameBirchSpeechTextWindows[3], 0xF3);
         FillWindowPixelBuffer(3, PIXEL_FILL(1));
-        AddTextPrinterParameterized(3, 1, gText_DaysOfWeek[sTimeSelectionData[0]], GetStringCenterAlignXOffset(1, gText_DaysOfWeek[sTimeSelectionData[0]], 56), 5, 0, NULL);
+        AddTextPrinterParameterized(3, 1, GetDayOfWeekString(sTimeSelectionData[0]), GetStringCenterAlignXOffset(1, GetDayOfWeekString(sTimeSelectionData[0]), 56), 5, 0, NULL);
         AddTextPrinterParameterized(3, 1, gStringVar1, 66, 5, 0, NULL);
         PutWindowTilemap(3);
         CopyWindowToVram(3, 3);
@@ -1397,7 +1392,7 @@ static void Task_NewGameBirchSpeech_CheckHandleTimeInput(u8 taskId)
     {
         FormatDecimalTimeWithoutSeconds(gStringVar1, sTimeSelectionData[1], sTimeSelectionData[2], gSaveBlock2Ptr->optionsClockMode);
         FillWindowPixelBuffer(3, PIXEL_FILL(1));
-        AddTextPrinterParameterized(3, 1, gText_DaysOfWeek[sTimeSelectionData[0]], GetStringCenterAlignXOffset(1, gText_DaysOfWeek[sTimeSelectionData[0]], 56), 5, 0, NULL);
+        AddTextPrinterParameterized(3, 1, GetDayOfWeekString(sTimeSelectionData[0]), GetStringCenterAlignXOffset(1, GetDayOfWeekString(sTimeSelectionData[0]), 56), 5, 0, NULL);
         AddTextPrinterParameterized(3, 1, gStringVar1, 66, 5, 0, NULL);
     }
 }
@@ -1521,7 +1516,7 @@ static void Task_NewGameBirchSpeech_ProcessTimeYesNoMenu(u8 taskId)
     {
         case 0:
             PlaySE(SE_SELECT);
-            InGameClock_SetTime(sTimeSelectionData[0], sTimeSelectionData[1], sTimeSelectionData[2]);
+            InitInGameTime(sTimeSelectionData[0], sTimeSelectionData[1], sTimeSelectionData[2]);
             gTasks[taskId].func = Task_NewGameBirchSpeech_ConfirmTime;
             break;
         case -1:
@@ -1537,8 +1532,8 @@ static void Task_NewGameBirchSpeech_ConfirmTime(u8 taskId)
     ClearStdWindowAndFrame(3, 0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     CopyWindowToVram(3, 3);
-    StringCopy(gStringVar1, gText_DaysOfWeek[gSaveBlock2Ptr->inGameClock.dayOfWeek]);
-    FormatDecimalTimeWithoutSeconds(gStringVar2, gSaveBlock2Ptr->inGameClock.hours, gSaveBlock2Ptr->inGameClock.minutes, gSaveBlock2Ptr->optionsClockMode);
+    StringCopy(gStringVar1, GetDayOfWeekString(gSaveBlock2Ptr->time.days));
+    FormatDecimalTimeWithoutSeconds(gStringVar2, gSaveBlock2Ptr->time.hours, gSaveBlock2Ptr->time.minutes, gSaveBlock2Ptr->optionsClockMode);
     StringExpandPlaceholders(gStringVar4, gText_Birch_TimeHasBeenSet);
     AddTextPrinterForMessage(1);
     gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForConfirmTimeTextprinter;

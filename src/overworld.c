@@ -1542,8 +1542,9 @@ const struct BlendSettings gTimeOfDayBlend[] =
 
 u8 UpdateTimeOfDay(void)
 {
-   s32 hours = gSaveBlock2Ptr->inGameClock.hours;
-    s32 minutes = gSaveBlock2Ptr->inGameClock.minutes;
+    s32 hours = gSaveBlock2Ptr->time.hours;
+    s32 minutes = gSaveBlock2Ptr->time.minutes;
+    
     if (hours < 4) // night
     {
         currentTimeBlend.weight = 256;

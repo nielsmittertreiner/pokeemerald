@@ -894,8 +894,8 @@ static void LoadOptionData(u8 option)
 
         InitEventWindows();
 
-        AddTextPrinterParameterized3(WIN_AGENDA_DATE_TIME, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_DaysOfWeek[gSaveBlock2Ptr->inGameClock.dayOfWeek], 64), 0, sPokeNav2TextColors[TEXT_COLORS_GRAY], 0, gText_DaysOfWeek[gSaveBlock2Ptr->inGameClock.dayOfWeek]);
-        FormatDecimalTimeWithoutSeconds(gStringVar1, gSaveBlock2Ptr->inGameClock.hours, gSaveBlock2Ptr->inGameClock.minutes, gSaveBlock2Ptr->optionsClockMode);
+        AddTextPrinterParameterized3(WIN_AGENDA_DATE_TIME, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, GetDayOfWeekString(gSaveBlock2Ptr->time.days), 64), 0, sPokeNav2TextColors[TEXT_COLORS_GRAY], 0, GetDayOfWeekString(gSaveBlock2Ptr->time.days));
+        FormatDecimalTimeWithoutSeconds(gStringVar1, gSaveBlock2Ptr->time.hours, gSaveBlock2Ptr->time.minutes, gSaveBlock2Ptr->optionsClockMode);
         AddTextPrinterParameterized3(WIN_AGENDA_DATE_TIME, FONT_SMALL, GetStringCenterAlignXOffset(FONT_SMALL, gStringVar1, 64), 16, sPokeNav2TextColors[TEXT_COLORS_GRAY], 0, gStringVar1);
         if (sPokeNav2Ptr->timeColonInvisible)
         {
@@ -1039,7 +1039,7 @@ static void LoadMainMenuSprites(void)
     }
 
     sPokeNav2Ptr->spriteIds[8] = CreateSprite(&sSpriteTemplate_AgendaClockIcons, 88, 87, 0);
-    StartSpriteAnim(&gSprites[sPokeNav2Ptr->spriteIds[8]], gSaveBlock2Ptr->inGameClock.hours < 12 ? gSaveBlock2Ptr->inGameClock.hours : gSaveBlock2Ptr->inGameClock.hours - 12);
+    StartSpriteAnim(&gSprites[sPokeNav2Ptr->spriteIds[8]], gSaveBlock2Ptr->time.hours < 12 ? gSaveBlock2Ptr->time.hours : gSaveBlock2Ptr->time.hours - 12);
     sprite = &gSprites[sPokeNav2Ptr->spriteIds[8]];
     sprite->x2 = -OPTION_SLIDE_X;
 }
@@ -1287,8 +1287,8 @@ static void Task_Agenda(u8 taskId)
     if (sPokeNav2Ptr->timeColonRedraw)
     {
         FillWindowPixelBuffer(WIN_AGENDA_DATE_TIME, PIXEL_FILL(0));
-        AddTextPrinterParameterized3(WIN_AGENDA_DATE_TIME, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_DaysOfWeek[gSaveBlock2Ptr->inGameClock.dayOfWeek], 64), 0, sPokeNav2TextColors[TEXT_COLORS_GRAY], 0, gText_DaysOfWeek[gSaveBlock2Ptr->inGameClock.dayOfWeek]);
-        FormatDecimalTimeWithoutSeconds(text, gSaveBlock2Ptr->inGameClock.hours, gSaveBlock2Ptr->inGameClock.minutes, gSaveBlock2Ptr->optionsClockMode);
+        AddTextPrinterParameterized3(WIN_AGENDA_DATE_TIME, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, GetDayOfWeekString(gSaveBlock2Ptr->time.days), 64), 0, sPokeNav2TextColors[TEXT_COLORS_GRAY], 0, GetDayOfWeekString(gSaveBlock2Ptr->time.days));
+        FormatDecimalTimeWithoutSeconds(text, gSaveBlock2Ptr->time.hours, gSaveBlock2Ptr->time.minutes, gSaveBlock2Ptr->optionsClockMode);
         AddTextPrinterParameterized3(WIN_AGENDA_DATE_TIME, FONT_SMALL, GetStringCenterAlignXOffset(FONT_SMALL, text, 64), 16, sPokeNav2TextColors[TEXT_COLORS_GRAY], 0, text);
 
         if (sPokeNav2Ptr->timeColonInvisible)

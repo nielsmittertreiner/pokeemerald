@@ -4,7 +4,7 @@
 #include "strings.h"
 #include "text.h"
 
-const u8 *const gText_DaysOfWeek[] =
+const u8 *const sText_DaysOfWeek[] =
 {
     gText_Monday,
     gText_Tuesday,
@@ -15,46 +15,42 @@ const u8 *const gText_DaysOfWeek[] =
     gText_Sunday,
 };
 
-void InGameClock_Run(void)
+EWRAM_DATA static u8 sInGameTimeFrameCounter = 0;
+
+void InitInGameTime(s8 dayOfWeek, s8 hour, s8 minute)
 {
-    gSaveBlock2Ptr->inGameClock.vblanks++;
-
-    // 20 vblanks for a 8 hour cycle
-    if (gSaveBlock2Ptr->inGameClock.vblanks < 5)
-        return;
-
-    gSaveBlock2Ptr->inGameClock.vblanks = 0;
-    gSaveBlock2Ptr->inGameClock.seconds++;
-
-    if (gSaveBlock2Ptr->inGameClock.seconds < 60)
-        return;
-
-    gSaveBlock2Ptr->inGameClock.seconds = 0;
-    gSaveBlock2Ptr->inGameClock.minutes++;
-
-    if (gSaveBlock2Ptr->inGameClock.minutes < 60)
-        return;
-
-    gSaveBlock2Ptr->inGameClock.minutes = 0;
-    gSaveBlock2Ptr->inGameClock.hours++;
-
-    if (gSaveBlock2Ptr->inGameClock.hours < 24)
-        return;
-
-    gSaveBlock2Ptr->inGameClock.hours = 0;
-    gSaveBlock2Ptr->inGameClock.dayOfWeek++;
-
-    if (gSaveBlock2Ptr->inGameClock.dayOfWeek < 7)
-        return;
-
-    gSaveBlock2Ptr->inGameClock.dayOfWeek = 0;
+    gSaveBlock2Ptr->time.days = dayOfWeek;
+    gSaveBlock2Ptr->time.hours = hour;
+    gSaveBlock2Ptr->time.minutes = minute;
 }
 
-void InGameClock_SetTime(s8 dayOfWeek, s8 hour, s8 minute)
+void UpdateInGameTime(void)
 {
-    gSaveBlock2Ptr->inGameClock.dayOfWeek = dayOfWeek;
-    gSaveBlock2Ptr->inGameClock.hours = hour;
-    gSaveBlock2Ptr->inGameClock.minutes = minute;
+    sInGameTimeFrameCounter++;
+
+    if (sInGameTimeFrameCounter < 60)
+        return;
+
+    sInGameTimeFrameCounter = 0;
+    gSaveBlock2Ptr->time.seconds++;
+
+    if (gSaveBlock2Ptr->time.seconds < INGAME_SECS_PER_MIN)
+        return;
+
+    gSaveBlock2Ptr->time.seconds = 0;
+    gSaveBlock2Ptr->time.minutes++;
+
+    if (gSaveBlock2Ptr->time.minutes < INGAME_MINS_PER_HR)
+        return;
+
+    gSaveBlock2Ptr->time.minutes = 0;
+    gSaveBlock2Ptr->time.hours++;
+
+    if (gSaveBlock2Ptr->time.hours < INGAME_HRS_PER_DAY)
+        return;
+
+    gSaveBlock2Ptr->time.hours = 0;
+    gSaveBlock2Ptr->time.days++;
 }
 
 void FormatDecimalTimeWithoutSeconds(u8 *dest, s8 hour, s8 minute, u16 clockMode)
@@ -83,4 +79,10 @@ void FormatDecimalTimeWithoutSeconds(u8 *dest, s8 hour, s8 minute, u16 clockMode
     }
 
     *dest = EOS;
+}
+
+const u8 *GetDayOfWeekString(s16 day)
+{
+    u8 dayOfWeek = day % 7;
+    return sText_DaysOfWeek[dayOfWeek];
 }

@@ -361,7 +361,7 @@ static const u8 sText_Ability[] = _("ABILITY: ");
 static const u8 sText_Shiny[] = _("SHINY: ");
 
 static const u8 sText_Time[] = _("TIME: ");
-static const u8 sText_DayOfWeek[] = _("DAY OF WEEK: ");
+static const u8 sText_Days[] = _("DAY: ");
 
 static const u8 sText_Weather[] = _("WEATHER: ");
 static const u8 sText_WeatherNone[] = _("NONE");
@@ -1330,13 +1330,14 @@ static void Task_HandleVarsInput(u8 taskId)
 
 #define tHours data[0]
 #define tMinutes data[1]
-#define tDayOfWeek data[2]
+#define tDays data[2]
 #define tState data[3]
 
 static void Task_DebugActionSetTime(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u8 str[8];
+    u8 str2[8];
 
     PlaySE(SE_SELECT);
     RemoveScrollIndicatorArrowPair(sDebugMenu->arrowTaskId);
@@ -1345,22 +1346,24 @@ static void Task_DebugActionSetTime(u8 taskId)
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
 
     AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 0, 0, sTextColor_Default, TEXT_SKIP_DRAW, sText_Time);
-    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 0, 16, sTextColor_Default, TEXT_SKIP_DRAW, sText_DayOfWeek);
+    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 0, 16, sTextColor_Default, TEXT_SKIP_DRAW, sText_Days);
 
-    ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->inGameClock.hours, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->time.hours, STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 30, 0, sTextColor_Green, TEXT_SKIP_DRAW, str);
     AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 40, 0, sTextColor_Default, TEXT_SKIP_DRAW, gText_Colon2);
-    ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->inGameClock.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->time.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 48, 0, sTextColor_Default, TEXT_SKIP_DRAW, str);
 
-    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 60, 16, sTextColor_Default, TEXT_SKIP_DRAW, gText_DaysOfWeek[gSaveBlock2Ptr->inGameClock.dayOfWeek]);
+    ConvertIntToDecimalStringN(str2, gSaveBlock2Ptr->time.days, STR_CONV_MODE_LEADING_ZEROS, 5);
+    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 30, 16, sTextColor_Default, TEXT_SKIP_DRAW, str2);
+    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 64, 16, sTextColor_Default, TEXT_SKIP_DRAW, GetDayOfWeekString(gSaveBlock2Ptr->time.days));
 
     CopyWindowToVram(WIN_DESCRIPTION, COPYWIN_GFX);
 
     task->func = Task_HandleSetTimeInput;
-    task->tHours = gSaveBlock2Ptr->inGameClock.hours;
-    task->tMinutes = gSaveBlock2Ptr->inGameClock.minutes;
-    task->tDayOfWeek = gSaveBlock2Ptr->inGameClock.dayOfWeek;
+    task->tHours = gSaveBlock2Ptr->time.hours;
+    task->tMinutes = gSaveBlock2Ptr->time.minutes;
+    task->tDays = gSaveBlock2Ptr->time.days;
     task->tState = SET_TIME_STATE_HOURS;
 
     sDebugMenu->cursorStackDepth++;
@@ -1370,6 +1373,7 @@ static void Task_HandleSetTimeInput(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u8 str[8];
+    u8 str2[8];
 
     if (JOY_REPEAT(DPAD_UP))
     {
@@ -1390,11 +1394,8 @@ static void Task_HandleSetTimeInput(u8 taskId)
             }
             break;
         case SET_TIME_STATE_DAY_OF_WEEK:
-            if (task->tDayOfWeek < 6)
-            {
-                PlaySE(SE_SELECT);
-                task->tDayOfWeek++;
-            }
+            PlaySE(SE_SELECT);
+            task->tDays++;
             break;
         }
     }
@@ -1419,7 +1420,7 @@ static void Task_HandleSetTimeInput(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SUCCESS);
-        InGameClock_SetTime(task->tDayOfWeek, task->tHours, task->tMinutes);
+        InitInGameTime(task->tDays, task->tHours, task->tMinutes);
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -1438,8 +1439,11 @@ static void Task_HandleSetTimeInput(u8 taskId)
         ConvertIntToDecimalStringN(str, task->tMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
         AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 48, 0, (task->tState == SET_TIME_STATE_MINUTES) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, str);
 
-        FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(0), 60, 16, 96, 16);
-        AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 60, 16, (task->tState == SET_TIME_STATE_DAY_OF_WEEK) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, gText_DaysOfWeek[task->tDayOfWeek]);
+        FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(0), 30, 16, 96, 16);
+        //AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 60, 16, (task->tState == SET_TIME_STATE_DAY_OF_WEEK) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, GetDayOfWeekString(task->tDays));
+        ConvertIntToDecimalStringN(str2, task->tDays, STR_CONV_MODE_LEADING_ZEROS, 5);
+        AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 30, 16, (task->tState == SET_TIME_STATE_DAY_OF_WEEK) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, str2);
+        AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 64, 16, sTextColor_Default, TEXT_SKIP_DRAW, GetDayOfWeekString(task->tDays));
 
         CopyWindowToVram(WIN_DESCRIPTION, COPYWIN_GFX);
     }
@@ -1447,7 +1451,7 @@ static void Task_HandleSetTimeInput(u8 taskId)
 
 #undef tHours
 #undef tMinutes
-#undef tDayOfWeek
+#undef tDays
 #undef tState
 
 #define tWeather data[0]

@@ -1,3 +1,12 @@
+struct InGameClock
+{
+    s8 dayOfWeek;
+    s8 hours;
+    s8 minutes;
+    s8 seconds;
+    s8 vblanks;
+};
+
 struct SaveBlock2V0
 {
     u8 playerName[7 + 1];

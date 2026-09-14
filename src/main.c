@@ -164,7 +164,7 @@ void AgbMain()
         }
 
         PlayTimeCounter_Update();
-        InGameClock_Run();
+        UpdateInGameTime();
         MapMusicMain();
         WaitForVBlank();
     }

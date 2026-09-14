@@ -329,7 +329,7 @@ static void ShowMapNamePopUpWindow(void)
     AddTextPrinterParameterized3(primaryPopUpWindowId, FONT_SHORT, 4, 2, sTextColor, TEXT_SKIP_DRAW, mapDisplayHeader);
     CopyWindowToVram(primaryPopUpWindowId, COPYWIN_FULL);
 
-    FormatDecimalTimeWithoutSeconds(mapDisplayHeader, gSaveBlock2Ptr->inGameClock.hours, gSaveBlock2Ptr->inGameClock.minutes, gSaveBlock2Ptr->optionsClockMode);
+    FormatDecimalTimeWithoutSeconds(mapDisplayHeader, gSaveBlock2Ptr->time.hours, gSaveBlock2Ptr->time.minutes, gSaveBlock2Ptr->optionsClockMode);
     AddTextPrinterParameterized3(secondaryPopUpWindowId, FONT_SMALL, GetStringRightAlignXOffset(FONT_SMALL, mapDisplayHeader, DISPLAY_WIDTH) - 8, 8, sTextColor, TEXT_SKIP_DRAW, mapDisplayHeader);
     CopyWindowToVram(secondaryPopUpWindowId, COPYWIN_FULL);
 }

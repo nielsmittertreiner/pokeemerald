@@ -58,7 +58,7 @@ bool8 DoUpdateSaveDataV0(const struct SaveSectorLocation *locations)
     COPY_SAVEBLOCK_FIELD(2, frontier);
     COPY_SAVEBLOCK_FIELD(2, follower);
     COPY_SAVEBLOCK_ARRAY(2, itemFlags);
-    COPY_SAVEBLOCK_FIELD(2, inGameClock);
+    //COPY_SAVEBLOCK_FIELD(2, inGameClock);
 
     COPY_SAVEBLOCK_FIELD(1, pos);
     COPY_SAVEBLOCK_FIELD(1, location);
