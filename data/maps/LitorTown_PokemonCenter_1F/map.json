@@ -60,14 +60,5 @@
   "coord_events": [
 
   ],
-  "bg_events": [
-    {
-      "type": "sign",
-      "x": 6,
-      "y": 3,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Common_EventScript_PkmnCenterTerminal"
-    }
-  ]
+  "bg_events": []
 }

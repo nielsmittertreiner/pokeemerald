@@ -78,10 +78,10 @@ script CedarredTown_EventScript_Boy {
 script CedarredTown_EventScript_ShowLoggersCabin {
     lock
     playse(SE_PIN)
-    applymovement(OBJ_EVENT_ID_FOLLOWER, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_FOLLOWER, Common_Movement_ExclamationMark)
     waitmovement(0)
     facefollower
-    loadspeechtail(FALSE, OBJ_EVENT_ID_FOLLOWER)
+    loadspeechtail(FALSE, LOCALID_FOLLOWER)
     msgbox("Ah, we're here!\n"
 	       "This is CEDARRED TOWN\p"
 	       "The LOGGERS CABIN should be at the\n"
@@ -129,10 +129,10 @@ script CedarredTown_EventScript_ShowLoggersCabin {
 script CedarredTown_EventScript_EnterLoggersCabin {
     lock
     playse(SE_PIN)
-    applymovement(OBJ_EVENT_ID_FOLLOWER, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_FOLLOWER, Common_Movement_ExclamationMark)
     waitmovement(0)
     facefollower
-    loadspeechtail(FALSE, OBJ_EVENT_ID_FOLLOWER)
+    loadspeechtail(FALSE, LOCALID_FOLLOWER)
     msgbox("Remember {PLAYER}, we're here to help\n"
 	       "the LOGGERS with a problem in\l"
 	       "the ACREN FOREST.\p"
@@ -144,23 +144,23 @@ script CedarredTown_EventScript_EnterLoggersCabin {
     {
         case 14:
             applymovement(OBJ_EVENT_ID_PLAYER, CedarredTown_Movement_PlayerWalkToCabinOne)
-            applymovement(OBJ_EVENT_ID_FOLLOWER, CedarredTown_Movement_ConiferWalkToCabinOne)
+            applymovement(LOCALID_FOLLOWER, CedarredTown_Movement_ConiferWalkToCabinOne)
         case 15:
             applymovement(OBJ_EVENT_ID_PLAYER, CedarredTown_Movement_PlayerWalkToCabinTwo)
-            applymovement(OBJ_EVENT_ID_FOLLOWER, CedarredTown_Movement_ConiferWalkToCabinTwo)
+            applymovement(LOCALID_FOLLOWER, CedarredTown_Movement_ConiferWalkToCabinTwo)
         case 16:
             applymovement(OBJ_EVENT_ID_PLAYER, CedarredTown_Movement_PlayerWalkToCabinThree)
-            applymovement(OBJ_EVENT_ID_FOLLOWER, CedarredTown_Movement_ConiferWalkToCabinThree)
+            applymovement(LOCALID_FOLLOWER, CedarredTown_Movement_ConiferWalkToCabinThree)
         case 17:
             applymovement(OBJ_EVENT_ID_PLAYER, CedarredTown_Movement_PlayerWalkToCabinFour)
-            applymovement(OBJ_EVENT_ID_FOLLOWER, CedarredTown_Movement_ConiferWalkToCabinFour)
+            applymovement(LOCALID_FOLLOWER, CedarredTown_Movement_ConiferWalkToCabinFour)
     }
     waitmovement(0)
     turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
     opendoor(20, 18)
     waitdooranim
     applymovement(OBJ_EVENT_ID_PLAYER, CedarredTown_Movement_PlayerWalkToDoor)
-    applymovement(OBJ_EVENT_ID_FOLLOWER, CedarredTown_Movement_ConiferWalkToDoor)
+    applymovement(LOCALID_FOLLOWER, CedarredTown_Movement_ConiferWalkToDoor)
     waitmovement(0)
     closedoor(20, 18)
     waitdooranim
@@ -173,17 +173,17 @@ script CedarredTown_EventScript_EnterLoggersCabin {
 script CedarredTown_EventScript_PreventWander {
     lock
     playse(SE_PIN)
-    applymovement(OBJ_EVENT_ID_FOLLOWER, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_FOLLOWER, Common_Movement_ExclamationMark)
     waitmovement(0)
     facefollower
-    loadspeechtail(FALSE, OBJ_EVENT_ID_FOLLOWER)
+    loadspeechtail(FALSE, LOCALID_FOLLOWER)
     msgbox("We should be going to the LOGGERS\n"
 	       "CABIN, {PLAYER}.\p"
 	       "Let's move!")
     destroyspeechtail
     applymovement(OBJ_EVENT_ID_PLAYER, CedarredTown_Movement_WalkDown)
     waitmovement(0)
-    turnobject(OBJ_EVENT_ID_FOLLOWER, DIR_SOUTH)
+    turnobject(LOCALID_FOLLOWER, DIR_SOUTH)
     release
     end
 }

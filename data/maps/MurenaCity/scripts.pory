@@ -213,7 +213,6 @@ script MurenaCity_EventScript_ArtistTrader {
         goto(MurenaCity_EventScript_ArtistTrader_Decline)
     }
     special(ChoosePartyMon)
-    waitstate
     copyvar(VAR_0x800A, VAR_0x8004)
     if (var(VAR_0x8004) == 255) {
         goto(MurenaCity_EventScript_ArtistTrader_Decline)
@@ -227,7 +226,6 @@ script MurenaCity_EventScript_ArtistTrader {
     copyvar(VAR_0x8005, VAR_0x800A)
     special(CreateInGameTradePokemon)
     special(DoInGameTradeScene)
-    waitstate
     bufferspeciesname(0, VAR_0x8009)
     loadspeechtail(FALSE, LOCALID_ARTIST)
     msgbox("Magnificent…\n"

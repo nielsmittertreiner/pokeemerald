@@ -1,5 +1,3 @@
-.set LOCALID_RIVAL, 2
-
 Route103_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route103_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route103_OnLoad
@@ -22,20 +20,17 @@ Route103_EventScript_OpenAlteringCave::
 Route103_EventScript_Rival::
 	lockall
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route103_EventScript_RivalPlayerFemale
-	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalPlayerMale
+	goto_if_eq VAR_RESULT, MALE, Route103_EventScript_RivalMay
+	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
 	end
 
-Route103_EventScript_RivalPlayerFemale::
+Route103_EventScript_RivalMay::
 	msgbox Route103_Text_MayRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_MAY, TRUE
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_FacePlayer
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
 	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_StartMayBattleTreecko
@@ -43,16 +38,13 @@ Route103_EventScript_RivalPlayerFemale::
 	case 2, Route103_EventScript_StartMayBattleMudkip
 	end
 
-Route103_EventScript_RivalPlayerMale::
+Route103_EventScript_RivalBrendan::
 	msgbox Route103_Text_BrendanRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_FacePlayer
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
 	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_StartBrendanBattleTreecko
@@ -110,36 +102,32 @@ Route103_EventScript_RivalExit::
 	end
 
 Route103_EventScript_RivalExitFacingNorth::
-	applymovement OBJ_EVENT_ID_PLAYER, Route103_Movement_WatchRivalExitFacingNorth
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExitFacingNorth1
+	applymovement LOCALID_PLAYER, Route103_Movement_WatchRivalExitFacingNorth
+	applymovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExitFacingNorth1
 	waitmovement 0
 	playse SE_LEDGE
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExitFacingNorth2
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExitFacingNorth2
 	goto Route103_EventScript_RivalEnd
 	end
 
 Route103_EventScript_RivalExitFacingEastOrWest::
-	applymovement OBJ_EVENT_ID_PLAYER, Route103_Movement_WatchRivalExitFacingEastOrWest
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit1
+	applymovement LOCALID_PLAYER, Route103_Movement_WatchRivalExitFacingEastOrWest
+	applymovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit1
 	waitmovement 0
 	playse SE_LEDGE
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit2
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit2
 	goto Route103_EventScript_RivalEnd
 	end
 
 Route103_EventScript_RivalExitFacingSouth::
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit1
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit1
 	playse SE_LEDGE
-	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit2
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit2
 	goto Route103_EventScript_RivalEnd
 	end
 
 Route103_EventScript_RivalEnd::
-	removeobject LOCALID_RIVAL
+	removeobject LOCALID_ROUTE103_RIVAL
 	setvar VAR_BIRCH_LAB_STATE, 4
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
 	setflag FLAG_DEFEATED_RIVAL_ROUTE103

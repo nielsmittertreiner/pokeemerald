@@ -1,12 +1,9 @@
-.set LOCALID_MOVE_DELETER, 1
-
 LilycoveCity_MoveDeletersHouse_MapScripts::
 	.byte 0
 
 LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter::
 	lockall
-	applymovement LOCALID_MOVE_DELETER, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_MOVE_DELETER, Common_Movement_FacePlayer
 	msgbox LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO
 	switch VAR_RESULT
 	case YES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
@@ -17,7 +14,6 @@ LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter::
 LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget::
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
 	special IsSelectedMonEgg
 	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves

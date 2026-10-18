@@ -403,7 +403,6 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_OLD_SEA_MAP] = {gItemIcon_OldSeaMap, gItemIconPalette_OldSeaMap},
 
     // Vanadium
-    [ITEM_TERMINAL_PASS] = {gItemIcon_TerminalPass, gItemIconPalette_TerminalPass},
     [ITEM_TENTACOOL_SKEWER] = {gItemIcon_TentacoolSkewer, gItemIconPalette_TentacoolSkewer},
 
     // Return to field arrow

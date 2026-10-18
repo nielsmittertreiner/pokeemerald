@@ -1,6 +1,3 @@
-.set LOCALID_BRINEY, 11
-.set LOCALID_WANDAS_BF_OUTSIDE, 21
-
 Route116_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route116_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route116_OnLoad
@@ -15,7 +12,7 @@ Route116_OnTransition:
 	end
 
 Route116_EventScript_SetWandasBoyfriendPos::
-	setobjectxyperm LOCALID_WANDAS_BF_OUTSIDE, 38, 10
+	setobjectxyperm LOCALID_ROUTE116_WANDAS_BF, 38, 10
 	return
 
 Route116_OnLoad:
@@ -71,13 +68,11 @@ Route116_EventScript_GiveRepeatBall::
 	end
 
 Route116_EventScript_DevonEmployeeExit::
-	applymovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExit
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExit
 	return
 
 Route116_EventScript_DevonEmployeeExitEast::
-	applymovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExitEast
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExitEast
 	return
 
 Route116_EventScript_TryGiveRepeatBallAgain::
@@ -144,8 +139,8 @@ Route116_EventScript_Briney::
 
 Route116_EventScript_BrineyTrigger::
 	lockall
-	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFasterRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_ROUTE116_BRINEY, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox Route116_Text_ScoundrelMadeOffWithPeeko, MSGBOX_DEFAULT
 	setvar VAR_ROUTE116_STATE, 2
@@ -195,13 +190,11 @@ Route116_EventScript_GlassesManExit::
 	end
 
 Route116_EventScript_GlassesManExitNormal::
-	applymovement VAR_LAST_TALKED, Route116_Movement_GlassesManExit
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Route116_Movement_GlassesManExit
 	return
 
 Route116_EventScript_GlassesManExitEast::
-	applymovement VAR_LAST_TALKED, Route116_Movement_GlassesManExitEast
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Route116_Movement_GlassesManExitEast
 	return
 
 Route116_Movement_GlassesManExit:

@@ -59,6 +59,12 @@ static void MainCB2_EndIntro(void);
 #define TAG_POKE_BALL        3003
 #define TAG_FLASH            3004
 
+enum {
+    COPYRIGHT_INITIALIZE,
+    COPYRIGHT_START_FADE = 140,
+    COPYRIGHT_START_INTRO,
+};
+
 #define MATRIX_POKE_BALL 0
 #define MATRIX_KECLEON   1
 #define MATRIX_FLASH     2
@@ -103,19 +109,19 @@ static void MainCB2_EndIntro(void);
 #define TIMER_KECLEON_ESCAPE_FINISH     791
 #define TIMER_END                       800
 
-u32 gIntroFrameCounter;
-struct GcmbStruct gMultibootProgramStruct;
+COMMON_DATA u32 gIntroFrameCounter = 0;
+COMMON_DATA struct GcmbStruct gMultibootProgramStruct = {0};
 
-static const u32 sIntroKecleon_Gfx[]          = INCBIN_U32("graphics/intro/scene_kecleon/kecleon.4bpp.lz");
-static const u16 sIntroKecleon_Pal[]          = INCBIN_U16("graphics/intro/scene_kecleon/kecleon.gbapal");
-static const u32 sIntroExclamationMark_Gfx[]  = INCBIN_U32("graphics/intro/scene_kecleon/exclamation_mark.4bpp.lz");
-static const u16 sIntroExclamationMark_Pal[]  = INCBIN_U16("graphics/intro/scene_kecleon/exclamation_mark.gbapal");
-static const u32 sIntroSand_Gfx[]             = INCBIN_U32("graphics/intro/scene_kecleon/sand.4bpp.lz");
-static const u16 sIntroSand_Pal[]             = INCBIN_U16("graphics/intro/scene_kecleon/sand.gbapal");
-static const u32 sIntroPokeBall_Gfx[]         = INCBIN_U32("graphics/intro/scene_kecleon/poke_ball.4bpp.lz");
-static const u16 sIntroPokeBall_Pal[]         = INCBIN_U16("graphics/intro/scene_kecleon/poke_ball.gbapal");
-static const u32 sIntroFlash_Gfx[]            = INCBIN_U32("graphics/intro/scene_kecleon/flash.4bpp.lz");
-static const u16 sIntroFlash_Pal[]            = INCBIN_U16("graphics/intro/scene_kecleon/flash.gbapal");
+static const u32 sIntroKecleon_Gfx[]          = INCGFX_U32("graphics/intro/scene_kecleon/kecleon.png", ".4bpp.lz");
+static const u16 sIntroKecleon_Pal[]          = INCGFX_U16("graphics/intro/scene_kecleon/kecleon.png", ".gbapal");
+static const u32 sIntroExclamationMark_Gfx[]  = INCGFX_U32("graphics/intro/scene_kecleon/exclamation_mark.png", ".4bpp.lz");
+static const u16 sIntroExclamationMark_Pal[]  = INCGFX_U16("graphics/intro/scene_kecleon/exclamation_mark.png", ".gbapal");
+static const u32 sIntroSand_Gfx[]             = INCGFX_U32("graphics/intro/scene_kecleon/sand.png", ".4bpp.lz");
+static const u16 sIntroSand_Pal[]             = INCGFX_U16("graphics/intro/scene_kecleon/sand.png", ".gbapal");
+static const u32 sIntroPokeBall_Gfx[]         = INCGFX_U32("graphics/intro/scene_kecleon/poke_ball.png", ".4bpp.lz");
+static const u16 sIntroPokeBall_Pal[]         = INCGFX_U16("graphics/intro/scene_kecleon/poke_ball.png", ".gbapal");
+static const u32 sIntroFlash_Gfx[]            = INCGFX_U32("graphics/intro/scene_kecleon/flash.png", ".4bpp.lz");
+static const u16 sIntroFlash_Pal[]            = INCGFX_U16("graphics/intro/scene_kecleon/flash.png", ".gbapal");
 
 static const struct OamData sOamData_Kecleon =
 {
@@ -558,7 +564,7 @@ static u8 SetUpCopyrightScreen(void)
 {
     switch (gMain.state)
     {
-    case 0:
+    case COPYRIGHT_INITIALIZE:
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -601,7 +607,7 @@ static u8 SetUpCopyrightScreen(void)
         gMain.state++;
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         break;
-    case 140:
+    case COPYRIGHT_START_FADE:
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
@@ -609,7 +615,7 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state++;
         }
         break;
-    case 141:
+    case COPYRIGHT_START_INTRO:
         if (UpdatePaletteFade())
             break;
         CreateTask(Task_Scene1_Load, 0);

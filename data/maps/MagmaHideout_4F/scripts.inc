@@ -1,11 +1,3 @@
-.set LOCALID_GROUDON, 1
-.set LOCALID_GRUNT_1, 2
-.set LOCALID_GRUNT_2, 3
-.set LOCALID_GRUNT_3, 4
-.set LOCALID_TABITHA, 5
-.set LOCALID_MAXIE, 6
-.set LOCALID_GROUDON_SLEEPING, 7
-
 MagmaHideout_4F_MapScripts::
 	.byte 0
 
@@ -23,26 +15,22 @@ MagmaHideout_4F_EventScript_Maxie::
 	playfanfare MUS_AWAKEN_LEGEND
 	playse SE_ORB
 	special DoOrbEffect
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	delay 150
-	removeobject LOCALID_GROUDON_SLEEPING
-	addobject LOCALID_GROUDON
+	removeobject LOCALID_MAGMA_HIDEOUT_4F_GROUDON_SLEEPING
+	addobject LOCALID_MAGMA_HIDEOUT_4F_GROUDON
 	waitstate
 	delay 60
-	applymovement LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonApproach
-	waitmovement 0
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_4F_GROUDON, MagmaHideout_4F_Movement_GroudonApproach
 	special FadeOutOrbEffect
-	waitstate
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
 	setvar VAR_0x8007, 5  @ shake delay
 	special ShakeCamera
 	waitstate
-	applymovement LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonExit
-	waitmovement 0
-	removeobject LOCALID_GROUDON
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_4F_GROUDON, MagmaHideout_4F_Movement_GroudonExit
+	removeobject LOCALID_MAGMA_HIDEOUT_4F_GROUDON
 	delay 4
 	setvar VAR_0x8004, 2  @ vertical pan
 	setvar VAR_0x8005, 2  @ horizontal pan
@@ -51,15 +39,12 @@ MagmaHideout_4F_EventScript_Maxie::
 	special ShakeCamera
 	waitstate
 	delay 30
-	applymovement LOCALID_MAXIE, MagmaHideout_4F_Movement_MaxieLookAround
-	waitmovement 0
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_4F_MAXIE, MagmaHideout_4F_Movement_MaxieLookAround
 	msgbox MagmaHideout_4F_Text_MaxieGroudonWhatsWrong, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	delay 30
-	applymovement LOCALID_MAXIE, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_4F_MAXIE, Common_Movement_FacePlayer
 	msgbox MagmaHideout_4F_Text_MaxieOhItWasYou, MSGBOX_DEFAULT
 	closemessage
 	trainerbattle_no_intro TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat
@@ -71,11 +56,11 @@ MagmaHideout_4F_EventScript_Maxie::
 	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
 	setvar VAR_SLATEPORT_HARBOR_STATE, 1
 	fadescreen FADE_TO_BLACK
-	removeobject LOCALID_MAXIE
-	removeobject LOCALID_GRUNT_1
-	removeobject LOCALID_GRUNT_2
-	removeobject LOCALID_GRUNT_3
-	removeobject LOCALID_TABITHA
+	removeobject LOCALID_MAGMA_HIDEOUT_4F_MAXIE
+	removeobject LOCALID_MAGMA_HIDEOUT_4F_GRUNT_1
+	removeobject LOCALID_MAGMA_HIDEOUT_4F_GRUNT_2
+	removeobject LOCALID_MAGMA_HIDEOUT_4F_GRUNT_3
+	removeobject LOCALID_MAGMA_HIDEOUT_4F_TABITHA
 	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
 	fadescreen FADE_FROM_BLACK
 	releaseall

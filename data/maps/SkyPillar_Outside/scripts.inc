@@ -1,5 +1,3 @@
-.set LOCALID_WALLACE, 1
-
 SkyPillar_Outside_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Outside_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, SkyPillar_Outside_OnLoad
@@ -34,10 +32,8 @@ SkyPillar_Outside_OnFrame:
 
 SkyPillar_Outside_EventScript_WallaceScene::
 	lockall
-	applymovement LOCALID_WALLACE, SkyPillar_Outside_Movement_WallaceApproachPlayer
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
+	applywaitmovement LOCALID_SKY_PILLAR_WALLACE, SkyPillar_Outside_Movement_WallaceApproachPlayer
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	msgbox SkyPillar_Outside_Text_OpenedDoorToSkyPillar, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -50,8 +46,8 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	delay 40
 	msgbox SkyPillar_Outside_Text_EarthquakeNotMomentToWaste, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, SkyPillar_Outside_Movement_PlayerClimbSkyPillar
-	applymovement LOCALID_WALLACE, SkyPillar_Outside_Movement_WallaceClimbSkyPillar
+	applymovement LOCALID_PLAYER, SkyPillar_Outside_Movement_PlayerClimbSkyPillar
+	applymovement LOCALID_SKY_PILLAR_WALLACE, SkyPillar_Outside_Movement_WallaceClimbSkyPillar
 	waitmovement 0
 	setvar VAR_0x8004, 1   @ vertical pan
 	setvar VAR_0x8005, 3   @ horizontal pan
@@ -60,14 +56,11 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	special ShakeCamera
 	waitstate
 	delay 20
-	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
+	applywaitmovement LOCALID_SKY_PILLAR_WALLACE, Common_Movement_WalkInPlaceFasterLeft
 	delay 10
-	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
+	applywaitmovement LOCALID_SKY_PILLAR_WALLACE, Common_Movement_WalkInPlaceFasterRight
 	delay 20
-	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement LOCALID_SKY_PILLAR_WALLACE, Common_Movement_WalkInPlaceFasterDown
 	delay 30
 	msgbox SkyPillar_Outside_Text_SituationGettingWorse, MSGBOX_DEFAULT
 	closemessage
@@ -75,7 +68,6 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	setweather WEATHER_ABNORMAL
 	doweather
 	special WaitWeather
-	waitstate
 	delay 30
 	msgbox SkyPillar_Outside_Text_GotToGoBackForSootopolis, MSGBOX_DEFAULT
 	closemessage
@@ -83,7 +75,7 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	fadescreenswapbuffers FADE_TO_BLACK
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 4
-	removeobject LOCALID_WALLACE
+	removeobject LOCALID_SKY_PILLAR_WALLACE
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	releaseall

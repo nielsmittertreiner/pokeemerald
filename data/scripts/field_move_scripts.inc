@@ -1,7 +1,7 @@
 @ Interact with cuttable tree
 EventScript_CutTree::
 	lockall
-	@goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
+	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
 	checkpartymove MOVE_CUT
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
 	setfieldeffectargument 0, VAR_RESULT
@@ -9,23 +9,26 @@ EventScript_CutTree::
 	buffermovename STR_VAR_2, MOVE_CUT
 	msgbox Text_WantToCut, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
-	setfieldeffectargument 2, MOVE_CUT
+	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
-EventScript_CutTreeCommon:
-	setfieldeffectargument 3, 0 @ skip pose if so
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
-EventScript_CutTreeDown:: @ fallthrough
-	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
-	waitmovement 0
-	removeobject VAR_LAST_TALKED
-	releaseall
+	goto EventScript_CutTreeDown
 	end
 
 @ Use cut from party menu
 EventScript_UseCut::
 	lockall
-	goto EventScript_CutTreeCommon
+	dofieldeffect FLDEFF_USE_CUT_ON_TREE
+	waitstate
+	goto EventScript_CutTreeDown
+	end
+
+EventScript_CutTreeDown::
+	applywaitmovement VAR_LAST_TALKED, Movement_CutTreeDown
+	removeobject VAR_LAST_TALKED
+	releaseall
+	end
 
 Movement_CutTreeDown:
 	cut_tree
@@ -53,15 +56,10 @@ Text_CantCut:
 	.string "This tree looks like it can be\n"
 	.string "CUT down!$"
 
-@ Use rock smash from party menu
-EventScript_UseRockSmash::
-	lockall
-	goto EventScript_RockSmashCommon
-
 @ Interact with smashable rock
 EventScript_RockSmash::
 	lockall
-	@goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
+	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	checkpartymove MOVE_ROCK_SMASH
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
 	setfieldeffectargument 0, VAR_RESULT
@@ -71,13 +69,21 @@ EventScript_RockSmash::
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
-EventScript_RockSmashCommon:
-	setfieldeffectargument 3, 0
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
-EventScript_SmashRock:: @ fallthrough
-	applymovement VAR_LAST_TALKED, Movement_SmashRock
-	waitmovement 0
+	goto EventScript_SmashRock
+	end
+
+@ Use rock smash from party menu
+EventScript_UseRockSmash::
+	lockall
+	dofieldeffect FLDEFF_USE_ROCK_SMASH
+	waitstate
+	goto EventScript_SmashRock
+	end
+
+EventScript_SmashRock::
+	applywaitmovement VAR_LAST_TALKED, Movement_SmashRock
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
 	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
@@ -90,38 +96,6 @@ EventScript_SmashRock:: @ fallthrough
 EventScript_EndSmash::
 	releaseall
 	end
-
-Movement_WalkUp:
-	walk_up
-	step_end
-
-Movement_JumpUp:
-	jump_in_place_up
-	step_end
-
-Movement_WalkRight:
-	walk_right
-	step_end
-
-Movement_JumpRight:
-	jump_in_place_right
-	step_end
-
-Movement_WalkDown:
-	walk_down
-	step_end
-
-Movement_JumpDown:
-	jump_in_place_down
-	step_end
-
-Movement_WalkLeft:
-	walk_left
-	step_end
-
-Movement_JumpLeft:
-	jump_in_place_left
-	step_end
 
 Movement_SmashRock:
 	rock_smash_break
@@ -147,7 +121,7 @@ Text_CantSmash:
 
 EventScript_StrengthBoulder::
 	lockall
-	@goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
+	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	checkpartymove MOVE_STRENGTH
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
@@ -155,7 +129,6 @@ EventScript_StrengthBoulder::
 	msgbox Text_WantToStrength, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
 	closemessage
-	setfieldeffectargument 2, MOVE_STRENGTH
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto EventScript_ActivateStrength
@@ -195,6 +168,7 @@ Text_WantToStrength:
 	.string "Would you like to use STRENGTH?$"
 
 Text_MonUsedStrength:
+	.string "{STR_VAR_1} used STRENGTH!\p"
 	.string "{STR_VAR_1}'s STRENGTH made it\n"
 	.string "possible to move boulders around!$"
 
@@ -214,11 +188,8 @@ EventScript_UseWaterfall::
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
-	setfieldeffectargument 2, MOVE_WATERFALL
-    call FollowerIntoPlayerScript
-    callnative HideFollower
+	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_WATERFALL
-    callnative FollowMe_WarpSetEnd
 	goto EventScript_EndWaterfall
 
 EventScript_CannotUseWaterfall::
@@ -246,15 +217,12 @@ EventScript_UseDive::
 	lockall
 	checkpartymove MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
-    copyvar 0x8004 VAR_RESULT
-	bufferpartymonnick 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	setfieldeffectargument 1, 1
 	msgbox Text_WantToDive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
-	setfieldeffectargument 2, MOVE_DIVE
-	call FollowerIntoPlayerScript
-	callnative HideFollower
-	setfieldeffectargument 0, VAR_0x8004
-	setfieldeffectargument 1, 1
+	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndDive
 	end
@@ -277,7 +245,7 @@ EventScript_UseDiveUnderwater::
 	setfieldeffectargument 1, 1
 	msgbox Text_WantToSurface, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
-	setfieldeffectargument 2, MOVE_DIVE
+	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndSurface
 	end
@@ -317,69 +285,3 @@ EventScript_FailSweetScent::
 
 Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"
-    
-FollowerPositionFixScript::
-	setvar 0x8000 0x0
-	callnative FollowerTrainerSightingPositionFix
-	compare VAR_RESULT 0xFFFF
-	goto_if_eq FollowerPositionFixScriptReturn
-	call WalkCall
-	setvar 0x8000 0x1
-	callnative FollowerTrainerSightingPositionFix
-FollowerPositionFixScriptReturn:
-	return
-    
-FollowerIntoPlayerScript::
-	setvar 0x8000 0x0
-	callnative FollowerIntoPlayer
-	compare VAR_RESULT 0xFFFF
-	goto_if_eq FollowerPositionFixScriptReturn
-	setvar 0x8005 0xFE  @ follower
-	call WalkCall
-	setvar 0x8000 0x1
-	callnative FollowerIntoPlayer
-	return
-    
-WalkCall:
-	compare VAR_RESULT 0x0
-	call_if_eq WalkDownCall
-	compare VAR_RESULT 0x1
-	call_if_eq WalkUpCall
-	compare VAR_RESULT 0x2
-	call_if_eq WalkLeftCall
-	compare VAR_RESULT 0x3
-	call_if_eq WalkRightCall
-	waitmovement 0x8005
-	return
-	
-WalkDownCall:
-	applymovement 0x8005 WalkDown
-	return
-
-WalkUpCall:
-	applymovement 0x8005 WalkUp
-	return
-
-WalkLeftCall:
-	applymovement 0x8005 WalkLeft
-	return
-
-WalkRightCall:
-	applymovement 0x8005 WalkRight
-	return
-    
-WalkDown:
-    walk_down
-    step_end 
-
-WalkUp:
-    walk_up
-    step_end
-
-WalkLeft:
-    walk_left
-    step_end
-
-WalkRight:
-    walk_right
-    step_end

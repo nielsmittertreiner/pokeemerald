@@ -3,11 +3,13 @@ NavireTown_House1_MapScripts::
 
 
 NavireTown_House1_EventScript_Girl::
+# 4 "data/maps/NavireTown_House1/scripts.pory"
 	msgbox NavireTown_House1_EventScript_Girl_Text_0, MSGBOX_NPC
 	end
 
 
 NavireTown_House1_EventScript_Girl_Text_0:
+# 4 "data/maps/NavireTown_House1/scripts.pory"
 	.string "I quite enjoy the salty air here and\n"
 	.string "sometimes I also go for a walk at\l"
 	.string "ROUTE 406.$"

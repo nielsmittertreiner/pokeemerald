@@ -8,7 +8,6 @@ script SunsetTown_PlayerHouse_2F_EventScript_CheckPlayersPC {
     playse(SE_PC_ON)
     msgbox(gText_PlayerHouseBootPC)
     special(BedroomPC)
-    waitstate
     release
     end
 }

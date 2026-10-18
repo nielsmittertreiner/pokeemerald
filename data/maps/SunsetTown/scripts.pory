@@ -24,7 +24,7 @@ script SunsetTown_EventScript_SetUpObjects {
 script SunsetTown_EventScript_FollowerScript {
     lock
     facefollower
-    loadspeechtail(FALSE, OBJ_EVENT_ID_FOLLOWER)
+    loadspeechtail(FALSE, LOCALID_FOLLOWER)
     switch (var(VAR_SUNSET_TOWN_FOLLOWER_STATE))
     {
         case 1:

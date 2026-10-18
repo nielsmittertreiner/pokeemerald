@@ -22,9 +22,9 @@ script FirwealdCity_TournamentHallBattleRoom_EventScript_SetUpObjects {
     removeobject(LOCALID_OPPONENT)
     checkplayergender
     if (var(VAR_RESULT) == MALE) {
-        setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MALE_NORMAL)
+        setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL)
     } elif (var(VAR_RESULT) == FEMALE) {
-        setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_FEMALE_NORMAL)
+        setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL)
     }
     if (var(VAR_TOURNAMENT_HALL_ROUND) == 4) {
         setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_PHYLLOS)

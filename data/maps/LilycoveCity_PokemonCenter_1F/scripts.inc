@@ -1,5 +1,3 @@
-.set LOCALID_NURSE, 1
-
 LilycoveCity_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonCenter_1F_OnTransition
 	.byte 0
@@ -25,7 +23,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon::
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar VAR_0x800B, LOCALID_LILYCOVE_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

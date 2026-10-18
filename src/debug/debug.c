@@ -1969,10 +1969,10 @@ static void Task_DebugActionGiveItem(u8 taskId)
     AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 0, 32, sTextColor_Default, TEXT_SKIP_DRAW, sText_ItemDesc);
     AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 0, 88, sTextColor_Default, TEXT_SKIP_DRAW, sText_ItemQuantity);
     
-    ConvertIntToDecimalStringN(str, ItemId_GetId(1), STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(str, GetItemId(1), STR_CONV_MODE_LEADING_ZEROS, 3);
     AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 32, 0, sTextColor_Green, TEXT_SKIP_DRAW, str);
-    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 32, 16, sTextColor_Default, TEXT_SKIP_DRAW, ItemId_GetName(1));
-    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 4, 44, sTextColor_Default, TEXT_SKIP_DRAW, ItemId_GetDescription(1));
+    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 32, 16, sTextColor_Default, TEXT_SKIP_DRAW, GetItemName(1));
+    AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 4, 44, sTextColor_Default, TEXT_SKIP_DRAW, GetItemDescription(1));
     ConvertIntToDecimalStringN(str, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 48, 88, sTextColor_Default, TEXT_SKIP_DRAW, str);
 
@@ -2020,7 +2020,7 @@ static void Task_HandleGiveItemInput(u8 taskId)
             task->tState++;
             FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(0), 32, 0, 80, 16);
             FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(0), 48, 88, 16, 16);
-            ConvertIntToDecimalStringN(str, ItemId_GetId(task->tItem), STR_CONV_MODE_LEADING_ZEROS, 3);
+            ConvertIntToDecimalStringN(str, GetItemId(task->tItem), STR_CONV_MODE_LEADING_ZEROS, 3);
             AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 32, 0, (task->tState == 0) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, str);
             ConvertIntToDecimalStringN(str, task->tQuantity, STR_CONV_MODE_LEADING_ZEROS, 2);
             AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 48, 88, (task->tState == 1) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, str);
@@ -2045,7 +2045,7 @@ static void Task_HandleGiveItemInput(u8 taskId)
             task->tState--;
             FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(0), 32, 0, 80, 16);
             FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(0), 48, 88, 16, 16);
-            ConvertIntToDecimalStringN(str, ItemId_GetId(task->tItem), STR_CONV_MODE_LEADING_ZEROS, 3);
+            ConvertIntToDecimalStringN(str, GetItemId(task->tItem), STR_CONV_MODE_LEADING_ZEROS, 3);
             AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 32, 0, (task->tState == 0) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, str);
             ConvertIntToDecimalStringN(str, task->tQuantity, STR_CONV_MODE_LEADING_ZEROS, 2);
             AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 48, 88, (task->tState == 1) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, str);
@@ -2060,8 +2060,8 @@ static void Task_HandleGiveItemInput(u8 taskId)
         FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(0), 4, 44, 96, 40);
         ConvertIntToDecimalStringN(str, task->tItem, STR_CONV_MODE_LEADING_ZEROS, 3);
         AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 32, 0, (task->tState == 0) ? sTextColor_Green : sTextColor_Default, TEXT_SKIP_DRAW, str);
-        AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 32, 16, sTextColor_Default, TEXT_SKIP_DRAW, ItemId_GetName(task->tItem));
-        AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 4, 44, sTextColor_Default, TEXT_SKIP_DRAW, ItemId_GetDescription(task->tItem));
+        AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 32, 16, sTextColor_Default, TEXT_SKIP_DRAW, GetItemName(task->tItem));
+        AddTextPrinterParameterized3(WIN_DESCRIPTION, FONT_SMALL, 4, 44, sTextColor_Default, TEXT_SKIP_DRAW, GetItemDescription(task->tItem));
 
         DestroySpriteAndFreeResources(&gSprites[sDebugMenu->spriteId]);
         sDebugMenu->spriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, task->tItem);

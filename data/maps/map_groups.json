@@ -626,5 +626,41 @@
     "BattlePyramidSquare15",
     "BattlePyramidSquare16",
     "UnionRoom"
+  ],
+  "gMapGroup_IndoorRoute104Prototype": [
+    "Route104_Prototype",
+    "Route104_PrototypePrettyPetalFlowerShop"
+  ],
+  "gMapGroup_IndoorRoute109": [
+    "Route109_SeashoreHouse"
+  ],
+  "gMapGroup_IndoorRoute110": [
+    "Route110_TrickHouseEntrance",
+    "Route110_TrickHouseEnd",
+    "Route110_TrickHouseCorridor",
+    "Route110_TrickHousePuzzle1",
+    "Route110_TrickHousePuzzle2",
+    "Route110_TrickHousePuzzle3",
+    "Route110_TrickHousePuzzle4",
+    "Route110_TrickHousePuzzle5",
+    "Route110_TrickHousePuzzle6",
+    "Route110_TrickHousePuzzle7",
+    "Route110_TrickHousePuzzle8",
+    "Route110_SeasideCyclingRoadSouthEntrance",
+    "Route110_SeasideCyclingRoadNorthEntrance"
+  ],
+  "gMapGroup_IndoorRoute113": [
+    "Route113_GlassWorkshop"
+  ],
+  "gMapGroup_IndoorRoute119": [
+    "Route119_WeatherInstitute_1F",
+    "Route119_WeatherInstitute_2F",
+    "Route119_House"
+  ],
+  "gMapGroup_IndoorRoute123": [
+    "Route123_BerryMastersHouse"
+  ],
+  "gMapGroup_IndoorRoute124": [
+    "Route124_DivingTreasureHuntersHouse"
   ]
 }

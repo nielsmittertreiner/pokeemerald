@@ -1,10 +1,13 @@
 #ifndef GUARD_CONSTANTS_EVENT_OBJECTS_H
 #define GUARD_CONSTANTS_EVENT_OBJECTS_H
 
-#define OBJ_EVENT_GFX_PLAYER_MALE_NORMAL           0
-#define OBJ_EVENT_GFX_PLAYER_MALE_MACH_BIKE        1
-#define OBJ_EVENT_GFX_PLAYER_MALE_SURFING          2
-#define OBJ_EVENT_GFX_PLAYER_MALE_FIELD_MOVE       3
+#include "constants/global.h"
+#include "constants/map_event_ids.h"
+
+#define OBJ_EVENT_GFX_BRENDAN_NORMAL               0
+#define OBJ_EVENT_GFX_BRENDAN_MACH_BIKE            1
+#define OBJ_EVENT_GFX_BRENDAN_SURFING              2
+#define OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE           3
 #define OBJ_EVENT_GFX_QUINTY_PLUMP                 4
 #define OBJ_EVENT_GFX_NINJA_BOY                    5
 #define OBJ_EVENT_GFX_TWIN                         6
@@ -64,7 +67,7 @@
 #define OBJ_EVENT_GFX_BERRY_TREE                  60
 #define OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES     61
 #define OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES      62
-#define OBJ_EVENT_GFX_PLAYER_MALE_ACRO_BIKE       63
+#define OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE           63
 #define OBJ_EVENT_GFX_PROF_BIRCH                  64
 #define OBJ_EVENT_GFX_MAN_4                       65
 #define OBJ_EVENT_GFX_MAN_5                       66
@@ -90,30 +93,30 @@
 #define OBJ_EVENT_GFX_BREAKABLE_ROCK              86
 #define OBJ_EVENT_GFX_PUSHABLE_BOULDER            87
 #define OBJ_EVENT_GFX_MR_BRINEYS_BOAT             88
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_NORMAL        89
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_MACH_BIKE     90
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_ACRO_BIKE     91
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_SURFING       92
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_FIELD_MOVE    93
+#define OBJ_EVENT_GFX_MAY_NORMAL                  89
+#define OBJ_EVENT_GFX_MAY_MACH_BIKE               90
+#define OBJ_EVENT_GFX_MAY_ACRO_BIKE               91
+#define OBJ_EVENT_GFX_MAY_SURFING                 92
+#define OBJ_EVENT_GFX_MAY_FIELD_MOVE              93
 #define OBJ_EVENT_GFX_TRUCK                       94
 #define OBJ_EVENT_GFX_VIGOROTH_CARRYING_BOX       95
 #define OBJ_EVENT_GFX_VIGOROTH_FACING_AWAY        96
 #define OBJ_EVENT_GFX_BIRCHS_BAG                  97
 #define OBJ_EVENT_GFX_ZIGZAGOON_1                 98
 #define OBJ_EVENT_GFX_ARTIST                      99
-#define OBJ_EVENT_GFX_RIVAL_MALE_NORMAL          100
-#define OBJ_EVENT_GFX_RIVAL_MALE_MACH_BIKE       101
-#define OBJ_EVENT_GFX_RIVAL_MALE_ACRO_BIKE       102
-#define OBJ_EVENT_GFX_RIVAL_MALE_SURFING         103
-#define OBJ_EVENT_GFX_RIVAL_MALE_FIELD_MOVE      104
-#define OBJ_EVENT_GFX_RIVAL_FEMALE_NORMAL        105
-#define OBJ_EVENT_GFX_RIVAL_FEMALE_MACH_BIKE     106
-#define OBJ_EVENT_GFX_RIVAL_FEMALE_ACRO_BIKE     107
-#define OBJ_EVENT_GFX_RIVAL_FEMALE_SURFING       108
-#define OBJ_EVENT_GFX_RIVAL_FEMALE_FIELD_MOVE    109
+#define OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL       100
+#define OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE    101
+#define OBJ_EVENT_GFX_RIVAL_BRENDAN_ACRO_BIKE    102
+#define OBJ_EVENT_GFX_RIVAL_BRENDAN_SURFING      103
+#define OBJ_EVENT_GFX_RIVAL_BRENDAN_FIELD_MOVE   104
+#define OBJ_EVENT_GFX_RIVAL_MAY_NORMAL           105
+#define OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE        106
+#define OBJ_EVENT_GFX_RIVAL_MAY_ACRO_BIKE        107
+#define OBJ_EVENT_GFX_RIVAL_MAY_SURFING          108
+#define OBJ_EVENT_GFX_RIVAL_MAY_FIELD_MOVE       109
 #define OBJ_EVENT_GFX_CAMERAMAN                  110
-#define OBJ_EVENT_GFX_PLAYER_MALE_UNDERWATER     111
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_UNDERWATER   112
+#define OBJ_EVENT_GFX_BRENDAN_UNDERWATER         111
+#define OBJ_EVENT_GFX_MAY_UNDERWATER             112
 #define OBJ_EVENT_GFX_MOVING_BOX                 113
 #define OBJ_EVENT_GFX_CABLE_CAR                  114
 #define OBJ_EVENT_GFX_SCIENTIST_2                115
@@ -138,8 +141,8 @@
 #define OBJ_EVENT_GFX_STEVEN                     134
 #define OBJ_EVENT_GFX_WALLY                      135
 #define OBJ_EVENT_GFX_LITTLE_BOY_3               136
-#define OBJ_EVENT_GFX_PLAYER_MALE_FISHING        137
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_FISHING      138
+#define OBJ_EVENT_GFX_BRENDAN_FISHING            137
+#define OBJ_EVENT_GFX_MAY_FISHING                138
 #define OBJ_EVENT_GFX_HOT_SPRINGS_OLD_WOMAN      139
 #define OBJ_EVENT_GFX_SS_TIDAL                   140
 #define OBJ_EVENT_GFX_SUBMARINE_SHADOW           141
@@ -192,10 +195,10 @@
 #define OBJ_EVENT_GFX_LATIOS                     188
 #define OBJ_EVENT_GFX_GAMEBOY_KID                189
 #define OBJ_EVENT_GFX_CONTEST_JUDGE              190
-#define OBJ_EVENT_GFX_PLAYER_MALE_WATERING       191
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_WATERING     192
-#define OBJ_EVENT_GFX_PLAYER_MALE_DECORATING     193
-#define OBJ_EVENT_GFX_PLAYER_FEMALE_DECORATING   194
+#define OBJ_EVENT_GFX_BRENDAN_WATERING           191
+#define OBJ_EVENT_GFX_MAY_WATERING               192
+#define OBJ_EVENT_GFX_BRENDAN_DECORATING         193
+#define OBJ_EVENT_GFX_MAY_DECORATING             194
 #define OBJ_EVENT_GFX_ARCHIE                     195
 #define OBJ_EVENT_GFX_MAXIE                      196
 #define OBJ_EVENT_GFX_KYOGRE_FRONT               197
@@ -217,8 +220,8 @@
 #define OBJ_EVENT_GFX_TUBER_M_SWIMMING           213
 #define OBJ_EVENT_GFX_AZURILL                    214
 #define OBJ_EVENT_GFX_MOM                        215
-#define OBJ_EVENT_GFX_LINK_PLAYER_MALE           216
-#define OBJ_EVENT_GFX_LINK_PLAYER_FEMALE         217
+#define OBJ_EVENT_GFX_LINK_BRENDAN               216
+#define OBJ_EVENT_GFX_LINK_MAY                   217
 #define OBJ_EVENT_GFX_JUAN                       218
 #define OBJ_EVENT_GFX_SCOTT                      219
 #define OBJ_EVENT_GFX_POOCHYENA                  220
@@ -298,39 +301,19 @@
 #define OBJ_KIND_NORMAL 0
 #define OBJ_KIND_CLONE  255 // Exclusive to FRLG
 
-// Special object event local ids
-#define OBJ_EVENT_ID_PLAYER 0xFF
-#define OBJ_EVENT_ID_FOLLOWER 0xFE
-#define OBJ_EVENT_ID_CAMERA 0x7F
+// Each object event template gets an ID that can be used to refer to it in scripts and elsewhere.
+// This is referred to as the "local id" (and it's really just 1 + its index in the templates array).
+// There are a few special IDs reserved for objects that don't have templates in the map data -- one for the player
+// in regular offline play, five for linked players while playing Berry Blender, and one for an invisible object that
+// can be spawned for the camera to track instead of the player. Additionally, the value 0 is reserved as an "empty" indicator.
+#define LOCALID_NONE                         0
+#define LOCALID_CAMERA                     127
+#define LOCALID_BERRY_BLENDER_PLAYER_END   240 // This will use 5 (MAX_RFU_PLAYERS) IDs ending at 240, i.e. 236-240
+#define LOCALID_FOLLOWER                   254
+#define LOCALID_PLAYER                     255
 
-// Object event local ids referenced in C files
-#define LOCALID_ROUTE111_PLAYER_FALLING 45
-#define LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK 1
-#define LOCALID_FARAWAY_ISLAND_MEW 1
-#define LOCALID_UNION_ROOM_PLAYER_4 2
-#define LOCALID_UNION_ROOM_PLAYER_8 3
-#define LOCALID_UNION_ROOM_PLAYER_7 4
-#define LOCALID_UNION_ROOM_PLAYER_6 5
-#define LOCALID_UNION_ROOM_PLAYER_5 6
-#define LOCALID_UNION_ROOM_PLAYER_3 7
-#define LOCALID_UNION_ROOM_PLAYER_2 8
-#define LOCALID_UNION_ROOM_PLAYER_1 9
-#define LOCALID_BATTLE_TOWER_LOBBY_REPORTER 5
-#define LOCALID_TRUCK_BOX_TOP 1
-#define LOCALID_TRUCK_BOX_BOTTOM_L 2
-#define LOCALID_TRUCK_BOX_BOTTOM_R 3
-#define LOCALID_OLDALE_MART_CLERK 1
-#define LOCALID_LAVARIDGE_MART_CLERK 1
-#define LOCALID_FALLARBOR_MART_CLERK 1
-#define LOCALID_VERDANTURF_MART_CLERK 1
-#define LOCALID_PETALBURG_MART_CLERK 1
-#define LOCALID_SLATEPORT_MART_CLERK 1
-#define LOCALID_MAUVILLE_MART_CLERK 1
-#define LOCALID_RUSTBORO_MART_CLERK 1
-#define LOCALID_FORTREE_MART_CLERK 1
-#define LOCALID_MOSSDEEP_MART_CLERK 1
-#define LOCALID_SOOTOPOLIS_MART_CLERK 1
-#define LOCALID_BATTLE_FRONTIER_MART_CLERK 1
-#define LOCALID_SLATEPORT_ENERGY_GURU 25
+// Aliases for old names. "object event id" normally refers to an index into gObjectEvents, which these are not.
+#define OBJ_EVENT_ID_CAMERA LOCALID_CAMERA
+#define OBJ_EVENT_ID_PLAYER LOCALID_PLAYER
 
 #endif  // GUARD_CONSTANTS_EVENT_OBJECTS_H

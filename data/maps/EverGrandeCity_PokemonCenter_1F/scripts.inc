@@ -1,6 +1,3 @@
-.set LOCALID_NURSE, 1
-.set LOCALID_SCOTT, 4
-
 EverGrandeCity_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonCenter_1F_OnTransition
 	.byte 0
@@ -16,7 +13,7 @@ EverGrandeCity_PokemonCenter_1F_EventScript_TryShowScott::
 	return
 
 EverGrandeCity_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar VAR_0x800B, LOCALID_EVER_GRANDE_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -43,18 +40,16 @@ EverGrandeCity_PokemonCenter_1F_EventScript_Scott::
 	setflag FLAG_MET_SCOTT_IN_EVERGRANDE
 	playse SE_EXIT
 	waitse
-	removeobject LOCALID_SCOTT
+	removeobject LOCALID_EVER_GRANDE_SCOTT
 	release
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth::
-	applymovement LOCALID_SCOTT, EverGrandeCity_PokemonCenter_1F_Movement_ScottExitNorth
-	waitmovement 0
+	applywaitmovement LOCALID_EVER_GRANDE_SCOTT, EverGrandeCity_PokemonCenter_1F_Movement_ScottExitNorth
 	return
 
 EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit::
-	applymovement LOCALID_SCOTT, EverGrandeCity_PokemonCenter_1F_Movement_ScottExit
-	waitmovement 0
+	applywaitmovement LOCALID_EVER_GRANDE_SCOTT, EverGrandeCity_PokemonCenter_1F_Movement_ScottExit
 	return
 
 EverGrandeCity_PokemonCenter_1F_Movement_ScottExitNorth:

@@ -86,8 +86,8 @@ EWRAM_DATA bool8 gHasHallOfFameRecords = 0;
 static EWRAM_DATA bool8 sUsedSpeedUp = 0; // Never read
 static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 
-static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
-static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
+static const u16 sCredits_Pal[] = INCGFX_U16("graphics/credits/credits.pal", ".gbapal");
+static const u32 sCreditsCopyrightEnd_Gfx[] = INCGFX_U32("graphics/credits/the_end_copyright.png", ".4bpp.lz");
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
 static void Task_WaitPaletteFade(u8);
@@ -1210,7 +1210,7 @@ static bool8 LoadBikeScene(u8 scene, u8 taskId)
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
             LoadCompressedSpriteSheet(gSpriteSheet_CreditsBrendan);
-            LoadCompressedSpriteSheet(gSpriteSheet_CreditsRivalPlayerFemale);
+            LoadCompressedSpriteSheet(gSpriteSheet_CreditsRivalMay);
             LoadCompressedSpriteSheet(gSpriteSheet_CreditsBicycle);
             LoadSpritePalettes(gSpritePalettes_Credits);
 
@@ -1227,7 +1227,7 @@ static bool8 LoadBikeScene(u8 scene, u8 taskId)
         else
         {
             LoadCompressedSpriteSheet(gSpriteSheet_CreditsMay);
-            LoadCompressedSpriteSheet(gSpriteSheet_CreditsRivalPlayerMale);
+            LoadCompressedSpriteSheet(gSpriteSheet_CreditsRivalBrendan);
             LoadCompressedSpriteSheet(gSpriteSheet_CreditsBicycle);
             LoadSpritePalettes(gSpritePalettes_Credits);
 

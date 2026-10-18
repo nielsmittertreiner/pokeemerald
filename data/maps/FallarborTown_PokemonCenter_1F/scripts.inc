@@ -1,6 +1,3 @@
-.set LOCALID_NURSE, 1
-.set LOCALID_LANETTE, 4
-
 FallarborTown_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_1F_OnTransition
 	.byte 0
@@ -11,7 +8,7 @@ FallarborTown_PokemonCenter_1F_OnTransition:
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar VAR_0x800B, LOCALID_FALLARBOR_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -37,20 +34,18 @@ FallarborTown_PokemonCenter_1F_EventScript_Lanette::
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth::
-	applymovement LOCALID_LANETTE, FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth
-	waitmovement 0
+	applywaitmovement LOCALID_FALLARBOR_LANETTE, FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth
 	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExited
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest::
-	applymovement LOCALID_LANETTE, FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest
-	waitmovement 0
+	applywaitmovement LOCALID_FALLARBOR_LANETTE, FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest
 	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExited
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExited::
 	playse SE_SLIDING_DOOR
-	removeobject LOCALID_LANETTE
+	removeobject LOCALID_FALLARBOR_LANETTE
 	clearflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
 	release
 	end

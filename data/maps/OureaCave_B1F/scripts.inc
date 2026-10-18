@@ -1,13 +1,17 @@
 OureaCave_B1F_MapScripts::
+# 2 "data/maps/OureaCave_B1F/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, OureaCave_B1F_MapScripts_MAP_SCRIPT_ON_TRANSITION
+# 5 "data/maps/OureaCave_B1F/scripts.pory"
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, OureaCave_B1F_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
 OureaCave_B1F_MapScripts_MAP_SCRIPT_ON_TRANSITION:
+# 3 "data/maps/OureaCave_B1F/scripts.pory"
 	call OureaCaves_EventScript_SetCaveLights
 	return
 
 OureaCave_B1F_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 6 "data/maps/OureaCave_B1F/scripts.pory"
 	map_script_2 VAR_TEMP_F, 0, OureaCaves_EventScript_TryShowMapNamePopup
 	.2byte 0
 

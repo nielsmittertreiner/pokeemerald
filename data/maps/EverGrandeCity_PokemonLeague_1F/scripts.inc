@@ -1,7 +1,3 @@
-.set LOCALID_NURSE, 1
-.set LOCALID_GUARD_1, 3
-.set LOCALID_GUARD_2, 4
-
 EverGrandeCity_PokemonLeague_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_1F_OnTransition
 	.byte 0
@@ -13,12 +9,12 @@ EverGrandeCity_PokemonLeague_1F_OnTransition:
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor::
-	setobjectxyperm LOCALID_GUARD_1, 9, 2
-	setobjectxyperm LOCALID_GUARD_2, 10, 2
+	setobjectxyperm LOCALID_LEAGUE_GUARD_1, 9, 2
+	setobjectxyperm LOCALID_LEAGUE_GUARD_2, 10, 2
 	return
 
 EverGrandeCity_PokemonLeague_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar VAR_0x800B, LOCALID_LEAGUE_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -44,9 +40,7 @@ EverGrandeCity_PokemonLeague_1F_Pokemart:
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
 	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 @ The door guards only check for FLAG_BADGE06_GET because Winonas badge is the only one that can be skipped
 @ Its assumed the player has the remaining badges
@@ -61,8 +55,8 @@ EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard::
 	delay 120
 	goto_if_unset FLAG_BADGE06_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
 	closemessage
-	applymovement LOCALID_GUARD_1, EverGrandeCity_PokemonLeague_1F_Movement_LeftGuardOutOfWay
-	applymovement LOCALID_GUARD_2, EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay
+	applymovement LOCALID_LEAGUE_GUARD_1, EverGrandeCity_PokemonLeague_1F_Movement_LeftGuardOutOfWay
+	applymovement LOCALID_LEAGUE_GUARD_2, EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay
 	waitmovement 0
 	delay 10
 	playfanfare MUS_OBTAIN_BADGE
@@ -70,20 +64,18 @@ EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard::
 	waitmessage
 	waitfanfare
 	closemessage
-	copyobjectxytoperm LOCALID_GUARD_1
-	copyobjectxytoperm LOCALID_GUARD_2
+	copyobjectxytoperm LOCALID_LEAGUE_GUARD_1
+	copyobjectxytoperm LOCALID_LEAGUE_GUARD_2
 	setflag FLAG_ENTERED_ELITE_FOUR
 	releaseall
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight::
-	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromRight
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromRight
 	return
 
 EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromLeft
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromLeft
 	return
 
 EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges::
@@ -93,12 +85,10 @@ EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges::
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_GoForth::
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	msgbox EverGrandeCity_PokemonLeague_1F_Text_GoForth, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	releaseall
 	end
 

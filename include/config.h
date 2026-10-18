@@ -10,6 +10,7 @@
 #define NDEBUG
 #endif
 
+//#define DEBUG
 
 // To enable printf debugging, comment out "#define NDEBUG". This allows
 // the various AGBPrint functions to be used. (See include/gba/isagbprint.h).

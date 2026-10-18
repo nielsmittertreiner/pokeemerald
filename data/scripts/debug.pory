@@ -7,24 +7,3 @@ script Debug_EventScript_ResetAllBerries {
     goto(EventScript_ResetAllBerries)
     end
 }
-
-raw `
-.ifdef DEBUG
-`
-script Debug_EventScript_ShowEndOfCurrentBeta {
-    lock
-    special(ShowEndOfCurrentBetaScreen)
-    waitbuttonpress
-    special(HideEndOfCurrentBetaScreen)
-    release
-    end
-}
-raw `
-.else
-`
-script Debug_EventScript_ShowEndOfCurrentBeta {
-    end
-}
-raw `
-.endif
-`

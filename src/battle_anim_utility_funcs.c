@@ -40,10 +40,8 @@ static void AnimTask_WaitAndRestoreVisibility(u8);
 
 static const u16 sCurseLinesPalette[] = { RGB_WHITE };
 
-// These belong in battle_intro.c, but putting them there causes 2 bytes of alignment padding
-// between the two .rodata segments. Perhaps battle_intro.c actually belongs in this file, too.
-const u8 gBattleAnimBgCntSet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
-const u8 gBattleAnimBgCntGet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
+static const u8 sBattleAnimBgCntSet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
+static const u8 sBattleAnimBgCntGet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 
 void AnimTask_BlendBattleAnimPal(u8 taskId)
 {
@@ -109,36 +107,36 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
 void AnimTask_SetCamouflageBlend(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattlePalettes(gBattleAnimArgs[0]);
-    switch (gBattleTerrain)
+    switch (gBattleEnvironment)
     {
-    case BATTLE_TERRAIN_GRASS:
+    case BATTLE_ENVIRONMENT_GRASS:
         gBattleAnimArgs[4] = RGB(12, 24, 2);
         break;
-    case BATTLE_TERRAIN_LONG_GRASS:
+    case BATTLE_ENVIRONMENT_LONG_GRASS:
         gBattleAnimArgs[4] = RGB(0, 15, 2);
         break;
-    case BATTLE_TERRAIN_SAND:
+    case BATTLE_ENVIRONMENT_SAND:
         gBattleAnimArgs[4] = RGB(30, 24, 11);
         break;
-    case BATTLE_TERRAIN_UNDERWATER:
+    case BATTLE_ENVIRONMENT_UNDERWATER:
         gBattleAnimArgs[4] = RGB(0, 0, 18);
         break;
-    case BATTLE_TERRAIN_WATER:
+    case BATTLE_ENVIRONMENT_WATER:
         gBattleAnimArgs[4] = RGB(11, 22, 31);
         break;
-    case BATTLE_TERRAIN_POND:
+    case BATTLE_ENVIRONMENT_POND:
         gBattleAnimArgs[4] = RGB(11, 22, 31);
         break;
-    case BATTLE_TERRAIN_MOUNTAIN:
+    case BATTLE_ENVIRONMENT_MOUNTAIN:
         gBattleAnimArgs[4] = RGB(22, 16, 10);
         break;
-    case BATTLE_TERRAIN_CAVE:
+    case BATTLE_ENVIRONMENT_CAVE:
         gBattleAnimArgs[4] = RGB(14, 9, 3);
         break;
-    case BATTLE_TERRAIN_BUILDING:
+    case BATTLE_ENVIRONMENT_BUILDING:
         gBattleAnimArgs[4] = RGB_WHITE;
         break;
-    case BATTLE_TERRAIN_PLAIN:
+    case BATTLE_ENVIRONMENT_PLAIN:
         gBattleAnimArgs[4] = RGB_WHITE;
         break;
     }
@@ -937,9 +935,9 @@ static void UpdateMonScrollingBgMask(u8 taskId)
     }
 }
 
-void AnimTask_GetBattleTerrain(u8 taskId)
+void AnimTask_GetBattleEnvironment(u8 taskId)
 {
-    gBattleAnimArgs[0] = gBattleTerrain;
+    gBattleAnimArgs[0] = gBattleEnvironment;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -1098,4 +1096,68 @@ static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
         gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = (u8)gTasks[taskId].data[0] & 1;
         DestroyTask(taskId);
     }
+}
+
+void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
+{
+    static EWRAM_DATA u16 sBgCnt = 0;
+    if (bgId < 4)
+    {
+        sBgCnt = GetGpuReg(sBattleAnimBgCntSet[bgId]);
+        switch (attributeId)
+        {
+        case BG_ANIM_SCREEN_SIZE:
+            ((struct BgCnt *)&sBgCnt)->screenSize = value;
+            break;
+        case BG_ANIM_AREA_OVERFLOW_MODE:
+            ((struct BgCnt *)&sBgCnt)->areaOverflowMode = value;
+            break;
+        case BG_ANIM_MOSAIC:
+            ((struct BgCnt *)&sBgCnt)->mosaic = value;
+            break;
+        case BG_ANIM_CHAR_BASE_BLOCK:
+            ((struct BgCnt *)&sBgCnt)->charBaseBlock = value;
+            break;
+        case BG_ANIM_PRIORITY:
+            ((struct BgCnt *)&sBgCnt)->priority = value;
+            break;
+        case BG_ANIM_PALETTES_MODE:
+            ((struct BgCnt *)&sBgCnt)->palettes = value;
+            break;
+        case BG_ANIM_SCREEN_BASE_BLOCK:
+            ((struct BgCnt *)&sBgCnt)->screenBaseBlock = value;
+            break;
+        }
+
+        SetGpuReg(sBattleAnimBgCntSet[bgId], sBgCnt);
+    }
+}
+
+int GetAnimBgAttribute(u8 bgId, u8 attributeId)
+{
+    u16 bgCnt;
+
+    if (bgId < 4)
+    {
+        bgCnt = GetGpuReg(sBattleAnimBgCntGet[bgId]);
+        switch (attributeId)
+        {
+        case BG_ANIM_SCREEN_SIZE:
+            return ((struct BgCnt *)&bgCnt)->screenSize;
+        case BG_ANIM_AREA_OVERFLOW_MODE:
+            return ((struct BgCnt *)&bgCnt)->areaOverflowMode;
+        case BG_ANIM_MOSAIC:
+            return ((struct BgCnt *)&bgCnt)->mosaic;
+        case BG_ANIM_CHAR_BASE_BLOCK:
+            return ((struct BgCnt *)&bgCnt)->charBaseBlock;
+        case BG_ANIM_PRIORITY:
+            return ((struct BgCnt *)&bgCnt)->priority;
+        case BG_ANIM_PALETTES_MODE:
+            return ((struct BgCnt *)&bgCnt)->palettes;
+        case BG_ANIM_SCREEN_BASE_BLOCK:
+            return ((struct BgCnt *)&bgCnt)->screenBaseBlock;
+        }
+    }
+
+    return 0;
 }

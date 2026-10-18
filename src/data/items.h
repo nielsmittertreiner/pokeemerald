@@ -4590,20 +4590,6 @@ const struct Item gItems[] =
     },
 
 // Vanadium
-
-    [ITEM_TERMINAL_PASS] = 
-    {
-        .name = _("TERMINAL PASS"),
-        .itemId = ITEM_TERMINAL_PASS,
-        .price = 0,
-        .description = sTerminalPassDesc,
-        .importance = 1,
-        .registrability = FALSE,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = 0,
-    },
     [ITEM_TENTACOOL_SKEWER] = 
     {
         .name = _("TENTACOOL SKEWER"),

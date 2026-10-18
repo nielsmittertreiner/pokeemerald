@@ -391,7 +391,9 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *newDirection, u16 newKeys, u16 
     gPlayerAvatar.runningState = NOT_MOVING;
 
     if (heldKeys & B_BUTTON)
+    {
         gPlayerAvatar.bikeFrameCounter++;
+    }
     else
     {
         // B button was released.
@@ -891,7 +893,7 @@ static u8 GetBikeCollision(u8 direction)
     u8 metatileBehavior;
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-#if DEBUG
+#ifdef DEBUG
     if (gGodMode)
         return COLLISION_NONE;
 #endif

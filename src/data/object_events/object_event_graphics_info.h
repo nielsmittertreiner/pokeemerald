@@ -1,6 +1,6 @@
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleNormal = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 16,
@@ -13,13 +13,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleNormal =
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_PlayerNormal,
-    .images = sPicTable_PlayerMaleNormal,
+    .images = sPicTable_BrendanNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleMachBike = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanMachBike = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -32,13 +32,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleMachBike
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PlayerMaleMachBike,
+    .images = sPicTable_BrendanMachBike,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleAcroBike = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanAcroBike = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -51,13 +51,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleAcroBike
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_AcroBike,
-    .images = sPicTable_PlayerMaleAcroBike,
+    .images = sPicTable_BrendanAcroBike,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleSurfing = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSurfing = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -70,13 +70,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleSurfing 
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Surfing,
-    .images = sPicTable_PlayerMaleSurfing,
+    .images = sPicTable_BrendanSurfing,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleFieldMove = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFieldMove = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -89,7 +89,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleFieldMov
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_FieldMove,
-    .images = sPicTable_PlayerMaleFieldMove,
+    .images = sPicTable_BrendanFieldMove,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -1689,9 +1689,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MrBrineysBoat = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleNormal = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayNormal = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 16,
@@ -1704,13 +1704,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleNormal
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_PlayerNormal,
-    .images = sPicTable_PlayerFemaleNormal,
+    .images = sPicTable_MayNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleMachBike = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayMachBike = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -1723,13 +1723,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleMachBi
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PlayerFemaleMachBike,
+    .images = sPicTable_MayMachBike,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleAcroBike = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayAcroBike = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -1742,13 +1742,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleAcroBi
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_AcroBike,
-    .images = sPicTable_PlayerFemaleAcroBike,
+    .images = sPicTable_MayAcroBike,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleSurfing = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MaySurfing = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -1761,13 +1761,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleSurfin
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Surfing,
-    .images = sPicTable_PlayerFemaleSurfing,
+    .images = sPicTable_MaySurfing,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleFieldMove = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFieldMove = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -1780,7 +1780,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleFieldM
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_FieldMove,
-    .images = sPicTable_PlayerFemaleFieldMove,
+    .images = sPicTable_MayFieldMove,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -1917,9 +1917,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Artist = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleNormal = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanNormal = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
     .width = 16,
@@ -1932,13 +1932,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleNor
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_PlayerNormal,
-    .images = sPicTable_PlayerMaleNormal,
+    .images = sPicTable_BrendanNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleMachBike = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanMachBike = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -1951,13 +1951,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleMac
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PlayerMaleMachBike,
+    .images = sPicTable_BrendanMachBike,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleAcroBike = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanAcroBike = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -1970,13 +1970,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleAcr
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_AcroBike,
-    .images = sPicTable_PlayerMaleAcroBike,
+    .images = sPicTable_BrendanAcroBike,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleSurfing = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanSurfing = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -1989,13 +1989,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleSur
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Surfing,
-    .images = sPicTable_PlayerMaleSurfing,
+    .images = sPicTable_BrendanSurfing,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleFieldMove = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanFieldMove = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -2008,13 +2008,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleFie
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_FieldMove,
-    .images = sPicTable_PlayerMaleFieldMove,
+    .images = sPicTable_BrendanFieldMove,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleNormal = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayNormal = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
     .width = 16,
@@ -2027,13 +2027,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleN
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_PlayerNormal,
-    .images = sPicTable_PlayerFemaleNormal,
+    .images = sPicTable_MayNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleMachBike = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayMachBike = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -2046,13 +2046,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleM
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PlayerFemaleMachBike,
+    .images = sPicTable_MayMachBike,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleAcroBike = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayAcroBike = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -2065,13 +2065,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleA
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_AcroBike,
-    .images = sPicTable_PlayerFemaleAcroBike,
+    .images = sPicTable_MayAcroBike,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleSurfing = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMaySurfing = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
@@ -2084,13 +2084,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleS
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Surfing,
-    .images = sPicTable_PlayerFemaleSurfing,
+    .images = sPicTable_MaySurfing,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleFieldMove = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayFieldMove = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -2103,7 +2103,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleF
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_FieldMove,
-    .images = sPicTable_PlayerFemaleFieldMove,
+    .images = sPicTable_MayFieldMove,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -2126,7 +2126,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cameraman = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleUnderwater = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanUnderwater = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -2141,11 +2141,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleUnderwat
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PlayerMaleUnderwater,
+    .images = sPicTable_BrendanUnderwater,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleUnderwater = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayUnderwater = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -2160,7 +2160,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleUnderw
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PlayerFemaleUnderwater,
+    .images = sPicTable_MayUnderwater,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -2620,9 +2620,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireLittle
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleFishing = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFishing = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -2635,13 +2635,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleFishing 
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Fishing,
-    .images = sPicTable_PlayerMaleFishing,
+    .images = sPicTable_BrendanFishing,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleFishing = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFishing = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -2654,7 +2654,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleFishin
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Fishing,
-    .images = sPicTable_PlayerFemaleFishing,
+    .images = sPicTable_MayFishing,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -3646,9 +3646,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ContestJudge = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleWatering = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanWatering = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -3661,13 +3661,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleWatering
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PlayerMaleWatering,
+    .images = sPicTable_BrendanWatering,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleWatering = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayWatering = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
     .width = 32,
@@ -3680,13 +3680,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleWateri
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PlayerFemaleWatering,
+    .images = sPicTable_MayWatering,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleDecorating = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanDecorating = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
     .width = 16,
@@ -3699,13 +3699,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleDecorati
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Inanimate,
-    .images = sPicTable_PlayerMaleDecorating,
+    .images = sPicTable_BrendanDecorating,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleDecorating = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayDecorating = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
     .width = 16,
@@ -3718,7 +3718,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleDecora
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Inanimate,
-    .images = sPicTable_PlayerFemaleDecorating,
+    .images = sPicTable_MayDecorating,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -4159,9 +4159,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mom = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkPlayerMale = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkBrendan = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_MALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
     .width = 16,
@@ -4174,13 +4174,13 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkPlayerMale = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_PlayerNormal,
-    .images = sPicTable_PlayerMaleNormal,
+    .images = sPicTable_BrendanNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkPlayerFemale = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkMay = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_FEMALE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
     .width = 16,
@@ -4193,7 +4193,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkPlayerFemale =
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_PlayerNormal,
-    .images = sPicTable_PlayerFemaleNormal,
+    .images = sPicTable_MayNormal,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

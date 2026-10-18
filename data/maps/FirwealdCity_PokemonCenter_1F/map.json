@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
@@ -34,27 +34,16 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_FIRWEALD_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 1,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_FIRWEALD_CITY_POKEMON_CENTER_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-    {
-      "type": "sign",
-      "x": 6,
-      "y": 3,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Common_EventScript_PkmnCenterTerminal"
-    }
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

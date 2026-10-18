@@ -187,9 +187,9 @@ static void SpriteCB_Confetti(struct Sprite *sprite);
 static void Task_ShowContestEntryMonPic(u8 taskId);
 static void Task_LinkContestWaitForConnection(u8 taskId);
 
-static const u16 sResultsTextWindow_Pal[] = INCBIN_U16("graphics/contest/results_screen/text_window.gbapal");
-static const u8 sResultsTextWindow_Gfx[] = INCBIN_U8("graphics/contest/results_screen/text_window.4bpp");
-static const u16 sMiscBlank_Pal[] = INCBIN_U16("graphics/interface/blank.gbapal");
+static const u16 sResultsTextWindow_Pal[] = INCGFX_U16("graphics/contest/results_screen/text_window.pal", ".gbapal");
+static const u8 sResultsTextWindow_Gfx[] = INCGFX_U8("graphics/contest/results_screen/text_window.png", ".4bpp");
+static const u16 sMiscBlank_Pal[] = INCGFX_U16("graphics/interface/blank.pal", ".gbapal");
 
 static const struct OamData sOamData_ResultsTextWindow =
 {
@@ -2306,13 +2306,13 @@ void GetNpcContestantLocalId(void)
     switch (contestant)
     {
     case 0:
-        localId = 3;
+        localId = LOCALID_CONTESTANT_1;
         break;
     case 1:
-        localId = 4;
+        localId = LOCALID_CONTESTANT_2;
         break;
     case 2:
-        localId = 5;
+        localId = LOCALID_CONTESTANT_3;
         break;
     default: // Invalid
         localId = 100;
@@ -2507,8 +2507,8 @@ void SetLinkContestPlayerGfx(void)
 }
 
 // copied from event_object_movement
-#define OBJ_EVENT_PAL_TAG_PLAYER_MALE             0x1100
-#define OBJ_EVENT_PAL_TAG_PLAYER_FEMALE           0x1110
+#define OBJ_EVENT_PAL_TAG_BRENDAN             0x1100
+#define OBJ_EVENT_PAL_TAG_MAY           0x1110
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 
@@ -2518,7 +2518,12 @@ void LoadLinkContestPlayerPalettes(void)
     u8 objectEventId;
     int version;
     struct Sprite *sprite;
-    static const u8 sContestantLocalIds[CONTESTANT_COUNT] = { 3, 4, 5, 14 };
+    static const u8 sContestantLocalIds[CONTESTANT_COUNT] = {
+        LOCALID_CONTESTANT_1,
+        LOCALID_CONTESTANT_2,
+        LOCALID_CONTESTANT_3,
+        LOCALID_CONTESTANT_4,
+    };
 
     // gReservedSpritePaletteCount = 12;
     // TODO: Does dynamically allocating link player palettes break link contests?
@@ -2539,9 +2544,9 @@ void LoadLinkContestPlayerPalettes(void)
             else
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_PLAYER_MALE);
+                    sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_BRENDAN);
                 else
-                    sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_PLAYER_FEMALE);
+                    sprite->oam.paletteNum = LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_MAY);
             }
         }
     }

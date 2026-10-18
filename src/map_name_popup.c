@@ -59,26 +59,26 @@ static void LoadMapNamePopUpWindowBgs(void);
 
 static const u8 sTextColor[] = {0, 1, 2};
 
-static const u32 sMapPopup_WoodTop_Gfx[] = INCBIN_U32("graphics/map_popup/wood_top.4bpp");
-static const u32 sMapPopup_WoodBottom_Gfx[] = INCBIN_U32("graphics/map_popup/wood_bottom.4bpp");
-static const u16 sMapPopup_Wood_Pal[] = INCBIN_U16("graphics/map_popup/wood.gbapal");
-static const u32 sMapPopup_GrassTop_Gfx[] = INCBIN_U32("graphics/map_popup/grass_top.4bpp");
-static const u32 sMapPopup_GrassBottom_Gfx[] = INCBIN_U32("graphics/map_popup/grass_bottom.4bpp");
-static const u16 sMapPopup_Grass_Pal[] = INCBIN_U16("graphics/map_popup/grass.gbapal");
-static const u32 sMapPopup_MarbleTop_Gfx[] = INCBIN_U32("graphics/map_popup/marble_top.4bpp");
-static const u32 sMapPopup_MarbleBottom_Gfx[] = INCBIN_U32("graphics/map_popup/marble_bottom.4bpp");
-static const u16 sMapPopup_Marble_Pal[] = INCBIN_U16("graphics/map_popup/marble.gbapal");
-static const u32 sMapPopup_BrickTop_Gfx[] = INCBIN_U32("graphics/map_popup/brick_top.4bpp");
-static const u32 sMapPopup_BrickBottom_Gfx[] = INCBIN_U32("graphics/map_popup/brick_bottom.4bpp");
-static const u16 sMapPopup_Brick_Pal[] = INCBIN_U16("graphics/map_popup/brick.gbapal");
-static const u32 sMapPopup_StoneTop_Gfx[] = INCBIN_U32("graphics/map_popup/stone_top.4bpp");
-static const u32 sMapPopup_StoneBottom_Gfx[] = INCBIN_U32("graphics/map_popup/stone_bottom.4bpp");
-static const u16 sMapPopup_Stone_Pal[] = INCBIN_U16("graphics/map_popup/stone.gbapal");
-static const u16 sMapPopup_Stone2_Pal[] = INCBIN_U16("graphics/map_popup/stone2.gbapal");
-static const u32 sMapPopup_UnderwaterTop_Gfx[] = INCBIN_U32("graphics/map_popup/underwater_top.4bpp");
-static const u32 sMapPopup_UnderwaterBottom_Gfx[] = INCBIN_U32("graphics/map_popup/underwater_bottom.4bpp");
-static const u16 sMapPopup_Underwater_Pal[] = INCBIN_U16("graphics/map_popup/underwater.gbapal");
-static const u16 sMapPopup_Underwater2_Pal[] = INCBIN_U16("graphics/map_popup/underwater2.gbapal");
+static const u32 sMapPopup_WoodTop_Gfx[] = INCGFX_U32("graphics/map_popup/wood_top.png", ".4bpp");
+static const u32 sMapPopup_WoodBottom_Gfx[] = INCGFX_U32("graphics/map_popup/wood_bottom.png", ".4bpp");
+static const u16 sMapPopup_Wood_Pal[] = INCGFX_U16("graphics/map_popup/wood.pal", ".gbapal");
+static const u32 sMapPopup_GrassTop_Gfx[] = INCGFX_U32("graphics/map_popup/grass_top.png", ".4bpp");
+static const u32 sMapPopup_GrassBottom_Gfx[] = INCGFX_U32("graphics/map_popup/grass_bottom.png", ".4bpp");
+static const u16 sMapPopup_Grass_Pal[] = INCGFX_U16("graphics/map_popup/grass.pal", ".gbapal");
+static const u32 sMapPopup_MarbleTop_Gfx[] = INCGFX_U32("graphics/map_popup/marble_top.png", ".4bpp");
+static const u32 sMapPopup_MarbleBottom_Gfx[] = INCGFX_U32("graphics/map_popup/marble_bottom.png", ".4bpp");
+static const u16 sMapPopup_Marble_Pal[] = INCGFX_U16("graphics/map_popup/marble.pal", ".gbapal");
+static const u32 sMapPopup_BrickTop_Gfx[] = INCGFX_U32("graphics/map_popup/brick_top.png", ".4bpp");
+static const u32 sMapPopup_BrickBottom_Gfx[] = INCGFX_U32("graphics/map_popup/brick_bottom.png", ".4bpp");
+static const u16 sMapPopup_Brick_Pal[] = INCGFX_U16("graphics/map_popup/brick.pal", ".gbapal");
+static const u32 sMapPopup_StoneTop_Gfx[] = INCGFX_U32("graphics/map_popup/stone_top.png", ".4bpp");
+static const u32 sMapPopup_StoneBottom_Gfx[] = INCGFX_U32("graphics/map_popup/stone_bottom.png", ".4bpp");
+static const u16 sMapPopup_Stone_Pal[] = INCGFX_U16("graphics/map_popup/stone.pal", ".gbapal");
+static const u16 sMapPopup_Stone2_Pal[] = INCGFX_U16("graphics/map_popup/stone2.pal", ".gbapal");
+static const u32 sMapPopup_UnderwaterTop_Gfx[] = INCGFX_U32("graphics/map_popup/underwater_top.png", ".4bpp");
+static const u32 sMapPopup_UnderwaterBottom_Gfx[] = INCGFX_U32("graphics/map_popup/underwater_bottom.png", ".4bpp");
+static const u16 sMapPopup_Underwater_Pal[] = INCGFX_U16("graphics/map_popup/underwater.pal", ".gbapal");
+static const u16 sMapPopup_Underwater2_Pal[] = INCGFX_U16("graphics/map_popup/underwater2.pal", ".gbapal");
 
 static const u32 *const sMapPopup_GfxTable[][2] = 
 {
@@ -102,7 +102,7 @@ static const u16 *const sMapPopup_PalTable[] =
     [MAPPOPUP_THEME_UNDERWATER] = sMapPopup_Underwater_Pal,
 };
 
-static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
+static const u8 sMapSectionToThemeId[MAPSEC_COUNT - KANTO_MAPSEC_COUNT - 1] =
 {
     [MAPSEC_SUNSET_TOWN] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_CEDARRED_TOWN] = MAPPOPUP_THEME_WOOD,
@@ -207,7 +207,7 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
     [MAPSEC_DESERT_UNDERPASS - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
     [MAPSEC_ALTERING_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
     [MAPSEC_NAVEL_ROCK - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
-    [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_MARBLE
+    [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_MARBLE,
 };
 
 // .text
@@ -349,8 +349,7 @@ static void LoadMapNamePopUpWindowBgs(void)
         else
             regionMapSectionId = 0; // Discard kanto region sections;
     }
-
-    popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
+    popUpThemeId = sMapSectionToThemeId[regionMapSectionId];
 
     PutWindowTilemap(primaryPopUpWindowId);
     PutWindowTilemap(secondaryPopUpWindowId);

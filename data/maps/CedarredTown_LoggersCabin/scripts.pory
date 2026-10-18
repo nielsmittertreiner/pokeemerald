@@ -15,7 +15,7 @@ mapscripts CedarredTown_LoggersCabin_MapScripts {
         VAR_CEDARRED_TOWN_STATE, 2 {
             lock
             applymovement(OBJ_EVENT_ID_PLAYER, CedarredTown_LoggersCabin_Movement_PlayerWalkIn)
-            applymovement(OBJ_EVENT_ID_FOLLOWER, CedarredTown_LoggersCabin_Movement_ConiferWalkIn)
+            applymovement(LOCALID_FOLLOWER, CedarredTown_LoggersCabin_Movement_ConiferWalkIn)
             waitmovement(0)
             playse(SE_PIN)
             applymovement(LOCALID_LOGGERMAN_1, CedarredTown_LoggersCabin_Movement_LoggerManOneReaction)
@@ -308,26 +308,26 @@ mapscripts CedarredTown_LoggersCabin_MapScripts {
                     break
             }
             playse(SE_PIN)
-            applymovement(OBJ_EVENT_ID_FOLLOWER, Common_Movement_ExclamationMark)
+            applymovement(LOCALID_FOLLOWER, Common_Movement_ExclamationMark)
             waitmovement(0)
-            loadspeechtail(FALSE, OBJ_EVENT_ID_FOLLOWER)
+            loadspeechtail(FALSE, LOCALID_FOLLOWER)
             msgbox("On that note…\n"
 	               "I'll be going back to the LAB.\p"
 	               "I'm sure {PLAYER} will be able\n"
 	               "to help  you like no other.")
             destroyspeechtail
             closemessage
-            turnobject(OBJ_EVENT_ID_FOLLOWER, DIR_WEST)
+            turnobject(LOCALID_FOLLOWER, DIR_WEST)
             turnobject(OBJ_EVENT_ID_PLAYER, DIR_EAST)
-            loadspeechtail(FALSE, OBJ_EVENT_ID_FOLLOWER)
+            loadspeechtail(FALSE, LOCALID_FOLLOWER)
             msgbox("And {PLAYER}…\p"
 	               "See me in my LAB after you're done.")
             destroyspeechtail
             closemessage
-            applymovement(OBJ_EVENT_ID_FOLLOWER, CedarredTown_LoggersCabin_Movement_ConiferWalkOut)
+            applymovement(LOCALID_FOLLOWER, CedarredTown_LoggersCabin_Movement_ConiferWalkOut)
             waitmovement(0)
             playse(SE_EXIT)
-            removeobject(OBJ_EVENT_ID_FOLLOWER, MAP_CEDARRED_TOWN_LOGGERS_CABIN)
+            removeobject(LOCALID_FOLLOWER, MAP_CEDARRED_TOWN_LOGGERS_CABIN)
             destroyfollower
             delay(16)
             applymovement(OBJ_EVENT_ID_PLAYER, CedarredTown_LoggersCabin_Movement_PlayerWalkInFrontOfLeader)

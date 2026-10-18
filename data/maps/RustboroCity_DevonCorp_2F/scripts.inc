@@ -1,5 +1,3 @@
-.set LOCALID_FOSSIL_SCIENTIST, 5
-
 RustboroCity_DevonCorp_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_OnTransition
 	.byte 0
@@ -73,10 +71,8 @@ RustboroCity_DevonCorp_2F_EventScript_FossilScientist::
 RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil::
 	closemessage
 	playse SE_PIN
-	applymovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_Delay48
 	msgbox RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
 	checkitem ITEM_CLAW_FOSSIL
@@ -96,10 +92,8 @@ RustboroCity_DevonCorp_2F_EventScript_GiveRootFossil::
 RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil::
 	closemessage
 	playse SE_PIN
-	applymovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_Delay48
 	msgbox RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
 	checkitem ITEM_ROOT_FOSSIL

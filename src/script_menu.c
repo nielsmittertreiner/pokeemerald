@@ -125,7 +125,7 @@ void TryDrawRepelMenu(void)
         if (CheckBagHasItem(repelItems[i], 1))
         {
             VarSet(VAR_0x8004 + count, repelItems[i]);
-            menuItems[count].text = ItemId_GetName(repelItems[i]);
+            menuItems[count].text = GetItemName(repelItems[i]);
             count++;
         }
     }
@@ -139,7 +139,7 @@ void TryDrawRepelMenu(void)
 void HandleRepelMenuChoice(void)
 {
     gSpecialVar_0x8004 = VarGet(VAR_0x8004 + gSpecialVar_Result); // Get item Id;
-    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004));
+    VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(gSpecialVar_0x8004));
 }
 
 #define tLeft           data[0]

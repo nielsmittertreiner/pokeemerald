@@ -2,7 +2,7 @@
   "id": "MAP_FIRWEALD_CITY",
   "name": "FirwealdCity",
   "layout": "LAYOUT_FIRWEALD_CITY",
-  "music": "MUS_SIMPLE_TOWN_DAY",
+  "music": "MUS_FIRWEALD_DAY",
   "region_map_section": "MAPSEC_FIRWEALD_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -37,8 +37,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FirwealdCity_EventScript_OldWoman",
       "flag": "0",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
@@ -52,8 +51,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FirwealdCity_EventScript_LittleGirl",
       "flag": "FLAG_HIDE_FIRWEALD_CITY_LITTLE_GIRL",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
@@ -67,8 +65,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FirwealdCity_EventScript_Lass",
       "flag": "FLAG_HIDE_FIRWEALD_CITY_LASS",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
@@ -82,8 +79,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FirwealdCity_EventScript_Fisherman",
       "flag": "FLAG_HIDE_FIRWEALD_CITY_FISHERMAN",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M",
@@ -97,8 +93,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FirwealdCity_EventScript_Triathlete",
       "flag": "0",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
@@ -112,8 +107,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FirwealdCity_EventScript_Maniac",
       "flag": "0",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
@@ -127,8 +121,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FirwealdCity_EventScript_Boy",
       "flag": "0",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -142,8 +135,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FirwealdCity_EventScript_ItemHyperPotion",
       "flag": "FLAG_ITEM_FIRWEALD_CITY_HYPER_POTION",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PHYLLOS",
@@ -157,8 +149,7 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "FLAG_HIDE_FIRWEALD_CITY_PHYLLOS",
-      "in_connection": false,
-      "type": "object"
+      "in_connection": false
     }
   ],
   "warp_events": [

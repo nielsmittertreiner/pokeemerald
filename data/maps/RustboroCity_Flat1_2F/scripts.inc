@@ -1,5 +1,3 @@
-.set LOCALID_WALDAS_DAD, 6
-
 RustboroCity_Flat1_2F_MapScripts::
 	.byte 0
 
@@ -12,7 +10,6 @@ RustboroCity_Flat1_2F_EventScript_WaldasDad::
 
 RustboroCity_Flat1_2F_EventScript_GivePhrase::
 	special DoWaldaNamingScreen
-	waitstate
 	goto_if_eq VAR_0x8004, 1, RustboroCity_Flat1_2F_EventScript_CancelGivePhrase
 	goto_if_eq VAR_0x8004, 2, RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase
 	specialvar VAR_RESULT, TryGetWallpaperWithWaldaPhrase
@@ -53,8 +50,7 @@ RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase::
 	msgbox RustboroCity_Flat1_2F_Text_LetsGiveItATry2, MSGBOX_DEFAULT
 	call RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda
 	msgbox RustboroCity_Flat1_2F_Text_OhShesLaughing, MSGBOX_DEFAULT
-	applymovement LOCALID_WALDAS_DAD, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_WALDAS_DAD, Common_Movement_FacePlayer
 	msgbox RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper, MSGBOX_DEFAULT
 	release
 	end

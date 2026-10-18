@@ -62,7 +62,7 @@ enum {
 struct PokeblockMenuStruct
 {
     u8 tilemap[BG_SCREEN_SIZE];
-    void (*callbackOnUse)(void);
+    MainCallback callbackOnUse;
     const u8 *pokeblockActionIds;
     u8 numActions;
     u8 caseId;
@@ -80,7 +80,7 @@ struct PokeblockMenuStruct
 
 struct PokeblockSavedData
 {
-    void (*callback)(void);
+    MainCallback callback;
     u16 selectedRow;
     u16 scrollOffset;
 };
@@ -699,7 +699,7 @@ static void DrawPokeblockMenuTitleText(void)
 {
     u8 i;
 
-    const u8 *itemName = ItemId_GetName(ITEM_POKEBLOCK_CASE);
+    const u8 *itemName = GetItemName(ITEM_POKEBLOCK_CASE);
     PrintOnPokeblockWindow(WIN_TITLE, itemName, GetStringCenterAlignXOffset(FONT_NORMAL, itemName, 0x48));
 
     PrintOnPokeblockWindow(WIN_SPICY,  gText_Spicy, 0);
@@ -742,7 +742,7 @@ static void PutPokeblockListMenuString(u8 *dst, u16 pkblId)
     u8 *txtPtr = StringCopy(dst, gPokeblockNames[pkblock->color]);
 
     *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
-    *(txtPtr++) = EXT_CTRL_CODE_SKIP;
+    *(txtPtr++) = EXT_CTRL_CODE_SKIP_TO;
     *(txtPtr++) = CHAR_BLOCK_1;
 
     ConvertIntToDecimalStringN(gStringVar1, GetHighestPokeblocksFlavorLevel(pkblock), STR_CONV_MODE_LEFT_ALIGN, 3);

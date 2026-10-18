@@ -1,9 +1,3 @@
-.set LOCALID_CAPT_STERN, 4
-.set LOCALID_SS_TIDAL, 5
-.set LOCALID_GRUNT, 6
-.set LOCALID_ARCHIE, 7
-.set LOCALID_SUBMARINE, 8
-
 SlateportCity_Harbor_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_Harbor_OnTransition
 	.byte 0
@@ -21,8 +15,8 @@ SlateportCity_Harbor_EventScript_ShowSSTidal::
 
 SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene::
 	savebgm MUS_ENCOUNTER_AQUA
-	setobjectxyperm LOCALID_CAPT_STERN, 12, 13
-	setobjectmovementtype LOCALID_CAPT_STERN, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm LOCALID_SLATEPORT_HARBOR_CAPT_STERN, 12, 13
+	setobjectmovementtype LOCALID_SLATEPORT_HARBOR_CAPT_STERN, MOVEMENT_TYPE_FACE_LEFT
 	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	return
 
@@ -47,26 +41,24 @@ SlateportCity_Harbor_EventScript_AquaEscapeTrigger2::
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger3::
 	lockall
 	setvar VAR_0x8008, 3
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_PlayerWalkUp
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, SlateportCity_Harbor_Movement_PlayerWalkUp
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene
 	end
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene::
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
-	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFasterDown
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applywaitmovement LOCALID_SLATEPORT_HARBOR_ARCHIE, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_SLATEPORT_HARBOR_GRUNT, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_GRUNT, SlateportCity_Harbor_Movement_AquaBoardSub
-	applymovement LOCALID_ARCHIE, SlateportCity_Harbor_Movement_AquaBoardSub
-	applymovement LOCALID_SUBMARINE, SlateportCity_Harbor_Movement_SubmarineExit
+	applymovement LOCALID_SLATEPORT_HARBOR_GRUNT, SlateportCity_Harbor_Movement_AquaBoardSub
+	applymovement LOCALID_SLATEPORT_HARBOR_ARCHIE, SlateportCity_Harbor_Movement_AquaBoardSub
+	applymovement LOCALID_SLATEPORT_HARBOR_SUBMARINE, SlateportCity_Harbor_Movement_SubmarineExit
 	waitmovement 0
-	removeobject LOCALID_GRUNT
-	removeobject LOCALID_ARCHIE
-	removeobject LOCALID_SUBMARINE
+	removeobject LOCALID_SLATEPORT_HARBOR_GRUNT
+	removeobject LOCALID_SLATEPORT_HARBOR_ARCHIE
+	removeobject LOCALID_SLATEPORT_HARBOR_SUBMARINE
 	setvar VAR_SLATEPORT_HARBOR_STATE, 2
 	setflag FLAG_MET_TEAM_AQUA_HARBOR
 	setflag FLAG_HIDE_LILYCOVE_MOTEL_SCOTT
@@ -78,30 +70,24 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene::
 	closemessage
 	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE
 	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE
-	copyobjectxytoperm LOCALID_CAPT_STERN
-	setobjectmovementtype LOCALID_CAPT_STERN, MOVEMENT_TYPE_FACE_RIGHT
+	copyobjectxytoperm LOCALID_SLATEPORT_HARBOR_CAPT_STERN
+	setobjectmovementtype LOCALID_SLATEPORT_HARBOR_CAPT_STERN, MOVEMENT_TYPE_FACE_RIGHT
 	releaseall
 	end
 
 SlateportCity_Harbor_EventScript_SternApproachPlayer0::
-	applymovement LOCALID_CAPT_STERN, SlateportCity_Harbor_Movement_SternApproachPlayer0
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement LOCALID_SLATEPORT_HARBOR_CAPT_STERN, SlateportCity_Harbor_Movement_SternApproachPlayer0
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	return
 
 SlateportCity_Harbor_EventScript_SternApproachPlayer1::
-	applymovement LOCALID_CAPT_STERN, SlateportCity_Harbor_Movement_SternApproachPlayer1
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
+	applywaitmovement LOCALID_SLATEPORT_HARBOR_CAPT_STERN, SlateportCity_Harbor_Movement_SternApproachPlayer1
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	return
 
 SlateportCity_Harbor_EventScript_SternApproachPlayer::
-	applymovement LOCALID_CAPT_STERN, SlateportCity_Harbor_Movement_SternApproachPlayer
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
+	applywaitmovement LOCALID_SLATEPORT_HARBOR_CAPT_STERN, SlateportCity_Harbor_Movement_SternApproachPlayer
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	return
 
 SlateportCity_Harbor_Movement_AquaBoardSub:
@@ -227,15 +213,14 @@ SlateportCity_Harbor_EventScript_ChooseNewDestination::
 SlateportCity_Harbor_EventScript_BoardFerry::
 	msgbox SlateportCity_Harbor_Text_PleaseBoardFerry, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
 	call_if_eq VAR_FACING, DIR_NORTH, SlateportCity_Harbor_EventScript_BoardFerryNorth
 	call_if_eq VAR_FACING, DIR_EAST, SlateportCity_Harbor_EventScript_BoardFerryEast
 	delay 30
-	hideobjectat OBJ_EVENT_ID_PLAYER, 0
-	setvar VAR_0x8004, LOCALID_SS_TIDAL
+	hideplayer
+	setvar VAR_0x8004, LOCALID_SLATEPORT_HARBOR_SS_TIDAL
 	call Common_EventScript_FerryDepart
 	return
 
@@ -245,13 +230,11 @@ SlateportCity_Harbor_EventScript_CancelDestinationSelect::
 	end
 
 SlateportCity_Harbor_EventScript_BoardFerryEast::
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_BoardFerryEast
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, SlateportCity_Harbor_Movement_BoardFerryEast
 	return
 
 SlateportCity_Harbor_EventScript_BoardFerryNorth::
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_BoardFerryNorth
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, SlateportCity_Harbor_Movement_BoardFerryNorth
 	return
 
 SlateportCity_Harbor_Movement_BoardFerryEast:
@@ -297,8 +280,7 @@ SlateportCity_Harbor_EventScript_CaptStern::
 	goto_if_eq VAR_SLATEPORT_HARBOR_STATE, 2, SlateportCity_Harbor_EventScript_WhyStealSubmarine
 	msgbox SlateportCity_Harbor_Text_SameThugsTriedToRobAtMuseum, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	release
 	end
 

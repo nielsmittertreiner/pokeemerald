@@ -81,11 +81,11 @@ static const struct FollowerSpriteGraphics gFollowerAlternateSprites[] =
     //{WALKING/RUNNING SPRITE ID, MACH BIKE SPRITE ID, ACRO BIKE SPRITE ID, SURFING SPRITE ID},
     [0] = 
     {
-        .normalId = OBJ_EVENT_GFX_RIVAL_FEMALE_NORMAL,
-        .machBikeId = OBJ_EVENT_GFX_RIVAL_FEMALE_MACH_BIKE,
-        .acroBikeId = OBJ_EVENT_GFX_RIVAL_FEMALE_ACRO_BIKE,
-        .surfId = OBJ_EVENT_GFX_RIVAL_FEMALE_SURFING,
-        .underwaterId = OBJ_EVENT_GFX_PLAYER_FEMALE_UNDERWATER,
+        .normalId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
+        .machBikeId = OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE,
+        .acroBikeId = OBJ_EVENT_GFX_RIVAL_MAY_ACRO_BIKE,
+        .surfId = OBJ_EVENT_GFX_RIVAL_MAY_SURFING,
+        .underwaterId = OBJ_EVENT_GFX_MAY_UNDERWATER,
     },
     
 };

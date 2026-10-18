@@ -1,7 +1,7 @@
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleNormal;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleMachBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleSurfing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_QuintyPlump;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NinjaBoy;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Twin;
@@ -61,7 +61,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeLateStages;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanAcroBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfBirch;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man4;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man5;
@@ -87,30 +87,30 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Teala;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BreakableRock;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PushableBoulder;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MrBrineysBoat;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleNormal;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleMachBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleAcroBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleSurfing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MaySurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Truck;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigorothCarryingBox;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigorothFacingAway;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BirchsBag;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EnemyZigzagoon;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Artist;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleNormal;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleMachBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleAcroBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleSurfing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerMaleFieldMove;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleNormal;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleMachBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleAcroBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleSurfing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalPlayerFemaleFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMaySurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalMayFieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cameraman;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleUnderwater;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleUnderwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanUnderwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayUnderwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MovingBox;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableCar;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist2;
@@ -135,8 +135,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wallace;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Steven;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wally;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireLittleBoy;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleFishing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleFishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayFishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HotSpringsOldWoman;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSTidal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SubmarineShadow;
@@ -189,10 +189,10 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Latias;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Latios;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GameboyKid;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ContestJudge;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleWatering;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleWatering;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerMaleDecorating;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerFemaleDecorating;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanWatering;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayWatering;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanDecorating;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayDecorating;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Archie;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Maxie;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KyogreFront;
@@ -214,8 +214,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KecleonBrid
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberMSwimming;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Azurill;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mom;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkPlayerMale;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkPlayerFemale;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkBrendan;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkMay;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Juan;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scott;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Poochyena;
@@ -252,10 +252,10 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Constructio
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LanternLight;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
-    [OBJ_EVENT_GFX_PLAYER_MALE_NORMAL] =       &gObjectEventGraphicsInfo_PlayerMaleNormal,
-    [OBJ_EVENT_GFX_PLAYER_MALE_MACH_BIKE] =    &gObjectEventGraphicsInfo_PlayerMaleMachBike,
-    [OBJ_EVENT_GFX_PLAYER_MALE_SURFING] =      &gObjectEventGraphicsInfo_PlayerMaleSurfing,
-    [OBJ_EVENT_GFX_PLAYER_MALE_FIELD_MOVE] =   &gObjectEventGraphicsInfo_PlayerMaleFieldMove,
+    [OBJ_EVENT_GFX_BRENDAN_NORMAL] =       &gObjectEventGraphicsInfo_BrendanNormal,
+    [OBJ_EVENT_GFX_BRENDAN_MACH_BIKE] =    &gObjectEventGraphicsInfo_BrendanMachBike,
+    [OBJ_EVENT_GFX_BRENDAN_SURFING] =      &gObjectEventGraphicsInfo_BrendanSurfing,
+    [OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE] =   &gObjectEventGraphicsInfo_BrendanFieldMove,
     [OBJ_EVENT_GFX_QUINTY_PLUMP] =             &gObjectEventGraphicsInfo_QuintyPlump,
     [OBJ_EVENT_GFX_NINJA_BOY] =                &gObjectEventGraphicsInfo_NinjaBoy,
     [OBJ_EVENT_GFX_TWIN] =                     &gObjectEventGraphicsInfo_Twin,
@@ -315,7 +315,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
     [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
     [OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES] =   &gObjectEventGraphicsInfo_BerryTreeLateStages,
-    [OBJ_EVENT_GFX_PLAYER_MALE_ACRO_BIKE] =    &gObjectEventGraphicsInfo_PlayerMaleAcroBike,
+    [OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE] =    &gObjectEventGraphicsInfo_BrendanAcroBike,
     [OBJ_EVENT_GFX_PROF_BIRCH] =               &gObjectEventGraphicsInfo_ProfBirch,
     [OBJ_EVENT_GFX_MAN_4] =                    &gObjectEventGraphicsInfo_Man4,
     [OBJ_EVENT_GFX_MAN_5] =                    &gObjectEventGraphicsInfo_Man5,
@@ -341,30 +341,30 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_BREAKABLE_ROCK] =           &gObjectEventGraphicsInfo_BreakableRock,
     [OBJ_EVENT_GFX_PUSHABLE_BOULDER] =         &gObjectEventGraphicsInfo_PushableBoulder,
     [OBJ_EVENT_GFX_MR_BRINEYS_BOAT] =          &gObjectEventGraphicsInfo_MrBrineysBoat,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_NORMAL] =     &gObjectEventGraphicsInfo_PlayerFemaleNormal,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_MACH_BIKE] =  &gObjectEventGraphicsInfo_PlayerFemaleMachBike,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_ACRO_BIKE] =  &gObjectEventGraphicsInfo_PlayerFemaleAcroBike,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_SURFING] =    &gObjectEventGraphicsInfo_PlayerFemaleSurfing,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_FIELD_MOVE] = &gObjectEventGraphicsInfo_PlayerFemaleFieldMove,
+    [OBJ_EVENT_GFX_MAY_NORMAL] =     &gObjectEventGraphicsInfo_MayNormal,
+    [OBJ_EVENT_GFX_MAY_MACH_BIKE] =  &gObjectEventGraphicsInfo_MayMachBike,
+    [OBJ_EVENT_GFX_MAY_ACRO_BIKE] =  &gObjectEventGraphicsInfo_MayAcroBike,
+    [OBJ_EVENT_GFX_MAY_SURFING] =    &gObjectEventGraphicsInfo_MaySurfing,
+    [OBJ_EVENT_GFX_MAY_FIELD_MOVE] = &gObjectEventGraphicsInfo_MayFieldMove,
     [OBJ_EVENT_GFX_TRUCK] =                    &gObjectEventGraphicsInfo_Truck,
     [OBJ_EVENT_GFX_VIGOROTH_CARRYING_BOX] =    &gObjectEventGraphicsInfo_VigorothCarryingBox,
     [OBJ_EVENT_GFX_VIGOROTH_FACING_AWAY] =     &gObjectEventGraphicsInfo_VigorothFacingAway,
     [OBJ_EVENT_GFX_BIRCHS_BAG] =               &gObjectEventGraphicsInfo_BirchsBag,
     [OBJ_EVENT_GFX_ZIGZAGOON_1] =              &gObjectEventGraphicsInfo_EnemyZigzagoon,
     [OBJ_EVENT_GFX_ARTIST] =                   &gObjectEventGraphicsInfo_Artist,
-    [OBJ_EVENT_GFX_RIVAL_MALE_NORMAL] =        &gObjectEventGraphicsInfo_RivalPlayerMaleNormal,
-    [OBJ_EVENT_GFX_RIVAL_MALE_MACH_BIKE] =     &gObjectEventGraphicsInfo_RivalPlayerMaleMachBike,
-    [OBJ_EVENT_GFX_RIVAL_MALE_ACRO_BIKE] =     &gObjectEventGraphicsInfo_RivalPlayerMaleAcroBike,
-    [OBJ_EVENT_GFX_RIVAL_MALE_SURFING] =       &gObjectEventGraphicsInfo_RivalPlayerMaleSurfing,
-    [OBJ_EVENT_GFX_RIVAL_MALE_FIELD_MOVE] =    &gObjectEventGraphicsInfo_RivalPlayerMaleFieldMove,
-    [OBJ_EVENT_GFX_RIVAL_FEMALE_NORMAL] =      &gObjectEventGraphicsInfo_RivalPlayerFemaleNormal,
-    [OBJ_EVENT_GFX_RIVAL_FEMALE_MACH_BIKE] =   &gObjectEventGraphicsInfo_RivalPlayerFemaleMachBike,
-    [OBJ_EVENT_GFX_RIVAL_FEMALE_ACRO_BIKE] =   &gObjectEventGraphicsInfo_RivalPlayerFemaleAcroBike,
-    [OBJ_EVENT_GFX_RIVAL_FEMALE_SURFING] =     &gObjectEventGraphicsInfo_RivalPlayerFemaleSurfing,
-    [OBJ_EVENT_GFX_RIVAL_FEMALE_FIELD_MOVE] =  &gObjectEventGraphicsInfo_RivalPlayerFemaleFieldMove,
+    [OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL] =        &gObjectEventGraphicsInfo_RivalBrendanNormal,
+    [OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE] =     &gObjectEventGraphicsInfo_RivalBrendanMachBike,
+    [OBJ_EVENT_GFX_RIVAL_BRENDAN_ACRO_BIKE] =     &gObjectEventGraphicsInfo_RivalBrendanAcroBike,
+    [OBJ_EVENT_GFX_RIVAL_BRENDAN_SURFING] =       &gObjectEventGraphicsInfo_RivalBrendanSurfing,
+    [OBJ_EVENT_GFX_RIVAL_BRENDAN_FIELD_MOVE] =    &gObjectEventGraphicsInfo_RivalBrendanFieldMove,
+    [OBJ_EVENT_GFX_RIVAL_MAY_NORMAL] =      &gObjectEventGraphicsInfo_RivalMayNormal,
+    [OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE] =   &gObjectEventGraphicsInfo_RivalMayMachBike,
+    [OBJ_EVENT_GFX_RIVAL_MAY_ACRO_BIKE] =   &gObjectEventGraphicsInfo_RivalMayAcroBike,
+    [OBJ_EVENT_GFX_RIVAL_MAY_SURFING] =     &gObjectEventGraphicsInfo_RivalMaySurfing,
+    [OBJ_EVENT_GFX_RIVAL_MAY_FIELD_MOVE] =  &gObjectEventGraphicsInfo_RivalMayFieldMove,
     [OBJ_EVENT_GFX_CAMERAMAN] =                &gObjectEventGraphicsInfo_Cameraman,
-    [OBJ_EVENT_GFX_PLAYER_MALE_UNDERWATER] =   &gObjectEventGraphicsInfo_PlayerMaleUnderwater,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_UNDERWATER] = &gObjectEventGraphicsInfo_PlayerFemaleUnderwater,
+    [OBJ_EVENT_GFX_BRENDAN_UNDERWATER] =   &gObjectEventGraphicsInfo_BrendanUnderwater,
+    [OBJ_EVENT_GFX_MAY_UNDERWATER] = &gObjectEventGraphicsInfo_MayUnderwater,
     [OBJ_EVENT_GFX_MOVING_BOX] =               &gObjectEventGraphicsInfo_MovingBox,
     [OBJ_EVENT_GFX_CABLE_CAR] =                &gObjectEventGraphicsInfo_CableCar,
     [OBJ_EVENT_GFX_SCIENTIST_2] =              &gObjectEventGraphicsInfo_Scientist2,
@@ -389,8 +389,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_STEVEN] =                   &gObjectEventGraphicsInfo_Steven,
     [OBJ_EVENT_GFX_WALLY] =                    &gObjectEventGraphicsInfo_Wally,
     [OBJ_EVENT_GFX_LITTLE_BOY_3] =             &gObjectEventGraphicsInfo_RubySapphireLittleBoy,
-    [OBJ_EVENT_GFX_PLAYER_MALE_FISHING] =      &gObjectEventGraphicsInfo_PlayerMaleFishing,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_FISHING] =    &gObjectEventGraphicsInfo_PlayerFemaleFishing,
+    [OBJ_EVENT_GFX_BRENDAN_FISHING] =      &gObjectEventGraphicsInfo_BrendanFishing,
+    [OBJ_EVENT_GFX_MAY_FISHING] =    &gObjectEventGraphicsInfo_MayFishing,
     [OBJ_EVENT_GFX_HOT_SPRINGS_OLD_WOMAN] =    &gObjectEventGraphicsInfo_HotSpringsOldWoman,
     [OBJ_EVENT_GFX_SS_TIDAL] =                 &gObjectEventGraphicsInfo_SSTidal,
     [OBJ_EVENT_GFX_SUBMARINE_SHADOW] =         &gObjectEventGraphicsInfo_SubmarineShadow,
@@ -443,10 +443,10 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_LATIOS] =                   &gObjectEventGraphicsInfo_Latios,
     [OBJ_EVENT_GFX_GAMEBOY_KID] =              &gObjectEventGraphicsInfo_GameboyKid,
     [OBJ_EVENT_GFX_CONTEST_JUDGE] =            &gObjectEventGraphicsInfo_ContestJudge,
-    [OBJ_EVENT_GFX_PLAYER_MALE_WATERING] =     &gObjectEventGraphicsInfo_PlayerMaleWatering,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_WATERING] =   &gObjectEventGraphicsInfo_PlayerFemaleWatering,
-    [OBJ_EVENT_GFX_PLAYER_MALE_DECORATING] =   &gObjectEventGraphicsInfo_PlayerMaleDecorating,
-    [OBJ_EVENT_GFX_PLAYER_FEMALE_DECORATING] = &gObjectEventGraphicsInfo_PlayerFemaleDecorating,
+    [OBJ_EVENT_GFX_BRENDAN_WATERING] =     &gObjectEventGraphicsInfo_BrendanWatering,
+    [OBJ_EVENT_GFX_MAY_WATERING] =   &gObjectEventGraphicsInfo_MayWatering,
+    [OBJ_EVENT_GFX_BRENDAN_DECORATING] =   &gObjectEventGraphicsInfo_BrendanDecorating,
+    [OBJ_EVENT_GFX_MAY_DECORATING] = &gObjectEventGraphicsInfo_MayDecorating,
     [OBJ_EVENT_GFX_ARCHIE] =                   &gObjectEventGraphicsInfo_Archie,
     [OBJ_EVENT_GFX_MAXIE] =                    &gObjectEventGraphicsInfo_Maxie,
     [OBJ_EVENT_GFX_KYOGRE_FRONT] =             &gObjectEventGraphicsInfo_KyogreFront,
@@ -468,8 +468,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TUBER_M_SWIMMING] =         &gObjectEventGraphicsInfo_TuberMSwimming,
     [OBJ_EVENT_GFX_AZURILL] =                  &gObjectEventGraphicsInfo_Azurill,
     [OBJ_EVENT_GFX_MOM] =                      &gObjectEventGraphicsInfo_Mom,
-    [OBJ_EVENT_GFX_LINK_PLAYER_MALE] =         &gObjectEventGraphicsInfo_LinkPlayerMale,
-    [OBJ_EVENT_GFX_LINK_PLAYER_FEMALE] =       &gObjectEventGraphicsInfo_LinkPlayerFemale,
+    [OBJ_EVENT_GFX_LINK_BRENDAN] =         &gObjectEventGraphicsInfo_LinkBrendan,
+    [OBJ_EVENT_GFX_LINK_MAY] =       &gObjectEventGraphicsInfo_LinkMay,
     [OBJ_EVENT_GFX_JUAN] =                     &gObjectEventGraphicsInfo_Juan,
     [OBJ_EVENT_GFX_SCOTT] =                    &gObjectEventGraphicsInfo_Scott,
     [OBJ_EVENT_GFX_POOCHYENA] =                &gObjectEventGraphicsInfo_Poochyena,

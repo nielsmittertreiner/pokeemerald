@@ -104,15 +104,15 @@ static void SpriteCB_TitleScreenDeoxys(struct Sprite *sprite);
 
 
 // const rom data
-static const u32 sTitleScreenDeoxysNormalGfx[] = INCBIN_U32("graphics/title_screen/deoxys_normal.4bpp.lz");
-static const u32 sTitleScreenDeoxysAttackGfx[] = INCBIN_U32("graphics/title_screen/deoxys_attack.4bpp.lz");
-static const u32 sTitleScreenDeoxysDefenseGfx[] = INCBIN_U32("graphics/title_screen/deoxys_defense.4bpp.lz");
-static const u32 sTitleScreenDeoxysSpeedGfx[] = INCBIN_U32("graphics/title_screen/deoxys_speed.4bpp.lz");
-static const u32 sTitleScreenDeoxysPal[] = INCBIN_U32("graphics/title_screen/deoxys_normal.gbapal.lz");
-static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/rayquaza.4bpp.lz");
-static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/rayquaza.bin.lz");
-static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
-static const u8 sTitleScreenCursorGfx[] = INCBIN_U8("graphics/title_screen/cursor.4bpp");
+static const u32 sTitleScreenDeoxysNormalGfx[] = INCGFX_U32("graphics/title_screen/deoxys_normal.png", ".4bpp.lz");
+static const u32 sTitleScreenDeoxysAttackGfx[] = INCGFX_U32("graphics/title_screen/deoxys_attack.png", ".4bpp.lz");
+static const u32 sTitleScreenDeoxysDefenseGfx[] = INCGFX_U32("graphics/title_screen/deoxys_defense.png", ".4bpp.lz");
+static const u32 sTitleScreenDeoxysSpeedGfx[] = INCGFX_U32("graphics/title_screen/deoxys_speed.png", ".4bpp.lz");
+static const u32 sTitleScreenDeoxysPal[] = INCGFX_U32("graphics/title_screen/deoxys_normal.png", ".gbapal.lz");
+static const u32 sTitleScreenRayquazaGfx[] = INCGFX_U32("graphics/title_screen/rayquaza.png", ".4bpp.lz");
+static const u32 sTitleScreenRayquazaTilemap[] = INCGFX_U32("graphics/title_screen/rayquaza.bin", ".lz");
+static const u32 sTitleScreenLogoShineGfx[] = INCGFX_U32("graphics/title_screen/logo_shine.png", ".4bpp.lz");
+static const u8 sTitleScreenCursorGfx[] = INCGFX_U8("graphics/title_screen/cursor.png", ".4bpp");
 static const u8 sTitleScreenTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 static const u8 sTitleScreenPressA[] = _("PRESS {A_BUTTON} TO CONTINUE");
 static const u8 sVanadiumGameVersion[] = _("v0.0.1");
